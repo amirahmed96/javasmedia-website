@@ -6,227 +6,33 @@
 <title>JavasMedia — House of Customize</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', sans-serif; overflow-x: hidden; background: white; }
+body { background: #FAF8F3; overflow-x: hidden; }
 .page { width: 1440px; margin: 0 auto; position: relative; }
+.homepage-img { width: 100%; display: block; }
 
-/* HEADER */
-.header {
-  width: 1440px;
-  height: 90px;
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-.header img.bar { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleY(-1); }
-.header-logo { position: absolute; left: 30px; top: 16px; height: 57px; width: 121px; z-index: 2; }
-.header-logo img { width: 100%; height: 100%; object-fit: cover; }
-.nav-btn-1 { position: absolute; left: 308px; top: 38px; height: 52px; width: 195px; z-index: 2; cursor: pointer; }
-.nav-btn-2 { position: absolute; left: 473px; top: 38px; height: 52px; width: 195px; z-index: 2; cursor: pointer; }
-.nav-btn-3 { position: absolute; left: 637px; top: 38px; height: 52px; width: 195px; z-index: 2; cursor: pointer; }
-.nav-btn-4 { position: absolute; left: 805px; top: 38px; height: 52px; width: 195px; z-index: 2; cursor: pointer; }
-.nav-btn-img { width: 100%; height: 100%; object-fit: cover; }
-.header-search { position: absolute; left: 1054px; top: 32px; height: 30px; width: 184px; z-index: 2; }
-.header-cart { position: absolute; left: 1263px; top: 27px; height: 35px; width: 38px; z-index: 2; cursor: pointer; }
-.header-profile { position: absolute; left: 1321px; top: 27px; height: 33px; width: 34px; z-index: 2; cursor: pointer; }
-
-/* NAV TEXT */
-.nav-promo { position: absolute; left: 392px; top: 50px; font-size: 25px; font-weight: 600; color: black; text-align: center; z-index: 3; transform: translateX(-50%); cursor: pointer; }
-.nav-product { position: absolute; left: 555px; top: 50px; font-size: 25px; font-weight: 600; color: black; text-align: center; z-index: 3; transform: translateX(-50%); cursor: pointer; }
-.nav-articles { position: absolute; left: 723px; top: 47px; font-size: 25px; font-weight: 600; color: black; text-align: center; z-index: 3; transform: translateX(-50%); cursor: pointer; }
-.nav-location { position: absolute; left: 897px; top: 47px; font-size: 25px; font-weight: 600; color: black; text-align: center; z-index: 3; transform: translateX(-50%); cursor: pointer; }
-
-/* CHECKERED BAR */
-.bar-ornamen { width: 1440px; height: 32px; position: relative; }
-.bar-ornamen img { width: 100%; height: 100%; object-fit: cover; }
-
-/* HERO - background full page */
-.hero-section { width: 1440px; position: relative; height: 2050px; }
-.hero-bg1 { position: absolute; left: 0; top: 0; width: 1440px; height: 2036px; }
-.hero-bg1 img { width: 100%; height: 100%; object-fit: cover; }
-
-/* MAIN BANNER */
-.main-campaign { position: absolute; left: 166px; top: 179px; height: 584px; width: 1113px; }
-.main-campaign img { width: 100%; height: 100%; object-fit: cover; }
-
-/* SUB CAMPAIGNS */
-.sub-section { position: absolute; left: 0; top: 821px; width: 1440px; height: 454px; }
-.bg2 { position: absolute; left: 0; top: 0; width: 1440px; height: 454px; }
-.bg2 img { width: 100%; height: 100%; object-fit: cover; }
-
-.sub-c1 { position: absolute; left: 173px; top: 0; height: 277px; width: 227px; }
-.sub-c2 { position: absolute; left: 463px; top: 0; height: 277px; width: 227px; }
-.sub-c3 { position: absolute; left: 751px; top: 0; height: 277px; width: 227px; }
-.sub-c4 { position: absolute; left: 1045px; top: 0; height: 277px; width: 227px; }
-.sub-c1 img, .sub-c2 img, .sub-c3 img, .sub-c4 img { width: 100%; height: 100%; object-fit: cover; }
-
-.sub-text { position: absolute; font-family: 'Baloo Chettan 2', cursive; font-size: 30px; color: #fff9f9; text-align: center; z-index: 2; }
-.sub-t1 { left: 292.5px; top: 63px; width: 149px; transform: translateX(-50%); }
-.sub-t2 { left: 578.5px; top: 58px; width: 149px; transform: translateX(-50%); }
-.sub-t3 { left: 867px; top: 63px; width: 148px; transform: translateX(-50%); }
-.sub-t4 { left: 1152.5px; top: 58px; width: 149px; transform: translateX(-50%); }
-
-/* ABOUT US */
-.about-rect { position: absolute; left: 195px; top: 342px; width: 1077px; height: 446px; background: rgba(253,252,252,0.8); border-radius: 25px; }
-.about-title { position: absolute; left: 50%; top: 386px; transform: translateX(-50%); font-family: 'Baloo Chettan 2', cursive; font-size: 35px; color: black; text-align: center; white-space: nowrap; z-index: 2; }
-.about-text { position: absolute; left: 50%; top: 458px; transform: translateX(-50%); width: 826px; font-size: 30px; color: black; text-align: center; z-index: 2; }
-
-/* BG3 */
-.bg3 { position: absolute; left: 0; top: 666px; width: 1440px; height: 367px; }
-.bg3 img { width: 100%; height: 100%; object-fit: cover; }
-
-/* BRAND PARTNER */
-.brand-section { width: 1440px; position: relative; }
-.bg4 { position: absolute; left: 0; top: 0; width: 1440px; height: 1145px; }
-.bg4 img { width: 100%; height: 100%; object-fit: cover; }
-.brand-dark-rect { position: absolute; left: 77px; top: 41px; width: 1285px; height: 707px; background: rgba(18,3,3,0.4); border-radius: 25px; }
-.brand-content { position: absolute; left: 150px; top: 0; width: 1140px; height: 614px; }
-
-.brand-title { position: absolute; left: 50%; top: 45px; transform: translateX(-50%); font-family: 'Inter', sans-serif; font-weight: 800; font-size: 35.323px; color: #ceffd3; text-align: center; width: 768px; }
-.brand-desc { position: absolute; left: 50%; top: 101px; transform: translateX(-50%); font-size: 17.983px; color: #ededed; text-align: center; width: 768px; line-height: 28px; }
-
-.logo-grid { position: absolute; left: -38px; top: 225px; width: 698px; }
-
-/* NEW ARRIVALS */
-.arrivals-section { position: relative; padding-top: 740px; }
-.arrival-card { position: absolute; background: white; border: 0.8px solid #f3f4f6; border-radius: 16px; height: 226px; width: 245px; display: flex; align-items: center; justify-content: center; flex-direction: column; }
-.arrival-text { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 25px; color: #1f3477; text-align: center; letter-spacing: 2px; text-transform: uppercase; }
-.arr1 { left: 170px; top: 781px; }
-.arr2 { left: 464px; top: 781px; }
-.arr3 { left: 758px; top: 781px; }
-.arr4 { left: 1057px; top: 781px; }
-
-/* FOOTER */
-.footer { background: black; padding: 48px; }
-.footer-inner { max-width: 1440px; margin: 0 auto; }
-.newsletter-text { color: #9ca3af; font-size: 14px; text-align: center; margin-bottom: 20px; }
-.newsletter-form { display: flex; max-width: 512px; margin: 0 auto 16px; }
-.newsletter-input { flex: 1; padding: 17px 20px; background: white; border: none; font-size: 14px; color: #9ca3af; outline: none; }
-.newsletter-btn { background: #ffbb00; padding: 16px 32px; border: none; font-size: 14px; font-weight: 700; color: black; cursor: pointer; letter-spacing: 1.4px; text-transform: uppercase; }
-.newsletter-consent { display: flex; align-items: center; justify-content: center; gap: 8px; }
-.newsletter-consent input { width: 12px; height: 12px; }
-.newsletter-consent span { color: #6b7280; font-size: 12px; }
-
-/* LOGO CARD */
-.logo-card { position: absolute; background: white; border: 0.8px solid #f3f4f6; border-radius: 16px; width: 183px; height: 183px; display: flex; align-items: center; justify-content: center; }
+/* Clickable nav areas - invisible overlay */
+.nav-area { position: absolute; cursor: pointer; }
+.nav-promo  { top: 0; left: 138px; width: 130px; height: 55px; }
+.nav-product { top: 0; left: 228px; width: 135px; height: 55px; }
+.nav-articles { top: 0; left: 323px; width: 135px; height: 55px; }
+.nav-location { top: 0; left: 415px; width: 135px; height: 55px; }
+.nav-login { top: 0; right: 0; width: 80px; height: 55px; }
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Baloo+Chettan+2&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="page">
-
-  <!-- HEADER -->
-  <div class="header" style="position:relative;">
-    <img class="bar" src="https://www.figma.com/api/mcp/asset/13b640b0-efb9-4686-86d2-790b44b6af11.png" alt="">
-    <div class="header-logo"><img src="https://www.figma.com/api/mcp/asset/f880a4d2-1625-4191-a766-32761a135fec.png" alt="JavasMedia Logo"></div>
-    <div class="nav-btn-1" onclick="location.href='promo.html'"><img class="nav-btn-img" src="https://www.figma.com/api/mcp/asset/855c0f68-c00f-494b-9a94-7fe26bbce058.png" alt=""></div>
-    <div class="nav-btn-2" onclick="location.href='katalog.html'"><img class="nav-btn-img" src="https://www.figma.com/api/mcp/asset/7a481867-9d95-4dbf-ad0a-7757dcaf82cf.png" alt=""></div>
-    <div class="nav-btn-3" onclick="location.href='articles.html'"><img class="nav-btn-img" src="https://www.figma.com/api/mcp/asset/28aa73c1-4004-4abe-8600-bb2c226bc52a.png" alt=""></div>
-    <div class="nav-btn-4" onclick="location.href='location.html'"><img class="nav-btn-img" src="https://www.figma.com/api/mcp/asset/435b2ea2-ed22-4ac0-9ffa-38261bcb3307.png" alt=""></div>
-    <div class="header-search"><img src="https://www.figma.com/api/mcp/asset/24acbb40-1d34-4b28-9031-e0f87f7920b9.png" alt="" style="width:100%;height:100%;object-fit:cover;"></div>
-    <div class="header-cart"><img src="https://www.figma.com/api/mcp/asset/b3f7669b-475f-4437-8407-39e074b6e8dd.png" alt="" style="width:100%;height:100%;object-fit:cover;"></div>
-    <div class="header-profile" onclick="location.href='login.html'"><img src="https://www.figma.com/api/mcp/asset/9e05ae47-9f5f-4917-a29d-81977c208593.png" alt="" style="width:100%;height:100%;object-fit:cover;"></div>
-    <span class="nav-promo" onclick="location.href='promo.html'">PROMO</span>
-    <span class="nav-product" onclick="location.href='katalog.html'">PRODUCT</span>
-    <span class="nav-articles" onclick="location.href='articles.html'">ARTICLES</span>
-    <span class="nav-location" onclick="location.href='location.html'">LOCATION</span>
+  <div style="position:relative;">
+    <img class="homepage-img" src="homepage.png" alt="JavasMedia — House of Customize" usemap="#navmap">
+    <map name="navmap">
+      <!-- Nav buttons -->
+      <area shape="rect" coords="138,0,268,55" href="promo.html" alt="Promo">
+      <area shape="rect" coords="228,0,363,55" href="katalog.html" alt="Product">
+      <area shape="rect" coords="323,0,458,55" href="articles.html" alt="Articles">
+      <area shape="rect" coords="415,0,550,55" href="location.html" alt="Location">
+      <!-- Login icon -->
+      <area shape="rect" coords="1360,0,1440,55" href="login.html" alt="Login">
+    </map>
   </div>
-
-  <!-- CHECKERED BAR -->
-  <div class="bar-ornamen">
-    <img src="https://www.figma.com/api/mcp/asset/b2a782ac-6254-49ea-b6e5-2294f31bd3be.png" alt="">
-  </div>
-
-  <!-- HERO SECTION -->
-  <div class="hero-section">
-    <!-- Background 1 -->
-    <div class="hero-bg1">
-      <img src="https://www.figma.com/api/mcp/asset/581a31ca-88b4-4dc0-b360-bd12baca4be9.png" alt="">
-    </div>
-
-    <!-- Main Campaign Banner -->
-    <div class="main-campaign">
-      <img src="https://www.figma.com/api/mcp/asset/47ff907f-83b9-430b-9f7f-9e2cadf8c7a7.png" alt="House of Customize">
-    </div>
-
-    <!-- Sub Section -->
-    <div class="sub-section">
-      <div class="bg2"><img src="https://www.figma.com/api/mcp/asset/71ce198f-ec25-448e-a2ff-76c95f2beaee.png" alt=""></div>
-      <div class="sub-c1"><img src="https://www.figma.com/api/mcp/asset/f92ef8c1-41f5-453e-84af-63f52db19bb5.png" alt=""></div>
-      <div class="sub-c2"><img src="https://www.figma.com/api/mcp/asset/f92ef8c1-41f5-453e-84af-63f52db19bb5.png" alt=""></div>
-      <div class="sub-c3"><img src="https://www.figma.com/api/mcp/asset/f92ef8c1-41f5-453e-84af-63f52db19bb5.png" alt=""></div>
-      <div class="sub-c4"><img src="https://www.figma.com/api/mcp/asset/f92ef8c1-41f5-453e-84af-63f52db19bb5.png" alt=""></div>
-      <p class="sub-text sub-t1">SUB<br>CAMPAIGN</p>
-      <p class="sub-text sub-t2">SUB<br>CAMPAIGN</p>
-      <p class="sub-text sub-t3">SUB<br>CAMPAIGN</p>
-      <p class="sub-text sub-t4">SUB<br>CAMPAIGN</p>
-    </div>
-
-    <!-- About Us -->
-    <div class="about-rect"></div>
-    <p class="about-title">ABOUT US</p>
-    <p class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquet ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-    <!-- BG3 Workshop photo -->
-    <div class="bg3"><img src="https://www.figma.com/api/mcp/asset/cafe70b2-6e15-4121-b9bf-1d15f72b2750.png" alt="Workshop"></div>
-
-  </div>
-
-  <!-- BRAND PARTNER SECTION -->
-  <div class="brand-section" style="height:1145px;">
-    <div class="bg4"><img src="https://www.figma.com/api/mcp/asset/98a9d799-ebdb-42d4-8553-1c330d763f07.png" alt=""></div>
-    <div class="brand-dark-rect"></div>
-    <div class="brand-content">
-      <p class="brand-title">Brand Partner / Customer</p>
-      <p class="brand-desc">Kami bangga telah dipercaya oleh berbagai perusahaan dan brand terkemuka untuk memberikan solusi terbaik yang mendukung pertumbuhan bisnis mereka.</p>
-
-      <!-- Logo Grid -->
-      <div style="position:absolute;left:-38px;top:225px;width:1216px;">
-        <!-- Row 1 -->
-        <div style="display:flex;gap:23.66px;margin-bottom:20px;">
-          <div style="background:white;border:0.8px solid #f3f4f6;border-radius:16px;width:183px;height:183px;display:flex;align-items:center;justify-content:center;"><span style="font-weight:900;font-size:22px;color:#d1d5db;">ACME</span></div>
-          <div style="background:white;border:0.8px solid #f3f4f6;border-radius:16px;width:183px;height:183px;display:flex;align-items:center;justify-content:center;gap:8px;"><span style="background:#d1d5db;width:24px;height:24px;border-radius:9999px;display:inline-block;"></span><span style="font-weight:800;font-size:20px;color:#d1d5db;">Nexus</span></div>
-          <div style="background:white;border:0.8px solid #f3f4f6;border-radius:16px;width:183px;height:183px;display:flex;align-items:center;justify-content:center;"><span style="font-weight:800;font-size:27px;color:#d1d5db;">Lumina</span></div>
-          <div style="background:white;border:0.8px solid #f3f4f6;border-radius:16px;width:183px;height:183px;display:flex;align-items:center;justify-content:center;"><span style="font-weight:800;font-size:18px;color:#d1d5db;letter-spacing:1.8px;">ZEN</span></div>
-          <div style="background:white;border:0.8px solid #f3f4f6;border-radius:16px;width:183px;height:183px;display:flex;align-items:center;justify-content:center;"><span style="font-weight:500;font-size:23px;color:#d1d5db;letter-spacing:-1.2px;">Vortex.</span></div>
-          <div style="background:white;border:0.8px solid #f3f4f6;border-radius:16px;width:183px;height:183px;display:flex;align-items:center;justify-content:center;gap:6px;"><span style="border:1.6px solid #d1d5db;width:16px;height:24px;display:inline-block;"></span><span style="font-weight:800;font-size:19px;color:#d1d5db;">Astra</span></div>
-        </div>
-        <!-- Row 2 -->
-        <div style="display:flex;gap:23.66px;">
-          <div style="background:white;border:0.8px solid #f3f4f6;border-radius:16px;width:183px;height:183px;display:flex;align-items:center;justify-content:center;"><span style="font-weight:800;font-size:20px;color:#d1d5db;letter-spacing:2px;text-transform:uppercase;">Nova</span></div>
-          <div style="background:white;border:0.8px solid #f3f4f6;border-radius:16px;width:183px;height:183px;display:flex;align-items:center;justify-content:center;gap:6px;"><img src="https://www.figma.com/api/mcp/asset/b7d197ea-772a-4b27-8c8d-811566b6b139.svg" alt="" style="width:24px;height:24px;"><span style="font-weight:800;font-size:15px;color:#d1d5db;">Apex</span></div>
-          <div style="background:white;border:0.8px solid #f3f4f6;border-radius:16px;width:183px;height:183px;display:flex;align-items:center;justify-content:center;"><span style="font-weight:800;font-size:23px;color:#d1d5db;">{Code}</span></div>
-          <div style="background:white;border:0.8px solid #f3f4f6;border-radius:16px;width:183px;height:183px;display:flex;align-items:center;justify-content:center;gap:6px;"><span style="background:#d1d5db;width:20px;height:20px;display:inline-block;transform:rotate(45deg);"></span><span style="font-weight:700;font-size:19px;color:#d1d5db;">Prism</span></div>
-          <div style="background:white;border:0.8px solid #f3f4f6;border-radius:16px;width:183px;height:183px;display:flex;align-items:center;justify-content:center;"><span style="font-weight:300;font-size:24px;color:#d1d5db;letter-spacing:0.6px;">ECHO</span></div>
-          <div style="background:white;border:0.8px solid #f3f4f6;border-radius:16px;width:183px;height:183px;display:flex;align-items:center;justify-content:center;"><span style="font-weight:900;font-size:30px;color:#d1d5db;">M</span><span style="font-weight:500;font-size:20px;color:#d1d5db;">atrix</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- NEW ARRIVALS -->
-    <div style="position:absolute;left:170px;top:781px;display:flex;gap:294px;">
-      <div style="background:white;border:0.8px solid #f3f4f6;border-radius:16px;width:245px;height:226px;display:flex;align-items:center;justify-content:center;flex-direction:column;"><span style="font-weight:800;font-size:25px;color:#1f3477;text-align:center;letter-spacing:2px;text-transform:uppercase;">NEW<br>ARRIVAL</span></div>
-      <div style="background:white;border:0.8px solid #f3f4f6;border-radius:16px;width:245px;height:226px;display:flex;align-items:center;justify-content:center;flex-direction:column;"><span style="font-weight:800;font-size:25px;color:#1f3477;text-align:center;letter-spacing:2px;text-transform:uppercase;">NEW<br>ARRIVAL</span></div>
-      <div style="background:white;border:0.8px solid #f3f4f6;border-radius:16px;width:245px;height:226px;display:flex;align-items:center;justify-content:center;flex-direction:column;"><span style="font-weight:800;font-size:25px;color:#1f3477;text-align:center;letter-spacing:2px;text-transform:uppercase;">NEW<br>ARRIVAL</span></div>
-      <div style="background:white;border:0.8px solid #f3f4f6;border-radius:16px;width:245px;height:226px;display:flex;align-items:center;justify-content:center;flex-direction:column;"><span style="font-weight:800;font-size:25px;color:#1f3477;text-align:center;letter-spacing:2px;text-transform:uppercase;">NEW<br>ARRIVAL</span></div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <div class="footer">
-    <div class="footer-inner">
-      <p class="newsletter-text">Be the first to know about new product drops and exclusive deals from Javas Media.</p>
-      <div class="newsletter-form">
-        <input class="newsletter-input" type="email" placeholder="Enter your email address">
-        <button class="newsletter-btn">SUBSCRIBE</button>
-      </div>
-      <div class="newsletter-consent">
-        <input type="checkbox">
-        <span>I agree to receive marketing emails from Javas Media. Unsubscribe anytime.</span>
-      </div>
-    </div>
-  </div>
-
 </div>
 </body>
 </html>
-<!-- deploy trigger Sun Aug 23 20:31:52 UTC 2026 -->
