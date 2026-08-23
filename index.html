@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavasMedia — House of Customize</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #FAF8F3;
+  --navy: #1e3a5f;
+  --orange: #ff9800;
+  --yellow: #ffc107;
+  --cyan: #00bcd4;
+  --pink: #e91e63;
+  --red: #c0392b;
+  --dark: #1a1a1a;
+  --checker-red: #7a2020;
+}
+
+body {
+  background: var(--bg);
+  font-family: 'Space Mono', monospace;
+  color: var(--dark);
+  overflow-x: hidden;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: var(--navy);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 90px;
+  position: relative;
+  /* wave texture */
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 8px,
+    rgba(255,255,255,0.03) 8px,
+    rgba(255,255,255,0.03) 9px
+  );
+}
+
+.logo-img {
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+/* Logo SVG placeholder — mirip logo JavasMedia */
+.logo-svg {
+  height: 56px;
+  width: auto;
+}
+
+.nav-center {
+  display: flex;
+  align-items: flex-end;
+  align-self: flex-end;
+  gap: 0;
+}
+
+.nav-btn {
+  padding: 10px 28px;
+  border: 2.5px solid var(--dark);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: var(--dark);
+  letter-spacing: 0.5px;
+  font-family: 'Space Mono', monospace;
+  transition: filter 0.2s;
+}
+.nav-btn:hover { filter: brightness(0.9); }
+.nav-btn.promo { background: var(--yellow); }
+.nav-btn.product { background: var(--cyan); }
+.nav-btn.articles { background: var(--orange); }
+.nav-btn.location { background: var(--pink); color: white; }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.search-wrap {
+  background: rgba(255,255,255,0.12);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  border-radius: 6px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 220px;
+}
+.search-wrap input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  width: 100%;
+  color: white;
+  font-family: 'Space Mono', monospace;
+}
+.search-wrap input::placeholder { color: rgba(255,255,255,0.4); }
+.search-icon { color: rgba(255,255,255,0.5); font-size: 14px; }
+
+.header-icons { display: flex; gap: 16px; }
+.header-icon { color: white; font-size: 22px; cursor: pointer; opacity: 0.8; }
+.header-icon:hover { opacity: 1; }
+
+/* ===== CHECKERED ===== */
+.checkered {
+  height: 20px;
+  background: repeating-linear-gradient(90deg,
+    var(--checker-red) 0px, var(--checker-red) 20px,
+    var(--bg) 20px, var(--bg) 40px
+  );
+  border-top: 2.5px solid var(--dark);
+  border-bottom: 2.5px solid var(--dark);
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+  background: var(--bg);
+  padding: 32px 40px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* tile background */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(#e8e3d8 1px, transparent 1px),
+    linear-gradient(90deg, #e8e3d8 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.hero-inner {
+  background: #ff9800;
+  border-radius: 16px;
+  padding: 48px 52px;
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  border: 2.5px solid var(--dark);
+  box-shadow: 6px 6px 0 var(--dark);
+}
+
+/* wave lines inside hero */
+.hero-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 14px,
+    rgba(180,80,0,0.15) 14px,
+    rgba(180,80,0,0.15) 15px
+  );
+  pointer-events: none;
+}
+
+/* chevron deco kanan bawah */
+.hero-chevron {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 120px;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  max-width: 560px;
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 120px;
+  line-height: 0.88;
+  letter-spacing: -2px;
+  color: white;
+  text-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title .outline {
+  -webkit-text-stroke: 3px white;
+  color: transparent;
+  display: block;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-tag-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.hero-tag-check {
+  width: 16px;
+  height: 16px;
+  background: var(--navy);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+
+.hero-desc {
+  font-size: 11px;
+  color: rgba(30,58,95,0.7);
+  line-height: 1.7;
+  max-width: 480px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Hero illustration area */
+.hero-illustration {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 55%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* Alien emoji dekorasi kiri */
+.hero-aliens {
+  position: absolute;
+  left: 52px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 3;
+}
+
+.alien-row {
+  display: flex;
+  gap: 6px;
+}
+
+.alien {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* javas media badge kanan atas */
+.hero-brand-badge {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 4;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: var(--yellow);
+  letter-spacing: 2px;
+  text-align: right;
+  line-height: 1.1;
+  text-shadow: 2px 2px 0 var(--dark);
+  -webkit-text-stroke: 1px var(--dark);
+}
+
+/* lightning bolts kanan bawah */
+.hero-lightning {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  z-index: 4;
+  display: flex;
+  gap: 4px;
+}
+
+/* circle dekorasi kiri bawah */
+.hero-circle {
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 3px solid rgba(30,58,95,0.3);
+  z-index: 1;
+}
+
+.hero-circle::before {
+  content: '';
+  position: absolute;
+  inset: 16px;
+  border-radius: 50%;
+  border: 3px solid rgba(30,58,95,0.2);
+}
+
+.hero-circle::after {
+  content: '';
+  position: absolute;
+  inset: 32px;
+  border-radius: 50%;
+  border: 3px solid rgba(30,58,95,0.15);
+}
+
+/* red circle behind illustration */
+.hero-red-circle {
+  position: absolute;
+  right: 30%;
+  top: 50%;
+  transform: translate(50%, -50%);
+  width: 340px;
+  height: 340px;
+  background: #c0392b;
+  border-radius: 50%;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+/* main character illustration */
+.hero-char {
+  position: relative;
+  z-index: 2;
+  font-size: 200px;
+  line-height: 1;
+  filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.2));
+}
+
+/* small char right */
+.hero-char-right {
+  position: absolute;
+  right: 60px;
+  bottom: 40px;
+  font-size: 100px;
+  z-index: 3;
+  filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.2));
+}
+
+/* ===== SUB CAMPAIGN SECTION ===== */
+.campaign-section {
+  padding: 32px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.campaign-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(#e8e3d8 1px, transparent 1px),
+    linear-gradient(90deg, #e8e3d8 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Background photo clothes rack */
+.campaign-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(250,248,243,0.7), rgba(250,248,243,0.7)),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%23ddd" width="100" height="100"/></svg>');
+  background-size: cover;
+  background-position: center;
+}
+
+.campaign-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.campaign-card {
+  background: var(--navy);
+  border: 2.5px solid var(--dark);
+  border-radius: 12px;
+  padding: 28px 24px 20px;
+  box-shadow: 5px 5px 0 var(--dark);
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.campaign-card:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--dark); }
+
+.campaign-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg, transparent, transparent 8px,
+    rgba(255,255,255,0.03) 8px, rgba(255,255,255,0.03) 9px
+  );
+}
+
+.campaign-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  color: white;
+  letter-spacing: 1px;
+  line-height: 1.1;
+  position: relative;
+  z-index: 1;
+}
+
+.campaign-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.campaign-bar {
+  height: 6px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 3px;
+  margin-bottom: 6px;
+  overflow: hidden;
+}
+
+.campaign-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+}
+
+.c1 .campaign-bar-fill { background: var(--yellow); width: 70%; }
+.c2 .campaign-bar-fill { background: var(--cyan); width: 50%; }
+.c3 .campaign-bar-fill { background: var(--pink); width: 85%; }
+.c4 .campaign-bar-fill { background: var(--orange); width: 60%; }
+
+.campaign-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+}
+
+/* ===== ABOUT US SECTION ===== */
+.about-section {
+  padding: 60px 40px;
+  background: rgba(255,255,255,0.5);
+  text-align: center;
+  border-top: 1.5px solid #e0ddd5;
+  border-bottom: 1.5px solid #e0ddd5;
+}
+
+.about-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--dark);
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+}
+
+.about-desc {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.9;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ===== WORKSHOP PHOTO ===== */
+.workshop-photo {
+  width: 100%;
+  height: 360px;
+  background: linear-gradient(135deg, #e8e3d8 0%, #d5cfc4 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 2.5px solid var(--dark);
+  border-bottom: 2.5px solid var(--dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.workshop-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(#ccc8bc 1px, transparent 1px),
+    linear-gradient(90deg, #ccc8bc 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.4;
+}
+
+.workshop-photo-label {
+  font-size: 13px;
+  color: #aaa;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== BRAND PARTNER SECTION ===== */
+.partner-section {
+  background: var(--navy);
+  padding: 60px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.partner-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg, transparent, transparent 8px,
+    rgba(255,255,255,0.02) 8px, rgba(255,255,255,0.02) 9px
+  );
+}
+
+.partner-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: white;
+  letter-spacing: 3px;
+  text-align: center;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.partner-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+
+.partner-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.partner-card {
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 20px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.partner-card:hover { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
+
+/* ===== NEW ARRIVALS SECTION ===== */
+.arrivals-section {
+  background: var(--navy);
+  padding: 0 40px 60px;
+  position: relative;
+}
+
+.arrivals-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.arrival-card {
+  background: white;
+  border: 2.5px solid var(--dark);
+  border-radius: 8px;
+  padding: 32px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--navy);
+  letter-spacing: 2px;
+  text-align: center;
+  line-height: 1.1;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+}
+
+.arrival-card:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 rgba(0,0,0,0.3); }
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--dark);
+  padding: 48px 40px 24px;
+  border-top: 2.5px solid var(--dark);
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: var(--yellow);
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.footer-desc {
+  font-size: 11px;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.footer-social { display: flex; gap: 8px; }
+
+.social-icon {
+  width: 32px;
+  height: 32px;
+  background: #222;
+  border: 1.5px solid #333;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.social-icon:hover { background: var(--orange); color: white; border-color: var(--orange); }
+
+.footer-section h4 {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--yellow);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #222;
+}
+
+.footer-section a {
+  display: block;
+  font-size: 11px;
+  color: #555;
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: color 0.15s;
+}
+
+.footer-section a:hover { color: var(--yellow); }
+
+.footer-newsletter {
+  margin-top: 14px;
+}
+
+.footer-newsletter-label {
+  font-size: 10px;
+  color: #444;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.email-sub { display: flex; gap: 0; }
+
+.email-sub input {
+  padding: 8px 12px;
+  background: #111;
+  border: 1.5px solid #333;
+  border-right: none;
+  color: white;
+  font-size: 11px;
+  flex: 1;
+  outline: none;
+  font-family: 'Space Mono', monospace;
+}
+
+.email-sub input::placeholder { color: #444; }
+
+.sub-btn {
+  background: var(--yellow);
+  border: 1.5px solid #333;
+  padding: 8px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--dark);
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 1px;
+  transition: background 0.15s;
+}
+
+.sub-btn:hover { background: var(--orange); color: white; }
+
+.footer-bottom {
+  border-top: 1px solid #222;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  color: #333;
+}
+
+.footer-bottom-links { display: flex; gap: 20px; }
+.footer-bottom-links a { color: #333; text-decoration: none; }
+.footer-bottom-links a:hover { color: #555; }
+
+/* ===== SCROLL CHECKBOX (agak tersembunyi) ===== */
+.footer-consent {
+  text-align: center;
+  padding: 12px 0 0;
+  font-size: 10px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.footer-consent input { accent-color: var(--yellow); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <!-- Logo SVG mirip JavasMedia -->
+  <div class="logo-img">
+    <svg class="logo-svg" viewBox="0 0 180 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- J shape -->
+      <text x="0" y="50" font-family="Arial Black" font-size="52" font-weight="900" font-style="italic" fill="white" letter-spacing="-2">JAVAS</text>
+      <!-- underline MEDIA -->
+      <text x="2" y="62" font-family="Arial" font-size="12" font-weight="700" fill="rgba(255,255,255,0.6)" letter-spacing="6">MEDIA</text>
+    </svg>
+  </div>
+
+  <div class="nav-center">
+    <button class="nav-btn promo" onclick="location.href='promo.html'">PROMO</button>
+    <button class="nav-btn product" onclick="location.href='katalog.html'">PRODUCT</button>
+    <button class="nav-btn articles" onclick="location.href='articles.html'">ARTICLES</button>
+    <button class="nav-btn location" onclick="location.href='location.html'">LOCATION</button>
+  </div>
+
+  <div class="header-right">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Cari produk...">
+    </div>
+    <div class="header-icons">
+      <span class="header-icon">🛒</span>
+      <span class="header-icon" onclick="location.href='login.html'">👤</span>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKERED -->
+<div class="checkered"></div>
+
+<!-- HERO SECTION -->
+<div class="hero">
+  <div class="hero-inner">
+
+    <!-- circle dekorasi kiri bawah -->
+    <div class="hero-circle"></div>
+
+    <!-- red circle behind char -->
+    <div class="hero-red-circle"></div>
+
+    <!-- Brand badge -->
+    <div class="hero-brand-badge">JAVAS<br>MEDIA</div>
+
+    <!-- lightning bolts -->
+    <div class="hero-lightning">
+      <svg width="28" height="40" viewBox="0 0 28 40" fill="none">
+        <path d="M16 0L4 22H14L12 40L24 18H14L16 0Z" fill="#ffc107" stroke="#1a1a1a" stroke-width="1.5"/>
+      </svg>
+      <svg width="28" height="40" viewBox="0 0 28 40" fill="none">
+        <path d="M16 0L4 22H14L12 40L24 18H14L16 0Z" fill="#00bcd4" stroke="#1a1a1a" stroke-width="1.5"/>
+      </svg>
+      <svg width="28" height="40" viewBox="0 0 28 40" fill="none">
+        <path d="M16 0L4 22H14L12 40L24 18H14L16 0Z" fill="#e91e63" stroke="#1a1a1a" stroke-width="1.5"/>
+      </svg>
+    </div>
+
+    <!-- chevron hitam putih kanan bawah -->
+    <div class="hero-chevron">
+      <svg width="120" height="200" viewBox="0 0 120 200" fill="none">
+        <path d="M0 0 L40 0 L120 100 L40 100 Z" fill="#1a1a1a"/>
+        <path d="M40 0 L80 0 L120 0 L120 100 L80 100 Z" fill="white"/>
+        <path d="M0 100 L40 100 L120 200 L40 200 Z" fill="white"/>
+        <path d="M40 100 L80 100 L120 100 L120 200 L80 200 Z" fill="#1a1a1a"/>
+      </svg>
+    </div>
+
+    <!-- Alien decorations -->
+    <div class="hero-aliens">
+      <div class="alien-row">
+        <div class="alien" style="background:#ffc107;">👾</div>
+        <div class="alien" style="background:#00bcd4;">👾</div>
+      </div>
+      <div class="alien-row">
+        <div class="alien" style="background:#e91e63;">👾</div>
+        <div class="alien" style="background:#ff9800;">👾</div>
+      </div>
+      <div class="alien-row">
+        <div class="alien" style="background:#ffc107;">👾</div>
+        <div class="alien" style="background:#1e3a5f;">👾</div>
+      </div>
+      <div class="alien-row">
+        <div class="alien" style="background:#e91e63;">👾</div>
+        <div class="alien" style="background:#00bcd4;">👾</div>
+      </div>
+    </div>
+
+    <!-- Hero content -->
+    <div class="hero-content" style="margin-left:80px;">
+      <div class="hero-title">
+        <span>HOUSE OF</span>
+        <span class="outline">CUSTOMIZE</span>
+      </div>
+    </div>
+
+    <!-- Illustration -->
+    <div class="hero-illustration">
+      <div class="hero-char">🤖</div>
+      <div class="hero-char-right">🧟</div>
+    </div>
+
+  </div>
+
+  <!-- Tags below hero -->
+  <div style="padding:20px 0 0; position:relative; z-index:2;">
+    <div class="hero-tags" style="justify-content:center;">
+      <div class="hero-tag-item"><div class="hero-tag-check">✓</div>T-SHIRT</div>
+      <div class="hero-tag-item"><div class="hero-tag-check">✓</div>JACKET</div>
+      <div class="hero-tag-item"><div class="hero-tag-check">✓</div>CAP</div>
+      <div class="hero-tag-item"><div class="hero-tag-check">✓</div>LANYARD</div>
+      <div class="hero-tag-item"><div class="hero-tag-check">✓</div>JERSEY</div>
+      <div class="hero-tag-item"><div class="hero-tag-check">✓</div>WALL DECOR</div>
+      <div class="hero-tag-item"><div class="hero-tag-check">✓</div>PACKAGING</div>
+    </div>
+    <div class="hero-tags" style="justify-content:center; margin-top:-4px;">
+      <div class="hero-tag-item"><div class="hero-tag-check">✓</div>KEY CHAIN</div>
+      <div class="hero-tag-item"><div class="hero-tag-check">✓</div>STICKER</div>
+      <div class="hero-tag-item"><div class="hero-tag-check">✓</div>POLYFLEX</div>
+      <div class="hero-tag-item"><div class="hero-tag-check">✓</div>ID CARD</div>
+      <div class="hero-tag-item"><div class="hero-tag-check">✓</div>LABEL</div>
+      <div class="hero-tag-item"><div class="hero-tag-check">✓</div>POSTER</div>
+    </div>
+    <div class="hero-desc" style="text-align:center; margin:12px auto 0;">
+      Javas Media is where creative ideas transform into high-quality reality. We specialize in custom apparel and merchandise, utilizing advanced printing techniques to ensure every color is sharp and every design is flawless. Our workflow is built on a passion for design excellence.
+    </div>
+  </div>
+</div>
+
+<!-- SUB CAMPAIGN SECTION -->
+<div class="campaign-section">
+  <div class="campaign-grid">
+    <div class="campaign-card c1">
+      <div class="campaign-title">SUB<br>CAMPAIGN</div>
+      <div class="campaign-footer">
+        <div class="campaign-bar"><div class="campaign-bar-fill"></div></div>
+        <div class="campaign-link">Lihat selengkapnya →</div>
+      </div>
+    </div>
+    <div class="campaign-card c2">
+      <div class="campaign-title">SUB<br>CAMPAIGN</div>
+      <div class="campaign-footer">
+        <div class="campaign-bar"><div class="campaign-bar-fill"></div></div>
+        <div class="campaign-link">Lihat selengkapnya →</div>
+      </div>
+    </div>
+    <div class="campaign-card c3">
+      <div class="campaign-title">SUB<br>CAMPAIGN</div>
+      <div class="campaign-footer">
+        <div class="campaign-bar"><div class="campaign-bar-fill"></div></div>
+        <div class="campaign-link">Lihat selengkapnya →</div>
+      </div>
+    </div>
+    <div class="campaign-card c4">
+      <div class="campaign-title">SUB<br>CAMPAIGN</div>
+      <div class="campaign-footer">
+        <div class="campaign-bar"><div class="campaign-bar-fill"></div></div>
+        <div class="campaign-link">Lihat selengkapnya →</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT US -->
+<div class="about-section">
+  <div class="about-title">ABOUT US</div>
+  <div class="about-desc">
+    Javas Media is where creative ideas transform into high-quality reality. We specialize in custom apparel and merchandise, utilizing advanced printing techniques to ensure every color is sharp and every design is flawless. Our workflow is built on a passion for design excellence. We don't just print; we craft identities. By utilizing the latest industry tools and meticulous production processes, we provide professional solutions for jerseys, polo shirts, and custom merchandise that truly represent who you are. Experience a seamless production journey where quality is never compromised and your satisfaction is our ultimate priority.
+  </div>
+</div>
+
+<!-- WORKSHOP PHOTO -->
+<div class="workshop-photo">
+  <div style="font-size:48px;opacity:0.15;position:relative;z-index:1;">🎨</div>
+  <div class="workshop-photo-label">Foto Workshop — Upload via CMS</div>
+</div>
+
+<!-- BRAND PARTNER -->
+<div class="partner-section">
+  <div class="partner-title">Brand Partner / Customer</div>
+  <div class="partner-desc">Kami bangga telah dipercaya oleh berbagai perusahaan dan brand terkemuka untuk memberikan solusi terbaik yang mendukung pertumbuhan bisnis mereka.</div>
+
+  <div class="partner-grid">
+    <div class="partner-card">ACME</div>
+    <div class="partner-card">● Nexus</div>
+    <div class="partner-card">Lumina</div>
+    <div class="partner-card">■ ZEN</div>
+    <div class="partner-card">Vortex.</div>
+    <div class="partner-card">□ Astra</div>
+  </div>
+  <div class="partner-grid">
+    <div class="partner-card">NOVA</div>
+    <div class="partner-card">△ Apex</div>
+    <div class="partner-card">{Code}</div>
+    <div class="partner-card">◆ Prism</div>
+    <div class="partner-card">ECHO</div>
+    <div class="partner-card">Matrix</div>
+  </div>
+</div>
+
+<!-- NEW ARRIVALS -->
+<div class="arrivals-section">
+  <div class="arrivals-grid">
+    <div class="arrival-card">NEW<br>ARRIVAL</div>
+    <div class="arrival-card">NEW<br>ARRIVAL</div>
+    <div class="arrival-card">NEW<br>ARRIVAL</div>
+    <div class="arrival-card">NEW<br>ARRIVAL</div>
+    <div class="arrival-card">NEW<br>ARRIVAL</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-top">
+    <div class="footer-section">
+      <div class="footer-logo">JAVAS MEDIA</div>
+      <div class="footer-desc">
+        Kebondalem 10/1 Surabaya<br>
+        082143777463<br>
+        javasmediasurabaya@gmail.com
+      </div>
+      <div class="footer-social">
+        <div class="social-icon">ig</div>
+        <div class="social-icon">tt</div>
+        <div class="social-icon">tw</div>
+        <div class="social-icon">fb</div>
+        <div class="social-icon">yt</div>
+      </div>
+    </div>
+    <div class="footer-section">
+      <h4>SHOP</h4>
+      <a href="katalog.html">New Arrivals</a>
+      <a href="katalog.html">Apparel</a>
+      <a href="katalog.html">Aksesoris</a>
+      <a href="katalog.html">Packaging</a>
+      <a href="katalog.html">Promotion Item</a>
+      <a href="katalog.html">Homedecor</a>
+    </div>
+    <div class="footer-section">
+      <h4>HELP</h4>
+      <a href="#">FAQ</a>
+      <a href="#">Shipping Info</a>
+      <a href="#">Returns & Exchanges</a>
+      <a href="#">Track Order</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div class="footer-section">
+      <h4>COMPANY</h4>
+      <a href="#">About Us</a>
+      <a href="articles.html">Articles</a>
+      <a href="#">Careers</a>
+      <a href="#">Press</a>
+      <div class="footer-newsletter">
+        <div class="footer-newsletter-label">Newsletter:</div>
+        <div class="email-sub">
+          <input type="email" placeholder="Enter your email address">
+          <button class="sub-btn">SUBSCRIBE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-consent">
+    <input type="checkbox">
+    <span>I agree to receive marketing emails from Javas Media. Unsubscribe anytime.</span>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2024 JavasMedia. All rights reserved.</span>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Sitemap</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

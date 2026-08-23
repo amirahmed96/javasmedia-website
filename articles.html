@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Articles - JavasMedia</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #f8f6f1;
+  --white: #ffffff;
+  --dark: #1a1a1a;
+  --mid: #444;
+  --muted: #888;
+  --border: #e0ddd5;
+  --accent: #c8391a;
+  --yellow: #f0c040;
+  --navy: #1e3a5f;
+}
+body {
+  background: var(--bg);
+  font-family: 'Space Mono', monospace;
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+/* HEADER */
+.header {
+  background: #1e3a5f;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 90px;
+  position: relative;
+  z-index: 10;
+}
+.logo-text { color: white; font-size: 22px; font-weight: 900; letter-spacing: 2px; font-style: italic; text-transform: uppercase; line-height: 1.1; font-family: 'Bebas Neue', sans-serif; }
+.nav-center { display: flex; align-items: flex-end; align-self: flex-end; }
+.nav-btn { padding: 10px 24px; border: 2.5px solid #1a1a1a; border-bottom: none; border-radius: 10px 10px 0 0; font-size: 13px; font-weight: 800; cursor: pointer; text-transform: uppercase; color: #1a1a1a; }
+.nav-btn.promo { background: #ffc107; }
+.nav-btn.product { background: #00bcd4; }
+.nav-btn.articles { background: #ff9800; }
+.nav-btn.location { background: #e91e63; color: white; }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.search-wrap { background: #FAF8F3; border-radius: 6px; padding: 8px 14px; display: flex; align-items: center; gap: 8px; width: 200px; }
+.search-wrap input { background: transparent; border: none; outline: none; font-size: 13px; width: 100%; }
+.icon-btn { color: white; font-size: 22px; cursor: pointer; }
+
+.checkered {
+  height: 18px;
+  background: repeating-linear-gradient(90deg, var(--accent) 0px, var(--accent) 18px, var(--bg) 18px, var(--bg) 36px);
+  border-top: 2.5px solid var(--dark);
+  border-bottom: 2.5px solid var(--dark);
+}
+
+/* ===== MASTHEAD ===== */
+.masthead {
+  background: var(--white);
+  border-bottom: 2px solid var(--dark);
+  padding: 48px 60px 32px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 40px;
+}
+
+.masthead-left {}
+
+.masthead-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.masthead-label::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  background: var(--accent);
+}
+
+.masthead-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 72px;
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1;
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+}
+
+.masthead-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.masthead-sub {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 480px;
+}
+
+.masthead-right {
+  text-align: right;
+}
+
+.masthead-date {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.masthead-issue {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: var(--dark);
+  font-style: italic;
+}
+
+/* CATEGORY NAV */
+.cat-nav {
+  background: var(--dark);
+  padding: 0 60px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  border-bottom: none;
+}
+
+.cat-btn {
+  background: transparent;
+  border: none;
+  padding: 14px 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #666;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+  border-bottom: 3px solid transparent;
+  font-family: 'Space Mono', monospace;
+}
+
+.cat-btn:hover { color: white; }
+.cat-btn.active { color: var(--yellow); border-bottom-color: var(--yellow); }
+
+/* ===== MAIN LAYOUT ===== */
+.page {
+  padding: 48px 60px 80px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 60px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* ===== FEATURED ARTICLE ===== */
+.featured-wrap { margin-bottom: 48px; }
+
+.featured-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.featured-label-text {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.featured-label-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.featured-card {
+  background: var(--white);
+  border: 2px solid var(--dark);
+  box-shadow: 6px 6px 0 var(--dark);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.featured-card:hover { transform: translate(-2px,-2px); box-shadow: 8px 8px 0 var(--dark); }
+
+.featured-img {
+  background: var(--navy);
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.featured-img-icon { font-size: 64px; opacity: 0.2; position: relative; z-index: 1; }
+.featured-img-label { font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,0.3); text-transform: uppercase; position: relative; z-index: 1; }
+
+/* category tag di foto */
+.featured-tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: var(--accent);
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1.5px solid var(--dark);
+  z-index: 2;
+}
+
+.featured-content {
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.featured-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.meta-cat {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.meta-dot { width: 3px; height: 3px; background: var(--muted); border-radius: 50%; }
+
+.meta-date {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.featured-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+
+.featured-excerpt {
+  font-size: 12px;
+  color: var(--mid);
+  line-height: 1.8;
+  margin-bottom: 24px;
+  flex: 1;
+}
+
+.featured-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.author-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.author-avatar {
+  width: 32px;
+  height: 32px;
+  background: var(--navy);
+  border-radius: 50%;
+  border: 2px solid var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+}
+
+.author-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.read-more {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 1px;
+  border-bottom: 1.5px solid var(--accent);
+  padding-bottom: 1px;
+}
+
+/* ===== ARTICLE LIST ===== */
+.articles-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.articles-label-text {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.articles-label-line { flex: 1; height: 1px; background: var(--border); }
+
+.article-list { display: flex; flex-direction: column; gap: 0; }
+
+.article-item {
+  background: var(--white);
+  border: 2px solid var(--dark);
+  border-bottom: none;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.article-item:last-child { border-bottom: 2px solid var(--dark); }
+.article-item:hover { background: #fffdf7; }
+
+.article-img {
+  background: #f0ede6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  opacity: 0.5;
+  border-right: 2px solid var(--dark);
+  min-height: 100px;
+}
+
+.article-content { padding: 16px 18px; }
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.article-cat {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.article-date {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.article-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.article-excerpt {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar { display: flex; flex-direction: column; gap: 28px; }
+
+.sidebar-card {
+  background: var(--white);
+  border: 2px solid var(--dark);
+  box-shadow: 4px 4px 0 var(--dark);
+}
+
+.sidebar-card-header {
+  background: var(--dark);
+  padding: 10px 16px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--yellow);
+}
+
+.sidebar-card-body { padding: 16px; }
+
+/* SEARCH */
+.sidebar-search {
+  display: flex;
+  gap: 0;
+}
+
+.sidebar-search input {
+  flex: 1;
+  padding: 9px 12px;
+  border: 2px solid var(--dark);
+  border-right: none;
+  font-size: 12px;
+  font-family: 'Space Mono', monospace;
+  background: var(--bg);
+  outline: none;
+  color: var(--dark);
+}
+
+.sidebar-search button {
+  background: var(--dark);
+  border: 2px solid var(--dark);
+  padding: 9px 14px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* KATEGORI */
+.cat-list { display: flex; flex-direction: column; gap: 0; }
+
+.cat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--mid);
+  transition: color 0.15s;
+}
+
+.cat-item:last-child { border-bottom: none; }
+.cat-item:hover { color: var(--accent); }
+
+.cat-count {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  font-size: 10px;
+  padding: 2px 7px;
+  color: var(--muted);
+}
+
+/* ARTIKEL POPULER */
+.popular-list { display: flex; flex-direction: column; gap: 12px; }
+
+.popular-item {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.popular-item:hover { opacity: 0.7; }
+
+.popular-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--border);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 28px;
+}
+
+.popular-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  color: var(--dark);
+  line-height: 1.4;
+}
+
+/* NEWSLETTER */
+.newsletter-card {
+  background: var(--accent);
+  border: 2px solid var(--dark);
+  box-shadow: 4px 4px 0 var(--dark);
+  padding: 24px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.newsletter-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent 12px, rgba(255,255,255,0.05) 12px, rgba(255,255,255,0.05) 24px);
+  pointer-events: none;
+}
+
+.newsletter-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.newsletter-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.newsletter-input {
+  width: 100%;
+  padding: 9px 12px;
+  border: 2px solid var(--dark);
+  font-size: 11px;
+  font-family: 'Space Mono', monospace;
+  background: white;
+  outline: none;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.newsletter-btn {
+  width: 100%;
+  background: var(--dark);
+  border: 2px solid var(--dark);
+  padding: 9px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: var(--yellow);
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+  z-index: 1;
+}
+
+.newsletter-btn:hover { background: #333; }
+
+/* FOOTER */
+.footer { background: #1a1a1a; color: white; padding: 40px 60px 20px; border-top: 2px solid var(--dark); }
+.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--yellow); margin-bottom: 10px; }
+.footer-desc { font-size: 10px; color: #555; line-height: 1.9; margin-bottom: 14px; }
+.footer-social { display: flex; gap: 6px; }
+.social-icon { width: 28px; height: 28px; background: #222; border: 1px solid #333; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; cursor: pointer; color: #555; }
+.social-icon:hover { color: var(--yellow); border-color: var(--yellow); }
+.footer-section h4 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--yellow); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #222; }
+.footer-section a { display: block; font-size: 10px; color: #555; text-decoration: none; margin-bottom: 8px; }
+.footer-section a:hover { color: var(--yellow); }
+.footer-bottom { border-top: 1px solid #222; padding-top: 16px; display: flex; justify-content: space-between; font-size: 10px; color: #333; }
+.email-sub { display: flex; gap: 6px; margin-top: 12px; }
+.email-sub input { padding: 6px 10px; background: #111; border: 1px solid #333; color: white; font-size: 10px; width: 130px; outline: none; }
+.sub-btn { background: var(--yellow); border: none; padding: 6px 12px; font-size: 10px; font-weight: 700; cursor: pointer; color: #1a1a1a; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo-text" onclick="location.href='index.html'" style="cursor:pointer;">Javas<br>Media</div>
+  <div class="nav-center">
+    <button class="nav-btn promo" onclick="location.href='promo.html'">PROMO</button>
+    <button class="nav-btn product" onclick="location.href='katalog.html'">PRODUCT</button>
+    <button class="nav-btn articles" onclick="location.href='articles.html'">ARTICLES</button>
+    <button class="nav-btn location" onclick="location.href='location.html'">LOCATION</button>
+  </div>
+  <div class="header-right">
+    <div class="search-wrap"><span>🔍</span><input type="text" placeholder="Cari produk..."></div>
+    <span class="icon-btn">🛒</span>
+    <span class="icon-btn" onclick="location.href='login.html'" style="cursor:pointer;">👤</span>
+  </div>
+</div>
+<div class="checkered"></div>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-left">
+    <div class="masthead-label">Jurnal & Inspirasi</div>
+    <div class="masthead-title">Javas<em>Media</em><br>Journal</div>
+    <div class="masthead-sub">Tips desain, behind the scenes produksi, update produk & promo terbaru dari workshop kami di Surabaya.</div>
+  </div>
+  <div class="masthead-right">
+    <div class="masthead-date">Juli 2024</div>
+    <div class="masthead-issue">Vol. 1 · Issue 07</div>
+  </div>
+</div>
+
+<!-- CATEGORY NAV -->
+<div class="cat-nav">
+  <button class="cat-btn active">Semua</button>
+  <button class="cat-btn">Tips & Tutorial</button>
+  <button class="cat-btn">Behind the Scenes</button>
+  <button class="cat-btn">Update Produk</button>
+  <button class="cat-btn">Promo & Info</button>
+</div>
+
+<!-- MAIN -->
+<div class="page">
+  <div class="main-content">
+
+    <!-- FEATURED -->
+    <div class="featured-wrap">
+      <div class="featured-label">
+        <div class="featured-label-text">Artikel Pilihan</div>
+        <div class="featured-label-line"></div>
+      </div>
+
+      <div class="featured-card">
+        <div class="featured-img">
+          <div class="featured-tag">Tips & Tutorial</div>
+          <div class="featured-img-icon">🎨</div>
+          <div class="featured-img-label">Foto artikel</div>
+        </div>
+        <div class="featured-content">
+          <div>
+            <div class="featured-meta">
+              <span class="meta-cat">Tips & Tutorial</span>
+              <div class="meta-dot"></div>
+              <span class="meta-date">5 Jul 2024</span>
+              <div class="meta-dot"></div>
+              <span class="meta-date">8 min baca</span>
+            </div>
+            <div class="featured-title">Panduan Lengkap Memilih Teknik Sablon yang Tepat untuk Brand Kamu</div>
+            <div class="featured-excerpt">DTF, polyflex, atau sablon plastisol? Setiap teknik punya kelebihan dan kekurangan masing-masing. Artikel ini membantu kamu memilih yang paling sesuai dengan kebutuhan, budget, dan jumlah produksi.</div>
+          </div>
+          <div class="featured-footer">
+            <div class="author-row">
+              <div class="author-avatar">JM</div>
+              <div class="author-name">Tim JavasMedia</div>
+            </div>
+            <a href="#" class="read-more">Baca selengkapnya →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARTICLE LIST -->
+    <div class="articles-label">
+      <div class="articles-label-text">Artikel Terbaru</div>
+      <div class="articles-label-line"></div>
+    </div>
+
+    <div class="article-list">
+      <div class="article-item">
+        <div class="article-img">🏭</div>
+        <div class="article-content">
+          <div class="article-meta">
+            <span class="article-cat">Behind the Scenes</span>
+            <div class="meta-dot"></div>
+            <span class="article-date">2 Jul 2024</span>
+          </div>
+          <div class="article-title">Sehari di Workshop JavasMedia: Dari Desain ke Produk Jadi</div>
+          <div class="article-excerpt">Proses produksi custom kaos dari awal sampai akhir — mulai dari cek file desain, printing DTF, pressing, quality control, sampai packing pengiriman.</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <div class="article-img">✨</div>
+        <div class="article-content">
+          <div class="article-meta">
+            <span class="article-cat">Update Produk</span>
+            <div class="meta-dot"></div>
+            <span class="article-date">28 Jun 2024</span>
+          </div>
+          <div class="article-title">Produk Baru: Polyflex Reflektif untuk Safety & Streetwear</div>
+          <div class="article-excerpt">Kini tersedia polyflex reflektif yang bisa menyala di gelap — cocok untuk seragam keselamatan, jersey outdoor, atau estetika streetwear yang unik.</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <div class="article-img">💡</div>
+        <div class="article-content">
+          <div class="article-meta">
+            <span class="article-cat">Tips & Tutorial</span>
+            <div class="meta-dot"></div>
+            <span class="article-date">20 Jun 2024</span>
+          </div>
+          <div class="article-title">5 Kesalahan Umum Saat Order Kaos Custom (dan Cara Menghindarinya)</div>
+          <div class="article-excerpt">Resolusi file terlalu rendah, warna tidak sesuai ekspektasi, ukuran salah — ini kesalahan yang paling sering terjadi dan cara mudah menghindarinya.</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <div class="article-img">🎉</div>
+        <div class="article-content">
+          <div class="article-meta">
+            <span class="article-cat">Promo & Info</span>
+            <div class="meta-dot"></div>
+            <span class="article-date">15 Jun 2024</span>
+          </div>
+          <div class="article-title">Promo Juli: Diskon 50% untuk Order Perdana + Gratis Ongkir Surabaya</div>
+          <div class="article-excerpt">Belum pernah order di JavasMedia? Dapatkan diskon 50% untuk order pertama kamu dengan kode JAVASPERT, berlaku sampai 31 Juli 2024.</div>
+        </div>
+      </div>
+
+      <div class="article-item">
+        <div class="article-img">🖨️</div>
+        <div class="article-content">
+          <div class="article-meta">
+            <span class="article-cat">Tips & Tutorial</span>
+            <div class="meta-dot"></div>
+            <span class="article-date">8 Jun 2024</span>
+          </div>
+          <div class="article-title">Cara Siapkan File Desain untuk Sablon DTF yang Sempurna</div>
+          <div class="article-excerpt">Format file, resolusi minimum, mode warna, ukuran artwork — semua yang perlu kamu ketahui sebelum kirim file ke kami agar hasil sablon maksimal.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- Search -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">Cari Artikel</div>
+      <div class="sidebar-card-body">
+        <div class="sidebar-search">
+          <input type="text" placeholder="Kata kunci...">
+          <button>🔍</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kategori -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">Kategori</div>
+      <div class="sidebar-card-body">
+        <div class="cat-list">
+          <div class="cat-item">
+            <span>Semua Artikel</span>
+            <span class="cat-count">18</span>
+          </div>
+          <div class="cat-item">
+            <span>Tips & Tutorial</span>
+            <span class="cat-count">7</span>
+          </div>
+          <div class="cat-item">
+            <span>Behind the Scenes</span>
+            <span class="cat-count">4</span>
+          </div>
+          <div class="cat-item">
+            <span>Update Produk</span>
+            <span class="cat-count">4</span>
+          </div>
+          <div class="cat-item">
+            <span>Promo & Info</span>
+            <span class="cat-count">3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Populer -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">Paling Banyak Dibaca</div>
+      <div class="sidebar-card-body">
+        <div class="popular-list">
+          <div class="popular-item">
+            <div class="popular-num">01</div>
+            <div class="popular-title">Panduan Memilih Teknik Sablon yang Tepat</div>
+          </div>
+          <div class="popular-item">
+            <div class="popular-num">02</div>
+            <div class="popular-title">Cara Siapkan File Desain untuk DTF</div>
+          </div>
+          <div class="popular-item">
+            <div class="popular-num">03</div>
+            <div class="popular-title">5 Kesalahan Umum Order Kaos Custom</div>
+          </div>
+          <div class="popular-item">
+            <div class="popular-num">04</div>
+            <div class="popular-title">Polyflex vs DTF: Mana yang Lebih Bagus?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="newsletter-card">
+      <div class="newsletter-title">Jangan Ketinggalan Update</div>
+      <div class="newsletter-sub">Daftar newsletter kami dan dapatkan tips desain + info promo terbaru langsung ke email kamu.</div>
+      <input class="newsletter-input" type="text" placeholder="Email kamu...">
+      <button class="newsletter-btn">SUBSCRIBE →</button>
+    </div>
+
+  </aside>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-top">
+    <div class="footer-section">
+      <div class="footer-logo">JAVAS MEDIA</div>
+      <div class="footer-desc">Kebondalem 10/1 Surabaya<br>082143777463<br>javasmediasurabaya@gmail.com</div>
+      <div class="footer-social">
+        <div class="social-icon">ig</div>
+        <div class="social-icon">tt</div>
+        <div class="social-icon">tw</div>
+        <div class="social-icon">fb</div>
+        <div class="social-icon">yt</div>
+      </div>
+    </div>
+    <div class="footer-section">
+      <h4>SHOP</h4>
+      <a href="#">Apparel</a>
+      <a href="#">Aksesoris</a>
+      <a href="#">Packaging</a>
+      <a href="#">Promotion Item</a>
+      <a href="#">Homedecor</a>
+    </div>
+    <div class="footer-section">
+      <h4>HELP</h4>
+      <a href="#">FAQ</a>
+      <a href="#">Shipping Info</a>
+      <a href="#">Returns & Exchanges</a>
+      <a href="#">Track Order</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div class="footer-section">
+      <h4>COMPANY</h4>
+      <a href="#">About Us</a>
+      <a href="#">Articles</a>
+      <a href="#">Careers</a>
+      <a href="#">Press</a>
+      <div style="font-size:9px;color:#333;margin-top:14px;margin-bottom:4px;">Newsletter:</div>
+      <div class="email-sub">
+        <input type="text" placeholder="Email kamu...">
+        <button class="sub-btn">OK</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 JavasMedia. All rights reserved.</span>
+    <span>Privacy Policy | Terms of Service</span>
+  </div>
+</div>
+
+</body>
+</html>

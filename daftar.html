@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daftar — JavasMedia</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #FAF8F3;
+  --navy: #1e3a5f;
+  --orange: #ff9800;
+  --yellow: #ffc107;
+  --cyan: #00bcd4;
+  --pink: #e91e63;
+  --red: #c0392b;
+  --dark: #1a1a1a;
+  --cream: #FAF8F3;
+  --border: #1a1a1a;
+}
+
+body {
+  background: var(--bg);
+  background-image:
+    linear-gradient(#d9d4c7 1px, transparent 1px),
+    linear-gradient(90deg, #d9d4c7 1px, transparent 1px);
+  background-size: 28px 28px;
+  font-family: 'Space Mono', monospace;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* MINI HEADER */
+.mini-header {
+  background: var(--navy);
+  padding: 14px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2.5px solid var(--dark);
+  position: relative;
+  z-index: 10;
+}
+
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: white;
+  letter-spacing: 3px;
+  font-style: italic;
+  text-decoration: none;
+}
+
+.header-right {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+}
+
+.header-right a {
+  color: var(--yellow);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.checkered {
+  height: 18px;
+  background: repeating-linear-gradient(90deg, var(--red) 0px, var(--red) 18px, var(--bg) 18px, var(--bg) 36px);
+  border-top: 2.5px solid var(--dark);
+  border-bottom: 2.5px solid var(--dark);
+}
+
+/* MAIN */
+.main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 112px);
+}
+
+/* LEFT PANEL — dekoratif */
+.left-panel {
+  background: var(--navy);
+  padding: 60px 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border-right: 2.5px solid var(--dark);
+}
+
+/* grid texture */
+.left-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+
+/* ghost text */
+.left-panel::after {
+  content: 'JAVAS';
+  position: absolute;
+  bottom: -30px;
+  right: -20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 200px;
+  color: rgba(255,255,255,0.03);
+  line-height: 1;
+  pointer-events: none;
+  letter-spacing: -4px;
+}
+
+/* vertical color strip */
+.left-strip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background: repeating-linear-gradient(180deg,
+    var(--yellow) 0px, var(--yellow) 25px,
+    var(--orange) 25px, var(--orange) 50px,
+    var(--pink) 50px, var(--pink) 75px,
+    var(--cyan) 75px, var(--cyan) 100px
+  );
+}
+
+.left-content { position: relative; z-index: 2; }
+
+.left-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--orange);
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  margin-bottom: 24px;
+  border: 2px solid rgba(255,255,255,0.2);
+  width: fit-content;
+}
+
+.left-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 72px;
+  line-height: 0.9;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.left-title .yellow { color: var(--yellow); }
+.left-title .outline {
+  -webkit-text-stroke: 2px white;
+  color: transparent;
+  display: block;
+}
+
+.left-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.8;
+  margin-bottom: 36px;
+  max-width: 340px;
+}
+
+/* benefits list */
+.benefits { display: flex; flex-direction: column; gap: 12px; }
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.8);
+}
+
+.benefit-icon {
+  width: 28px;
+  height: 28px;
+  border: 2px solid rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.05);
+}
+
+/* floating ornaments */
+.orn {
+  position: absolute;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* RIGHT PANEL — form */
+.right-panel {
+  background: var(--cream);
+  padding: 60px 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.form-wrap {
+  max-width: 380px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.form-header { margin-bottom: 32px; }
+
+.form-eyebrow {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: var(--orange);
+}
+
+.form-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px;
+  color: var(--dark);
+  line-height: 1;
+  letter-spacing: -1px;
+  margin-bottom: 6px;
+}
+
+.form-sub {
+  font-size: 11px;
+  color: #888;
+  line-height: 1.6;
+}
+
+/* GOOGLE BTN */
+.btn-google {
+  width: 100%;
+  background: white;
+  border: 2px solid var(--dark);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dark);
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--dark);
+  transition: all 0.15s;
+  margin-bottom: 20px;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.5px;
+}
+
+.btn-google:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--dark); }
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #4285f4, #34a853, #fbbc05, #ea4335);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 11px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+/* DIVIDER */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.divider-line { flex: 1; height: 1px; background: #ddd; }
+
+.divider-text {
+  font-size: 10px;
+  color: #aaa;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* FORM FIELDS */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.form-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dark);
+}
+
+.form-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 2px solid var(--dark);
+  background: white;
+  font-size: 13px;
+  font-family: 'Space Mono', monospace;
+  color: var(--dark);
+  outline: none;
+  transition: all 0.15s;
+  box-shadow: 3px 3px 0 var(--dark);
+}
+
+.form-input:focus {
+  box-shadow: 4px 4px 0 var(--orange);
+  border-color: var(--orange);
+}
+
+.form-input::placeholder { color: #bbb; }
+
+.password-wrap {
+  position: relative;
+}
+
+.password-wrap .form-input { padding-right: 44px; }
+
+.show-pass {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  cursor: pointer;
+  color: #888;
+  background: none;
+  border: none;
+}
+
+/* forgot */
+.forgot-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.forgot-link {
+  font-size: 10px;
+  color: var(--orange);
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-bottom: 1px solid var(--orange);
+}
+
+/* SUBMIT */
+.btn-login {
+  width: 100%;
+  background: var(--navy);
+  border: 2px solid var(--dark);
+  padding: 14px 16px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 3px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 5px 5px 0 var(--dark);
+  transition: all 0.15s;
+  margin-bottom: 20px;
+}
+
+.btn-login:hover {
+  transform: translate(-2px,-2px);
+  box-shadow: 7px 7px 0 var(--dark);
+  background: var(--orange);
+}
+
+/* register link */
+.register-row {
+  text-align: center;
+  font-size: 11px;
+  color: #888;
+}
+
+.register-row a {
+  color: var(--navy);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--navy);
+}
+
+/* nav tabs atas form */
+.form-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 28px;
+  border: 2px solid var(--dark);
+  box-shadow: 4px 4px 0 var(--dark);
+}
+
+.form-tab {
+  flex: 1;
+  padding: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  background: white;
+  color: #888;
+  border: none;
+  font-family: 'Space Mono', monospace;
+  transition: all 0.15s;
+}
+
+.form-tab.active {
+  background: var(--navy);
+  color: var(--yellow);
+}
+
+.form-tab:first-child { border-right: 2px solid var(--dark); }
+</style>
+</head>
+<body>
+
+<!-- MINI HEADER -->
+<div class="mini-header">
+  <a href="#" class="logo">JavasMedia</a>
+  <div class="header-right">
+    Sudah punya akun? <a href="#">Masuk sekarang →</a>
+  </div>
+</div>
+<div class="checkered"></div>
+
+<div class="main">
+
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+    <div class="left-strip"></div>
+
+    <!-- Ornamen tersebar -->
+    <div class="orn" style="top:14%;right:44px;">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="#ffc107">
+        <path d="M24 0 L27 21 L48 24 L27 27 L24 48 L21 27 L0 24 L21 21 Z"/>
+      </svg>
+    </div>
+
+    <div class="orn" style="bottom:18%;right:60px;">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#00bcd4" stroke-width="2.5">
+        <polygon points="16,1 31,31 1,31"/>
+      </svg>
+    </div>
+
+    <div class="orn" style="top:12%;left:52px;">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="#e91e63">
+        <polygon points="10,0 20,10 10,20 0,10"/>
+      </svg>
+    </div>
+
+    <div class="orn" style="bottom:28%;left:44px;">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#ff9800" stroke-width="2.5">
+        <rect x="2" y="2" width="32" height="32"/>
+        <rect x="8" y="8" width="20" height="20"/>
+      </svg>
+    </div>
+
+    <div class="orn" style="top:42%;right:32px;">
+      <svg width="16" height="16" viewBox="0 0 16 16">
+        <circle cx="8" cy="8" r="8" fill="#ffc107"/>
+      </svg>
+    </div>
+
+    <div class="orn" style="bottom:12%;left:60%;transform:translateX(-50%);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="#00bcd4">
+        <rect x="0" y="9" width="24" height="6"/>
+        <rect x="9" y="0" width="6" height="24"/>
+      </svg>
+    </div>
+
+    <div class="orn" style="top:28%;left:56px;">
+      <svg width="14" height="14" viewBox="0 0 14 14">
+        <circle cx="7" cy="7" r="7" fill="#e91e63" opacity="0.7"/>
+      </svg>
+    </div>
+
+    <div class="left-content">
+      <div class="left-tag">✏️ &nbsp; Buat Akun Baru</div>
+
+      <div class="left-title">
+        <span>HOUSE</span>
+        <span class="yellow">OF</span>
+        <span class="outline">CUSTOMIZE</span>
+      </div>
+
+      <div class="left-desc">
+        Daftar sekarang dan nikmati kemudahan pantau order, download invoice, dan akses promo eksklusif member JavasMedia.
+      </div>
+
+      <div class="benefits">
+        <div class="benefit-item">
+          <div class="benefit-icon">⚡</div>
+          <span>Daftar gratis, tanpa biaya apapun</span>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">📦</div>
+          <span>Pantau status order real-time</span>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">📄</div>
+          <span>Download invoice kapan saja</span>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">🎁</div>
+          <span>Promo eksklusif khusus member</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+    <div class="form-wrap">
+
+      <div class="form-header">
+        <div class="form-eyebrow">Daftar Gratis</div>
+        <div class="form-title">Buat<br>Akun</div>
+        <div class="form-sub">Sudah punya akun? <a href="#" style="color:var(--orange);font-weight:700;">Masuk sekarang →</a></div>
+      </div>
+
+      <!-- Google register -->
+      <button class="btn-google">
+        <div class="google-icon">G</div>
+        Daftar dengan Google
+      </button>
+
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-text">atau</div>
+        <div class="divider-line"></div>
+      </div>
+
+      <!-- Form register -->
+      <div class="form-group">
+        <label class="form-label">Nama Lengkap</label>
+        <input type="text" class="form-input" placeholder="Nama kamu">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" placeholder="email@kamu.com">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">No. WhatsApp</label>
+        <input type="tel" class="form-input" placeholder="08xxxxxxxxxx">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <div class="password-wrap">
+          <input type="password" class="form-input" placeholder="Min. 8 karakter">
+          <button class="show-pass">👁</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Konfirmasi Password</label>
+        <div class="password-wrap">
+          <input type="password" class="form-input" placeholder="Ulangi password">
+          <button class="show-pass">👁</button>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;font-size:11px;color:#666;line-height:1.5;">
+        <input type="checkbox" style="margin-top:2px;flex-shrink:0;width:14px;height:14px;accent-color:var(--navy);">
+        <span>Saya setuju dengan <a href="#" style="color:var(--navy);font-weight:700;border-bottom:1px solid var(--navy);">Syarat & Ketentuan</a> dan <a href="#" style="color:var(--navy);font-weight:700;border-bottom:1px solid var(--navy);">Kebijakan Privasi</a> JavasMedia.</span>
+      </div>
+
+      <button class="btn-login">DAFTAR SEKARANG →</button>
+
+      <div class="register-row">
+        Sudah punya akun? <a href="#">Masuk di sini</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// Tab switcher
+const tabs = document.querySelectorAll('.form-tab');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

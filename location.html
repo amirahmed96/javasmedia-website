@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Location - JavasMedia</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1c1a14;
+  --bg2: #232116;
+  --cream: #e8dfc4;
+  --yellow: #f0c040;
+  --orange: #e8621a;
+  --red: #c0392b;
+  --green: #6b8f4e;
+  --sage: #8aab6e;
+  --muted: #5a5238;
+  --border: #3a3520;
+}
+body {
+  background: var(--bg);
+  font-family: 'Space Mono', monospace;
+  overflow-x: hidden;
+  color: var(--cream);
+  position: relative;
+}
+
+/* PERSPECTIVE GRID TEXTURE */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(240,192,64,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240,192,64,0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* HEADER */
+.header {
+  background: #1e3a5f;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 90px;
+  position: relative;
+  z-index: 10;
+}
+.logo-text { color: white; font-size: 22px; font-weight: 900; letter-spacing: 2px; font-style: italic; text-transform: uppercase; line-height: 1.1; font-family: 'Bebas Neue', sans-serif; }
+.nav-center { display: flex; align-items: flex-end; align-self: flex-end; }
+.nav-btn { padding: 10px 24px; border: 2.5px solid #1a1a1a; border-bottom: none; border-radius: 10px 10px 0 0; font-size: 13px; font-weight: 800; cursor: pointer; text-transform: uppercase; color: #1a1a1a; }
+.nav-btn.promo { background: #ffc107; }
+.nav-btn.product { background: #00bcd4; }
+.nav-btn.articles { background: #ff9800; }
+.nav-btn.location { background: #e91e63; color: white; }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.search-wrap { background: #FAF8F3; border-radius: 6px; padding: 8px 14px; display: flex; align-items: center; gap: 8px; width: 200px; }
+.search-wrap input { background: transparent; border: none; outline: none; font-size: 13px; width: 100%; }
+.icon-btn { color: white; font-size: 22px; cursor: pointer; }
+
+.checkered {
+  height: 18px;
+  background: repeating-linear-gradient(90deg, var(--red) 0px, var(--red) 18px, var(--bg) 18px, var(--bg) 36px);
+  border-top: 2px solid var(--orange);
+  border-bottom: 2px solid var(--orange);
+  position: relative; z-index: 10;
+}
+
+/* ======= HERO ======= */
+.hero {
+  position: relative;
+  min-height: 580px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid var(--border);
+  z-index: 1;
+}
+
+/* left yellow strip */
+.hero::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 8px;
+  background: repeating-linear-gradient(180deg, var(--yellow) 0px, var(--yellow) 20px, var(--orange) 20px, var(--orange) 40px, var(--red) 40px, var(--red) 60px, var(--green) 60px, var(--green) 80px);
+}
+
+.hero-left {
+  position: relative;
+  z-index: 3;
+  padding: 60px 40px 60px 60px;
+  flex: 1;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--red);
+  color: white;
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 120px;
+  line-height: 0.88;
+  letter-spacing: -2px;
+  margin-bottom: 16px;
+}
+
+.hero-title .line1 { color: var(--cream); display: block; }
+.hero-title .line2 { color: var(--yellow); display: block; -webkit-text-stroke: 0; }
+.hero-title .line3 { color: transparent; -webkit-text-stroke: 2px var(--orange); display: block; }
+
+.hero-script {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 26px;
+  color: var(--sage);
+  margin-bottom: 20px;
+}
+
+.hero-addr-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.addr-chip {
+  background: var(--border);
+  border: 1px solid var(--muted);
+  padding: 5px 12px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--cream);
+  text-transform: uppercase;
+}
+
+/* HERO RIGHT — ornamen besar */
+.hero-right {
+  position: relative;
+  width: 520px;
+  flex-shrink: 0;
+  height: 580px;
+  z-index: 2;
+}
+
+/* Globe besar */
+.big-globe {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 380px;
+  height: 380px;
+}
+
+/* floating ornaments */
+.fl {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* Badge bundar */
+.vintage-badge {
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  width: 110px;
+  height: 110px;
+}
+.vbadge-outer {
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  border: 2px solid var(--yellow);
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg2);
+  position: relative;
+}
+.vbadge-outer::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  border: 1px dashed var(--orange);
+}
+.vbadge-inner { text-align: center; }
+.vbadge-top { font-size: 7px; letter-spacing: 3px; color: var(--yellow); text-transform: uppercase; display: block; }
+.vbadge-num { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--cream); line-height: 1; }
+.vbadge-bot { font-size: 7px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; display: block; }
+
+/* ======= MARQUEE STRIP ======= */
+.marquee-strip {
+  background: var(--yellow);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px 0;
+  border-top: 2px solid var(--orange);
+  border-bottom: 2px solid var(--orange);
+  position: relative;
+  z-index: 5;
+}
+.marquee-track {
+  display: inline-block;
+  animation: marquee 18s linear infinite;
+}
+.marquee-track span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 4px;
+  color: #1c1a14;
+  margin-right: 40px;
+}
+.marquee-track span.dot { color: var(--red); margin-right: 40px; font-size: 20px; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ======= PAGE ======= */
+.page { padding: 60px 60px 80px; position: relative; z-index: 1; }
+
+/* ======= MAIN GRID ======= */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 48px;
+  margin-bottom: 80px;
+  align-items: start;
+}
+
+/* MAP */
+.map-col { display: flex; flex-direction: column; gap: 0; }
+
+.map-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.map-title-box {
+  background: var(--orange);
+  padding: 10px 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: white;
+}
+
+.map-title-arrow {
+  width: 0; height: 0;
+  border-top: 22px solid transparent;
+  border-bottom: 22px solid transparent;
+  border-left: 20px solid var(--orange);
+}
+
+.map-box {
+  border: 2px solid var(--border);
+  border-top: none;
+  background: var(--bg2);
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* corner brackets */
+.map-box::before { content: ''; position: absolute; top: 14px; left: 14px; width: 28px; height: 28px; border-top: 3px solid var(--yellow); border-left: 3px solid var(--yellow); }
+.map-box::after { content: ''; position: absolute; bottom: 14px; right: 14px; width: 28px; height: 28px; border-bottom: 3px solid var(--red); border-right: 3px solid var(--red); }
+
+.map-ph-icon { opacity: 0.12; }
+.map-ph-text { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+
+/* INFO STACK */
+.info-stack { display: flex; flex-direction: column; gap: 0; }
+
+.info-card {
+  background: var(--bg2);
+  border: 2px solid var(--border);
+  border-bottom: none;
+  padding: 22px 24px;
+  position: relative;
+}
+.info-card:last-child { border-bottom: 2px solid var(--border); }
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.card-header-bar {
+  width: 4px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.bar-yellow { background: var(--yellow); }
+.bar-orange { background: var(--orange); }
+.bar-green { background: var(--sage); }
+
+.card-header-title {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cream);
+  font-weight: 700;
+}
+
+.info-row { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
+.info-row:last-child { margin-bottom: 0; }
+.info-row-icon { font-size: 13px; flex-shrink: 0; margin-top: 2px; }
+.info-row-text { font-size: 11px; color: var(--cream); line-height: 1.7; }
+.info-label { font-size: 9px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 2px; }
+
+/* JAM */
+.jam-row { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--muted); padding: 8px 0; border-bottom: 1px solid var(--border); }
+.jam-row:last-child { border-bottom: none; }
+.jam-row.buka .jam-day { color: var(--yellow); font-weight: 700; }
+.jam-row.buka .jam-time { color: var(--sage); font-weight: 700; }
+.open-tag { background: var(--sage); color: #1a1a1a; font-size: 7px; font-weight: 700; letter-spacing: 2px; padding: 2px 6px; text-transform: uppercase; }
+.tutup { color: var(--border); }
+
+/* SOSMED */
+.sosmed-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.sosmed-btn { background: transparent; border: 1.5px solid var(--border); padding: 8px 10px; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); cursor: pointer; font-family: 'Space Mono', monospace; transition: all 0.15s; text-align: left; display: flex; align-items: center; gap: 6px; }
+.sosmed-btn:hover { border-color: var(--yellow); color: var(--yellow); background: rgba(240,192,64,0.06); }
+.sosmed-icon { width: 18px; height: 18px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
+.si-ig { background: var(--orange); }
+.si-tt { background: #1a1a1a; border: 1px solid #444; }
+.si-tw { background: #1da1f2; }
+.si-fb { background: #1877f2; }
+.si-yt { background: var(--red); }
+
+/* ======= ORNAMEN SECTION ======= */
+.ornamen-section {
+  position: relative;
+  margin-bottom: 80px;
+  padding: 48px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/* big ghost text */
+.ornamen-section::before {
+  content: 'FIND US';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 160px;
+  color: rgba(240,192,64,0.04);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: 10px;
+}
+
+.ornamen-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+
+.orn-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.orn-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ======= TRANSPORT ======= */
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.sh-line { flex: 1; height: 1px; background: var(--border); }
+.sh-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--cream); letter-spacing: 3px; }
+.sh-orn { color: var(--yellow); font-size: 16px; }
+
+.transport-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+  margin-bottom: 80px;
+}
+
+.transport-card {
+  background: var(--bg2);
+  padding: 36px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.transport-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+}
+
+.tc-1::before { background: var(--yellow); }
+.tc-2::before { background: var(--orange); }
+.tc-3::before { background: var(--sage); }
+
+.transport-card:hover { background: #252318; }
+
+.t-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 72px;
+  line-height: 1;
+  margin-bottom: 4px;
+  opacity: 0.15;
+  position: absolute;
+  top: 16px;
+  right: 20px;
+}
+
+.tc-1 .t-num { color: var(--yellow); opacity: 0.2; }
+.tc-2 .t-num { color: var(--orange); opacity: 0.2; }
+.tc-3 .t-num { color: var(--sage); opacity: 0.2; }
+
+.t-icon { font-size: 36px; margin-bottom: 14px; display: block; }
+.t-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--cream); letter-spacing: 2px; margin-bottom: 10px; }
+.t-desc { font-size: 11px; color: var(--muted); line-height: 1.8; }
+
+/* ======= CTA ======= */
+.cta-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-box {
+  background: var(--bg2);
+  border: 2px solid var(--yellow);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 40px;
+  padding: 48px 52px;
+  position: relative;
+  z-index: 2;
+}
+
+/* diagonal stripes */
+.cta-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 20px,
+    rgba(240,192,64,0.03) 20px,
+    rgba(240,192,64,0.03) 40px
+  );
+  z-index: -1;
+}
+
+/* star row top */
+.cta-stars {
+  text-align: center;
+  margin-bottom: -2px;
+  font-size: 12px;
+  color: var(--yellow);
+  letter-spacing: 12px;
+  opacity: 0.4;
+  padding: 6px 0;
+  background: var(--bg2);
+  border: 2px solid var(--yellow);
+  border-bottom: none;
+}
+
+.cta-eyebrow {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--sage);
+  margin-bottom: 8px;
+}
+
+.cta-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  color: var(--cream);
+  line-height: 1;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.cta-title span { color: var(--yellow); }
+
+.cta-sub { font-size: 11px; color: var(--muted); line-height: 1.7; }
+
+.cta-btn {
+  background: var(--yellow);
+  border: 2px solid var(--cream);
+  padding: 18px 36px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 3px;
+  color: #1a1a1a;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  display: block;
+}
+
+.cta-btn:hover { background: var(--orange); color: white; transform: translate(-3px,-3px); box-shadow: 5px 5px 0 var(--red); }
+
+/* FOOTER */
+.footer { background: #0e0d08; color: var(--cream); padding: 48px 60px 24px; border-top: 2px solid var(--border); position: relative; z-index: 1; }
+.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 3px; color: var(--yellow); margin-bottom: 12px; }
+.footer-desc { font-size: 10px; color: var(--muted); line-height: 1.9; margin-bottom: 16px; }
+.footer-social { display: flex; gap: 6px; }
+.social-icon { width: 28px; height: 28px; background: var(--bg2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; cursor: pointer; transition: all 0.15s; color: var(--muted); }
+.social-icon:hover { border-color: var(--yellow); color: var(--yellow); }
+.footer-section h4 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--yellow); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.footer-section a { display: block; font-size: 10px; color: var(--muted); text-decoration: none; margin-bottom: 8px; transition: color 0.15s; }
+.footer-section a:hover { color: var(--yellow); }
+.footer-bottom { border-top: 1px solid var(--border); padding-top: 16px; display: flex; justify-content: space-between; font-size: 10px; color: var(--border); }
+.email-sub { display: flex; gap: 6px; margin-top: 12px; }
+.email-sub input { padding: 6px 10px; background: var(--bg); border: 1px solid var(--border); color: var(--cream); font-size: 10px; width: 130px; outline: none; font-family: monospace; }
+.sub-btn { background: var(--yellow); border: none; padding: 6px 12px; font-size: 10px; font-weight: 700; cursor: pointer; color: #1a1a1a; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo-text" onclick="location.href='index.html'" style="cursor:pointer;">Javas<br>Media</div>
+  <div class="nav-center">
+    <button class="nav-btn promo" onclick="location.href='promo.html'">PROMO</button>
+    <button class="nav-btn product" onclick="location.href='katalog.html'">PRODUCT</button>
+    <button class="nav-btn articles" onclick="location.href='articles.html'">ARTICLES</button>
+    <button class="nav-btn location" onclick="location.href='location.html'">LOCATION</button>
+  </div>
+  <div class="header-right">
+    <div class="search-wrap"><span>🔍</span><input type="text" placeholder="Cari produk..."></div>
+    <span class="icon-btn">🛒</span>
+    <span class="icon-btn" onclick="location.href='login.html'" style="cursor:pointer;">👤</span>
+  </div>
+</div>
+<div class="checkered"></div>
+
+<!-- HERO -->
+<div class="hero">
+
+  <div class="hero-left">
+    <div class="hero-tag">📍 &nbsp; Find Our Workshop</div>
+
+    <div class="hero-title">
+      <span class="line1">HOUSE</span>
+      <span class="line2">OF</span>
+      <span class="line3">CRAFT</span>
+    </div>
+
+    <div class="hero-script">Where your ideas come to life</div>
+
+    <div class="hero-addr-row">
+      <div class="addr-chip">📍 Kebondalem 10/1</div>
+      <div class="addr-chip">🌆 Surabaya</div>
+      <div class="addr-chip">🇮🇩 Jawa Timur</div>
+    </div>
+  </div>
+
+  <!-- HERO RIGHT ornamen -->
+  <div class="hero-right">
+
+    <!-- BIG GLOBE -->
+    <div class="big-globe">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <!-- glow circle -->
+        <circle cx="200" cy="200" r="185" stroke="#f0c040" stroke-width="1" opacity="0.15"/>
+        <!-- main circle -->
+        <circle cx="200" cy="200" r="172" stroke="#e8dfc4" stroke-width="2" opacity="0.5"/>
+        <!-- lat lines -->
+        <ellipse cx="200" cy="200" rx="172" ry="55" stroke="#f0c040" stroke-width="1" opacity="0.4"/>
+        <ellipse cx="200" cy="200" rx="172" ry="110" stroke="#f0c040" stroke-width="1" opacity="0.3"/>
+        <ellipse cx="200" cy="200" rx="172" ry="155" stroke="#f0c040" stroke-width="1" opacity="0.2"/>
+        <!-- equator -->
+        <line x1="28" y1="200" x2="372" y2="200" stroke="#e8621a" stroke-width="1.5" opacity="0.6"/>
+        <!-- long lines -->
+        <ellipse cx="200" cy="200" rx="55" ry="172" stroke="#e8dfc4" stroke-width="1" opacity="0.3"/>
+        <ellipse cx="200" cy="200" rx="110" ry="172" stroke="#e8dfc4" stroke-width="1" opacity="0.25"/>
+        <line x1="200" y1="28" x2="200" y2="372" stroke="#e8dfc4" stroke-width="1" opacity="0.3"/>
+        <!-- location pin -->
+        <circle cx="260" cy="140" r="14" fill="#c0392b" opacity="0.9"/>
+        <circle cx="260" cy="140" r="6" fill="white" opacity="0.9"/>
+        <line x1="260" y1="154" x2="260" y2="172" stroke="#c0392b" stroke-width="3" opacity="0.9"/>
+        <!-- Stand -->
+        <line x1="200" y1="372" x2="200" y2="395" stroke="#5a5238" stroke-width="2"/>
+        <ellipse cx="200" cy="395" rx="40" ry="6" stroke="#5a5238" stroke-width="1.5" fill="none"/>
+        <!-- decorative ring -->
+        <ellipse cx="200" cy="200" rx="195" ry="30" stroke="#6b8f4e" stroke-width="1.5" opacity="0.3" transform="rotate(-20, 200, 200)"/>
+      </svg>
+    </div>
+
+    <!-- Vintage badge kiri atas -->
+    <div class="fl vintage-badge">
+      <div class="vbadge-outer">
+        <div class="vbadge-inner">
+          <span class="vbadge-top">Est.</span>
+          <div class="vbadge-num">2018</div>
+          <span class="vbadge-bot">Surabaya</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ornamen line-art tersebar (inline SVG) -->
+
+    <!-- Bintang 4 titik — orange -->
+    <div class="fl" style="top:18%;right:380px;">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="#e8621a">
+        <path d="M18 0 L20 16 L36 18 L20 20 L18 36 L16 20 L0 18 L16 16 Z"/>
+      </svg>
+    </div>
+
+    <!-- Bintang kecil kuning -->
+    <div class="fl" style="bottom:25%;right:360px;">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="#f0c040">
+        <path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z"/>
+      </svg>
+    </div>
+
+    <!-- Bulan sabit — cream -->
+    <div class="fl" style="top:12%;right:60px;">
+      <svg width="50" height="50" viewBox="0 0 50 50" fill="none" stroke="#e8dfc4" stroke-width="2" opacity="0.7">
+        <path d="M35 25 A15 15 0 1 1 35 25.01 Q28 35 20 25 Q28 15 35 25Z" fill="#e8dfc4" opacity="0.8" stroke="none"/>
+        <circle cx="40" cy="15" r="2" fill="#f0c040"/>
+        <circle cx="44" cy="22" r="1.5" fill="#f0c040"/>
+        <circle cx="38" cy="28" r="1" fill="#f0c040"/>
+      </svg>
+    </div>
+
+    <!-- Kompas kecil — green -->
+    <div class="fl" style="bottom:15%;right:50px;">
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#6b8f4e" stroke-width="1.5">
+        <circle cx="32" cy="32" r="28"/>
+        <circle cx="32" cy="32" r="22" stroke-dasharray="3,3"/>
+        <polygon points="32,8 35,30 32,36 29,30" fill="#f0c040" stroke="none"/>
+        <polygon points="32,56 35,34 32,28 29,34" fill="#c0392b" stroke="none"/>
+        <polygon points="56,32 34,35 28,32 34,29" fill="#e8dfc4" stroke="none"/>
+        <polygon points="8,32 30,35 36,32 30,29" fill="#5a5238" stroke="none"/>
+        <text x="32" y="7" text-anchor="middle" font-size="6" fill="#f0c040" stroke="none" font-family="monospace" font-weight="700">N</text>
+        <text x="32" y="61" text-anchor="middle" font-size="6" fill="#c0392b" stroke="none" font-family="monospace" font-weight="700">S</text>
+        <text x="4" y="35" font-size="6" fill="#6b8f4e" stroke="none" font-family="monospace" font-weight="700">W</text>
+        <text x="56" y="35" font-size="6" fill="#6b8f4e" stroke="none" font-family="monospace" font-weight="700">E</text>
+      </svg>
+    </div>
+
+    <!-- Kunci vintage — yellow -->
+    <div class="fl" style="top:55%;right:380px;">
+      <svg width="32" height="56" viewBox="0 0 32 56" fill="none" stroke="#f0c040" stroke-width="1.8" opacity="0.8">
+        <circle cx="16" cy="12" r="10"/>
+        <circle cx="16" cy="12" r="5"/>
+        <line x1="16" y1="22" x2="16" y2="52"/>
+        <line x1="16" y1="38" x2="22" y2="44"/>
+        <line x1="16" y1="46" x2="22" y2="52"/>
+      </svg>
+    </div>
+
+    <!-- Segitiga dekoratif — red outline -->
+    <div class="fl" style="top:8%;right:200px;">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#c0392b" stroke-width="2" opacity="0.7">
+        <polygon points="14,2 26,26 2,26"/>
+      </svg>
+    </div>
+
+    <!-- Diamond shape — sage -->
+    <div class="fl" style="bottom:35%;right:300px;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="#6b8f4e" opacity="0.6">
+        <polygon points="12,0 24,12 12,24 0,12"/>
+      </svg>
+    </div>
+
+    <!-- Tanda plus — orange -->
+    <div class="fl" style="top:35%;right:30px;">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="#e8621a" opacity="0.7">
+        <rect x="9" y="0" width="4" height="22"/>
+        <rect x="0" y="9" width="22" height="4"/>
+      </svg>
+    </div>
+
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>JAVAS MEDIA</span><span class="dot">✦</span>
+    <span>SURABAYA</span><span class="dot">★</span>
+    <span>HOUSE OF CRAFT</span><span class="dot">◆</span>
+    <span>KUNJUNGI KAMI</span><span class="dot">✦</span>
+    <span>CUSTOM PRINTING</span><span class="dot">★</span>
+    <span>WORKSHOP</span><span class="dot">◆</span>
+    <span>JAVAS MEDIA</span><span class="dot">✦</span>
+    <span>SURABAYA</span><span class="dot">★</span>
+    <span>HOUSE OF CRAFT</span><span class="dot">◆</span>
+    <span>KUNJUNGI KAMI</span><span class="dot">✦</span>
+    <span>CUSTOM PRINTING</span><span class="dot">★</span>
+    <span>WORKSHOP</span><span class="dot">◆</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="page">
+
+  <!-- MAP + INFO -->
+  <div class="main-grid">
+    <div class="map-col">
+      <div class="map-title-row">
+        <div class="map-title-box">📍 &nbsp; LOKASI WORKSHOP</div>
+        <div class="map-title-arrow"></div>
+      </div>
+      <div class="map-box">
+        <svg class="map-ph-icon" width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="#f0c040" stroke-width="1.5">
+          <circle cx="50" cy="50" r="45"/>
+          <ellipse cx="50" cy="50" rx="45" ry="15"/>
+          <ellipse cx="50" cy="50" rx="45" ry="30"/>
+          <line x1="5" y1="50" x2="95" y2="50"/>
+          <line x1="50" y1="5" x2="50" y2="95"/>
+          <ellipse cx="50" cy="50" rx="15" ry="45"/>
+          <ellipse cx="50" cy="50" rx="30" ry="45"/>
+        </svg>
+        <div class="map-ph-text">Google Maps Embed</div>
+      </div>
+    </div>
+
+    <div class="info-stack">
+      <!-- Alamat -->
+      <div class="info-card">
+        <div class="card-header">
+          <div class="card-header-bar bar-yellow"></div>
+          <div class="card-header-title">Alamat & Kontak</div>
+        </div>
+        <div class="info-row">
+          <div class="info-row-icon">🏠</div>
+          <div class="info-row-text">
+            <span class="info-label">Workshop</span>
+            Jl. Kebondalem 10/1<br>Surabaya, Jawa Timur 60174
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-row-icon">📱</div>
+          <div class="info-row-text">
+            <span class="info-label">WhatsApp</span>
+            082143777463
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-row-icon">✉️</div>
+          <div class="info-row-text">
+            <span class="info-label">Email</span>
+            javasmediasurabaya@gmail.com
+          </div>
+        </div>
+      </div>
+
+      <!-- Jam -->
+      <div class="info-card">
+        <div class="card-header">
+          <div class="card-header-bar bar-orange"></div>
+          <div class="card-header-title">Jam Operasional</div>
+        </div>
+        <div class="jam-row buka">
+          <span class="jam-day">Senin – Jumat</span>
+          <span class="open-tag">Buka</span>
+          <span class="jam-time">08.00–17.00</span>
+        </div>
+        <div class="jam-row">
+          <span class="jam-day">Sabtu</span>
+          <span></span>
+          <span class="jam-time" style="color:#8aab6e;">08.00–14.00</span>
+        </div>
+        <div class="jam-row tutup">
+          <span class="jam-day">Minggu</span>
+          <span></span>
+          <span class="jam-time">Tutup</span>
+        </div>
+      </div>
+
+      <!-- Sosmed -->
+      <div class="info-card">
+        <div class="card-header">
+          <div class="card-header-bar bar-green"></div>
+          <div class="card-header-title">Temukan Kami Di</div>
+        </div>
+        <div class="sosmed-grid">
+          <button class="sosmed-btn"><span class="sosmed-icon si-ig">📸</span>Instagram</button>
+          <button class="sosmed-btn"><span class="sosmed-icon si-tt">🎵</span>TikTok</button>
+          <button class="sosmed-btn"><span class="sosmed-icon si-tw">🐦</span>Twitter</button>
+          <button class="sosmed-btn"><span class="sosmed-icon si-fb">📘</span>Facebook</button>
+          <button class="sosmed-btn"><span class="sosmed-icon si-yt">▶️</span>YouTube</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORNAMEN SECTION -->
+  <div class="ornamen-section">
+    <div class="ornamen-row">
+      <!-- Globe kecil -->
+      <div class="orn-item">
+        <svg width="72" height="72" viewBox="0 0 80 80" fill="none" stroke="#f0c040" stroke-width="1.5">
+          <circle cx="40" cy="40" r="34"/>
+          <ellipse cx="40" cy="40" rx="34" ry="12"/>
+          <ellipse cx="40" cy="40" rx="34" ry="24"/>
+          <line x1="6" y1="40" x2="74" y2="40"/>
+          <line x1="40" y1="6" x2="40" y2="74"/>
+          <ellipse cx="40" cy="40" rx="12" ry="34"/>
+        </svg>
+        <div class="orn-label">Globe</div>
+      </div>
+
+      <!-- Kompas -->
+      <div class="orn-item">
+        <svg width="72" height="72" viewBox="0 0 80 80" fill="none" stroke="#e8621a" stroke-width="1.5">
+          <circle cx="40" cy="40" r="34"/>
+          <circle cx="40" cy="40" r="26" stroke-dasharray="4,3"/>
+          <polygon points="40,10 43.5,37 40,44 36.5,37" fill="#f0c040" stroke="none"/>
+          <polygon points="40,70 43.5,43 40,36 36.5,43" fill="#c0392b" stroke="none"/>
+          <polygon points="70,40 43,43.5 36,40 43,36.5" fill="#e8dfc4" stroke="none"/>
+          <polygon points="10,40 37,43.5 44,40 37,36.5" fill="#5a5238" stroke="none"/>
+          <text x="40" y="9" text-anchor="middle" font-size="7" fill="#f0c040" stroke="none" font-family="monospace" font-weight="700">N</text>
+          <text x="40" y="76" text-anchor="middle" font-size="7" fill="#c0392b" stroke="none" font-family="monospace" font-weight="700">S</text>
+        </svg>
+        <div class="orn-label">Compass</div>
+      </div>
+
+      <!-- Pin lokasi -->
+      <div class="orn-item">
+        <svg width="52" height="72" viewBox="0 0 52 72" fill="none">
+          <circle cx="26" cy="24" r="22" fill="#c0392b" opacity="0.9"/>
+          <circle cx="26" cy="24" r="14" fill="#1c1a14"/>
+          <circle cx="26" cy="24" r="7" fill="#c0392b"/>
+          <path d="M26 46 L10 68 L26 60 L42 68 Z" fill="#e8621a"/>
+        </svg>
+        <div class="orn-label">Location Pin</div>
+      </div>
+
+      <!-- Kunci vintage besar -->
+      <div class="orn-item">
+        <svg width="48" height="80" viewBox="0 0 48 80" fill="none" stroke="#6b8f4e" stroke-width="2">
+          <circle cx="24" cy="18" r="16"/>
+          <circle cx="24" cy="18" r="8"/>
+          <line x1="24" y1="34" x2="24" y2="76"/>
+          <line x1="24" y1="54" x2="34" y2="62"/>
+          <line x1="24" y1="66" x2="34" y2="74"/>
+        </svg>
+        <div class="orn-label">Key</div>
+      </div>
+
+      <!-- Bintang besar -->
+      <div class="orn-item">
+        <svg width="72" height="72" viewBox="0 0 72 72" fill="#f0c040">
+          <path d="M36 4 L40 32 L68 36 L40 40 L36 68 L32 40 L4 36 L32 32 Z"/>
+        </svg>
+        <div class="orn-label">Star</div>
+      </div>
+
+      <!-- Teleskop -->
+      <div class="orn-item">
+        <svg width="80" height="64" viewBox="0 0 80 64" fill="none" stroke="#e8dfc4" stroke-width="1.5" opacity="0.8">
+          <rect x="10" y="20" width="60" height="14" rx="2"/>
+          <polygon points="10,20 2,14 2,40 10,34"/>
+          <polygon points="70,20 78,8 78,48 70,34"/>
+          <line x1="40" y1="34" x2="40" y2="60"/>
+          <line x1="28" y1="60" x2="52" y2="60"/>
+          <circle cx="40" cy="27" r="5" stroke="#f0c040"/>
+        </svg>
+        <div class="orn-label">Telescope</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CARA KE SINI -->
+  <div class="section-head">
+    <div class="sh-orn">◈</div>
+    <div class="sh-title">CARA KE SINI</div>
+    <div class="sh-line"></div>
+    <div class="sh-orn">◈</div>
+  </div>
+
+  <div class="transport-grid">
+    <div class="transport-card tc-1">
+      <div class="t-num">01</div>
+      <span class="t-icon">🚗</span>
+      <div class="t-title">Kendaraan Pribadi</div>
+      <div class="t-desc">Dari pusat kota Surabaya, ambil arah Kebondalem. Parkir tersedia di depan workshop. Estimasi 10–20 menit dari Tunjungan Plaza.</div>
+    </div>
+    <div class="transport-card tc-2">
+      <div class="t-num">02</div>
+      <span class="t-icon">🛵</span>
+      <div class="t-title">Ojek Online</div>
+      <div class="t-desc">Pesan via Gojek atau Grab. Ketik "Kebondalem 10/1 Surabaya" di kolom tujuan. Mudah dijangkau dari berbagai penjuru kota.</div>
+    </div>
+    <div class="transport-card tc-3">
+      <div class="t-num">03</div>
+      <span class="t-icon">🚌</span>
+      <div class="t-title">Transportasi Umum</div>
+      <div class="t-desc">Naik Suroboyo Bus atau angkot arah Kebondalem. Turun di halte terdekat, lalu jalan kaki ±5 menit menuju lokasi.</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-wrap">
+    <div class="cta-stars">★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★ &nbsp; ★</div>
+    <div class="cta-box">
+      <div>
+        <div class="cta-eyebrow">Sebelum datang ke workshop...</div>
+        <div class="cta-title">Konsultasi Dulu<br><span>Via WhatsApp</span></div>
+        <div class="cta-sub">Biar kami siapkan sampel & referensi material buat kamu. Gratis konsultasi!</div>
+      </div>
+      <button class="cta-btn">CHAT SEKARANG →</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-top">
+    <div class="footer-section">
+      <div class="footer-logo">JAVAS MEDIA</div>
+      <div class="footer-desc">Kebondalem 10/1 Surabaya<br>082143777463<br>javasmediasurabaya@gmail.com</div>
+      <div class="footer-social">
+        <div class="social-icon">ig</div>
+        <div class="social-icon">tt</div>
+        <div class="social-icon">tw</div>
+        <div class="social-icon">fb</div>
+        <div class="social-icon">yt</div>
+      </div>
+    </div>
+    <div class="footer-section">
+      <h4>SHOP</h4>
+      <a href="#">Apparel</a>
+      <a href="#">Aksesoris</a>
+      <a href="#">Packaging</a>
+      <a href="#">Promotion Item</a>
+      <a href="#">Homedecor</a>
+      <a href="#">Others</a>
+    </div>
+    <div class="footer-section">
+      <h4>HELP</h4>
+      <a href="#">FAQ</a>
+      <a href="#">Shipping Info</a>
+      <a href="#">Returns & Exchanges</a>
+      <a href="#">Track Order</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div class="footer-section">
+      <h4>COMPANY</h4>
+      <a href="#">About Us</a>
+      <a href="#">Articles</a>
+      <a href="#">Careers</a>
+      <a href="#">Press</a>
+      <div style="font-size:9px;color:#3a3520;margin-top:14px;margin-bottom:4px;">Newsletter:</div>
+      <div class="email-sub">
+        <input type="text" placeholder="Email kamu...">
+        <button class="sub-btn">OK</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 JavasMedia. All rights reserved.</span>
+    <span>Privacy Policy | Terms of Service</span>
+  </div>
+</div>
+
+</body>
+</html>
