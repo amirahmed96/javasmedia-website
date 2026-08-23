@@ -4,35 +4,489 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JavasMedia — House of Customize</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@400;700&family=Inter:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #FAF8F3; overflow-x: hidden; }
-.page { width: 1440px; margin: 0 auto; position: relative; }
-.homepage-img { width: 100%; display: block; }
+html { overflow-x: hidden; }
+body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 
-/* Clickable nav areas - invisible overlay */
-.nav-area { position: absolute; cursor: pointer; }
-.nav-promo  { top: 0; left: 138px; width: 130px; height: 55px; }
-.nav-product { top: 0; left: 228px; width: 135px; height: 55px; }
-.nav-articles { top: 0; left: 323px; width: 135px; height: 55px; }
-.nav-location { top: 0; left: 415px; width: 135px; height: 55px; }
-.nav-login { top: 0; right: 0; width: 80px; height: 55px; }
+.page {
+  width: 1440px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== HEADER ===== */
+.header {
+  position: relative;
+  width: 1440px;
+  height: 122px;
+  z-index: 10;
+}
+
+.header-bar {
+  position: absolute;
+  top: 0; left: 0;
+  width: 1440px; height: 90px;
+  object-fit: cover;
+}
+
+.header-logo {
+  position: absolute;
+  top: 16px; left: 30px;
+  height: 57px; width: 121px;
+  cursor: pointer;
+  object-fit: contain;
+}
+
+/* Nav buttons */
+.nav-btn {
+  position: absolute;
+  top: 38px;
+  height: 52px; width: 195px;
+  cursor: pointer;
+  object-fit: cover;
+}
+.nav-btn-1 { left: 308px; }
+.nav-btn-2 { left: 473px; }
+.nav-btn-3 { left: 637px; }
+.nav-btn-4 { left: 805px; }
+
+/* Nav labels */
+.nav-label {
+  position: absolute;
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: #1a1a1a;
+  text-align: center;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+}
+.nav-label-1 { top: 50px; left: 360px; }
+.nav-label-2 { top: 50px; left: 520px; }
+.nav-label-3 { top: 47px; left: 688px; }
+.nav-label-4 { top: 47px; left: 858px; }
+
+.header-search {
+  position: absolute;
+  top: 32px; left: 1054px;
+  height: 30px; width: 184px;
+  object-fit: cover;
+}
+
+.header-cart {
+  position: absolute;
+  top: 27px; left: 1263px;
+  height: 35px; width: 38px;
+  cursor: pointer;
+  object-fit: contain;
+  filter: invert(1) sepia(1) saturate(0) brightness(1.8);
+  opacity: 0.85;
+}
+
+.header-profile {
+  position: absolute;
+  top: 27px; left: 1321px;
+  height: 33px; width: 34px;
+  cursor: pointer;
+  object-fit: contain;
+  filter: invert(1) sepia(1) saturate(0) brightness(1.8);
+  opacity: 0.85;
+}
+
+/* Bar ornamen checkered */
+.bar-ornamen {
+  position: absolute;
+  top: 90px; left: 0;
+  width: 1440px; height: 32px;
+  object-fit: cover;
+}
+
+/* ===== HERO SECTION ===== */
+.hero-section {
+  position: relative;
+  width: 1440px;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 1440px;
+  height: 820px;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 32px 163px 0;
+  height: 820px;
+}
+
+.main-banner {
+  width: 1113px;
+  height: 584px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+/* ===== SUB CAMPAIGN SECTION ===== */
+.sub-section {
+  position: relative;
+  width: 1440px;
+  height: 454px;
+  overflow: hidden;
+}
+
+.sub-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 1440px; height: 454px;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.sub-grid {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 14px;
+  padding: 0 173px;
+  padding-top: 0;
+  align-items: flex-start;
+  height: 100%;
+  align-items: center;
+}
+
+.sub-card {
+  position: relative;
+  width: 227px;
+  height: 277px;
+  flex-shrink: 0;
+}
+
+.sub-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.sub-card-label {
+  position: absolute;
+  top: 58px; left: 0; right: 0;
+  text-align: center;
+  font-family: 'Baloo Chettan 2', cursive;
+  font-size: 30px;
+  color: #fff8f8;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+/* ===== ABOUT US ===== */
+.about-section {
+  position: relative;
+  width: 1440px;
+  padding: 60px 195px;
+  background: url('bg1.png') center/cover;
+}
+
+.about-box {
+  background: rgba(253,252,252,0.85);
+  border-radius: 25px;
+  padding: 44px 114px 48px;
+  text-align: center;
+}
+
+.about-title {
+  font-family: 'Baloo Chettan 2', cursive;
+  font-size: 35px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.about-text {
+  font-size: 20px;
+  color: black;
+  line-height: 1.8;
+}
+
+/* ===== WORKSHOP PHOTO ===== */
+.workshop-photo {
+  width: 1440px;
+  height: 367px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===== BRAND PARTNER ===== */
+.brand-section {
+  position: relative;
+  width: 1440px;
+  padding: 60px 150px;
+  background: url('bg2.png') center/cover;
+  min-height: 640px;
+}
+
+.brand-overlay {
+  position: absolute;
+  left: 77px; top: 41px;
+  width: 1285px; height: 560px;
+  background: rgba(18,2,2,0.4);
+  border-radius: 25px;
+}
+
+.brand-content {
+  position: relative;
+  z-index: 2;
+}
+
+.brand-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 35px;
+  font-weight: 800;
+  color: #ceffd3;
+  text-align: center;
+  letter-spacing: -0.9px;
+  margin-bottom: 12px;
+  padding-top: 45px;
+}
+
+.brand-desc {
+  font-size: 18px;
+  color: #ededed;
+  text-align: center;
+  line-height: 1.7;
+  max-width: 768px;
+  margin: 0 auto 48px;
+}
+
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 183px);
+  gap: 24px;
+  margin-left: -38px;
+}
+
+.logo-card {
+  background: white;
+  border: 0.8px solid #f3f4f6;
+  border-radius: 16px;
+  width: 183px; height: 183px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  color: #d1d4db;
+}
+
+/* ===== NEW ARRIVALS ===== */
+.arrivals-section {
+  width: 1440px;
+  background: url('bg2.png') center bottom/cover;
+  padding: 0 170px 60px;
+  display: flex;
+  gap: 25px;
+}
+
+.arrival-card {
+  background: white;
+  border: 0.8px solid #f3f4f6;
+  border-radius: 16px;
+  width: 245px; height: 226px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.arrival-card span {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 25px;
+  color: #1e3377;
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+/* ===== FOOTER / NEWSLETTER ===== */
+.footer {
+  background: black;
+  padding: 60px 0 40px;
+  text-align: center;
+}
+
+.footer-text {
+  color: #9ca3af;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.newsletter-form {
+  display: flex;
+  max-width: 512px;
+  margin: 0 auto 16px;
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: 16px 20px;
+  background: white;
+  border: none;
+  font-size: 14px;
+  color: #9ca3af;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+}
+
+.newsletter-btn {
+  background: #ffbb00;
+  border: none;
+  padding: 16px 32px;
+  font-size: 13px;
+  font-weight: 700;
+  color: black;
+  cursor: pointer;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+}
+
+.newsletter-consent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #6b7280;
+  font-size: 12px;
+}
 </style>
 </head>
 <body>
 <div class="page">
-  <div style="position:relative;">
-    <img class="homepage-img" src="homepage.png" alt="JavasMedia — House of Customize" usemap="#navmap">
-    <map name="navmap">
-      <!-- Nav buttons -->
-      <area shape="rect" coords="138,0,268,55" href="promo.html" alt="Promo">
-      <area shape="rect" coords="228,0,363,55" href="katalog.html" alt="Product">
-      <area shape="rect" coords="323,0,458,55" href="articles.html" alt="Articles">
-      <area shape="rect" coords="415,0,550,55" href="location.html" alt="Location">
-      <!-- Login icon -->
-      <area shape="rect" coords="1360,0,1440,55" href="login.html" alt="Login">
-    </map>
+
+  <!-- HEADER -->
+  <div class="header">
+    <img class="header-bar" src="bar-header.png" alt="">
+    <img class="header-logo" src="logo.png" alt="JavasMedia" onclick="location.href='index.html'" style="cursor:pointer;">
+
+    <!-- Nav buttons -->
+    <img class="nav-btn nav-btn-1" src="btn1.png" alt="Promo" onclick="location.href='promo.html'">
+    <img class="nav-btn nav-btn-2" src="btn2.png" alt="Product" onclick="location.href='katalog.html'">
+    <img class="nav-btn nav-btn-3" src="btn3.png" alt="Articles" onclick="location.href='articles.html'">
+    <img class="nav-btn nav-btn-4" src="btn4.png" alt="Location" onclick="location.href='location.html'">
+
+    <!-- Nav labels -->
+    <span class="nav-label nav-label-1" onclick="location.href='promo.html'">PROMO</span>
+    <span class="nav-label nav-label-2" onclick="location.href='katalog.html'">PRODUCT</span>
+    <span class="nav-label nav-label-3" onclick="location.href='articles.html'">ARTICLES</span>
+    <span class="nav-label nav-label-4" onclick="location.href='location.html'">LOCATION</span>
+
+    <!-- Search, cart, profile -->
+    <img class="header-search" src="search-bar.png" alt="">
+    <img class="header-cart" src="cart.png" alt="Cart" onclick="location.href='#'">
+    <img class="header-profile" src="profile.png" alt="Profile" onclick="location.href='login.html'">
+
+    <!-- Checkered bar ornamen -->
+    <img class="bar-ornamen" src="bar-ornamen.png" alt="">
   </div>
+
+  <!-- HERO SECTION -->
+  <div class="hero-section" style="height:820px;">
+    <img class="hero-bg" src="bg1.png" alt="">
+    <div class="hero-content">
+      <img class="main-banner" src="main-campaign.png" alt="House of Customize">
+    </div>
+  </div>
+
+  <!-- SUB CAMPAIGN -->
+  <div class="sub-section">
+    <img class="sub-bg" src="bg2.png" alt="">
+    <div class="sub-grid">
+      <div class="sub-card">
+        <img src="sub-campaign.png" alt="Sub Campaign 1">
+        <div class="sub-card-label">SUB<br>CAMPAIGN</div>
+      </div>
+      <div class="sub-card">
+        <img src="sub-campaign.png" alt="Sub Campaign 2">
+        <div class="sub-card-label">SUB<br>CAMPAIGN</div>
+      </div>
+      <div class="sub-card">
+        <img src="sub-campaign.png" alt="Sub Campaign 3">
+        <div class="sub-card-label">SUB<br>CAMPAIGN</div>
+      </div>
+      <div class="sub-card">
+        <img src="sub-campaign.png" alt="Sub Campaign 4">
+        <div class="sub-card-label">SUB<br>CAMPAIGN</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT US -->
+  <div class="about-section">
+    <div class="about-box">
+      <div class="about-title">ABOUT US</div>
+      <p class="about-text">
+        Javas Media is where creative ideas transform into high-quality reality. We specialize in custom apparel and merchandise, utilizing advanced printing techniques to ensure every color is sharp and every design is flawless. Our workflow is built on a passion for design excellence. We don't just print; we craft identities. By utilizing the latest industry tools and meticulous production processes, we provide professional solutions for jerseys, polo shirts, and custom merchandise that truly represent who you are. Experience a seamless production journey where quality is never compromised and your satisfaction is our ultimate priority.
+      </p>
+    </div>
+  </div>
+
+  <!-- WORKSHOP PHOTO -->
+  <img class="workshop-photo" src="bg3.png" alt="Workshop JavasMedia">
+
+  <!-- BRAND PARTNER -->
+  <div class="brand-section">
+    <div class="brand-overlay"></div>
+    <div class="brand-content">
+      <h2 class="brand-title">Brand Partner / Customer</h2>
+      <p class="brand-desc">Kami bangga telah dipercaya oleh berbagai perusahaan dan brand terkemuka untuk memberikan solusi terbaik yang mendukung pertumbuhan bisnis mereka.</p>
+      <div class="logo-grid">
+        <div class="logo-card">ACME</div>
+        <div class="logo-card" style="font-size:19px;gap:8px;display:flex;align-items:center;"><span style="background:#d1d4db;width:24px;height:24px;border-radius:50%;display:inline-block;"></span>Nexus</div>
+        <div class="logo-card" style="font-size:27px;">Lumina</div>
+        <div class="logo-card" style="font-size:18px;letter-spacing:2px;">ZEN</div>
+        <div class="logo-card" style="font-size:23px;letter-spacing:-1px;">Vortex.</div>
+        <div class="logo-card" style="font-size:19px;gap:6px;display:flex;align-items:center;"><span style="border:2px solid #d1d4db;width:16px;height:24px;display:inline-block;"></span>Astra</div>
+        <div class="logo-card" style="font-size:20px;letter-spacing:2px;">NOVA</div>
+        <div class="logo-card" style="font-size:15px;">Apex</div>
+        <div class="logo-card" style="font-size:23px;">{Code}</div>
+        <div class="logo-card" style="font-size:19px;gap:6px;display:flex;align-items:center;"><span style="background:#d1d4db;width:20px;height:20px;display:inline-block;transform:rotate(45deg);"></span>Prism</div>
+        <div class="logo-card" style="font-size:24px;letter-spacing:1px;font-weight:300;">ECHO</div>
+        <div class="logo-card"><span style="font-size:30px;">M</span><span style="font-size:20px;font-weight:500;">atrix</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW ARRIVALS -->
+  <div class="arrivals-section">
+    <div class="arrival-card"><span>NEW<br>ARRIVAL</span></div>
+    <div class="arrival-card"><span>NEW<br>ARRIVAL</span></div>
+    <div class="arrival-card"><span>NEW<br>ARRIVAL</span></div>
+    <div class="arrival-card"><span>NEW<br>ARRIVAL</span></div>
+  </div>
+
+  <!-- FOOTER / NEWSLETTER -->
+  <div class="footer">
+    <p class="footer-text">Be the first to know about new product drops and exclusive deals from Javas Media.</p>
+    <div class="newsletter-form">
+      <input class="newsletter-input" type="email" placeholder="Enter your email address">
+      <button class="newsletter-btn">SUBSCRIBE</button>
+    </div>
+    <div class="newsletter-consent">
+      <input type="checkbox" style="width:12px;height:12px;">
+      <span>I agree to receive marketing emails from Javas Media. Unsubscribe anytime.</span>
+    </div>
+  </div>
+
 </div>
 </body>
 </html>
