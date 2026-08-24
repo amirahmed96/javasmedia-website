@@ -26,7 +26,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 
 /* ===== HERO PROMO ===== */
 .hero-promo {
-  background: #ffc107;
+  background: url('promo-bg.jpg') center/cover;
   padding: 48px 80px;
   position: relative;
   overflow: hidden;
@@ -36,20 +36,8 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   justify-content: space-between;
 }
 
-/* Diagonal stripe background */
-.hero-promo::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 20px,
-    rgba(255,193,7,0.5) 20px,
-    rgba(255,193,7,0.5) 40px
-  );
-  opacity: 0.3;
-}
+/* Remove the diagonal stripe pseudo-element since image already has stripes */
+.hero-promo::before { display: none; }
 
 .hero-left { position: relative; z-index: 2; }
 
