@@ -1,0 +1,96 @@
+<!-- ===== HEADER JAVASMEDIA - VERSI FINAL ===== -->
+<!-- CSS Header -->
+<style>
+.jm-header {
+  position: relative;
+  width: 1440px;
+  height: 110px;
+  z-index: 100;
+}
+.jm-header .header-bar {
+  position: absolute;
+  top: 0; left: 0;
+  width: 1440px; height: 90px;
+  object-fit: cover;
+}
+.jm-header .header-logo {
+  position: absolute;
+  top: 16px; left: 30px;
+  height: 57px; width: 121px;
+  cursor: pointer;
+  object-fit: contain;
+}
+.jm-header .nav-btn {
+  position: absolute;
+  top: 28px;
+  height: 62px; width: 165px;
+  cursor: pointer;
+  object-fit: fill;
+  display: block;
+}
+.jm-header .nav-btn-1 { left: 280px; }
+.jm-header .nav-btn-2 { left: 422px; }
+.jm-header .nav-btn-3 { left: 564px; }
+.jm-header .nav-btn-4 { left: 706px; }
+.jm-header .nav-label {
+  position: absolute;
+  font-family: 'Avenir Next Condensed', 'Arial Narrow', Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  cursor: pointer;
+  pointer-events: none;
+  width: 165px;
+}
+.jm-header .nav-label-1 { top: 44px; left: 280px; }
+.jm-header .nav-label-2 { top: 44px; left: 422px; }
+.jm-header .nav-label-3 { top: 44px; left: 564px; }
+.jm-header .nav-label-4 { top: 44px; left: 706px; }
+.jm-header .header-search {
+  position: absolute;
+  top: 32px; left: 1054px;
+  height: 30px; width: 184px;
+  object-fit: cover;
+}
+.jm-header .header-cart {
+  position: absolute;
+  top: 27px; left: 1263px;
+  height: 35px; width: 38px;
+  cursor: pointer;
+  object-fit: contain;
+}
+.jm-header .header-profile {
+  position: absolute;
+  top: 27px; left: 1321px;
+  height: 33px; width: 34px;
+  cursor: pointer;
+  object-fit: contain;
+}
+.jm-header .bar-ornamen {
+  position: absolute;
+  top: 90px; left: 0;
+  width: 1440px; height: 32px;
+  background-image: repeating-conic-gradient(#8b1a1a 0% 25%, transparent 0% 50%);
+  background-size: 32px 32px;
+  background-position: 0 0;
+}
+</style>
+
+<!-- HTML Header -->
+<div class="jm-header">
+  <img class="header-bar" src="bar-header.png" alt="">
+  <img class="header-logo" src="logo.png" alt="JavasMedia" onclick="location.href='index.html'" style="cursor:pointer;">
+  <img class="nav-btn nav-btn-1" src="btn1.png" alt="Promo" onclick="location.href='promo.html'">
+  <img class="nav-btn nav-btn-2" src="btn2.png" alt="Product" onclick="location.href='katalog.html'">
+  <img class="nav-btn nav-btn-3" src="btn3.png" alt="Articles" onclick="location.href='articles.html'">
+  <img class="nav-btn nav-btn-4" src="btn4.png" alt="Location" onclick="location.href='location.html'">
+  <span class="nav-label nav-label-1" onclick="location.href='promo.html'">PROMO</span>
+  <span class="nav-label nav-label-2" onclick="location.href='katalog.html'">PRODUCT</span>
+  <span class="nav-label nav-label-3" onclick="location.href='articles.html'">ARTICLES</span>
+  <span class="nav-label nav-label-4" onclick="location.href='location.html'">LOCATION</span>
+  <img class="header-search" src="search-bar.png" alt="">
+  <img class="header-cart" src="cart.png" alt="Cart">
+  <img class="header-profile" src="profile.png" alt="Profile" onclick="location.href='login.html'">
+  <div class="bar-ornamen"></div>
+</div>
