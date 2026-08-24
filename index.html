@@ -40,7 +40,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   object-fit: contain;
 }
 
-/* Nav buttons - koordinat presisi dari Figma */
+/* Nav buttons - rapat antar button */
 .nav-btn {
   position: absolute;
   top: 28px;
@@ -50,9 +50,9 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   display: block;
 }
 .nav-btn-1 { left: 280px; }
-.nav-btn-2 { left: 443px; }
-.nav-btn-3 { left: 606px; }
-.nav-btn-4 { left: 769px; }
+.nav-btn-2 { left: 432px; }
+.nav-btn-3 { left: 584px; }
+.nav-btn-4 { left: 736px; }
 
 /* Nav labels - center di tengah button */
 .nav-label {
@@ -67,9 +67,9 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   width: 165px;
 }
 .nav-label-1 { top: 44px; left: 280px; }
-.nav-label-2 { top: 44px; left: 443px; }
-.nav-label-3 { top: 44px; left: 606px; }
-.nav-label-4 { top: 44px; left: 769px; }
+.nav-label-2 { top: 44px; left: 432px; }
+.nav-label-3 { top: 44px; left: 584px; }
+.nav-label-4 { top: 44px; left: 736px; }
 
 .header-search {
   position: absolute;
@@ -94,12 +94,18 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   object-fit: contain;
 }
 
-/* Bar ornamen checkered */
+/* Bar ornamen checkered - CSS pola catur 2 baris */
 .bar-ornamen {
   position: absolute;
   top: 90px; left: 0;
-  width: 1440px; height: 20px;
-  object-fit: cover;
+  width: 1440px; height: 32px;
+  background-image: 
+    repeating-conic-gradient(#8b0000 0% 25%, #fff 0% 50%);
+  background-size: 32px 32px;
+  background-position: 0 0;
+  border-top: 2px solid #1e3a5f;
+  border-bottom: 2px solid #1e3a5f;
+  box-sizing: border-box;
 }
 
 /* ===== HERO SECTION ===== */
@@ -392,8 +398,8 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
     <img class="header-cart" src="cart.png" alt="Cart" onclick="location.href='#'">
     <img class="header-profile" src="profile.png" alt="Profile" onclick="location.href='login.html'">
 
-    <!-- Checkered bar ornamen -->
-    <img class="bar-ornamen" src="bar-ornamen.png" alt="">
+    <!-- Checkered bar ornamen - CSS pola catur -->
+    <div class="bar-ornamen"></div>
   </div>
 
   <!-- HERO SECTION -->
