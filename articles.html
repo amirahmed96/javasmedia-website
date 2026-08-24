@@ -3,893 +3,749 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Articles - JavasMedia</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<title>Articles — JavasMedia Journal</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@400;700;800&family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --bg: #f8f6f1;
-  --white: #ffffff;
-  --dark: #1a1a1a;
-  --mid: #444;
-  --muted: #888;
-  --border: #e0ddd5;
-  --accent: #c8391a;
-  --yellow: #f0c040;
-  --navy: #1e3a5f;
-}
-body {
-  background: var(--bg);
-  font-family: 'Space Mono', monospace;
-  color: var(--dark);
-  overflow-x: hidden;
-}
+html { overflow-x: hidden; }
+body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
+.page { width: 1440px; margin: 0 auto; overflow: hidden; }
 
-/* HEADER */
-.header {
-  background: #1e3a5f;
+/* ===== HEADER (FINAL) ===== */
+.header { position: relative; width: 1440px; height: 100px; z-index: 100; }
+.header .header-bar { position: absolute; top: 0; left: 0; width: 1440px; height: 80px; object-fit: cover; }
+.header .header-logo { position: absolute; top: 12px; left: 30px; height: 48px; width: auto; cursor: pointer; object-fit: contain; }
+.header .nav-btn { position: absolute; bottom: 20px; height: 52px; width: 140px; cursor: pointer; object-fit: fill; display: block; }
+.header .nav-btn-1 { left: 340px; } .header .nav-btn-2 { left: 455px; } .header .nav-btn-3 { left: 570px; } .header .nav-btn-4 { left: 685px; }
+.header .nav-label { position: absolute; font-family: 'Avenir Next Condensed','Arial Narrow',Arial,sans-serif; font-size: 18px; font-weight: 700; color: #1a1a1a; text-align: center; cursor: pointer; pointer-events: none; width: 140px; }
+.header .nav-label-1 { bottom: 33px; left: 340px; } .header .nav-label-2 { bottom: 33px; left: 455px; } .header .nav-label-3 { bottom: 33px; left: 570px; } .header .nav-label-4 { bottom: 33px; left: 685px; }
+.header .header-search { position: absolute; top: 27px; left: 1020px; height: 26px; width: 160px; object-fit: cover; }
+.header .header-cart { position: absolute; top: 24px; left: 1210px; height: 30px; width: 32px; cursor: pointer; object-fit: contain; }
+.header .header-profile { position: absolute; top: 24px; left: 1260px; height: 28px; width: 29px; cursor: pointer; object-fit: contain; }
+.header .bar-ornamen { position: absolute; top: 80px; left: 0; width: 1440px; height: 20px; background-image: repeating-conic-gradient(#8b1a1a 0% 25%, transparent 0% 50%); background-size: 20px 20px; }
+
+/* ===== CONTAINER - breathing room ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 0 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 90px;
-  position: relative;
-  z-index: 10;
-}
-.logo-text { color: white; font-size: 22px; font-weight: 900; letter-spacing: 2px; font-style: italic; text-transform: uppercase; line-height: 1.1; font-family: 'Bebas Neue', sans-serif; }
-.nav-center { display: flex; align-items: flex-end; align-self: flex-end; }
-.nav-btn { padding: 10px 24px; border: 2.5px solid #1a1a1a; border-bottom: none; border-radius: 10px 10px 0 0; font-size: 13px; font-weight: 800; cursor: pointer; text-transform: uppercase; color: #1a1a1a; }
-.nav-btn.promo { background: #ffc107; }
-.nav-btn.product { background: #00bcd4; }
-.nav-btn.articles { background: #ff9800; }
-.nav-btn.location { background: #e91e63; color: white; }
-.header-right { display: flex; align-items: center; gap: 16px; }
-.search-wrap { background: #FAF8F3; border-radius: 6px; padding: 8px 14px; display: flex; align-items: center; gap: 8px; width: 200px; }
-.search-wrap input { background: transparent; border: none; outline: none; font-size: 13px; width: 100%; }
-.icon-btn { color: white; font-size: 22px; cursor: pointer; }
-
-.checkered {
-  height: 18px;
-  background: repeating-linear-gradient(90deg, var(--accent) 0px, var(--accent) 18px, var(--bg) 18px, var(--bg) 36px);
-  border-top: 2.5px solid var(--dark);
-  border-bottom: 2.5px solid var(--dark);
 }
 
 /* ===== MASTHEAD ===== */
 .masthead {
-  background: var(--white);
-  border-bottom: 2px solid var(--dark);
-  padding: 48px 60px 32px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-  gap: 40px;
+  background: #FAF6EE;
+  padding: 48px 0 0;
+  background-image: linear-gradient(#e8e3d8 1px, transparent 1px), linear-gradient(90deg, #e8e3d8 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
-.masthead-left {}
+.masthead-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
 
-.masthead-label {
-  font-size: 10px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 12px;
+.masthead-left { flex: 1; }
+
+.masthead-eyebrow {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
-.masthead-label::before {
-  content: '';
-  display: inline-block;
+.masthead-eyebrow-line {
   width: 24px;
   height: 2px;
-  background: var(--accent);
+  background: #e85d04;
+}
+
+.masthead-eyebrow-text {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #888;
 }
 
 .masthead-title {
   font-family: 'Playfair Display', serif;
-  font-size: 72px;
-  font-weight: 700;
-  color: var(--dark);
-  line-height: 1;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.05;
+  color: #1a1a1a;
   margin-bottom: 16px;
-  letter-spacing: -1px;
 }
 
-.masthead-title em {
-  font-style: italic;
-  color: var(--accent);
-}
+.masthead-title span { color: #e85d04; font-style: italic; }
 
-.masthead-sub {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.7;
-  max-width: 480px;
+.masthead-desc {
+  font-size: 13px;
+  color: #888;
+  line-height: 1.8;
+  max-width: 340px;
 }
 
 .masthead-right {
   text-align: right;
 }
 
-.masthead-date {
-  font-size: 11px;
-  color: var(--muted);
+.masthead-issue {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
   letter-spacing: 2px;
+  color: #aaa;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
-.masthead-issue {
+.masthead-vol {
   font-family: 'Playfair Display', serif;
-  font-size: 18px;
-  color: var(--dark);
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
   font-style: italic;
 }
 
-/* CATEGORY NAV */
-.cat-nav {
-  background: var(--dark);
-  padding: 0 60px;
-  display: flex;
-  align-items: center;
-  gap: 0;
-  overflow-x: auto;
-  border-bottom: none;
+/* ===== CATEGORY TABS ===== */
+.cat-tabs {
+  background: #1a1a1a;
+  padding: 0;
 }
 
-.cat-btn {
-  background: transparent;
-  border: none;
-  padding: 14px 20px;
+.cat-tabs-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  gap: 0;
+}
+
+.cat-tab {
+  padding: 14px 24px;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #666;
+  color: rgba(255,255,255,0.5);
   cursor: pointer;
-  white-space: nowrap;
+  border-bottom: 2px solid transparent;
   transition: all 0.15s;
-  border-bottom: 3px solid transparent;
-  font-family: 'Space Mono', monospace;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  font-family: 'Inter', sans-serif;
+}
+.cat-tab:hover { color: white; }
+.cat-tab.active { color: #ffc107; border-bottom: 2px solid #ffc107; }
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+  padding: 48px 0;
+  background-image: linear-gradient(#e8e3d8 1px, transparent 1px), linear-gradient(90deg, #e8e3d8 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
-.cat-btn:hover { color: white; }
-.cat-btn.active { color: var(--yellow); border-bottom-color: var(--yellow); }
-
-/* ===== MAIN LAYOUT ===== */
-.page {
-  padding: 48px 60px 80px;
-  display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 60px;
-  max-width: 1440px;
+.content-layout {
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 48px;
+  align-items: start;
 }
 
-/* ===== FEATURED ARTICLE ===== */
-.featured-wrap { margin-bottom: 48px; }
-
-.featured-label {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.featured-label-text {
-  font-size: 10px;
+/* ===== ARTIKEL PILIHAN ===== */
+.section-label {
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--accent);
+  color: #e85d04;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
-
-.featured-label-line {
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
+.section-label::after { content: ''; flex: 1; height: 1px; background: #e8e3d8; }
 
 .featured-card {
-  background: var(--white);
-  border: 2px solid var(--dark);
-  box-shadow: 6px 6px 0 var(--dark);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  overflow: hidden;
+  grid-template-columns: 300px 1fr;
+  background: white;
+  border: 2.5px solid #1a1a1a;
+  box-shadow: 4px 4px 0 #1a1a1a;
+  margin-bottom: 48px;
   cursor: pointer;
   transition: all 0.15s;
 }
-
-.featured-card:hover { transform: translate(-2px,-2px); box-shadow: 8px 8px 0 var(--dark); }
+.featured-card:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 #1a1a1a; }
 
 .featured-img {
-  background: var(--navy);
-  min-height: 340px;
+  background: #1e3a5f;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  gap: 12px;
+  font-size: 64px;
+  min-height: 240px;
   position: relative;
-  overflow: hidden;
 }
 
-.featured-img::before {
-  content: '';
+.featured-img-label {
   position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-  background-size: 32px 32px;
+  bottom: 12px;
+  left: 12px;
+  font-size: 9px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-.featured-img-icon { font-size: 64px; opacity: 0.2; position: relative; z-index: 1; }
-.featured-img-label { font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,0.3); text-transform: uppercase; position: relative; z-index: 1; }
+.featured-body { padding: 28px 28px 24px; }
 
-/* category tag di foto */
-.featured-tag {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  background: var(--accent);
-  color: white;
+.article-cat-badge {
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
+  background: #e85d04;
+  color: white;
   padding: 4px 10px;
-  border: 1.5px solid var(--dark);
-  z-index: 2;
+  display: inline-block;
+  border-radius: 2px;
+  margin-bottom: 12px;
 }
 
-.featured-content {
-  padding: 36px 32px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.featured-meta {
+.article-meta {
+  font-size: 11px;
+  color: #aaa;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-}
-
-.meta-cat {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-.meta-dot { width: 3px; height: 3px; background: var(--muted); border-radius: 50%; }
-
-.meta-date {
-  font-size: 10px;
-  color: var(--muted);
-  letter-spacing: 1px;
+  gap: 8px;
 }
 
 .featured-title {
   font-family: 'Playfair Display', serif;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
-  color: var(--dark);
-  line-height: 1.25;
-  margin-bottom: 16px;
+  line-height: 1.3;
+  color: #1a1a1a;
+  margin-bottom: 14px;
 }
 
 .featured-excerpt {
-  font-size: 12px;
-  color: var(--mid);
+  font-size: 13px;
+  color: #666;
   line-height: 1.8;
-  margin-bottom: 24px;
-  flex: 1;
+  margin-bottom: 20px;
 }
 
-.featured-footer {
+.article-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.author-row {
+.author {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .author-avatar {
   width: 32px;
   height: 32px;
-  background: var(--navy);
+  background: #1e3a5f;
   border-radius: 50%;
-  border: 2px solid var(--dark);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
-  font-weight: 700;
   color: white;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .author-name {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--dark);
+  font-size: 12px;
+  font-weight: 600;
+  color: #1a1a1a;
 }
 
 .read-more {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  color: var(--accent);
+  color: #e85d04;
   text-decoration: none;
-  letter-spacing: 1px;
-  border-bottom: 1.5px solid var(--accent);
-  padding-bottom: 1px;
-}
-
-/* ===== ARTICLE LIST ===== */
-.articles-label {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 6px;
+  letter-spacing: 0.5px;
 }
 
-.articles-label-text {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--muted);
-}
+/* ===== ARTIKEL TERBARU ===== */
+.articles-list { display: flex; flex-direction: column; gap: 0; }
 
-.articles-label-line { flex: 1; height: 1px; background: var(--border); }
-
-.article-list { display: flex; flex-direction: column; gap: 0; }
-
-.article-item {
-  background: var(--white);
-  border: 2px solid var(--dark);
-  border-bottom: none;
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  overflow: hidden;
+.article-row {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 20px 0;
+  border-bottom: 1px solid #e8e3d8;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.1s;
 }
+.article-row:hover { background: rgba(255,255,255,0.5); margin: 0 -12px; padding: 20px 12px; }
+.article-row:first-child { border-top: 1px solid #e8e3d8; }
 
-.article-item:last-child { border-bottom: 2px solid var(--dark); }
-.article-item:hover { background: #fffdf7; }
-
-.article-img {
+.article-thumb {
+  width: 72px;
+  height: 72px;
   background: #f0ede6;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 28px;
-  opacity: 0.5;
-  border-right: 2px solid var(--dark);
-  min-height: 100px;
+  flex-shrink: 0;
+  border: 1px solid #e8e3d8;
 }
 
-.article-content { padding: 16px 18px; }
+.article-row-body { flex: 1; }
 
-.article-meta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 6px;
-}
-
-.article-cat {
-  font-size: 8px;
+.article-row-cat {
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--accent);
-}
-
-.article-date {
-  font-size: 10px;
-  color: var(--muted);
-}
-
-.article-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--dark);
-  line-height: 1.3;
+  color: #e85d04;
   margin-bottom: 6px;
 }
 
-.article-excerpt {
-  font-size: 11px;
-  color: var(--muted);
+.article-row-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.article-row-excerpt {
+  font-size: 12px;
+  color: #999;
   line-height: 1.6;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 /* ===== SIDEBAR ===== */
-.sidebar { display: flex; flex-direction: column; gap: 28px; }
+.sidebar { position: sticky; top: 20px; }
 
-.sidebar-card {
-  background: var(--white);
-  border: 2px solid var(--dark);
-  box-shadow: 4px 4px 0 var(--dark);
+.sidebar-block {
+  background: white;
+  border: 2px solid #1a1a1a;
+  margin-bottom: 20px;
 }
 
-.sidebar-card-header {
-  background: var(--dark);
-  padding: 10px 16px;
-  font-size: 10px;
+.sidebar-title {
+  background: #1a1a1a;
+  color: white;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--yellow);
+  padding: 10px 16px;
 }
 
-.sidebar-card-body { padding: 16px; }
+.sidebar-content { padding: 16px; }
 
-/* SEARCH */
-.sidebar-search {
+/* Search */
+.search-wrap {
   display: flex;
-  gap: 0;
+  border: 1.5px solid #e8e3d8;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
-.sidebar-search input {
+.search-input {
   flex: 1;
-  padding: 9px 12px;
-  border: 2px solid var(--dark);
-  border-right: none;
+  padding: 10px 14px;
+  border: none;
   font-size: 12px;
-  font-family: 'Space Mono', monospace;
-  background: var(--bg);
   outline: none;
-  color: var(--dark);
+  font-family: 'Inter', sans-serif;
+  background: #faf6ee;
+  color: #666;
 }
 
-.sidebar-search button {
-  background: var(--dark);
-  border: 2px solid var(--dark);
-  padding: 9px 14px;
+.search-btn {
+  background: #1a1a1a;
+  border: none;
+  padding: 10px 14px;
   color: white;
-  font-size: 14px;
   cursor: pointer;
+  font-size: 14px;
 }
 
-/* KATEGORI */
-.cat-list { display: flex; flex-direction: column; gap: 0; }
-
-.cat-item {
+/* Category list */
+.cat-list { list-style: none; }
+.cat-list li {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  border-bottom: 1px solid var(--border);
-  cursor: pointer;
-  font-size: 12px;
-  color: var(--mid);
-  transition: color 0.15s;
-}
-
-.cat-item:last-child { border-bottom: none; }
-.cat-item:hover { color: var(--accent); }
-
-.cat-count {
-  background: var(--bg);
-  border: 1.5px solid var(--border);
-  font-size: 10px;
-  padding: 2px 7px;
-  color: var(--muted);
-}
-
-/* ARTIKEL POPULER */
-.popular-list { display: flex; flex-direction: column; gap: 12px; }
-
-.popular-item {
-  display: flex;
-  gap: 10px;
-  cursor: pointer;
-  transition: opacity 0.15s;
-}
-
-.popular-item:hover { opacity: 0.7; }
-
-.popular-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 28px;
-  color: var(--border);
-  line-height: 1;
-  flex-shrink: 0;
-  width: 28px;
-}
-
-.popular-title {
-  font-family: 'Playfair Display', serif;
+  border-bottom: 1px solid #f0ede6;
   font-size: 13px;
-  color: var(--dark);
-  line-height: 1.4;
-}
-
-/* NEWSLETTER */
-.newsletter-card {
-  background: var(--accent);
-  border: 2px solid var(--dark);
-  box-shadow: 4px 4px 0 var(--dark);
-  padding: 24px 20px;
-  position: relative;
-  overflow: hidden;
-}
-
-.newsletter-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: repeating-linear-gradient(-45deg, transparent, transparent 12px, rgba(255,255,255,0.05) 12px, rgba(255,255,255,0.05) 24px);
-  pointer-events: none;
-}
-
-.newsletter-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 8px;
-  position: relative;
-  z-index: 1;
-}
-
-.newsletter-sub {
-  font-size: 11px;
-  color: rgba(255,255,255,0.7);
-  line-height: 1.6;
-  margin-bottom: 16px;
-  position: relative;
-  z-index: 1;
-}
-
-.newsletter-input {
-  width: 100%;
-  padding: 9px 12px;
-  border: 2px solid var(--dark);
-  font-size: 11px;
-  font-family: 'Space Mono', monospace;
-  background: white;
-  outline: none;
-  margin-bottom: 8px;
-  position: relative;
-  z-index: 1;
-}
-
-.newsletter-btn {
-  width: 100%;
-  background: var(--dark);
-  border: 2px solid var(--dark);
-  padding: 9px;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 16px;
-  letter-spacing: 2px;
-  color: var(--yellow);
   cursor: pointer;
-  transition: all 0.15s;
-  position: relative;
-  z-index: 1;
+}
+.cat-list li:last-child { border-bottom: none; }
+.cat-list li:hover { color: #e85d04; }
+.cat-count {
+  background: #1a1a1a;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  min-width: 28px;
+  text-align: center;
 }
 
-.newsletter-btn:hover { background: #333; }
+/* Top articles */
+.top-article {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0ede6;
+  cursor: pointer;
+}
+.top-article:last-child { border-bottom: none; }
+.top-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #e85d04;
+  flex-shrink: 0;
+  width: 18px;
+}
+.top-title { font-size: 12px; color: #1a1a1a; line-height: 1.4; }
+.top-title:hover { color: #e85d04; }
 
-/* FOOTER */
-.footer { background: #1a1a1a; color: white; padding: 40px 60px 20px; border-top: 2px solid var(--dark); }
-.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
-.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--yellow); margin-bottom: 10px; }
-.footer-desc { font-size: 10px; color: #555; line-height: 1.9; margin-bottom: 14px; }
-.footer-social { display: flex; gap: 6px; }
-.social-icon { width: 28px; height: 28px; background: #222; border: 1px solid #333; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; cursor: pointer; color: #555; }
-.social-icon:hover { color: var(--yellow); border-color: var(--yellow); }
-.footer-section h4 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--yellow); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #222; }
-.footer-section a { display: block; font-size: 10px; color: #555; text-decoration: none; margin-bottom: 8px; }
-.footer-section a:hover { color: var(--yellow); }
-.footer-bottom { border-top: 1px solid #222; padding-top: 16px; display: flex; justify-content: space-between; font-size: 10px; color: #333; }
-.email-sub { display: flex; gap: 6px; margin-top: 12px; }
-.email-sub input { padding: 6px 10px; background: #111; border: 1px solid #333; color: white; font-size: 10px; width: 130px; outline: none; }
-.sub-btn { background: var(--yellow); border: none; padding: 6px 12px; font-size: 10px; font-weight: 700; cursor: pointer; color: #1a1a1a; }
+/* Newsletter sidebar */
+.newsletter-sidebar {
+  background: #e85d04;
+  padding: 20px 16px;
+}
+.newsletter-sidebar-title {
+  font-family: 'Baloo Chettan 2', cursive;
+  font-size: 18px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 6px;
+}
+.newsletter-sidebar-desc {
+  font-size: 11px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.newsletter-sidebar input {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  font-size: 12px;
+  margin-bottom: 8px;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+}
+.newsletter-sidebar-btn {
+  width: 100%;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ===== FOOTER ===== */
+.footer { background: black; }
+.footer-main { padding: 60px 80px 40px; max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; border-bottom: 1px solid #222; }
+.footer-logo { height: 90px; width: auto; margin-bottom: 16px; display: block; object-fit: contain; }
+.footer-info { color: #666; font-size: 13px; line-height: 1.8; margin-bottom: 16px; }
+.footer-social { display: flex; gap: 8px; }
+.social-icon { width: 32px; height: 32px; background: #111; border: 1px solid #222; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #555; cursor: pointer; }
+.footer-col h4 { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: white; text-transform: uppercase; margin-bottom: 16px; }
+.footer-col a { display: block; color: #555; font-size: 13px; text-decoration: none; margin-bottom: 10px; }
+.footer-newsletter { padding: 40px 80px; text-align: center; max-width: 1440px; margin: 0 auto; }
+.newsletter-text { color: #555; font-size: 13px; margin-bottom: 20px; }
+.newsletter-form { display: flex; max-width: 512px; margin: 0 auto 12px; }
+.newsletter-input { flex: 1; padding: 16px 20px; background: white; border: none; font-size: 13px; color: #999; outline: none; }
+.newsletter-btn { background: #ffbb00; border: none; padding: 16px 32px; font-size: 12px; font-weight: 700; color: black; cursor: pointer; letter-spacing: 1.4px; text-transform: uppercase; }
+.newsletter-consent { display: flex; align-items: center; justify-content: center; gap: 8px; color: #444; font-size: 11px; }
 </style>
 </head>
 <body>
-
-<div class="header">
-  <div class="logo-text" onclick="location.href='index.html'" style="cursor:pointer;">Javas<br>Media</div>
-  <div class="nav-center">
-    <button class="nav-btn promo" onclick="location.href='promo.html'">PROMO</button>
-    <button class="nav-btn product" onclick="location.href='katalog.html'">PRODUCT</button>
-    <button class="nav-btn articles" onclick="location.href='articles.html'">ARTICLES</button>
-    <button class="nav-btn location" onclick="location.href='location.html'">LOCATION</button>
-  </div>
-  <div class="header-right">
-    <div class="search-wrap"><span>🔍</span><input type="text" placeholder="Cari produk..."></div>
-    <span class="icon-btn">🛒</span>
-    <span class="icon-btn" onclick="location.href='login.html'" style="cursor:pointer;">👤</span>
-  </div>
-</div>
-<div class="checkered"></div>
-
-<!-- MASTHEAD -->
-<div class="masthead">
-  <div class="masthead-left">
-    <div class="masthead-label">Jurnal & Inspirasi</div>
-    <div class="masthead-title">Javas<em>Media</em><br>Journal</div>
-    <div class="masthead-sub">Tips desain, behind the scenes produksi, update produk & promo terbaru dari workshop kami di Surabaya.</div>
-  </div>
-  <div class="masthead-right">
-    <div class="masthead-date">Juli 2024</div>
-    <div class="masthead-issue">Vol. 1 · Issue 07</div>
-  </div>
-</div>
-
-<!-- CATEGORY NAV -->
-<div class="cat-nav">
-  <button class="cat-btn active">Semua</button>
-  <button class="cat-btn">Tips & Tutorial</button>
-  <button class="cat-btn">Behind the Scenes</button>
-  <button class="cat-btn">Update Produk</button>
-  <button class="cat-btn">Promo & Info</button>
-</div>
-
-<!-- MAIN -->
 <div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <img class="header-bar" src="bar-header.png" alt="">
+    <img class="header-logo" src="logo.png" alt="JavasMedia" onclick="location.href='index.html'" style="cursor:pointer;">
+    <img class="nav-btn nav-btn-1" src="btn1.png" alt="" onclick="location.href='promo.html'">
+    <img class="nav-btn nav-btn-2" src="btn2.png" alt="" onclick="location.href='katalog.html'">
+    <img class="nav-btn nav-btn-3" src="btn3.png" alt="" onclick="location.href='articles.html'">
+    <img class="nav-btn nav-btn-4" src="btn4.png" alt="" onclick="location.href='location.html'">
+    <span class="nav-label nav-label-1" onclick="location.href='promo.html'">PROMO</span>
+    <span class="nav-label nav-label-2" onclick="location.href='katalog.html'">PRODUCT</span>
+    <span class="nav-label nav-label-3" onclick="location.href='articles.html'">ARTICLES</span>
+    <span class="nav-label nav-label-4" onclick="location.href='location.html'">LOCATION</span>
+    <img class="header-search" src="search-bar.png" alt="">
+    <img class="header-cart" src="cart.png" alt="">
+    <img class="header-profile" src="profile.png" alt="" onclick="location.href='login.html'">
+    <div class="bar-ornamen"></div>
+  </div>
+
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div class="masthead-inner">
+      <div class="masthead-left">
+        <div class="masthead-eyebrow">
+          <div class="masthead-eyebrow-line"></div>
+          <div class="masthead-eyebrow-text">Jurnal & Inspirasi</div>
+        </div>
+        <h1 class="masthead-title">Javas<span>Media</span><br>Journal</h1>
+        <p class="masthead-desc">Tips desain, behind the scenes produksi, update produk & promo terbaru dari workshop kami di Surabaya.</p>
+      </div>
+      <div class="masthead-right">
+        <div class="masthead-issue">JULI 2026</div>
+        <div class="masthead-vol">Vol. 1 · Issue 07</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY TABS -->
+  <div class="cat-tabs">
+    <div class="cat-tabs-inner">
+      <button class="cat-tab active">Semua</button>
+      <button class="cat-tab">Tips & Tutorial</button>
+      <button class="cat-tab">Behind the Scenes</button>
+      <button class="cat-tab">Update Produk</button>
+      <button class="cat-tab">Promo & Info</button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
   <div class="main-content">
+    <div class="content-layout">
 
-    <!-- FEATURED -->
-    <div class="featured-wrap">
-      <div class="featured-label">
-        <div class="featured-label-text">Artikel Pilihan</div>
-        <div class="featured-label-line"></div>
-      </div>
+      <!-- LEFT: Articles -->
+      <div>
+        <!-- Artikel Pilihan -->
+        <div class="section-label">Artikel Pilihan</div>
 
-      <div class="featured-card">
-        <div class="featured-img">
-          <div class="featured-tag">Tips & Tutorial</div>
-          <div class="featured-img-icon">🎨</div>
-          <div class="featured-img-label">Foto artikel</div>
-        </div>
-        <div class="featured-content">
-          <div>
-            <div class="featured-meta">
-              <span class="meta-cat">Tips & Tutorial</span>
-              <div class="meta-dot"></div>
-              <span class="meta-date">5 Jul 2024</span>
-              <div class="meta-dot"></div>
-              <span class="meta-date">8 min baca</span>
+        <div class="featured-card" onclick="location.href='detail-artikel.html'">
+          <div class="featured-img">
+            🎨
+            <div class="featured-img-label">FOTO ARTIKEL</div>
+          </div>
+          <div class="featured-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+              <span class="article-cat-badge">Tips & Tutorial</span>
             </div>
+            <div class="article-meta">5 Jul 2026 · 8 min baca</div>
             <div class="featured-title">Panduan Lengkap Memilih Teknik Sablon yang Tepat untuk Brand Kamu</div>
-            <div class="featured-excerpt">DTF, polyflex, atau sablon plastisol? Setiap teknik punya kelebihan dan kekurangan masing-masing. Artikel ini membantu kamu memilih yang paling sesuai dengan kebutuhan, budget, dan jumlah produksi.</div>
-          </div>
-          <div class="featured-footer">
-            <div class="author-row">
-              <div class="author-avatar">JM</div>
-              <div class="author-name">Tim JavasMedia</div>
+            <p class="featured-excerpt">DTF, polyflex, atau sablon plastisol? Setiap teknik punya kelebihan dan kekurangan masing-masing. Artikel ini membantu kamu memilih yang paling sesuai dengan kebutuhan, budget, dan jumlah produksi.</p>
+            <div class="article-footer">
+              <div class="author">
+                <div class="author-avatar">JM</div>
+                <div class="author-name">Tim Javas Media</div>
+              </div>
+              <a href="detail-artikel.html" class="read-more">Baca selengkapnya →</a>
             </div>
-            <a href="#" class="read-more">Baca selengkapnya →</a>
           </div>
         </div>
+
+        <!-- Artikel Terbaru -->
+        <div class="section-label">Artikel Terbaru</div>
+
+        <div class="articles-list">
+          <div class="article-row" onclick="location.href='detail-artikel.html'">
+            <div class="article-thumb">🏭</div>
+            <div class="article-row-body">
+              <div class="article-row-cat">Behind the Scenes · 2 Jul 2026</div>
+              <div class="article-row-title">Sehari di Workshop JavasMedia: Dari Desain ke Produk Jadi</div>
+              <div class="article-row-excerpt">Proses produksi custom kaos dari awal sampai akhir – mulai dari cek file desain, printing DTF, pressing, quality control, sampai packing pengiriman.</div>
+            </div>
+          </div>
+          <div class="article-row" onclick="location.href='detail-artikel.html'">
+            <div class="article-thumb">✨</div>
+            <div class="article-row-body">
+              <div class="article-row-cat" style="color:#1e3a5f;">Update Produk · 28 Jun 2026</div>
+              <div class="article-row-title">Produk Baru: Polyflex Reflektif untuk Safety & Streetwear</div>
+              <div class="article-row-excerpt">Kini tersedia polyflex reflektif yang bisa menyala di gelap – cocok untuk seragam keselamatan, jersey outdoor, atau estetika streetwear yang unik.</div>
+            </div>
+          </div>
+          <div class="article-row" onclick="location.href='detail-artikel.html'">
+            <div class="article-thumb">⚠️</div>
+            <div class="article-row-body">
+              <div class="article-row-cat">Tips & Tutorial · 15 Jun 2026</div>
+              <div class="article-row-title">5 Kesalahan Umum Saat Order Kaos Custom (dan Cara Menghindarinya)</div>
+              <div class="article-row-excerpt">Resolusi file terlalu rendah, warna tidak sesuai ekspektasi, ukuran salah – ini kesalahan yang paling sering terjadi dan cara mudah menghindarinya.</div>
+            </div>
+          </div>
+          <div class="article-row" onclick="location.href='detail-artikel.html'">
+            <div class="article-thumb">🏷️</div>
+            <div class="article-row-body">
+              <div class="article-row-cat" style="color:#e91e63;">Promo & Info · 10 Jun 2026</div>
+              <div class="article-row-title">Promo Juli: Diskon 50% untuk Order Perdana + Gratis Ongkir Surabaya</div>
+              <div class="article-row-excerpt">Belum pernah order di JavasMedia? Dapatkan diskon 50% untuk order pertama kamu dengan kode JAVASPERT, berlaku sampai 31 Juli 2026.</div>
+            </div>
+          </div>
+          <div class="article-row" onclick="location.href='detail-artikel.html'">
+            <div class="article-thumb">📁</div>
+            <div class="article-row-body">
+              <div class="article-row-cat">Tips & Tutorial · 3 Jun 2026</div>
+              <div class="article-row-title">Cara Siapkan File Desain untuk Sablon DTF yang Sempurna</div>
+              <div class="article-row-excerpt">Format file, resolusi minimum, mode warna, ukuran artwork – semua yang perlu kamu ketahui sebelum kirim file ke kami agar hasil sablon maksimal.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Sidebar -->
+      <div class="sidebar">
+
+        <!-- Search -->
+        <div class="sidebar-block">
+          <div class="sidebar-title">Cari Artikel</div>
+          <div class="sidebar-content">
+            <div class="search-wrap">
+              <input class="search-input" type="text" placeholder="Kata kunci...">
+              <button class="search-btn">🔍</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kategori -->
+        <div class="sidebar-block">
+          <div class="sidebar-title">Kategori</div>
+          <div class="sidebar-content">
+            <ul class="cat-list">
+              <li>Semua Artikel <span class="cat-count">18</span></li>
+              <li>Tips & Tutorial <span class="cat-count">7</span></li>
+              <li>Behind the Scenes <span class="cat-count">4</span></li>
+              <li>Update Produk <span class="cat-count">4</span></li>
+              <li>Promo & Info <span class="cat-count">3</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Paling Banyak Dibaca -->
+        <div class="sidebar-block">
+          <div class="sidebar-title">Paling Banyak Dibaca</div>
+          <div class="sidebar-content">
+            <div class="top-article">
+              <div class="top-num">01</div>
+              <div class="top-title">Panduan Memilih Teknik Sablon yang Tepat</div>
+            </div>
+            <div class="top-article">
+              <div class="top-num">02</div>
+              <div class="top-title">Cara Siapkan File Desain untuk DTF</div>
+            </div>
+            <div class="top-article">
+              <div class="top-num">03</div>
+              <div class="top-title">5 Kesalahan Umum Order Kaos Custom</div>
+            </div>
+            <div class="top-article">
+              <div class="top-num">04</div>
+              <div class="top-title">Polyflex vs DTF: Mana yang Lebih Bagus?</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="newsletter-sidebar">
+          <div class="newsletter-sidebar-title">Jangan Ketinggalan Update.</div>
+          <p class="newsletter-sidebar-desc">Daftar sekarang dan dapatkan tips desain + info promo terbaru langsung ke email kamu.</p>
+          <input type="email" placeholder="Email kamu...">
+          <button class="newsletter-sidebar-btn">SUBSCRIBE</button>
+        </div>
+
       </div>
     </div>
-
-    <!-- ARTICLE LIST -->
-    <div class="articles-label">
-      <div class="articles-label-text">Artikel Terbaru</div>
-      <div class="articles-label-line"></div>
-    </div>
-
-    <div class="article-list">
-      <div class="article-item">
-        <div class="article-img">🏭</div>
-        <div class="article-content">
-          <div class="article-meta">
-            <span class="article-cat">Behind the Scenes</span>
-            <div class="meta-dot"></div>
-            <span class="article-date">2 Jul 2024</span>
-          </div>
-          <div class="article-title">Sehari di Workshop JavasMedia: Dari Desain ke Produk Jadi</div>
-          <div class="article-excerpt">Proses produksi custom kaos dari awal sampai akhir — mulai dari cek file desain, printing DTF, pressing, quality control, sampai packing pengiriman.</div>
-        </div>
-      </div>
-
-      <div class="article-item">
-        <div class="article-img">✨</div>
-        <div class="article-content">
-          <div class="article-meta">
-            <span class="article-cat">Update Produk</span>
-            <div class="meta-dot"></div>
-            <span class="article-date">28 Jun 2024</span>
-          </div>
-          <div class="article-title">Produk Baru: Polyflex Reflektif untuk Safety & Streetwear</div>
-          <div class="article-excerpt">Kini tersedia polyflex reflektif yang bisa menyala di gelap — cocok untuk seragam keselamatan, jersey outdoor, atau estetika streetwear yang unik.</div>
-        </div>
-      </div>
-
-      <div class="article-item">
-        <div class="article-img">💡</div>
-        <div class="article-content">
-          <div class="article-meta">
-            <span class="article-cat">Tips & Tutorial</span>
-            <div class="meta-dot"></div>
-            <span class="article-date">20 Jun 2024</span>
-          </div>
-          <div class="article-title">5 Kesalahan Umum Saat Order Kaos Custom (dan Cara Menghindarinya)</div>
-          <div class="article-excerpt">Resolusi file terlalu rendah, warna tidak sesuai ekspektasi, ukuran salah — ini kesalahan yang paling sering terjadi dan cara mudah menghindarinya.</div>
-        </div>
-      </div>
-
-      <div class="article-item">
-        <div class="article-img">🎉</div>
-        <div class="article-content">
-          <div class="article-meta">
-            <span class="article-cat">Promo & Info</span>
-            <div class="meta-dot"></div>
-            <span class="article-date">15 Jun 2024</span>
-          </div>
-          <div class="article-title">Promo Juli: Diskon 50% untuk Order Perdana + Gratis Ongkir Surabaya</div>
-          <div class="article-excerpt">Belum pernah order di JavasMedia? Dapatkan diskon 50% untuk order pertama kamu dengan kode JAVASPERT, berlaku sampai 31 Juli 2024.</div>
-        </div>
-      </div>
-
-      <div class="article-item">
-        <div class="article-img">🖨️</div>
-        <div class="article-content">
-          <div class="article-meta">
-            <span class="article-cat">Tips & Tutorial</span>
-            <div class="meta-dot"></div>
-            <span class="article-date">8 Jun 2024</span>
-          </div>
-          <div class="article-title">Cara Siapkan File Desain untuk Sablon DTF yang Sempurna</div>
-          <div class="article-excerpt">Format file, resolusi minimum, mode warna, ukuran artwork — semua yang perlu kamu ketahui sebelum kirim file ke kami agar hasil sablon maksimal.</div>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-
-    <!-- Search -->
-    <div class="sidebar-card">
-      <div class="sidebar-card-header">Cari Artikel</div>
-      <div class="sidebar-card-body">
-        <div class="sidebar-search">
-          <input type="text" placeholder="Kata kunci...">
-          <button>🔍</button>
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-main">
+      <div>
+        <img src="logo.png" alt="JavasMedia" class="footer-logo">
+        <div class="footer-info">Ploso Timur 1b No. 3b<br>Tambaksari - Surabaya<br>082143777463<br>javasmediasurabaya@gmail.com</div>
+        <div class="footer-social">
+          <div class="social-icon">ig</div>
+          <div class="social-icon">tt</div>
+          <div class="social-icon">tw</div>
+          <div class="social-icon">fb</div>
+          <div class="social-icon">yt</div>
         </div>
       </div>
-    </div>
-
-    <!-- Kategori -->
-    <div class="sidebar-card">
-      <div class="sidebar-card-header">Kategori</div>
-      <div class="sidebar-card-body">
-        <div class="cat-list">
-          <div class="cat-item">
-            <span>Semua Artikel</span>
-            <span class="cat-count">18</span>
-          </div>
-          <div class="cat-item">
-            <span>Tips & Tutorial</span>
-            <span class="cat-count">7</span>
-          </div>
-          <div class="cat-item">
-            <span>Behind the Scenes</span>
-            <span class="cat-count">4</span>
-          </div>
-          <div class="cat-item">
-            <span>Update Produk</span>
-            <span class="cat-count">4</span>
-          </div>
-          <div class="cat-item">
-            <span>Promo & Info</span>
-            <span class="cat-count">3</span>
-          </div>
-        </div>
+      <div class="footer-col">
+        <h4>SHOP</h4>
+        <a href="katalog.html">New Arrivals</a>
+        <a href="katalog.html">T-Shirts</a>
+        <a href="katalog.html">Hoodies</a>
+        <a href="katalog.html">Pants</a>
+        <a href="katalog.html">Accessories</a>
+        <a href="promo.html">Sale</a>
+      </div>
+      <div class="footer-col">
+        <h4>HELP</h4>
+        <a href="#">FAQ</a>
+        <a href="#">Shipping Info</a>
+        <a href="#">Returns & Exchanges</a>
+        <a href="#">Track Order</a>
+        <a href="#">Contact Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>COMPANY</h4>
+        <a href="#">About Us</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+        <a href="#">Sustainability</a>
+        <a href="location.html">Pickup In Store</a>
       </div>
     </div>
-
-    <!-- Populer -->
-    <div class="sidebar-card">
-      <div class="sidebar-card-header">Paling Banyak Dibaca</div>
-      <div class="sidebar-card-body">
-        <div class="popular-list">
-          <div class="popular-item">
-            <div class="popular-num">01</div>
-            <div class="popular-title">Panduan Memilih Teknik Sablon yang Tepat</div>
-          </div>
-          <div class="popular-item">
-            <div class="popular-num">02</div>
-            <div class="popular-title">Cara Siapkan File Desain untuk DTF</div>
-          </div>
-          <div class="popular-item">
-            <div class="popular-num">03</div>
-            <div class="popular-title">5 Kesalahan Umum Order Kaos Custom</div>
-          </div>
-          <div class="popular-item">
-            <div class="popular-num">04</div>
-            <div class="popular-title">Polyflex vs DTF: Mana yang Lebih Bagus?</div>
-          </div>
-        </div>
+    <div class="footer-newsletter">
+      <p class="newsletter-text">Be the first to know about new product drops and exclusive deals from Javas Media.</p>
+      <div class="newsletter-form">
+        <input class="newsletter-input" type="email" placeholder="Enter your email address">
+        <button class="newsletter-btn">SUBSCRIBE</button>
+      </div>
+      <div class="newsletter-consent">
+        <input type="checkbox" style="width:12px;height:12px;">
+        <span>I agree to receive marketing emails from Javas Media. Unsubscribe anytime.</span>
       </div>
     </div>
+  </div>
 
-    <!-- Newsletter -->
-    <div class="newsletter-card">
-      <div class="newsletter-title">Jangan Ketinggalan Update</div>
-      <div class="newsletter-sub">Daftar newsletter kami dan dapatkan tips desain + info promo terbaru langsung ke email kamu.</div>
-      <input class="newsletter-input" type="text" placeholder="Email kamu...">
-      <button class="newsletter-btn">SUBSCRIBE →</button>
-    </div>
-
-  </aside>
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
-  <div class="footer-top">
-    <div class="footer-section">
-      <div class="footer-logo">JAVAS MEDIA</div>
-      <div class="footer-desc">Kebondalem 10/1 Surabaya<br>082143777463<br>javasmediasurabaya@gmail.com</div>
-      <div class="footer-social">
-        <div class="social-icon">ig</div>
-        <div class="social-icon">tt</div>
-        <div class="social-icon">tw</div>
-        <div class="social-icon">fb</div>
-        <div class="social-icon">yt</div>
-      </div>
-    </div>
-    <div class="footer-section">
-      <h4>SHOP</h4>
-      <a href="#">Apparel</a>
-      <a href="#">Aksesoris</a>
-      <a href="#">Packaging</a>
-      <a href="#">Promotion Item</a>
-      <a href="#">Homedecor</a>
-    </div>
-    <div class="footer-section">
-      <h4>HELP</h4>
-      <a href="#">FAQ</a>
-      <a href="#">Shipping Info</a>
-      <a href="#">Returns & Exchanges</a>
-      <a href="#">Track Order</a>
-      <a href="#">Contact Us</a>
-    </div>
-    <div class="footer-section">
-      <h4>COMPANY</h4>
-      <a href="#">About Us</a>
-      <a href="#">Articles</a>
-      <a href="#">Careers</a>
-      <a href="#">Press</a>
-      <div style="font-size:9px;color:#333;margin-top:14px;margin-bottom:4px;">Newsletter:</div>
-      <div class="email-sub">
-        <input type="text" placeholder="Email kamu...">
-        <button class="sub-btn">OK</button>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2024 JavasMedia. All rights reserved.</span>
-    <span>Privacy Policy | Terms of Service</span>
-  </div>
-</div>
-
+<script>
+// Category tab switching
+document.querySelectorAll('.cat-tab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
 </body>
 </html>
