@@ -293,6 +293,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 .product-card {
   background: white;
   border: 2.5px solid #1a1a1a;
+  border-top-width: 5px;
   border-radius: 4px;
   overflow: hidden;
   cursor: pointer;
@@ -302,28 +303,40 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 }
 .product-card:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #1a1a1a; }
 
+/* Border top warna per card */
+.product-card.red { border-top-color: #e85d04; }
+.product-card.cyan { border-top-color: #00bcd4; }
+.product-card.purple { border-top-color: #9c27b0; }
+.product-card.green { border-top-color: #4caf50; }
+.product-card.orange { border-top-color: #ff9800; }
+.product-card.brown { border-top-color: #795548; }
+.product-card.gray { border-top-color: #607d8b; }
+.product-card.pink { border-top-color: #e91e63; }
+
 .product-badge {
   position: absolute;
   top: 12px;
   right: 12px;
-  background: #e85d04;
   color: white;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: 3px;
   z-index: 2;
+  font-family: 'Space Mono', monospace;
 }
 
 .product-img {
   aspect-ratio: 1 / 1;
-  background: #f5f4f0;
+  background: #f8f7f4;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 80px;
-  border-bottom: 2.5px solid #1a1a1a;
+  font-size: 72px;
+  border-bottom: 2px solid #e8e3d8;
 }
+
+.product-info { padding: 14px 16px 16px; }
 
 .product-info { padding: 16px; }
 
@@ -542,108 +555,76 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
     </div>
 
     <div class="product-grid">
-      <!-- Card 1 -->
-      <div class="product-card">
-        <div class="product-badge">-50%</div>
+      <div class="product-card red">
+        <div class="product-badge" style="background:#e85d04;">-50%</div>
         <div class="product-img">👕</div>
         <div class="product-info">
           <div class="product-cat">APPAREL</div>
           <div class="product-name">Kaos Custom Sablon DTF</div>
-          <div class="product-price">
-            <span class="price-old">Rp 90.000</span>
-            <span class="price-new">Rp 45.000</span>
-          </div>
+          <div class="product-price"><span class="price-old">Rp 90.000</span><span class="price-new">Rp 45.000</span></div>
         </div>
       </div>
-      <!-- Card 2 -->
-      <div class="product-card">
+      <div class="product-card cyan">
         <div class="product-badge" style="background:#00bcd4;">-30%</div>
         <div class="product-img">🪪</div>
         <div class="product-info">
           <div class="product-cat" style="background:#00bcd4;">AKSESORI</div>
           <div class="product-name">Lanyard Polyflex Custom</div>
-          <div class="product-price">
-            <span class="price-old">Rp 12.000</span>
-            <span class="price-new">Rp 8.500</span>
-          </div>
+          <div class="product-price"><span class="price-old">Rp 12.000</span><span class="price-new">Rp 8.500</span></div>
         </div>
       </div>
-      <!-- Card 3 -->
-      <div class="product-card">
-        <div class="product-badge" style="background:#4caf50;">-20%</div>
+      <div class="product-card purple">
+        <div class="product-badge" style="background:#9c27b0;">-20%</div>
         <div class="product-img">🏷️</div>
         <div class="product-info">
-          <div class="product-cat" style="background:#4caf50;">PACKAGING</div>
+          <div class="product-cat" style="background:#9c27b0;">PACKAGING</div>
           <div class="product-name">Label Custom Sablon</div>
-          <div class="product-price">
-            <span class="price-old">Rp 3.200</span>
-            <span class="price-new">Rp 2.500</span>
-          </div>
+          <div class="product-price"><span class="price-old">Rp 3.200</span><span class="price-new">Rp 2.500</span></div>
         </div>
       </div>
-      <!-- Card 4 -->
-      <div class="product-card">
-        <div class="product-badge" style="background:#9c27b0;">-40%</div>
+      <div class="product-card green">
+        <div class="product-badge" style="background:#1a1a1a;">-40%</div>
         <div class="product-img">🧢</div>
         <div class="product-info">
           <div class="product-cat">APPAREL</div>
           <div class="product-name">Topi Baseball Custom</div>
-          <div class="product-price">
-            <span class="price-old">Rp 110.000</span>
-            <span class="price-new">Rp 65.000</span>
-          </div>
+          <div class="product-price"><span class="price-old">Rp 110.000</span><span class="price-new">Rp 65.000</span></div>
         </div>
       </div>
-      <!-- Card 5 -->
-      <div class="product-card">
-        <div class="product-badge" style="background:#ff9800;">-25%</div>
+      <div class="product-card red">
+        <div class="product-badge" style="background:#e85d04;">-25%</div>
         <div class="product-img">⭐</div>
         <div class="product-info">
           <div class="product-cat" style="background:#ff9800;">PROMOTION</div>
           <div class="product-name">Stiker Vinil Polyflex</div>
-          <div class="product-price">
-            <span class="price-old">Rp 2.000</span>
-            <span class="price-new">Rp 1.500</span>
-          </div>
+          <div class="product-price"><span class="price-old">Rp 2.000</span><span class="price-new">Rp 1.500</span></div>
         </div>
       </div>
-      <!-- Card 6 -->
-      <div class="product-card">
-        <div class="product-badge" style="background:#795548;">-35%</div>
+      <div class="product-card cyan">
+        <div class="product-badge" style="background:#9c27b0;">-35%</div>
         <div class="product-img">🛍️</div>
         <div class="product-info">
           <div class="product-cat">APPAREL</div>
           <div class="product-name">Totebag Canvas Custom</div>
-          <div class="product-price">
-            <span class="price-old">Rp 54.000</span>
-            <span class="price-new">Rp 35.000</span>
-          </div>
+          <div class="product-price"><span class="price-old">Rp 54.000</span><span class="price-new">Rp 35.000</span></div>
         </div>
       </div>
-      <!-- Card 7 -->
-      <div class="product-card">
-        <div class="product-badge" style="background:#607d8b;">-15%</div>
+      <div class="product-card green">
+        <div class="product-badge" style="background:#4caf50;">-15%</div>
         <div class="product-img">🖼️</div>
         <div class="product-info">
           <div class="product-cat" style="background:#607d8b;">HOMEDECOR</div>
           <div class="product-name">Poster A3 Custom</div>
-          <div class="product-price">
-            <span class="price-old">Rp 14.000</span>
-            <span class="price-new">Rp 12.000</span>
-          </div>
+          <div class="product-price"><span class="price-old">Rp 14.000</span><span class="price-new">Rp 12.000</span></div>
         </div>
       </div>
-      <!-- Card 8 -->
-      <div class="product-card">
-        <div class="product-badge" style="background:#e91e63;">-45%</div>
+      <div class="product-card green" style="border-top-color:#b5cc00;">
+        <div class="product-badge" style="background:#1a1a1a;">-45%</div>
         <div class="product-img">🧥</div>
         <div class="product-info">
           <div class="product-cat">APPAREL</div>
           <div class="product-name">Jaket Bomber Custom</div>
-          <div class="product-price">
-            <span class="price-old">Rp 230.000</span>
-            <span class="price-new">Rp 125.000</span>
-          </div>
+          <div class="product-price"><span class="price-old">Rp 230.000</span><span class="price-new">Rp 125.000</span></div>
         </div>
       </div>
     </div>
