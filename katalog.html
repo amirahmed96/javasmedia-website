@@ -348,9 +348,59 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 .newsletter-btn { background: #ffbb00; border: none; padding: 16px 32px; font-size: 12px; font-weight: 700; color: black; cursor: pointer; letter-spacing: 1.4px; text-transform: uppercase; }
 .newsletter-consent { display: flex; align-items: center; justify-content: center; gap: 8px; color: #444; font-size: 11px; }
 </style>
+<link rel="stylesheet" href="mobile-nav.css">
 </head>
 <body>
 <div class="page">
+
+  <!-- ===== MOBILE HEADER (mobile only, see mobile-nav.css) ===== -->
+  <div class="mobile-header-bar">
+    <button class="mh-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <img class="mh-logo" src="logo.png" alt="JavasMedia" onclick="location.href='index.html'">
+    <div class="mh-right">
+      <button class="mh-search-toggle" aria-label="Cari">&#128269;</button>
+      <img class="mh-icon" src="cart.png" alt="Cart">
+      <img class="mh-icon" src="profile.png" alt="Profile" onclick="location.href='login.html'">
+    </div>
+  </div>
+  <div class="mh-search-box">
+    <input type="text" placeholder="Cari produk...">
+  </div>
+
+  <!-- ===== MOBILE DRAWER NAV ===== -->
+  <div class="mobile-nav-overlay"></div>
+  <div class="mobile-nav-drawer">
+    <button class="mnd-close" aria-label="Tutup">&#10005;</button>
+    <div class="mnd-brand">
+      <div class="mnd-brand-title">HOUSE OF<br>CUSTOMIZE</div>
+    </div>
+    <div class="mnd-nav">
+      <a class="n1" href="promo.html">PROMO</a>
+      <a class="n2" href="katalog.html">PRODUCT</a>
+      <a class="n3" href="articles.html">ARTICLES</a>
+      <a class="n4" href="location.html">LOCATION</a>
+    </div>
+    <div class="mnd-footer">
+      <img class="mnd-footer-logo" src="logo.png" alt="JavasMedia">
+      <p>Ploso Timur 1B No. 3b<br>Tambaksari - Surabaya<br>javasmediasurabaya@gmail.com<br>082143777463</p>
+      <div class="mnd-social">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="TikTok">TT</a>
+        <a href="#" aria-label="YouTube">YT</a>
+        <a href="#" aria-label="Facebook">FB</a>
+      </div>
+      <div class="mnd-links">
+        <a href="#">About Us</a>
+        <a href="#">Production</a>
+        <a href="location.html">Alamat</a>
+        <a href="katalog.html">Kaos Custom</a>
+        <a href="#">Career</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Track Order</a>
+      </div>
+    </div>
+  </div>
+
 
   <!-- HEADER -->
   <div class="header">
@@ -369,6 +419,8 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
     <img class="header-profile" src="profile.png" alt="" onclick="location.href='login.html'">
     <div class="bar-ornamen"></div>
   </div>
+
+  <div class="mobile-scale-wrap"><div class="mobile-scale-inner">
 
   <!-- BREADCRUMB -->
   <div class="breadcrumb">
@@ -836,6 +888,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
     </div>
   </div>
 
+</div></div>
 </div>
 
 <script>
@@ -855,5 +908,6 @@ document.querySelectorAll('.cat-item').forEach(item => {
   });
 });
 </script>
+<script src="mobile-nav.js"></script>
 </body>
 </html>
