@@ -399,11 +399,31 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
     <div class="bar-ornamen"></div>
   </div>
 
-  <!-- HERO SECTION -->
-  <div class="hero-section" style="height:520px;">
-    <img class="hero-bg" src="bg1.png" alt="">
-    <div class="hero-content">
-      <img class="main-banner" src="main-campaign.png" alt="House of Customize">
+  <!-- HERO SLIDER -->
+  <div class="hero-section" style="height:auto;position:relative;">
+    <div class="slider-wrap" style="position:relative;width:1440px;overflow:hidden;">
+      <!-- Slides -->
+      <div class="slider-track" id="sliderTrack" style="display:flex;transition:transform 0.5s ease;width:500%;">
+        <img src="slide1.jpg" alt="House of Customize" style="width:1440px;height:auto;display:block;flex-shrink:0;">
+        <img src="slide2.jpg" alt="House of Customize" style="width:1440px;height:auto;display:block;flex-shrink:0;">
+        <img src="slide3.jpg" alt="TShirt Custom" style="width:1440px;height:auto;display:block;flex-shrink:0;">
+        <img src="slide4.jpg" alt="Bring Your Idea" style="width:1440px;height:auto;display:block;flex-shrink:0;">
+        <img src="slide5.jpg" alt="House of Customize" style="width:1440px;height:auto;display:block;flex-shrink:0;">
+      </div>
+
+      <!-- Panah kiri -->
+      <button onclick="moveSlide(-1)" style="position:absolute;left:20px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;border:none;width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;">‹</button>
+      <!-- Panah kanan -->
+      <button onclick="moveSlide(1)" style="position:absolute;right:20px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;border:none;width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;">›</button>
+
+      <!-- Dots -->
+      <div id="sliderDots" style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10;">
+        <button onclick="goToSlide(0)" class="dot active" style="width:10px;height:10px;border-radius:50%;border:none;background:white;cursor:pointer;padding:0;opacity:1;"></button>
+        <button onclick="goToSlide(1)" class="dot" style="width:10px;height:10px;border-radius:50%;border:none;background:white;cursor:pointer;padding:0;opacity:0.4;"></button>
+        <button onclick="goToSlide(2)" class="dot" style="width:10px;height:10px;border-radius:50%;border:none;background:white;cursor:pointer;padding:0;opacity:0.4;"></button>
+        <button onclick="goToSlide(3)" class="dot" style="width:10px;height:10px;border-radius:50%;border:none;background:white;cursor:pointer;padding:0;opacity:0.4;"></button>
+        <button onclick="goToSlide(4)" class="dot" style="width:10px;height:10px;border-radius:50%;border:none;background:white;cursor:pointer;padding:0;opacity:0.4;"></button>
+      </div>
     </div>
   </div>
 
@@ -539,60 +559,52 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   </div>
 
   <!-- FOOTER -->
-  <div class="footer">
-    <div style="max-width:1440px;margin:0 auto;padding:60px 80px 40px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:40px;">
-      <!-- Col 1: Logo + info -->
+  <div style="background:black;">
+    <div style="padding:60px 80px 40px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;border-bottom:1px solid #222;">
       <div>
         <img src="logo.png" alt="JavasMedia" style="height:90px;width:auto;margin-bottom:16px;display:block;object-fit:contain;">
-        <p style="color:#999;font-size:13px;line-height:1.8;margin-bottom:4px;">Ploso Timur 1b No. 3b, Tambaksari - Surabaya</p>
-        <p style="color:#999;font-size:13px;margin-bottom:4px;">082143777463</p>
-        <p style="color:#999;font-size:13px;margin-bottom:20px;">javasmediasurabaya@gmail.com</p>
-        <div style="display:flex;gap:12px;">
-          <div style="width:38px;height:38px;border:1px solid #333;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#999;font-size:14px;cursor:pointer;">ig</div>
-          <div style="width:38px;height:38px;border:1px solid #333;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#999;font-size:14px;cursor:pointer;">tt</div>
-          <div style="width:38px;height:38px;border:1px solid #333;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#999;font-size:14px;cursor:pointer;">tw</div>
-          <div style="width:38px;height:38px;border:1px solid #333;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#999;font-size:14px;cursor:pointer;">fb</div>
-          <div style="width:38px;height:38px;border:1px solid #333;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#999;font-size:14px;cursor:pointer;">yt</div>
+        <div style="color:#666;font-size:13px;line-height:1.8;margin-bottom:16px;">Ploso Timur 1b No. 3b<br>Tambaksari - Surabaya<br>082143777463<br>javasmediasurabaya@gmail.com</div>
+        <div style="display:flex;gap:8px;">
+          <div style="width:32px;height:32px;background:#111;border:1px solid #222;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#555;cursor:pointer;">ig</div>
+          <div style="width:32px;height:32px;background:#111;border:1px solid #222;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#555;cursor:pointer;">tt</div>
+          <div style="width:32px;height:32px;background:#111;border:1px solid #222;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#555;cursor:pointer;">tw</div>
+          <div style="width:32px;height:32px;background:#111;border:1px solid #222;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#555;cursor:pointer;">fb</div>
+          <div style="width:32px;height:32px;background:#111;border:1px solid #222;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#555;cursor:pointer;">yt</div>
         </div>
       </div>
-      <!-- Col 2: Shop -->
       <div>
-        <h4 style="color:white;font-size:13px;font-weight:700;letter-spacing:2px;margin-bottom:20px;">SHOP</h4>
-        <a href="katalog.html" style="display:block;color:#999;font-size:14px;text-decoration:none;margin-bottom:12px;">New Arrivals</a>
-        <a href="katalog.html" style="display:block;color:#999;font-size:14px;text-decoration:none;margin-bottom:12px;">T-Shirts</a>
-        <a href="katalog.html" style="display:block;color:#999;font-size:14px;text-decoration:none;margin-bottom:12px;">Hoodies</a>
-        <a href="katalog.html" style="display:block;color:#999;font-size:14px;text-decoration:none;margin-bottom:12px;">Pants</a>
-        <a href="katalog.html" style="display:block;color:#999;font-size:14px;text-decoration:none;margin-bottom:12px;">Accessories</a>
-        <a href="promo.html" style="display:block;color:#999;font-size:14px;text-decoration:none;margin-bottom:12px;">Sale</a>
+        <h4 style="font-size:10px;font-weight:700;letter-spacing:2px;color:white;text-transform:uppercase;margin-bottom:16px;">SHOP</h4>
+        <a href="katalog.html" style="display:block;color:#555;font-size:13px;text-decoration:none;margin-bottom:10px;">New Arrivals</a>
+        <a href="katalog.html" style="display:block;color:#555;font-size:13px;text-decoration:none;margin-bottom:10px;">T-Shirts</a>
+        <a href="katalog.html" style="display:block;color:#555;font-size:13px;text-decoration:none;margin-bottom:10px;">Hoodies</a>
+        <a href="katalog.html" style="display:block;color:#555;font-size:13px;text-decoration:none;margin-bottom:10px;">Pants</a>
+        <a href="katalog.html" style="display:block;color:#555;font-size:13px;text-decoration:none;margin-bottom:10px;">Accessories</a>
+        <a href="promo.html" style="display:block;color:#555;font-size:13px;text-decoration:none;margin-bottom:10px;">Sale</a>
       </div>
-      <!-- Col 3: Help -->
       <div>
-        <h4 style="color:white;font-size:13px;font-weight:700;letter-spacing:2px;margin-bottom:20px;">HELP</h4>
-        <a href="#" style="display:block;color:#999;font-size:14px;text-decoration:none;margin-bottom:12px;">FAQ</a>
-        <a href="#" style="display:block;color:#999;font-size:14px;text-decoration:none;margin-bottom:12px;">Shipping Info</a>
-        <a href="#" style="display:block;color:#999;font-size:14px;text-decoration:none;margin-bottom:12px;">Returns & Exchanges</a>
-        <a href="#" style="display:block;color:#999;font-size:14px;text-decoration:none;margin-bottom:12px;">Track Order</a>
-        <a href="#" style="display:block;color:#999;font-size:14px;text-decoration:none;margin-bottom:12px;">Contact Us</a>
+        <h4 style="font-size:10px;font-weight:700;letter-spacing:2px;color:white;text-transform:uppercase;margin-bottom:16px;">HELP</h4>
+        <a href="#" style="display:block;color:#555;font-size:13px;text-decoration:none;margin-bottom:10px;">FAQ</a>
+        <a href="#" style="display:block;color:#555;font-size:13px;text-decoration:none;margin-bottom:10px;">Shipping Info</a>
+        <a href="#" style="display:block;color:#555;font-size:13px;text-decoration:none;margin-bottom:10px;">Returns & Exchanges</a>
+        <a href="#" style="display:block;color:#555;font-size:13px;text-decoration:none;margin-bottom:10px;">Track Order</a>
+        <a href="#" style="display:block;color:#555;font-size:13px;text-decoration:none;margin-bottom:10px;">Contact Us</a>
       </div>
-      <!-- Col 4: Company -->
       <div>
-        <h4 style="color:white;font-size:13px;font-weight:700;letter-spacing:2px;margin-bottom:20px;">COMPANY</h4>
-        <a href="#" style="display:block;color:#999;font-size:14px;text-decoration:none;margin-bottom:12px;">About Us</a>
-        <a href="#" style="display:block;color:#999;font-size:14px;text-decoration:none;margin-bottom:12px;">Careers</a>
-        <a href="#" style="display:block;color:#999;font-size:14px;text-decoration:none;margin-bottom:12px;">Press</a>
-        <a href="#" style="display:block;color:#999;font-size:14px;text-decoration:none;margin-bottom:12px;">Sustainability</a>
-        <a href="location.html" style="display:block;color:#999;font-size:14px;text-decoration:none;margin-bottom:12px;">Pickup In Store</a>
+        <h4 style="font-size:10px;font-weight:700;letter-spacing:2px;color:white;text-transform:uppercase;margin-bottom:16px;">COMPANY</h4>
+        <a href="#" style="display:block;color:#555;font-size:13px;text-decoration:none;margin-bottom:10px;">About Us</a>
+        <a href="#" style="display:block;color:#555;font-size:13px;text-decoration:none;margin-bottom:10px;">Careers</a>
+        <a href="#" style="display:block;color:#555;font-size:13px;text-decoration:none;margin-bottom:10px;">Press</a>
+        <a href="#" style="display:block;color:#555;font-size:13px;text-decoration:none;margin-bottom:10px;">Sustainability</a>
+        <a href="location.html" style="display:block;color:#555;font-size:13px;text-decoration:none;margin-bottom:10px;">Pickup In Store</a>
       </div>
     </div>
-
-    <!-- Newsletter -->
-    <div style="border-top:1px solid #222;padding:40px 80px;max-width:1440px;margin:0 auto;text-align:center;">
-      <p class="footer-text">Be the first to know about new product drops and exclusive deals from Javas Media.</p>
-      <div class="newsletter-form">
-        <input class="newsletter-input" type="email" placeholder="Enter your email address">
-        <button class="newsletter-btn">SUBSCRIBE</button>
+    <div style="padding:40px 80px;text-align:center;">
+      <p style="color:#555;font-size:13px;margin-bottom:20px;">Be the first to know about new product drops and exclusive deals from Javas Media.</p>
+      <div style="display:flex;max-width:512px;margin:0 auto 12px;">
+        <input type="email" placeholder="Enter your email address" style="flex:1;padding:16px 20px;background:white;border:none;font-size:13px;color:#999;outline:none;">
+        <button style="background:#ffbb00;border:none;padding:16px 32px;font-size:12px;font-weight:700;color:black;cursor:pointer;letter-spacing:1.4px;text-transform:uppercase;">SUBSCRIBE</button>
       </div>
-      <div class="newsletter-consent">
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;color:#444;font-size:11px;">
         <input type="checkbox" style="width:12px;height:12px;">
         <span>I agree to receive marketing emails from Javas Media. Unsubscribe anytime.</span>
       </div>
@@ -600,5 +612,31 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   </div>
 
 </div>
+
+<script>
+// ===== SLIDER =====
+let current = 0;
+const total = 5;
+const track = document.getElementById('sliderTrack');
+const dots = document.querySelectorAll('.dot');
+
+function updateSlider() {
+  track.style.transform = `translateX(-${current * 1440}px)`;
+  dots.forEach((d, i) => d.style.opacity = i === current ? '1' : '0.4');
+}
+
+function moveSlide(dir) {
+  current = (current + dir + total) % total;
+  updateSlider();
+}
+
+function goToSlide(n) {
+  current = n;
+  updateSlider();
+}
+
+// Auto slide setiap 5 detik
+setInterval(() => moveSlide(1), 5000);
+</script>
 </body>
 </html>
