@@ -3,538 +3,711 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Detail Produk - JavasMedia</title>
+<title>Kaos Custom Sablon DTF — JavasMedia</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@400;700;800&family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  background: #FAF8F3;
-  background-image: linear-gradient(#d9d4c7 1px, transparent 1px), linear-gradient(90deg, #d9d4c7 1px, transparent 1px);
-  background-size: 28px 28px;
-  font-family: 'Arial Black', Arial, sans-serif;
-  overflow-x: hidden;
+html { overflow-x: hidden; }
+body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
+.page { width: 1440px; margin: 0 auto; overflow: hidden; }
+
+/* ===== HEADER FINAL ===== */
+.header { position: relative; width: 1440px; height: 100px; z-index: 1000; }
+.header .header-bar { position: absolute; top: 0; left: 0; width: 1440px; height: 80px; object-fit: cover; }
+.header .header-logo { position: absolute; top: 12px; left: 30px; height: 48px; width: 121px; cursor: pointer; object-fit: contain; }
+.header .nav-btn { position: absolute; bottom: 20px; height: 52px; width: 140px; cursor: pointer; object-fit: fill; display: block; }
+.header .nav-btn-1 { left: 340px; } .header .nav-btn-2 { left: 455px; } .header .nav-btn-3 { left: 570px; } .header .nav-btn-4 { left: 685px; }
+.header .nav-label { position: absolute; font-family: 'Avenir Next Condensed','Arial Narrow',Arial,sans-serif; font-size: 18px; font-weight: 700; color: #1a1a1a; text-align: center; cursor: pointer; pointer-events: all; width: 140px; }
+.header .nav-label-1 { bottom: 33px; left: 340px; } .header .nav-label-2 { bottom: 33px; left: 455px; } .header .nav-label-3 { bottom: 33px; left: 570px; } .header .nav-label-4 { bottom: 33px; left: 685px; }
+.header .header-search { position: absolute; top: 27px; left: 1020px; height: 26px; width: 160px; object-fit: cover; }
+.header .header-cart { position: absolute; top: 24px; left: 1210px; height: 30px; width: 32px; cursor: pointer; object-fit: contain; }
+.header .header-profile { position: absolute; top: 24px; left: 1260px; height: 28px; width: 29px; cursor: pointer; object-fit: contain; }
+.header .bar-ornamen { position: absolute; top: 80px; left: 0; width: 1440px; height: 20px; background-image: repeating-conic-gradient(#8b1a1a 0% 25%, transparent 0% 50%); background-size: 20px 20px; }
+
+/* ===== GRID BG ===== */
+.grid-bg {
+  background-color: #FAF6EE;
+  background-image: linear-gradient(#e8e3d8 1px, transparent 1px), linear-gradient(90deg, #e8e3d8 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
-.header {
-  background: #1e3a5f;
-  padding: 0 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 90px;
-}
-.logo-text { color: white; font-size: 22px; font-weight: 900; letter-spacing: 2px; font-style: italic; text-transform: uppercase; line-height: 1.1; }
-.nav-center { display: flex; align-items: flex-end; align-self: flex-end; }
-.nav-btn { padding: 10px 24px; border: 2.5px solid #1a1a1a; border-bottom: none; border-radius: 10px 10px 0 0; font-size: 13px; font-weight: 800; cursor: pointer; text-transform: uppercase; color: #1a1a1a; }
-.nav-btn.promo { background: #ffc107; }
-.nav-btn.product { background: #00bcd4; }
-.nav-btn.articles { background: #ff9800; }
-.nav-btn.location { background: #e91e63; color: white; }
-.header-right { display: flex; align-items: center; gap: 16px; }
-.search-wrap { background: #FAF8F3; border-radius: 6px; padding: 8px 14px; display: flex; align-items: center; gap: 8px; width: 200px; }
-.search-wrap input { background: transparent; border: none; outline: none; font-size: 13px; width: 100%; }
-.icon-btn { color: white; font-size: 22px; cursor: pointer; }
-
-.checkered { height: 18px; background: repeating-linear-gradient(90deg, #7a2020 0px, #7a2020 18px, #FAF8F3 18px, #FAF8F3 36px); border-top: 2.5px solid #1e3a5f; border-bottom: 2.5px solid #1e3a5f; }
-
-.breadcrumb { padding: 20px 60px; font-size: 12px; color: #888; font-family: Arial; }
-.breadcrumb span { color: #ff9800; font-weight: 700; }
-
-.page { padding: 0 60px 80px; max-width: 1300px; margin: 0 auto; }
-
-.top-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 56px;
-  margin-bottom: 80px;
-  align-items: start;
-}
-
-/* FOTO */
-.photo-col {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  background: white;
-  border: 2.5px solid #1a1a1a;
-  border-radius: 14px;
-  box-shadow: 5px 5px 0 #1a1a1a;
-  padding: 20px;
-}
-
-.main-photo {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  background: white;
-  border: 2.5px solid #1a1a1a;
-  border-radius: 12px;
-  box-shadow: 4px 4px 0 #1a1a1a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.main-photo-inner {
-  width: 100%;
-  height: 100%;
-  background: #f5f2ec;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  color: #ccc;
-  font-family: Arial;
-}
-
-.photo-badge {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  background: #e91e63;
-  color: white;
-  font-size: 9px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: 3px 8px;
-  border-radius: 5px;
-  border: 1.5px solid #1a1a1a;
-  box-shadow: 2px 2px 0 #1a1a1a;
-  z-index: 2;
-}
-
-.photo-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 12px;
-  z-index: 2;
-}
-
-.photo-nav-btn {
-  background: white;
-  border: 2px solid #1a1a1a;
-  border-radius: 6px;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 900;
-  cursor: pointer;
-  box-shadow: 2px 2px 0 #1a1a1a;
-  opacity: 0.8;
-}
-.photo-nav-btn:hover { background: #ffc107; opacity: 1; }
-
-.thumbnails { display: flex; gap: 10px; }
-
-.thumb {
-  width: 64px;
-  height: 64px;
-  flex-shrink: 0;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.thumb.active { border: 2.5px solid #ff9800; box-shadow: 2px 2px 0 #ff9800; }
-.thumb:hover { border-color: #1a1a1a; }
-
-/* ORDER */
-.order-col {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  background: white;
-  border: 2.5px solid #1a1a1a;
-  border-radius: 14px;
-  box-shadow: 5px 5px 0 #1a1a1a;
-  padding: 28px;
-}
-
-.product-category-badge {
-  background: #1e3a5f;
-  color: white;
-  font-size: 9px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  padding: 3px 9px;
-  border-radius: 5px;
-  border: 1.5px solid #1a1a1a;
-  display: inline-block;
-  margin-bottom: 12px;
-}
-
-.product-title { font-size: 20px; font-weight: 900; color: #1a1a1a; margin-bottom: 16px; line-height: 1.3; }
-.product-price { font-size: 26px; font-weight: 900; color: #ff9800; margin-bottom: 4px; }
-.price-note { font-size: 11px; color: #aaa; font-family: Arial; margin-bottom: 20px; }
-
-.desc-short {
+/* ===== BREADCRUMB ===== */
+.breadcrumb {
+  padding: 16px 120px;
   font-size: 12px;
-  font-family: Arial;
-  color: #666;
-  line-height: 1.8;
-  padding-bottom: 24px;
-  border-bottom: 1.5px solid #ece9e0;
+  color: #aaa;
 }
+.breadcrumb a { color: #aaa; text-decoration: none; }
+.breadcrumb a:hover { color: #1e3a5f; }
+.breadcrumb span { color: #1a1a1a; font-weight: 600; }
 
-.qty-row { display: flex; align-items: center; }
-.qty-label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: #888; margin-right: 14px; letter-spacing: 0.5px; font-family: Arial; }
-.qty-btn { width: 30px; height: 30px; background: white; border: 2px solid #1a1a1a; font-size: 15px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 2px 2px 0 #1a1a1a; }
-.qty-btn:hover { background: #ffc107; }
-.qty-btn.minus { border-radius: 6px 0 0 6px; }
-.qty-btn.plus { border-radius: 0 6px 6px 0; }
-.qty-num { width: 38px; height: 30px; border: 2px solid #1a1a1a; border-left: none; border-right: none; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; font-family: Arial; }
-
-.btn-group { display: flex; flex-direction: column; gap: 10px; }
-
-.btn-wa {
-  width: 100%;
-  background: #25D366;
-  border: 2px solid #1a1a1a;
-  border-radius: 8px;
-  padding: 13px;
-  font-size: 13px;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: white;
-  cursor: pointer;
-  box-shadow: 3px 3px 0 #1a1a1a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: all 0.15s;
-}
-.btn-wa:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 #1a1a1a; }
-
-.btn-cart {
-  width: 100%;
-  background: white;
-  border: 2px solid #1a1a1a;
-  border-radius: 8px;
-  padding: 11px;
-  font-size: 12px;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: #1a1a1a;
-  cursor: pointer;
-  box-shadow: 3px 3px 0 #1a1a1a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: all 0.15s;
-}
-.btn-cart:hover { background: #ffc107; transform: translate(-1px,-1px); }
-
-.info-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.chip {
-  background: white;
-  border: 1.5px solid #ddd;
-  border-radius: 6px;
-  padding: 6px 10px;
-  font-size: 10px;
-  font-family: Arial;
-  color: #555;
-}
-
-/* BOTTOM */
-.bottom-section {
+/* ===== DETAIL LAYOUT ===== */
+.detail-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px 60px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 48px;
+  align-items: start;
 }
 
-.info-card {
+/* ===== FOTO SECTION ===== */
+.foto-main {
   background: white;
-  border: 2px solid #1a1a1a;
-  border-radius: 12px;
-  box-shadow: 4px 4px 0 #1a1a1a;
-  padding: 36px 40px;
-}
-
-.card-title {
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: #1e3a5f;
-  margin-bottom: 20px;
-}
-
-.spec-list { display: flex; flex-direction: column; gap: 0; }
-.spec-item {
-  display: flex;
-  gap: 10px;
-  font-size: 12px;
-  font-family: Arial;
-  color: #555;
-  align-items: flex-start;
-  padding: 14px 0;
-  border-bottom: 1px solid #f0ede6;
-}
-.spec-item:last-child { border-bottom: none; }
-.spec-item:first-child { padding-top: 0; }
-.spec-dot { width: 7px; height: 7px; background: #ff9800; border-radius: 2px; flex-shrink: 0; margin-top: 4px; }
-
-.cara-order { background: #1e3a5f; border: 2px solid #1a1a1a; border-radius: 12px; box-shadow: 4px 4px 0 #1a1a1a; padding: 36px 40px; }
-.cara-order .card-title { color: #ffc107; }
-
-.cara-step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 18px; font-size: 12px; font-family: Arial; color: #ccc; line-height: 1.5; }
-.cara-step:last-child { margin-bottom: 0; }
-
-.step-num {
-  background: #ff9800;
-  color: #1a1a1a;
-  font-size: 9px;
-  font-weight: 800;
-  width: 18px;
-  height: 18px;
-  border-radius: 4px;
-  border: 1.5px solid #1a1a1a;
+  border: 2.5px solid #1a1a1a;
+  border-top: 5px solid #1e3a5f;
+  box-shadow: 5px 5px 0 #1a1a1a;
+  aspect-ratio: 1/1;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  margin-top: 1px;
+  font-size: 160px;
+  margin-bottom: 12px;
+  position: relative;
 }
 
-/* REKOMENDASI */
-.rekomendasi { padding: 60px 60px 0; max-width: 1300px; margin: 0 auto; }
-.rek-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
-.rek-title { font-size: 16px; font-weight: 900; color: #1a1a1a; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
-.rek-title::before { content: ''; display: inline-block; width: 6px; height: 20px; background: #ff9800; border: 1.5px solid #1a1a1a; border-radius: 3px; }
-.rek-link { font-size: 11px; font-family: Arial; font-weight: 700; color: #ff9800; text-decoration: none; border-bottom: 1.5px solid #ff9800; }
-.rek-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.rek-card { background: white; border: 2.5px solid #1a1a1a; border-radius: 10px; overflow: hidden; cursor: pointer; transition: all 0.15s; box-shadow: 4px 4px 0 #1a1a1a; }
-.rek-card:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 #1a1a1a; }
-.rek-strip { height: 5px; }
-.rek-s1 { background: #ff9800; }
-.rek-s2 { background: #00bcd4; }
-.rek-s3 { background: #e91e63; }
-.rek-s4 { background: #ffc107; }
-.rek-img { width: 100%; aspect-ratio: 1/1; background: #f5f2ec; display: flex; align-items: center; justify-content: center; font-size: 36px; border-bottom: 1.5px solid #e0ddd5; opacity: 0.6; }
-.rek-info { padding: 10px 12px 14px; }
-.rek-badge { background: #1e3a5f; color: white; font-size: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; padding: 2px 6px; border-radius: 4px; border: 1.5px solid #1a1a1a; display: inline-block; margin-bottom: 6px; }
-.rek-name { font-size: 11px; font-weight: 700; color: #1a1a1a; font-family: Arial; line-height: 1.3; margin-bottom: 6px; height: 28px; overflow: hidden; }
-.rek-price { font-size: 13px; font-weight: 900; color: #ff9800; }
+.foto-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #e85d04;
+  color: white;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: 3px;
+  font-family: 'Space Mono', monospace;
+}
 
-/* FOOTER */
-.footer { background: #1a1a1a; color: white; padding: 40px 40px 20px; margin-top: 80px; border-top: 18px solid transparent; border-image: repeating-linear-gradient(90deg, #7a2020 0px, #7a2020 18px, #FAF8F3 18px, #FAF8F3 36px) 1; }
-.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
-.footer-logo { font-size: 18px; font-weight: 900; letter-spacing: 2px; font-style: italic; text-transform: uppercase; margin-bottom: 10px; }
-.footer-desc { font-size: 11px; color: #aaa; font-family: Arial; line-height: 1.7; margin-bottom: 14px; }
+.foto-thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.foto-thumb {
+  aspect-ratio: 1/1;
+  background: white;
+  border: 2px solid #e8e3d8;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.foto-thumb:hover { border-color: #1e3a5f; }
+.foto-thumb.active { border-color: #1e3a5f; border-width: 2.5px; }
+
+/* ===== INFO SECTION ===== */
+.info-section { padding-top: 8px; }
+
+.product-cat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #1e3a5f;
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 2px;
+  margin-bottom: 12px;
+}
+
+.product-title {
+  font-family: 'Baloo Chettan 2', cursive;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+}
+
+.rating-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.stars { color: #ffc107; font-size: 16px; letter-spacing: 2px; }
+.rating-count { font-size: 12px; color: #888; }
+.rating-sold { font-size: 12px; color: #888; }
+.rating-sep { color: #ddd; }
+
+.price-section {
+  background: #f8f7f4;
+  border: 1.5px solid #e8e3d8;
+  border-left: 4px solid #e85d04;
+  padding: 16px 20px;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.price-old { font-size: 14px; color: #bbb; text-decoration: line-through; margin-bottom: 4px; }
+.price-new { font-size: 36px; font-weight: 900; color: #e85d04; font-family: 'Baloo Chettan 2', cursive; }
+.price-note { font-size: 11px; color: #888; margin-top: 4px; }
+
+/* Varian section */
+.varian-section { margin-bottom: 24px; }
+
+.varian-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.varian-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.varian-btn {
+  padding: 7px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 2px solid #e8e3d8;
+  background: white;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.1s;
+  font-family: 'Inter', sans-serif;
+}
+.varian-btn:hover { border-color: #1e3a5f; color: #1e3a5f; }
+.varian-btn.active { border-color: #1e3a5f; background: #1e3a5f; color: white; }
+
+/* QTY section */
+.qty-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.qty-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.qty-control {
+  display: flex;
+  align-items: center;
+  border: 2px solid #1a1a1a;
+  background: white;
+}
+
+.qty-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: #f8f7f4;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.qty-btn:hover { background: #e8e3d8; }
+
+.qty-num {
+  width: 48px;
+  height: 36px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-left: 2px solid #1a1a1a;
+  border-right: 2px solid #1a1a1a;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  background: white;
+}
+
+.qty-note { font-size: 11px; color: #aaa; }
+
+/* CTA Buttons */
+.cta-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+
+.btn-wa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #25D366;
+  color: white;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 18px 32px;
+  border: 2.5px solid #1a1a1a;
+  box-shadow: 4px 4px 0 #1a1a1a;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s;
+  font-family: 'Inter', sans-serif;
+}
+.btn-wa:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 #1a1a1a; }
+
+.btn-catalog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: white;
+  color: #1a1a1a;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 14px 32px;
+  border: 2.5px solid #1a1a1a;
+  box-shadow: 3px 3px 0 #1a1a1a;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s;
+  font-family: 'Inter', sans-serif;
+}
+.btn-catalog:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 #1a1a1a; }
+
+/* Benefit mini */
+.benefit-mini {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 16px;
+  background: white;
+  border: 1.5px solid #e8e3d8;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.benefit-mini-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.benefit-mini-icon { font-size: 20px; }
+.benefit-mini-title { font-size: 11px; font-weight: 700; color: #1a1a1a; }
+.benefit-mini-desc { font-size: 10px; color: #888; }
+
+/* Deskripsi */
+.desc-section { margin-bottom: 32px; }
+
+.desc-tabs {
+  display: flex;
+  border-bottom: 2px solid #e8e3d8;
+  margin-bottom: 20px;
+}
+
+.desc-tab {
+  padding: 12px 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #aaa;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  font-family: 'Inter', sans-serif;
+}
+.desc-tab.active { color: #1e3a5f; border-bottom-color: #1e3a5f; }
+
+.desc-content { font-size: 13px; color: #555; line-height: 1.9; }
+.desc-content ul { padding-left: 20px; margin-top: 8px; }
+.desc-content li { margin-bottom: 6px; }
+.desc-content strong { color: #1a1a1a; }
+
+/* Spek tabel */
+.spek-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.spek-table tr { border-bottom: 1px solid #f0ede6; }
+.spek-table td { padding: 10px 12px; }
+.spek-table td:first-child { color: #888; width: 40%; font-weight: 600; }
+.spek-table td:last-child { color: #1a1a1a; }
+
+/* ===== PRODUK TERKAIT ===== */
+.related-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px 60px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.section-title-bar { width: 5px; height: 24px; background: #e85d04; border-radius: 2px; }
+.section-title-text { font-family: 'Baloo Chettan 2', cursive; font-size: 20px; font-weight: 800; color: #1a1a1a; letter-spacing: 0.5px; }
+
+.related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+.product-card {
+  background: white;
+  border: 2px solid #1a1a1a;
+  border-top-width: 4px;
+  border-top-color: #1e3a5f;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 3px 3px 0 #1a1a1a;
+}
+.product-card:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 #1a1a1a; }
+.product-img { aspect-ratio: 1/1; background: #f8f7f4; display: flex; align-items: center; justify-content: center; font-size: 56px; border-bottom: 1.5px solid #e8e3d8; }
+.product-info { padding: 12px 14px 14px; }
+.product-cat { font-size: 8px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; background: #1e3a5f; color: white; padding: 2px 8px; display: inline-block; border-radius: 2px; margin-bottom: 6px; }
+.product-name { font-size: 12px; font-weight: 700; color: #1a1a1a; line-height: 1.3; margin-bottom: 6px; }
+.product-price { display: flex; align-items: center; gap: 6px; }
+.price-old { font-size: 11px; color: #bbb; text-decoration: line-through; }
+.price-new { font-size: 14px; font-weight: 800; color: #e85d04; }
+
+/* ===== FOOTER ===== */
+.footer { background: black; }
+.footer-main { padding: 60px 80px 40px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; border-bottom: 1px solid #222; }
+.footer-logo { height: 90px; width: auto; margin-bottom: 16px; display: block; object-fit: contain; }
+.footer-info { color: #666; font-size: 13px; line-height: 1.8; margin-bottom: 16px; }
 .footer-social { display: flex; gap: 8px; }
-.social-icon { width: 30px; height: 30px; background: #333; border: 1.5px solid #555; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; cursor: pointer; font-family: Arial; }
-.footer-section h4 { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #ffc107; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1.5px solid #333; }
-.footer-section a { display: block; font-size: 11px; color: #aaa; text-decoration: none; margin-bottom: 8px; font-family: Arial; }
-.footer-bottom { border-top: 1px solid #333; padding-top: 16px; display: flex; justify-content: space-between; font-size: 10px; color: #666; font-family: Arial; }
-.email-sub { display: flex; gap: 8px; margin-top: 12px; }
-.email-sub input { padding: 6px 12px; background: #222; border: 1.5px solid #444; color: white; border-radius: 6px; font-size: 11px; width: 130px; outline: none; }
-.sub-btn { background: #ffc107; border: 1.5px solid #1a1a1a; padding: 6px 12px; border-radius: 6px; font-size: 11px; font-weight: 800; cursor: pointer; color: #1a1a1a; }
+.social-icon { width: 32px; height: 32px; background: #111; border: 1px solid #222; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #555; cursor: pointer; }
+.footer-col h4 { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: white; text-transform: uppercase; margin-bottom: 16px; }
+.footer-col a { display: block; color: #555; font-size: 13px; text-decoration: none; margin-bottom: 10px; }
+.footer-col a:hover { color: #ffc107; }
+.footer-newsletter { padding: 40px 80px; text-align: center; }
+.newsletter-text { color: #555; font-size: 13px; margin-bottom: 20px; }
+.newsletter-form { display: flex; max-width: 512px; margin: 0 auto 12px; }
+.newsletter-input { flex: 1; padding: 16px 20px; background: white; border: none; font-size: 13px; color: #999; outline: none; }
+.newsletter-btn { background: #ffbb00; border: none; padding: 16px 32px; font-size: 12px; font-weight: 700; color: black; cursor: pointer; letter-spacing: 1.4px; text-transform: uppercase; }
+.newsletter-consent { display: flex; align-items: center; justify-content: center; gap: 8px; color: #444; font-size: 11px; }
 </style>
 </head>
 <body>
-
-<div class="header">
-  <div class="logo-text" onclick="location.href='index.html'" style="cursor:pointer;">Javas<br>Media</div>
-  <div class="nav-center">
-    <button class="nav-btn promo" onclick="location.href='promo.html'">PROMO</button>
-    <button class="nav-btn product" onclick="location.href='katalog.html'">PRODUCT</button>
-    <button class="nav-btn articles" onclick="location.href='articles.html'">ARTICLES</button>
-    <button class="nav-btn location" onclick="location.href='location.html'">LOCATION</button>
-  </div>
-  <div class="header-right">
-    <div class="search-wrap"><span>🔍</span><input type="text" placeholder="Cari produk..."></div>
-    <span class="icon-btn">🛒</span>
-    <span class="icon-btn" onclick="location.href='login.html'" style="cursor:pointer;">👤</span>
-  </div>
-</div>
-<div class="checkered"></div>
-
-<div class="breadcrumb">Home › <span>Katalog</span> › <span>Kaos Custom Sablon DTF Premium</span></div>
-
 <div class="page">
-  <div class="top-section">
-    <div class="photo-col">
-      <div class="main-photo">
-        <div class="photo-badge">NEW</div>
-        <div class="photo-nav">
-          <button class="photo-nav-btn">‹</button>
-          <button class="photo-nav-btn">›</button>
-        </div>
-        <div class="main-photo-inner">Foto Produk 1:1</div>
-      </div>
-      <div class="thumbnails">
-        <div class="thumb active">👕</div>
-        <div class="thumb">👕</div>
-        <div class="thumb">👕</div>
-        <div class="thumb">👕</div>
-        <div class="thumb">👕</div>
-        <div class="thumb">👕</div>
-      </div>
-    </div>
 
-    <div class="order-col">
+  <!-- HEADER -->
+  <div class="header">
+    <img class="header-bar" src="bar-header.png" alt="">
+    <img class="header-logo" src="logo.png" alt="JavasMedia" onclick="location.href='index.html'" style="cursor:pointer;">
+    <img class="nav-btn nav-btn-1" src="btn1.png" alt="" onclick="location.href='promo.html'">
+    <img class="nav-btn nav-btn-2" src="btn2.png" alt="" onclick="location.href='katalog.html'">
+    <img class="nav-btn nav-btn-3" src="btn3.png" alt="" onclick="location.href='articles.html'">
+    <img class="nav-btn nav-btn-4" src="btn4.png" alt="" onclick="location.href='location.html'">
+    <span class="nav-label nav-label-1" onclick="location.href='promo.html'">PROMO</span>
+    <span class="nav-label nav-label-2" onclick="location.href='katalog.html'">PRODUCT</span>
+    <span class="nav-label nav-label-3" onclick="location.href='articles.html'">ARTICLES</span>
+    <span class="nav-label nav-label-4" onclick="location.href='location.html'">LOCATION</span>
+    <img class="header-search" src="search-bar.png" alt="">
+    <img class="header-cart" src="cart.png" alt="">
+    <img class="header-profile" src="profile.png" alt="" onclick="location.href='login.html'">
+    <div class="bar-ornamen"></div>
+  </div>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb grid-bg">
+    <a href="index.html">Home</a> ›
+    <a href="katalog.html">Produk</a> ›
+    <a href="katalog.html">Apparel</a> ›
+    <span>Kaos Custom Sablon DTF</span>
+  </div>
+
+  <!-- DETAIL PRODUK -->
+  <div class="grid-bg" style="padding-top:32px;">
+    <div class="detail-layout">
+
+      <!-- KIRI: Foto -->
       <div>
-        <span class="product-category-badge">Apparel</span>
-        <div class="product-title">Kaos Custom Sablon DTF Premium</div>
-        <div class="product-price">Rp 45.000 <span style="font-size:12px;color:#aaa;font-weight:400;font-family:Arial;">/ pcs</span></div>
-        <div class="price-note">Harga dapat berubah sesuai spesifikasi</div>
-        <div class="desc-short">Kaos custom DTF dengan warna tajam & detail halus. Cocok untuk seragam, merchandise brand, atau fashion custom. Bisa satuan maupun partai.</div>
+        <div class="foto-main">
+          <div class="foto-badge">-50%</div>
+          👕
+        </div>
+        <div class="foto-thumbs">
+          <div class="foto-thumb active">👕</div>
+          <div class="foto-thumb">📐</div>
+          <div class="foto-thumb">🎨</div>
+          <div class="foto-thumb">📦</div>
+        </div>
       </div>
 
-      <div class="qty-row">
-        <span class="qty-label">Jumlah</span>
-        <button class="qty-btn minus">−</button>
-        <div class="qty-num">1</div>
-        <button class="qty-btn plus">+</button>
-      </div>
+      <!-- KANAN: Info -->
+      <div class="info-section">
+        <div class="product-cat-badge">APPAREL</div>
+        <h1 class="product-title">Kaos Custom<br>Sablon DTF</h1>
 
-      <div class="btn-group">
-        <button class="btn-wa">💬 Pesan via WhatsApp</button>
-        <button class="btn-cart">🛒 Tambah ke Keranjang</button>
-      </div>
+        <div class="rating-row">
+          <span class="stars">★★★★★</span>
+          <span class="rating-count">4.9 (127 ulasan)</span>
+          <span class="rating-sep">·</span>
+          <span class="rating-sold">500+ terjual</span>
+        </div>
 
-      <div class="info-chips">
-        <div class="chip">📦 Kirim ke seluruh Indonesia</div>
-        <div class="chip">💳 Transfer · QRIS · COD</div>
-        <div class="chip">⏱ 3–5 hari kerja</div>
-        <div class="chip">📞 Konsultasi gratis</div>
+        <div class="price-section">
+          <div class="price-old">Rp 90.000</div>
+          <div class="price-new">Rp 45.000</div>
+          <div class="price-note">Harga per pcs · Bisa satuan · Min. 1 pcs</div>
+        </div>
+
+        <!-- Varian Ukuran -->
+        <div class="varian-section">
+          <div class="varian-label">Ukuran</div>
+          <div class="varian-grid">
+            <button class="varian-btn">XS</button>
+            <button class="varian-btn active">S</button>
+            <button class="varian-btn">M</button>
+            <button class="varian-btn">L</button>
+            <button class="varian-btn">XL</button>
+            <button class="varian-btn">XXL</button>
+            <button class="varian-btn">3XL</button>
+          </div>
+        </div>
+
+        <!-- Varian Bahan -->
+        <div class="varian-section">
+          <div class="varian-label">Bahan</div>
+          <div class="varian-grid">
+            <button class="varian-btn active">Cotton Combed 30s</button>
+            <button class="varian-btn">Cotton Combed 24s</button>
+            <button class="varian-btn">Polyester</button>
+            <button class="varian-btn">Drifit</button>
+          </div>
+        </div>
+
+        <!-- QTY -->
+        <div class="qty-section">
+          <div class="qty-label">Jumlah</div>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+            <input class="qty-num" type="number" id="qty" value="1" min="1">
+            <button class="qty-btn" onclick="changeQty(1)">+</button>
+          </div>
+          <span class="qty-note">Bisa satuan, tidak min. order</span>
+        </div>
+
+        <!-- Benefit mini -->
+        <div class="benefit-mini">
+          <div class="benefit-mini-item">
+            <div class="benefit-mini-icon">⚡</div>
+            <div class="benefit-mini-title">Produksi Cepat</div>
+            <div class="benefit-mini-desc">3–5 hari kerja</div>
+          </div>
+          <div class="benefit-mini-item">
+            <div class="benefit-mini-icon">🚚</div>
+            <div class="benefit-mini-title">Kirim ke Seluruh Indonesia</div>
+            <div class="benefit-mini-desc">JNE · JNT · Sicepat</div>
+          </div>
+          <div class="benefit-mini-item">
+            <div class="benefit-mini-icon">✅</div>
+            <div class="benefit-mini-title">Bisa Satuan</div>
+            <div class="benefit-mini-desc">Tidak minimum order</div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-group">
+          <a href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+mau+order+Kaos+Custom+Sablon+DTF" target="_blank" class="btn-wa">
+            💬 Pesan via WhatsApp
+          </a>
+          <a href="katalog.html" class="btn-catalog">
+            ← Kembali ke Katalog
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DESKRIPSI & SPESIFIKASI -->
+    <div style="max-width:1200px;margin:0 auto;padding:0 40px 60px;">
+      <div class="desc-section">
+        <div class="desc-tabs">
+          <button class="desc-tab active" onclick="showTab('deskripsi', this)">Deskripsi</button>
+          <button class="desc-tab" onclick="showTab('spesifikasi', this)">Spesifikasi</button>
+          <button class="desc-tab" onclick="showTab('cara-order', this)">Cara Order</button>
+        </div>
+
+        <div id="tab-deskripsi" class="desc-content">
+          <p>Kaos custom dengan teknik sablon <strong>DTF (Direct to Film)</strong> — hasil cetak presisi, warna tajam, dan tahan lama setelah dicuci berkali-kali. Cocok untuk:</p>
+          <ul>
+            <li>Merchandise komunitas & organisasi</li>
+            <li>Seragam tim olahraga & ekstrakurikuler</li>
+            <li>Kaos event, gathering, reuni</li>
+            <li>UMKM yang butuh produk branded</li>
+          </ul>
+          <br>
+          <p>Sablon DTF memungkinkan cetakan detail seperti foto, gradasi warna, dan desain kompleks tanpa minimum warna. <strong>Bisa full color tanpa biaya tambahan.</strong></p>
+        </div>
+
+        <div id="tab-spesifikasi" class="desc-content" style="display:none;">
+          <table class="spek-table">
+            <tr><td>Teknik Sablon</td><td>DTF (Direct to Film)</td></tr>
+            <tr><td>Bahan Tersedia</td><td>Cotton Combed 30s, 24s, Polyester, Drifit</td></tr>
+            <tr><td>Ukuran</td><td>XS, S, M, L, XL, XXL, 3XL</td></tr>
+            <tr><td>Gramasi</td><td>160–180 gsm (30s) / 200–220 gsm (24s)</td></tr>
+            <tr><td>Warna Sablon</td><td>Full color, tidak ada batasan warna</td></tr>
+            <tr><td>Area Sablon</td><td>Depan, belakang, atau keduanya</td></tr>
+            <tr><td>Min. Order</td><td>1 pcs</td></tr>
+            <tr><td>Waktu Produksi</td><td>3–5 hari kerja setelah desain ACC</td></tr>
+          </table>
+        </div>
+
+        <div id="tab-cara-order" class="desc-content" style="display:none;">
+          <p><strong>Cara pesan di JavasMedia:</strong></p>
+          <ul>
+            <li><strong>1. Chat WA</strong> — Hubungi kami via WhatsApp, ceritakan kebutuhan kamu</li>
+            <li><strong>2. Kirim Desain</strong> — Kirim file desain (CDR/AI/PNG 300dpi) atau minta bantu desain</li>
+            <li><strong>3. Approval</strong> — Kami kirim preview mock-up untuk kamu ACC</li>
+            <li><strong>4. DP & Produksi</strong> — Bayar DP 50%, produksi mulai berjalan</li>
+            <li><strong>5. Kirim / Ambil</strong> — Pelunasan, lalu produk dikirim atau bisa diambil langsung</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="bottom-section">
-    <div class="info-card">
-      <div class="card-title">Spesifikasi</div>
-      <div class="spec-list">
-        <div class="spec-item"><span class="spec-dot"></span>Bahan: Cotton Combed 30s / 24s</div>
-        <div class="spec-item"><span class="spec-dot"></span>Teknik: Direct To Film (DTF)</div>
-        <div class="spec-item"><span class="spec-dot"></span>Ukuran: S / M / L / XL / XXL</div>
-        <div class="spec-item"><span class="spec-dot"></span>MOQ: 1 pcs (satuan bisa)</div>
-        <div class="spec-item"><span class="spec-dot"></span>Warna: Hitam, Putih, Abu, Navy, dll</div>
-        <div class="spec-item"><span class="spec-dot"></span>Estimasi produksi: 3–5 hari kerja</div>
+  <!-- PRODUK TERKAIT -->
+  <div class="grid-bg" style="padding-top:8px;padding-bottom:60px;">
+    <div class="related-section">
+      <div class="section-title">
+        <div class="section-title-bar"></div>
+        <div class="section-title-text">PRODUK TERKAIT</div>
+      </div>
+      <div class="related-grid">
+        <div class="product-card" onclick="location.href='detail-produk.html'">
+          <div class="product-img">🧥</div>
+          <div class="product-info">
+            <div class="product-cat">APPAREL</div>
+            <div class="product-name">Coach Jacket Sablon Polyflex</div>
+            <div class="product-price"><span class="price-new">Rp 125.000</span></div>
+          </div>
+        </div>
+        <div class="product-card" style="border-top-color:#00bcd4;" onclick="location.href='detail-produk.html'">
+          <div class="product-img">🪪</div>
+          <div class="product-info">
+            <div class="product-cat" style="background:#00bcd4;">AKSESORI</div>
+            <div class="product-name">Lanyard Print + ID Card</div>
+            <div class="product-price"><span class="price-new">Rp 25.000</span></div>
+          </div>
+        </div>
+        <div class="product-card" onclick="location.href='detail-produk.html'">
+          <div class="product-img">🧢</div>
+          <div class="product-info">
+            <div class="product-cat">APPAREL</div>
+            <div class="product-name">Topi Baseball Custom DTF</div>
+            <div class="product-price"><span class="price-old">Rp 110.000</span><span class="price-new">Rp 65.000</span></div>
+          </div>
+        </div>
+        <div class="product-card" onclick="location.href='detail-produk.html'">
+          <div class="product-img">⚽</div>
+          <div class="product-info">
+            <div class="product-cat">APPAREL</div>
+            <div class="product-name">Jersey Futsal Full Print</div>
+            <div class="product-price"><span class="price-new">Rp 56.000</span></div>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
 
-    <div class="cara-order">
-      <div class="card-title">Cara Order</div>
-      <div class="cara-step"><span class="step-num">1</span>Klik "Pesan via WA" di atas</div>
-      <div class="cara-step"><span class="step-num">2</span>Kirim file desain (PNG / PDF / CDR)</div>
-      <div class="cara-step"><span class="step-num">3</span>Konfirmasi ukuran, warna & jumlah</div>
-      <div class="cara-step"><span class="step-num">4</span>DP 50% untuk mulai produksi</div>
-      <div class="cara-step"><span class="step-num">5</span>Pelunasan & pengiriman setelah selesai</div>
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-main">
+      <div>
+        <img src="logo.png" alt="JavasMedia" class="footer-logo">
+        <div class="footer-info">Ploso Timur 1b No. 3b<br>Tambaksari - Surabaya<br>082143777463<br>javasmediasurabaya@gmail.com</div>
+        <div class="footer-social">
+          <div class="social-icon">ig</div>
+          <div class="social-icon">tt</div>
+          <div class="social-icon">tw</div>
+          <div class="social-icon">fb</div>
+          <div class="social-icon">yt</div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>SHOP</h4>
+        <a href="katalog.html">New Arrivals</a>
+        <a href="katalog.html">Apparel</a>
+        <a href="katalog.html">Aksesori</a>
+        <a href="katalog.html">Packaging</a>
+        <a href="promo.html">Sale</a>
+      </div>
+      <div class="footer-col">
+        <h4>HELP</h4>
+        <a href="#">FAQ</a>
+        <a href="#">Shipping Info</a>
+        <a href="#">Returns & Exchanges</a>
+        <a href="#">Track Order</a>
+        <a href="#">Contact Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>COMPANY</h4>
+        <a href="#">About Us</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+        <a href="#">Sustainability</a>
+        <a href="location.html">Pickup In Store</a>
+      </div>
+    </div>
+    <div class="footer-newsletter">
+      <p class="newsletter-text">Be the first to know about new product drops and exclusive deals from Javas Media.</p>
+      <div class="newsletter-form">
+        <input class="newsletter-input" type="email" placeholder="Enter your email address">
+        <button class="newsletter-btn">SUBSCRIBE</button>
+      </div>
+      <div class="newsletter-consent">
+        <input type="checkbox" style="width:12px;height:12px;">
+        <span>I agree to receive marketing emails from Javas Media. Unsubscribe anytime.</span>
+      </div>
     </div>
   </div>
+
 </div>
 
-<div class="rekomendasi">
-  <div class="rek-header">
-    <div class="rek-title">Mungkin Kamu Suka</div>
-    <a class="rek-link" href="#">Lihat Semua →</a>
-  </div>
-  <div class="rek-grid">
-    <div class="rek-card">
-      <div class="rek-strip rek-s1"></div>
-      <div class="rek-img">🧥</div>
-      <div class="rek-info">
-        <span class="rek-badge">Apparel</span>
-        <div class="rek-name">Jaket Bomber Custom Bordir</div>
-        <div class="rek-price">Rp 125.000</div>
-      </div>
-    </div>
-    <div class="rek-card">
-      <div class="rek-strip rek-s2"></div>
-      <div class="rek-img">🧢</div>
-      <div class="rek-info">
-        <span class="rek-badge">Apparel</span>
-        <div class="rek-name">Topi Baseball Custom Bordir</div>
-        <div class="rek-price">Rp 65.000</div>
-      </div>
-    </div>
-    <div class="rek-card">
-      <div class="rek-strip rek-s3"></div>
-      <div class="rek-img">🛍️</div>
-      <div class="rek-info">
-        <span class="rek-badge">Apparel</span>
-        <div class="rek-name">Totebag Canvas Custom Printing</div>
-        <div class="rek-price">Rp 35.000</div>
-      </div>
-    </div>
-    <div class="rek-card">
-      <div class="rek-strip rek-s4"></div>
-      <div class="rek-img">🪪</div>
-      <div class="rek-info">
-        <span class="rek-badge">Aksesoris</span>
-        <div class="rek-name">Lanyard Polyflex Warna Custom</div>
-        <div class="rek-price">Rp 8.500</div>
-      </div>
-    </div>
-  </div>
-</div>
+<script>
+function changeQty(delta) {
+  const input = document.getElementById('qty');
+  const val = parseInt(input.value) + delta;
+  if (val >= 1) input.value = val;
+}
 
-<div class="footer">
-  <div class="footer-top">
-    <div class="footer-section">
-      <div class="footer-logo">Javas<br>Media</div>
-      <div class="footer-desc">Kebondalem 10/1 Surabaya<br>082143777463<br>javasmediasurabaya@gmail.com</div>
-      <div class="footer-social">
-        <div class="social-icon">ig</div>
-        <div class="social-icon">tt</div>
-        <div class="social-icon">tw</div>
-        <div class="social-icon">fb</div>
-        <div class="social-icon">yt</div>
-      </div>
-    </div>
-    <div class="footer-section">
-      <h4>SHOP</h4>
-      <a href="#">Apparel</a>
-      <a href="#">Aksesoris</a>
-      <a href="#">Packaging</a>
-      <a href="#">Promotion Item</a>
-      <a href="#">Homedecor</a>
-      <a href="#">Others</a>
-    </div>
-    <div class="footer-section">
-      <h4>HELP</h4>
-      <a href="#">FAQ</a>
-      <a href="#">Shipping Info</a>
-      <a href="#">Returns & Exchanges</a>
-      <a href="#">Track Order</a>
-      <a href="#">Contact Us</a>
-    </div>
-    <div class="footer-section">
-      <h4>COMPANY</h4>
-      <a href="#">About Us</a>
-      <a href="#">Articles</a>
-      <a href="#">Careers</a>
-      <a href="#">Press</a>
-      <div style="font-size:10px;color:#666;margin-top:14px;margin-bottom:4px;font-family:Arial;">Newsletter:</div>
-      <div class="email-sub">
-        <input type="text" placeholder="Email kamu...">
-        <button class="sub-btn">OK</button>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2024 JavasMedia. All rights reserved.</span>
-    <span>Privacy Policy | Terms of Service</span>
-  </div>
-</div>
+function showTab(id, el) {
+  document.querySelectorAll('.desc-content').forEach(t => t.style.display = 'none');
+  document.querySelectorAll('.desc-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).style.display = 'block';
+  el.classList.add('active');
+}
 
+document.querySelectorAll('.varian-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const group = this.closest('.varian-grid');
+    group.querySelectorAll('.varian-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+document.querySelectorAll('.foto-thumb').forEach(thumb => {
+  thumb.addEventListener('click', function() {
+    document.querySelectorAll('.foto-thumb').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
 </body>
 </html>
