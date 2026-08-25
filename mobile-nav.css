@@ -1,0 +1,239 @@
+/* ============================================================
+   MOBILE HEADER + DRAWER NAV — JavasMedia
+   Active only at <=768px. Desktop (.header etc) untouched above that.
+   ============================================================ */
+
+.mobile-header-bar,
+.mh-search-box,
+.mobile-nav-overlay,
+.mobile-nav-drawer { display: none; }
+
+@media (max-width: 768px) {
+
+  .page .header { display: none !important; }
+
+  html, body { overflow-x: hidden; }
+
+  /* .page is fixed 1440px for desktop — release it on mobile so the
+     sticky header/drawer measure against the real viewport width.
+     The 1440px canvas itself lives inside .mobile-scale-inner below. */
+  .page {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  /* ---- Top bar ---- */
+  .mobile-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 58px;
+    background: #16305c;
+    padding: 0 14px;
+    z-index: 2000;
+    box-sizing: border-box;
+  }
+  .mobile-header-bar::after {
+    content: "";
+    position: absolute;
+    top: 58px; left: 0;
+    width: 100%; height: 12px;
+    background-image: repeating-conic-gradient(#8b1a1a 0% 25%, transparent 0% 50%);
+    background-size: 12px 12px;
+  }
+  .mh-hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 30px; height: 30px;
+    background: none; border: none;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+  }
+  .mh-hamburger span {
+    display: block;
+    width: 24px; height: 3px;
+    background: #ffbb00;
+    border-radius: 2px;
+  }
+  .mh-logo {
+    height: 32px;
+    object-fit: contain;
+    cursor: pointer;
+  }
+  .mh-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .mh-search-toggle {
+    background: none;
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
+    color: #fff;
+    padding: 4px;
+    line-height: 1;
+  }
+  .mh-icon {
+    height: 21px;
+    width: auto;
+    cursor: pointer;
+    object-fit: contain;
+  }
+  .mh-search-box {
+    position: fixed;
+    top: 58px; left: 0; right: 0;
+    background: #16305c;
+    padding: 10px 14px 14px;
+    z-index: 1999;
+  }
+  .mh-search-box.open { display: block; }
+  .mh-search-box input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+    box-sizing: border-box;
+    outline: none;
+  }
+
+  /* ---- Overlay ---- */
+  .mobile-nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 2998;
+  }
+  .mobile-nav-overlay.open { display: block; }
+
+  /* ---- Drawer ---- */
+  .mobile-nav-drawer {
+    display: block;
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: 78%;
+    max-width: 300px;
+    background: #16305c;
+    background-image:
+      radial-gradient(circle at 15% 8%, rgba(255,255,255,0.06), transparent 40%),
+      radial-gradient(circle at 85% 95%, rgba(255,255,255,0.06), transparent 40%);
+    z-index: 2999;
+    transform: translateX(-105%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    padding: 16px 18px 30px;
+    box-sizing: border-box;
+  }
+  .mobile-nav-drawer.open { transform: translateX(0); }
+
+  .mnd-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: auto;
+    display: block;
+    padding: 6px 8px;
+  }
+  .mnd-brand {
+    text-align: center;
+    margin: 4px 0 22px;
+  }
+  .mnd-brand-title {
+    font-family: 'Baloo Chettan 2', cursive;
+    font-size: 25px;
+    color: #ffbb00;
+    line-height: 1.15;
+    text-shadow: 2px 2px 0 #e85d04;
+  }
+  .mnd-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    margin-bottom: 26px;
+  }
+  .mnd-nav a {
+    display: block;
+    text-align: center;
+    padding: 13px 10px;
+    border-radius: 10px;
+    border: 2px solid #1a1a1a;
+    box-shadow: 3px 3px 0 #1a1a1a;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    color: #1a1a1a;
+    font-family: 'Avenir Next Condensed', 'Arial Narrow', Arial, sans-serif;
+  }
+  .mnd-nav a.n1 { background: #ffbb00; }
+  .mnd-nav a.n2 { background: #00bcd4; }
+  .mnd-nav a.n3 { background: #ff7a3d; }
+  .mnd-nav a.n4 { background: #ff8fab; }
+
+  .mnd-footer {
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 16px;
+    text-align: center;
+  }
+  .mnd-footer-logo {
+    height: 42px;
+    margin-bottom: 10px;
+    object-fit: contain;
+  }
+  .mnd-footer p {
+    color: rgba(255,255,255,0.75);
+    font-size: 11px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .mnd-social {
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    margin-bottom: 16px;
+  }
+  .mnd-social a {
+    width: 27px; height: 27px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .mnd-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .mnd-links a {
+    color: rgba(255,255,255,0.6);
+    font-size: 11.5px;
+    text-decoration: none;
+  }
+
+  /* ---- Scale wrapper for the existing 1440px canvas ---- */
+  .mobile-scale-wrap {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .mobile-scale-inner {
+    width: 1440px;
+    transform-origin: top left;
+  }
+}
