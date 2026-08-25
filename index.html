@@ -400,19 +400,17 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   </div>
 
   <!-- HERO SLIDER -->
-  <div style="position:relative;width:1440px;background:url('bg1.png') center/cover;padding:16px 163px;">
+  <div style="position:relative;width:1440px;background:url('bg1.png') center/cover;padding:16px 220px;">
     <div class="slider-wrap" style="position:relative;overflow:hidden;border-radius:8px;">
       <div id="sliderTrack" style="display:flex;transition:transform 0.5s ease;width:500%;">
-        <img src="slide1.jpg" alt="" style="width:1114px;height:auto;display:block;flex-shrink:0;object-fit:cover;">
-        <img src="slide2.jpg" alt="" style="width:1114px;height:auto;display:block;flex-shrink:0;object-fit:cover;">
-        <img src="slide3.jpg" alt="" style="width:1114px;height:auto;display:block;flex-shrink:0;object-fit:cover;">
-        <img src="slide4.jpg" alt="" style="width:1114px;height:auto;display:block;flex-shrink:0;object-fit:cover;">
-        <img src="slide5.jpg" alt="" style="width:1114px;height:auto;display:block;flex-shrink:0;object-fit:cover;">
+        <img src="slide1.jpg" alt="" style="width:1000px;height:auto;display:block;flex-shrink:0;object-fit:cover;">
+        <img src="slide2.jpg" alt="" style="width:1000px;height:auto;display:block;flex-shrink:0;object-fit:cover;">
+        <img src="slide3.jpg" alt="" style="width:1000px;height:auto;display:block;flex-shrink:0;object-fit:cover;">
+        <img src="slide4.jpg" alt="" style="width:1000px;height:auto;display:block;flex-shrink:0;object-fit:cover;">
+        <img src="slide5.jpg" alt="" style="width:1000px;height:auto;display:block;flex-shrink:0;object-fit:cover;">
       </div>
-      <!-- Panah -->
       <button onclick="moveSlide(-1)" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;border:none;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;z-index:10;">‹</button>
       <button onclick="moveSlide(1)" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;border:none;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;z-index:10;">›</button>
-      <!-- Dots -->
       <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:10;">
         <button onclick="goToSlide(0)" class="dot" style="width:9px;height:9px;border-radius:50%;border:none;background:white;cursor:pointer;padding:0;opacity:1;"></button>
         <button onclick="goToSlide(1)" class="dot" style="width:9px;height:9px;border-radius:50%;border:none;background:white;cursor:pointer;padding:0;opacity:0.4;"></button>
@@ -617,7 +615,7 @@ const track = document.getElementById('sliderTrack');
 const dots = document.querySelectorAll('.dot');
 
 function updateSlider() {
-  track.style.transform = `translateX(-${current * 1114}px)`;
+  track.style.transform = `translateX(-${current * 1000}px)`;
   dots.forEach((d, i) => d.style.opacity = i === current ? '1' : '0.4');
 }
 
