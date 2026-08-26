@@ -59,6 +59,7 @@
     height: 30px;
     object-fit: contain;
     cursor: pointer;
+    margin-left: 14px;
   }
   .mh-right {
     display: flex;
