@@ -29,7 +29,7 @@
     top: 0;
     width: 100%;
     height: 60px;
-    background-image: url('mobile-header-bg.jpg');
+    background-image: url('mobile-header-bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -114,7 +114,7 @@
     top: 0; left: 0; bottom: 0;
     width: 80%;
     max-width: 310px;
-    background-image: url('drawer-bg.jpg');
+    background-image: url('drawer-bg.png');
     background-size: cover;
     background-position: center;
     z-index: 2999;
