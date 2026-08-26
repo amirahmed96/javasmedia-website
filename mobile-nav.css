@@ -59,7 +59,10 @@
     height: 30px;
     object-fit: contain;
     cursor: pointer;
-    margin-left: 14px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
   .mh-right {
     display: flex;
