@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
 <title>Promo — JavasMedia</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@400;700;800&family=Inter:wght@300;400;500;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -464,6 +465,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   </div>
   <div class="mh-search-box">
     <input type="text" placeholder="Cari produk...">
+    <button class="mh-search-close" aria-label="Tutup pencarian">&times;</button>
   </div>
 
   <!-- ===== MOBILE DRAWER NAV ===== -->
@@ -474,19 +476,19 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
       <img class="mnd-brand-logo" src="house-of-customize.png" alt="House of Customize">
     </div>
     <div class="mnd-nav">
-      <a href="promo.html"><img src="btn-promo.png" alt="Promo"></a>
-      <a href="katalog.html"><img src="btn-product.png" alt="Product"></a>
-      <a href="articles.html"><img src="btn-articles.png" alt="Articles"></a>
-      <a href="location.html"><img src="btn-location.png" alt="Location"></a>
+      <a href="promo.html"><img src="btn-promo.png" alt="Promo"><span>PROMO</span></a>
+      <a href="katalog.html"><img src="btn-product.png" alt="Product"><span>PRODUCT</span></a>
+      <a href="articles.html"><img src="btn-articles.png" alt="Articles"><span>ARTICLES</span></a>
+      <a href="location.html"><img src="btn-location.png" alt="Location"><span>LOCATION</span></a>
     </div>
     <div class="mnd-footer">
       <img class="mnd-footer-logo" src="javas-media-badge.png" alt="JavasMedia">
       <p>Ploso Timur 1B No. 3b<br>Tambaksari - Surabaya<br>javasmediasurabaya@gmail.com<br>082143777463</p>
       <div class="mnd-social">
-        <a href="#" aria-label="Instagram"><img src="instagram-icon.png" alt="Instagram"></a>
+        <a href="#" aria-label="Facebook"><img src="fb-icon.png" alt="Facebook"></a>
         <a href="#" aria-label="TikTok"><img src="tiktok-icon.png" alt="TikTok"></a>
         <a href="#" aria-label="YouTube"><img src="youtube-icon.png" alt="YouTube"></a>
-        <a href="#" aria-label="Facebook"><img src="fb-icon.png" alt="Facebook"></a>
+        <a href="#" aria-label="Instagram"><img src="instagram-icon.png" alt="Instagram"></a>
         <a href="https://wa.me/6282143777463" aria-label="WhatsApp"><img src="whatsapp-icon.png" alt="WhatsApp"></a>
       </div>
       <div class="mnd-links">
@@ -794,5 +796,6 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 </script>
+<script src="mobile-nav.js"></script>
 </body>
 </html>
