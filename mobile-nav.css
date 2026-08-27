@@ -95,18 +95,29 @@
     position: fixed;
     top: 44px; left: 0; right: 0;
     background: #16305c;
-    padding: 10px 14px 14px;
+    padding: 8px 12px;
     z-index: 1999;
+    display: none;
   }
-  .mh-search-box.open { display: block; }
+  .mh-search-box.open { display: flex; align-items: center; gap: 8px; }
   .mh-search-box input {
-    width: 100%;
-    padding: 10px 14px;
+    flex: 1;
+    padding: 7px 10px;
     border-radius: 6px;
     border: none;
-    font-size: 14px;
+    font-size: 16px;
     box-sizing: border-box;
     outline: none;
+  }
+  .mh-search-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 2px;
+    flex-shrink: 0;
   }
 
   /* ---- Overlay ---- */
