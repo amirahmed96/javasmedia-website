@@ -158,21 +158,37 @@
     gap: 10px;
     margin-bottom: 24px;
   }
-  .mnd-nav a { display: block; }
+  .mnd-nav a {
+    display: block;
+    position: relative;
+  }
   .mnd-nav img {
     width: 100%;
     height: auto;
     display: block;
   }
+  .mnd-nav span {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Avenir Next Condensed', 'Arial Narrow', Arial, sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #1a1a1a;
+    pointer-events: none;
+    white-space: nowrap;
+  }
 
   .mnd-footer {
     border-top: 1px solid rgba(255,255,255,0.2);
     padding-top: 16px;
-    text-align: center;
+    text-align: left;
   }
   .mnd-footer-logo {
     height: 56px;
-    margin-bottom: 10px;
+    margin: 0 auto 10px;
+    display: block;
     object-fit: contain;
   }
   .mnd-footer p {
@@ -183,7 +199,7 @@
   }
   .mnd-social {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 10px;
     margin-bottom: 16px;
     flex-wrap: wrap;
