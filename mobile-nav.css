@@ -93,7 +93,7 @@
   }
   .mh-search-box {
     position: fixed;
-    top: 44px; left: 0; right: 0;
+    top: 56px; left: 0; right: 0;
     background: #16305c;
     padding: 8px 12px;
     z-index: 1999;
