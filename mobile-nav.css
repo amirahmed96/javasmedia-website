@@ -76,14 +76,13 @@
     cursor: pointer;
     padding: 0;
     line-height: 1;
-    width: 16px;
     height: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
-  .mh-search-toggle img { width: 16px; height: 16px; object-fit: contain; }
+  .mh-search-toggle img { height: 16px; width: auto; object-fit: contain; }
   .mh-icon {
     width: 16px;
     height: 16px;
@@ -152,7 +151,7 @@
 
   .mnd-brand {
     text-align: center;
-    margin: 32px 0 22px;
+    margin: 32px 0 30px;
   }
   .mnd-brand-logo {
     width: 100%;
@@ -169,7 +168,7 @@
   .mnd-nav a {
     display: block;
     position: relative;
-    width: 74%;
+    width: 80%;
     cursor: pointer;
   }
   .mnd-nav img {
@@ -182,7 +181,7 @@
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     font-family: 'Avenir Next Condensed', 'Arial Narrow', Arial, sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     letter-spacing: 0.3px;
     color: #1a1a1a;
@@ -193,6 +192,7 @@
   .mnd-footer {
     border-top: none;
     padding-top: 0;
+    padding-left: 8px;
     text-align: left;
   }
   .mnd-footer-logo {
