@@ -134,9 +134,11 @@
     background: none;
     border: none;
     cursor: pointer;
-    margin-left: auto;
     display: block;
     padding: 4px;
+    position: absolute;
+    top: 12px;
+    right: 14px;
   }
   .mnd-close img { height: 22px; width: auto; }
 
