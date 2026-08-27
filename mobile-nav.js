@@ -8,6 +8,7 @@
     var closeBtn = qs('.mnd-close');
     var searchToggle = qs('.mh-search-toggle');
     var searchBox = qs('.mh-search-box');
+    var searchClose = qs('.mh-search-close');
 
     function openDrawer() {
       if (drawer) drawer.classList.add('open');
@@ -24,6 +25,11 @@
     if (searchToggle && searchBox) {
       searchToggle.addEventListener('click', function () {
         searchBox.classList.toggle('open');
+      });
+    }
+    if (searchClose && searchBox) {
+      searchClose.addEventListener('click', function () {
+        searchBox.classList.remove('open');
       });
     }
   }
