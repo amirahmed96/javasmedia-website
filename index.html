@@ -397,71 +397,90 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 @media (max-width: 768px) {
   .page { width: 100%; overflow-x: hidden; }
 
-  /* Hero slider */
-  .hero-wrap { width: 100% !important; padding: 12px !important; margin-bottom: 24px !important; box-sizing: border-box; }
+  /* Hero slider - kasih jarak dari checkered strip */
+  .hero-wrap { width: 100% !important; padding: 12px !important; margin-top: 24px !important; margin-bottom: 20px !important; box-sizing: border-box; }
   .slide-img { width: 100% !important; }
 
-  /* Sub Campaign (disederhanakan jadi grid 2x2, tidak overlap presisi kayak desktop) */
+  /* Sub Campaign — FIX: 4 kartu tetap sejajar 1 baris, tidak ada gap hantu ke bg3 */
   .campaign-about-wrap { width: 100%; }
-  .sub-section { width: 100% !important; height: auto !important; margin-top: 0 !important; }
-  .sub-bg { position: relative !important; width: 100% !important; height: 150px !important; }
-  .sub-grid {
+  .sub-section {
     position: relative !important;
+    width: 100% !important;
+    height: 130px !important;
+    margin-top: 0 !important;
+  }
+  .sub-bg { position: absolute !important; top: 0; left: 0; width: 100% !important; height: 130px !important; }
+  .sub-grid {
+    position: absolute !important;
+    left: 14px !important; right: 14px !important;
     top: auto !important;
-    transform: translateY(-28px) !important;
+    bottom: -36px !important;
+    transform: none !important;
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px !important;
-    padding: 0 16px !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 6px !important;
     justify-content: initial !important;
     box-sizing: border-box;
   }
-  .sub-card { width: 100% !important; height: 120px !important; }
-  .sub-card-label { font-size: 15px !important; top: 26px !important; }
+  .sub-card { width: 100% !important; height: 88px !important; border-radius: 6px; overflow: hidden; }
+  .sub-card-label { font-size: 7px !important; top: 16px !important; line-height: 1.2; letter-spacing: 0; }
 
-  .workshop-photo { width: 100% !important; height: 170px !important; margin-top: 0 !important; }
+  .workshop-photo { width: 100% !important; height: 150px !important; margin-top: 0 !important; }
 
+  /* About Us — font & kotak diperkecil */
   .about-box-wrap {
     position: relative !important;
     top: auto !important;
     left: auto !important;
-    transform: translateY(-22px) !important;
+    transform: translateY(-18px) !important;
     padding: 0 16px !important;
     box-sizing: border-box;
   }
-  .about-box { padding: 20px 18px 24px !important; border-radius: 16px !important; }
-  .about-title { font-size: 20px !important; margin-bottom: 10px !important; }
-  .about-text { font-size: 13px !important; line-height: 1.6 !important; }
+  .about-box { padding: 16px 16px 18px !important; border-radius: 14px !important; }
+  .about-title { font-size: 15px !important; margin-bottom: 8px !important; }
+  .about-text { font-size: 11px !important; line-height: 1.55 !important; }
 
-  /* Brand Partner */
-  .brand-section { width: 100% !important; padding: 24px 16px !important; min-height: auto !important; box-sizing: border-box; }
-  .brand-overlay { left: 12px !important; right: 12px !important; top: 12px !important; bottom: 12px !important; }
-  .brand-title { font-size: 20px !important; padding-top: 16px !important; }
-  .brand-desc { font-size: 12px !important; margin-bottom: 20px !important; padding: 0 4px !important; }
+  /* Brand Partner — kotak logo jadi persegi 1:1, font diperkecil */
+  .brand-section { width: 100% !important; padding: 20px 14px !important; min-height: auto !important; box-sizing: border-box; }
+  .brand-overlay { left: 10px !important; right: 10px !important; top: 10px !important; bottom: 10px !important; }
+  .brand-title { font-size: 16px !important; padding-top: 14px !important; margin-bottom: 8px !important; }
+  .brand-desc { font-size: 10.5px !important; line-height: 1.5 !important; margin-bottom: 14px !important; padding: 0 2px !important; }
   .logo-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; margin-left: 0 !important; }
-  .logo-card { width: 100% !important; height: 72px !important; font-size: 12px !important; }
+  .logo-card { width: 100% !important; height: auto !important; aspect-ratio: 1 / 1 !important; font-size: 9px !important; }
 
-  /* New Arrivals */
-  .arrivals-section { width: 100% !important; flex-wrap: wrap !important; padding: 0 16px 28px !important; gap: 10px !important; justify-content: center !important; box-sizing: border-box; }
-  .arrival-card { width: calc(50% - 5px) !important; height: 130px !important; }
-  .arrival-card span { font-size: 16px !important; }
+  /* New Arrivals — kartu jadi persegi 1:1 */
+  .arrivals-section { width: 100% !important; flex-wrap: wrap !important; padding: 0 16px 24px !important; gap: 10px !important; justify-content: center !important; box-sizing: border-box; }
+  .arrival-card { width: calc(50% - 5px) !important; height: auto !important; aspect-ratio: 1 / 1 !important; }
+  .arrival-card span { font-size: 15px !important; }
 
-  /* Testimonials */
-  .testi-section { width: 100% !important; padding: 28px 16px !important; box-sizing: border-box; }
-  .testi-card { min-width: 80vw !important; max-width: 80vw !important; padding: 18px !important; }
+  /* Testimonials — kotak & font diperkecil */
+  .testi-section { width: 100% !important; padding: 22px 14px !important; box-sizing: border-box; }
+  .testi-section h2 { font-size: 18px !important; }
+  .testi-section > p { font-size: 11px !important; margin-bottom: 24px !important; }
+  .testi-card { min-width: 70vw !important; max-width: 70vw !important; padding: 14px !important; }
+  .testi-card p { font-size: 12px !important; line-height: 1.55 !important; margin-bottom: 12px !important; }
+  .testi-card > div:first-child span { font-size: 14px !important; }
+  .testi-card div[style*="width:40px"] { width: 30px !important; height: 30px !important; font-size: 12px !important; }
+  .testi-card div[style*="font-weight:700;font-size:13px"] { font-size: 11px !important; }
+  .testi-card div[style*="font-size:11px;color:#999"] { font-size: 9.5px !important; }
   .testi-arrow { display: none !important; }
 
-  /* CTA Banner */
-  .cta-banner { width: 100% !important; flex-direction: column !important; text-align: center !important; padding: 28px 20px !important; gap: 18px !important; box-sizing: border-box; }
-  .cta-banner h2 { font-size: 22px !important; }
-  .cta-banner p { max-width: 100% !important; }
+  /* CTA Banner — dikecilin total */
+  .cta-banner { width: 100% !important; flex-direction: column !important; text-align: center !important; padding: 22px 18px !important; gap: 14px !important; box-sizing: border-box; }
+  .cta-banner h2 { font-size: 17px !important; margin-bottom: 6px !important; }
+  .cta-banner p { max-width: 100% !important; font-size: 11.5px !important; }
+  .cta-banner a[href*="wa.me"] { padding: 11px 26px !important; font-size: 13px !important; }
 
-  /* Footer */
-  .footer-main { grid-template-columns: 1fr !important; padding: 28px 20px 8px !important; gap: 20px !important; }
+  /* Footer — logo, alamat, icon sosmed diperkecil */
+  .footer-logo { height: 56px !important; margin-bottom: 10px !important; }
+  .footer-info { font-size: 10.5px !important; line-height: 1.6 !important; margin-bottom: 10px !important; }
+  .social-icon { width: 24px !important; height: 24px !important; }
+  .social-icon img { width: 12px !important; height: 12px !important; }
+  .footer-main { grid-template-columns: 1fr !important; padding: 24px 20px 8px !important; gap: 18px !important; }
   .footer-newsletter { padding: 0 20px 20px !important; }
 
-  /* Floating WA lebih kecil di mobile */
-  .floating-wa { width: 52px !important; height: 52px !important; right: 16px !important; bottom: 16px !important; }
+  /* Floating WA — diperkecil ~25% */
+  .floating-wa { width: 38px !important; height: 38px !important; right: 14px !important; bottom: 14px !important; }
 }
 </style>
 
