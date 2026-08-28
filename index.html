@@ -351,7 +351,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 
 /* ===== FOOTER / NEWSLETTER (sama seperti promo.html) ===== */
 .footer { background: black; }
-.footer-main { padding: 60px 80px 24px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; border-bottom: 1px solid #222; }
+.footer-main { padding: 60px 80px 12px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; border-bottom: 1px solid #222; }
 .footer-logo { height: 90px; width: auto; margin-bottom: 16px; display: block; object-fit: contain; }
 .footer-info { color: #666; font-size: 13px; line-height: 1.8; margin-bottom: 16px; }
 .footer-social { display: flex; gap: 8px; }
@@ -360,12 +360,14 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 .footer-col h4 { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: white; text-transform: uppercase; margin-bottom: 16px; }
 .footer-col a { display: block; color: #555; font-size: 13px; text-decoration: none; margin-bottom: 10px; transition: color 0.15s; }
 .footer-col a:hover { color: #ffc107; }
-.footer-newsletter { padding: 8px 80px 20px; text-align: center; }
-.newsletter-text { color: #555; font-size: 12px; margin-bottom: 12px; }
-.newsletter-form { display: flex; max-width: 440px; margin: 0 auto 10px; }
-.newsletter-input { flex: 1; padding: 11px 16px; background: white; border: none; font-size: 12px; color: #999; outline: none; font-family: 'Inter', sans-serif; }
-.newsletter-btn { background: #ffbb00; border: none; padding: 11px 24px; font-size: 11px; font-weight: 700; color: black; cursor: pointer; letter-spacing: 1.2px; text-transform: uppercase; font-family: 'Inter', sans-serif; }
-.newsletter-consent { display: flex; align-items: center; justify-content: center; gap: 8px; color: #444; font-size: 10px; }
+.footer-newsletter { padding: 0 80px 14px; text-align: center; }
+.newsletter-text { color: #555; font-size: 11px; margin-bottom: 8px; }
+.newsletter-form { display: flex; max-width: 360px; margin: 0 auto 8px; }
+.newsletter-input { flex: 1; padding: 8px 12px; background: white; border: none; font-size: 11px; color: #999; outline: none; font-family: 'Inter', sans-serif; }
+.newsletter-btn { background: #ffbb00; border: none; padding: 8px 18px; font-size: 10px; font-weight: 700; color: black; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; font-family: 'Inter', sans-serif; }
+.newsletter-consent { display: flex; align-items: center; justify-content: center; gap: 6px; color: #444; font-size: 9px; }
+.testi-track { scrollbar-width: none; -ms-overflow-style: none; }
+.testi-track::-webkit-scrollbar { display: none; }
 </style>
 
 <link rel="stylesheet" href="mobile-nav.css">
@@ -544,49 +546,91 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   <div style="background:#FAF6EE;padding:60px 80px;width:1440px;">
     <h2 style="font-family:'Baloo Chettan 2',cursive;font-size:32px;text-align:center;color:#1e3a5f;margin-bottom:8px;letter-spacing:1px;">APA KATA MEREKA?</h2>
     <p style="text-align:center;color:#888;font-size:14px;margin-bottom:40px;">Lebih dari 500+ pelanggan puas dengan produk JavasMedia</p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
-      <!-- Testimoni 1 -->
-      <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
-        <div style="display:flex;gap:4px;margin-bottom:12px;">
-          <span style="color:#ffc107;font-size:18px;">★★★★★</span>
+    <div style="position:relative;">
+      <div id="testiTrack" class="testi-track" style="display:flex;gap:24px;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x mandatory;padding-bottom:8px;">
+        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+          <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
+          <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Kualitas sablon DTF-nya mantap banget! Warnanya tajam dan awet setelah dicuci berkali-kali. Recommend banget buat yang cari kaos custom berkualitas."</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;height:40px;background:#1e3a5f;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:16px;">R</div>
+            <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Rizky A.</div><div style="font-size:11px;color:#999;">Kaos Custom DTF · 200 pcs</div></div>
+          </div>
         </div>
-        <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Kualitas sablon DTF-nya mantap banget! Warnanya tajam dan awet setelah dicuci berkali-kali. Recommend banget buat yang cari kaos custom berkualitas."</p>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:40px;height:40px;background:#1e3a5f;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:16px;">R</div>
-          <div>
-            <div style="font-weight:700;font-size:13px;color:#1a1a1a;">Rizky A.</div>
-            <div style="font-size:11px;color:#999;">Kaos Custom DTF · 200 pcs</div>
+        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+          <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
+          <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Udah 3x order jersey tim futsal di sini. Harga bersaing, produksi cepat, dan yang paling penting hasilnya selalu memuaskan. Pelayanan ramah dan responsif."</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;height:40px;background:#ff9800;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:16px;">D</div>
+            <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Dimas P.</div><div style="font-size:11px;color:#999;">Jersey Futsal · 30 pcs</div></div>
+          </div>
+        </div>
+        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+          <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
+          <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Patch DTF-nya detail dan rapi. Buat merchandise event kampus kami, hasilnya profesional banget. Pasti bakal order lagi untuk acara berikutnya!"</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;height:40px;background:#e91e63;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:16px;">S</div>
+            <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Sari W.</div><div style="font-size:11px;color:#999;">Patch DTF · Event Kampus</div></div>
+          </div>
+        </div>
+        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+          <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
+          <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Lanyard buat acara kantor kami dikerjain cepat dan hasilnya rapi banget, warnanya juga presisi sesuai brand guideline kami."</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;height:40px;background:#4caf50;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:16px;">A</div>
+            <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Andi K.</div><div style="font-size:11px;color:#999;">Lanyard Custom · 500 pcs</div></div>
+          </div>
+        </div>
+        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+          <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
+          <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Totebag buat goodie bag wedding jadi kado yang berkesan, kualitas jahitannya kuat dan desainnya sesuai request."</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;height:40px;background:#9c27b0;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:16px;">P</div>
+            <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Putri N.</div><div style="font-size:11px;color:#999;">Totebag Canvas · 100 pcs</div></div>
+          </div>
+        </div>
+        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+          <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
+          <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Pesan topi buat komunitas motor, prosesnya gampang tinggal WA aja, hasilnya keren dan awet dipakai harian."</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;height:40px;background:#00bcd4;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:16px;">B</div>
+            <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Budi S.</div><div style="font-size:11px;color:#999;">Topi Trucker · 50 pcs</div></div>
+          </div>
+        </div>
+        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+          <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
+          <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Stiker buat produk UMKM kami cetakannya tajam dan warnanya nggak gampang pudar meski kena matahari."</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;height:40px;background:#795548;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:16px;">M</div>
+            <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Maya L.</div><div style="font-size:11px;color:#999;">Stiker Vinyl · 1000 pcs</div></div>
+          </div>
+        </div>
+        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+          <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
+          <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Bordirnya rapi, benangnya rapat, jauh lebih bagus dari ekspektasi. Pasti order lagi buat seragam kantor."</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;height:40px;background:#607d8b;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:16px;">F</div>
+            <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Fajar R.</div><div style="font-size:11px;color:#999;">Kaos Polo Bordir · 75 pcs</div></div>
+          </div>
+        </div>
+        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+          <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
+          <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Hoodienya nyaman dan sablonnya nggak retak walau udah dicuci puluhan kali, worth it banget harganya."</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;height:40px;background:#e64a19;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:16px;">N</div>
+            <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Nadia H.</div><div style="font-size:11px;color:#999;">Hoodie Custom · 40 pcs</div></div>
+          </div>
+        </div>
+        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+          <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
+          <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Detail gantungan kuncinya presisi banget, cocok buat merchandise event kampus kami. Pengiriman juga cepat."</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;height:40px;background:#3f51b5;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:16px;">Y</div>
+            <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Yoga P.</div><div style="font-size:11px;color:#999;">Gantungan Kunci Akrilik · 300 pcs</div></div>
           </div>
         </div>
       </div>
-      <!-- Testimoni 2 -->
-      <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
-        <div style="display:flex;gap:4px;margin-bottom:12px;">
-          <span style="color:#ffc107;font-size:18px;">★★★★★</span>
-        </div>
-        <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Udah 3x order jersey tim futsal di sini. Harga bersaing, produksi cepat, dan yang paling penting hasilnya selalu memuaskan. Pelayanan ramah dan responsif."</p>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:40px;height:40px;background:#ff9800;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:16px;">D</div>
-          <div>
-            <div style="font-weight:700;font-size:13px;color:#1a1a1a;">Dimas P.</div>
-            <div style="font-size:11px;color:#999;">Jersey Futsal · 30 pcs</div>
-          </div>
-        </div>
-      </div>
-      <!-- Testimoni 3 -->
-      <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
-        <div style="display:flex;gap:4px;margin-bottom:12px;">
-          <span style="color:#ffc107;font-size:18px;">★★★★★</span>
-        </div>
-        <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Patch DTF-nya detail dan rapi. Buat merchandise event kampus kami, hasilnya profesional banget. Pasti bakal order lagi untuk acara berikutnya!"</p>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:40px;height:40px;background:#e91e63;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:16px;">S</div>
-          <div>
-            <div style="font-weight:700;font-size:13px;color:#1a1a1a;">Sari W.</div>
-            <div style="font-size:11px;color:#999;">Patch DTF · Event Kampus</div>
-          </div>
-        </div>
-      </div>
+      <button onclick="document.getElementById('testiTrack').scrollBy({left:-404,behavior:'smooth'})" style="position:absolute;left:-44px;top:45%;transform:translateY(-50%);background:white;color:#1e3a5f;border:1px solid #e8e3d8;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.1);">‹</button>
+      <button onclick="document.getElementById('testiTrack').scrollBy({left:404,behavior:'smooth'})" style="position:absolute;right:-44px;top:45%;transform:translateY(-50%);background:white;color:#1e3a5f;border:1px solid #e8e3d8;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.1);">›</button>
     </div>
   </div>
 
