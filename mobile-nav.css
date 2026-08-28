@@ -136,7 +136,7 @@
     top: 0; left: 0; bottom: 0;
     width: 40%;
     max-width: 160px;
-    background-image: url('drawer-bg.png');
+    background-image: url('drawer-bg.jpg');
     background-size: cover;
     background-position: center;
     z-index: 2999;
