@@ -20,7 +20,37 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 .header .nav-btn-1 { left: 340px; } .header .nav-btn-2 { left: 455px; } .header .nav-btn-3 { left: 570px; } .header .nav-btn-4 { left: 685px; }
 .header .nav-label { position: absolute; font-family: 'Avenir Next Condensed','Arial Narrow',Arial,sans-serif; font-size: 18px; font-weight: 700; color: #1a1a1a; text-align: center; cursor: pointer; pointer-events: none; width: 140px; }
 .header .nav-label-1 { bottom: 33px; left: 340px; } .header .nav-label-2 { bottom: 33px; left: 455px; } .header .nav-label-3 { bottom: 33px; left: 570px; } .header .nav-label-4 { bottom: 33px; left: 685px; }
-.header .header-search { position: absolute; top: 27px; left: 1020px; height: 26px; width: 160px; object-fit: cover; }
+.header .header-search-box {
+  position: absolute;
+  top: 24px; left: 1000px;
+  width: 190px; height: 32px;
+  background: #f5ecd8;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  box-sizing: border-box;
+}
+.header .header-search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 12px;
+  color: #1a1a1a;
+  font-family: 'Inter', sans-serif;
+  min-width: 0;
+}
+.header .header-search-box img {
+  width: 16px;
+  height: auto;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+.floating-wa { position: fixed; right: 30px; bottom: 30px; width: 68px; height: 68px; z-index: 5000; display: block; }
+.floating-wa img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); transition: transform 0.2s ease; }
+.floating-wa:hover img { transform: scale(1.08); }
 .header .header-cart { position: absolute; top: 24px; left: 1210px; height: 30px; width: 32px; cursor: pointer; object-fit: contain; }
 .header .header-profile { position: absolute; top: 24px; left: 1260px; height: 28px; width: 29px; cursor: pointer; object-fit: contain; }
 .header .bar-ornamen { 
@@ -437,7 +467,8 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 .footer-logo { height: 90px; width: auto; margin-bottom: 16px; display: block; object-fit: contain; }
 .footer-info { color: #666; font-size: 13px; line-height: 1.8; margin-bottom: 16px; }
 .footer-social { display: flex; gap: 8px; }
-.social-icon { width: 32px; height: 32px; background: #111; border: 1px solid #222; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #555; cursor: pointer; }
+.social-icon { width: 32px; height: 32px; background: #111; border: 1px solid #222; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; }
+.social-icon img { width: 16px; height: 16px; object-fit: contain; }
 .footer-col h4 { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: white; text-transform: uppercase; margin-bottom: 16px; }
 .footer-col a { display: block; color: #555; font-size: 13px; text-decoration: none; margin-bottom: 10px; }
 .footer-col a:hover { color: #ffc107; }
@@ -517,7 +548,10 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
     <span class="nav-label nav-label-2" onclick="location.href='katalog.html'">PRODUCT</span>
     <span class="nav-label nav-label-3" onclick="location.href='articles.html'">ARTICLES</span>
     <span class="nav-label nav-label-4" onclick="location.href='location.html'">LOCATION</span>
-    <img class="header-search" src="search-bar.png" alt="">
+    <div class="header-search-box">
+      <input type="text" id="desktopSearchInput" placeholder="Cari produk..." onkeypress="if(event.key==='Enter'){searchDesktop()}">
+      <img src="search-icon-navy.png" alt="Cari" onclick="searchDesktop()">
+    </div>
     <img class="header-cart" src="cart.png" alt="">
     <img class="header-profile" src="profile.png" alt="" onclick="location.href='login.html'">
     <div class="bar-ornamen"></div>
@@ -725,11 +759,11 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
         <img src="logo.png" alt="JavasMedia" class="footer-logo">
         <div class="footer-info">Ploso Timur 1b No. 3b<br>Tambaksari - Surabaya<br>082143777463<br>javasmediasurabaya@gmail.com</div>
         <div class="footer-social">
-          <div class="social-icon">ig</div>
-          <div class="social-icon">tt</div>
-          <div class="social-icon">tw</div>
-          <div class="social-icon">fb</div>
-          <div class="social-icon">yt</div>
+          <a class="social-icon" href="#" aria-label="Facebook"><img src="fb-icon.png" alt="Facebook"></a>
+          <a class="social-icon" href="#" aria-label="TikTok"><img src="tiktok-icon.png" alt="TikTok"></a>
+          <a class="social-icon" href="#" aria-label="YouTube"><img src="youtube-icon.png" alt="YouTube"></a>
+          <a class="social-icon" href="#" aria-label="Instagram"><img src="instagram-icon.png" alt="Instagram"></a>
+          <a class="social-icon" href="https://wa.me/6282143777463" aria-label="WhatsApp"><img src="whatsapp-icon.png" alt="WhatsApp"></a>
         </div>
       </div>
       <div class="footer-col">
@@ -795,7 +829,17 @@ function updateCountdown() {
 }
 updateCountdown();
 setInterval(updateCountdown, 1000);
+
+function searchDesktop() {
+  const val = document.getElementById('desktopSearchInput').value.trim();
+  if (val) window.location.href = 'katalog.html?q=' + encodeURIComponent(val);
+}
 </script>
+
+<a class="floating-wa" href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+ingin+konsultasi" target="_blank" aria-label="Chat WhatsApp">
+  <img src="floating-wa.png" alt="Chat WhatsApp">
+</a>
+
 <script src="mobile-nav.js"></script>
 </body>
 </html>
