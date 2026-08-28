@@ -148,7 +148,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   position: relative;
   width: 1440px;
   height: 454px;
-  margin-top: 200px;
+  margin-top: 180px;
 }
 
 .sub-bg {
@@ -193,10 +193,10 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   pointer-events: none;
 }
 
-/* ===== ABOUT US (overlaps bg2/workshop-photo boundary) ===== */
+/* ===== ABOUT US (straddles bg2's bottom edge) ===== */
 .about-box-wrap {
   position: absolute;
-  top: 694px;
+  top: 634px;
   left: 0;
   width: 100%;
   transform: translateY(-50%);
@@ -231,7 +231,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   height: 385px;
   object-fit: cover;
   display: block;
-  margin-top: 80px;
+  margin-top: 120px;
 }
 
 /* ===== FLOATING WHATSAPP BUTTON ===== */
@@ -321,8 +321,9 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 .arrivals-section {
   width: 1440px;
   background: url('bg4.png') center bottom/cover;
-  padding: 0 170px 60px;
+  padding: 0 0 60px;
   display: flex;
+  justify-content: center;
   gap: 25px;
 }
 
@@ -330,7 +331,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   background: white;
   border: 0.8px solid #f3f4f6;
   border-radius: 16px;
-  width: 245px; height: 226px;
+  width: 294px; height: 271px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -340,7 +341,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 .arrival-card span {
   font-family: 'Inter', sans-serif;
   font-weight: 800;
-  font-size: 25px;
+  font-size: 30px;
   color: #1e3377;
   text-align: center;
   letter-spacing: 2px;
@@ -350,15 +351,16 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 
 /* ===== FOOTER / NEWSLETTER (sama seperti promo.html) ===== */
 .footer { background: black; }
-.footer-main { padding: 60px 80px 40px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; border-bottom: 1px solid #222; }
+.footer-main { padding: 60px 80px 24px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; border-bottom: 1px solid #222; }
 .footer-logo { height: 90px; width: auto; margin-bottom: 16px; display: block; object-fit: contain; }
 .footer-info { color: #666; font-size: 13px; line-height: 1.8; margin-bottom: 16px; }
 .footer-social { display: flex; gap: 8px; }
-.social-icon { width: 32px; height: 32px; background: #111; border: 1px solid #222; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #555; cursor: pointer; }
+.social-icon { width: 32px; height: 32px; background: #111; border: 1px solid #222; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; }
+.social-icon img { width: 16px; height: 16px; object-fit: contain; }
 .footer-col h4 { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: white; text-transform: uppercase; margin-bottom: 16px; }
 .footer-col a { display: block; color: #555; font-size: 13px; text-decoration: none; margin-bottom: 10px; transition: color 0.15s; }
 .footer-col a:hover { color: #ffc107; }
-.footer-newsletter { padding: 22px 80px 26px; text-align: center; }
+.footer-newsletter { padding: 8px 80px 20px; text-align: center; }
 .newsletter-text { color: #555; font-size: 12px; margin-bottom: 12px; }
 .newsletter-form { display: flex; max-width: 440px; margin: 0 auto 10px; }
 .newsletter-input { flex: 1; padding: 11px 16px; background: white; border: none; font-size: 12px; color: #999; outline: none; font-family: 'Inter', sans-serif; }
@@ -609,11 +611,11 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
         <img src="logo.png" alt="JavasMedia" class="footer-logo">
         <div class="footer-info">Ploso Timur 1b No. 3b<br>Tambaksari - Surabaya<br>082143777463<br>javasmediasurabaya@gmail.com</div>
         <div class="footer-social">
-          <div class="social-icon">ig</div>
-          <div class="social-icon">tt</div>
-          <div class="social-icon">tw</div>
-          <div class="social-icon">fb</div>
-          <div class="social-icon">yt</div>
+          <a class="social-icon" href="#" aria-label="Facebook"><img src="fb-icon.png" alt="Facebook"></a>
+          <a class="social-icon" href="#" aria-label="TikTok"><img src="tiktok-icon.png" alt="TikTok"></a>
+          <a class="social-icon" href="#" aria-label="YouTube"><img src="youtube-icon.png" alt="YouTube"></a>
+          <a class="social-icon" href="#" aria-label="Instagram"><img src="instagram-icon.png" alt="Instagram"></a>
+          <a class="social-icon" href="https://wa.me/6282143777463" aria-label="WhatsApp"><img src="whatsapp-icon.png" alt="WhatsApp"></a>
         </div>
       </div>
       <div class="footer-col">
