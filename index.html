@@ -137,12 +137,18 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   border-radius: 8px;
 }
 
+/* ===== CAMPAIGN + ABOUT WRAP ===== */
+.campaign-about-wrap {
+  position: relative;
+  width: 1440px;
+}
+
 /* ===== SUB CAMPAIGN SECTION ===== */
 .sub-section {
   position: relative;
   width: 1440px;
-  height: 380px;
-  overflow: hidden;
+  height: 454px;
+  margin-top: 160px;
 }
 
 .sub-bg {
@@ -154,15 +160,14 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 }
 
 .sub-grid {
-  position: relative;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  transform: translateY(-50%);
   z-index: 2;
   display: flex;
+  justify-content: center;
   gap: 14px;
-  padding: 0 173px;
-  padding-top: 0;
-  align-items: flex-start;
-  height: 100%;
-  align-items: center;
 }
 
 .sub-card {
@@ -188,16 +193,20 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   pointer-events: none;
 }
 
-/* ===== ABOUT US ===== */
-.about-section {
-  position: relative;
-  width: 1440px;
-  padding: 60px 195px;
-  background: url('bg1.png') center/cover;
+/* ===== ABOUT US (overlaps bg2/workshop-photo boundary) ===== */
+.about-box-wrap {
+  position: absolute;
+  top: 639px;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  z-index: 3;
+  padding: 0 195px;
+  box-sizing: border-box;
 }
 
 .about-box {
-  background: rgba(253,252,252,0.85);
+  background: rgba(255,255,255,0.5);
   border-radius: 25px;
   padding: 44px 114px 48px;
   text-align: center;
@@ -219,9 +228,31 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 /* ===== WORKSHOP PHOTO ===== */
 .workshop-photo {
   width: 1440px;
-  height: 367px;
+  height: 385px;
   object-fit: cover;
   display: block;
+  margin-top: 50px;
+}
+
+/* ===== FLOATING WHATSAPP BUTTON ===== */
+.floating-wa {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  width: 68px;
+  height: 68px;
+  z-index: 5000;
+  display: block;
+}
+.floating-wa img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+  transition: transform 0.2s ease;
+}
+.floating-wa:hover img {
+  transform: scale(1.08);
 }
 
 /* ===== BRAND PARTNER ===== */
@@ -454,7 +485,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   </div>
 
   <!-- HERO SLIDER -->
-  <div style="position:relative;width:1440px;background:url('bg1.png') center/cover;padding:16px 220px;">
+  <div style="position:relative;width:1440px;background:url('bg1.png') center/cover;padding:16px 220px;margin-bottom:60px;">
     <div class="slider-wrap" style="position:relative;overflow:hidden;border-radius:8px;">
       <div id="sliderTrack" style="display:flex;transition:transform 0.5s ease;width:500%;">
         <img src="slide1.jpg" alt="" style="width:1000px;height:auto;display:block;flex-shrink:0;object-fit:cover;">
@@ -475,41 +506,41 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
     </div>
   </div>
 
-  <!-- SUB CAMPAIGN -->
-  <div class="sub-section">
-    <img class="sub-bg" src="bg2.png" alt="">
-    <div class="sub-grid">
-      <div class="sub-card">
-        <img src="sub-campaign.png" alt="Sub Campaign 1">
-        <div class="sub-card-label">SUB<br>CAMPAIGN</div>
+  <!-- SUB CAMPAIGN + ABOUT US + WORKSHOP PHOTO -->
+  <div class="campaign-about-wrap">
+    <div class="sub-section">
+      <img class="sub-bg" src="bg2.png" alt="">
+      <div class="sub-grid">
+        <div class="sub-card">
+          <img src="sub-campaign.png" alt="Sub Campaign 1">
+          <div class="sub-card-label">SUB<br>CAMPAIGN</div>
+        </div>
+        <div class="sub-card">
+          <img src="sub-campaign.png" alt="Sub Campaign 2">
+          <div class="sub-card-label">SUB<br>CAMPAIGN</div>
+        </div>
+        <div class="sub-card">
+          <img src="sub-campaign.png" alt="Sub Campaign 3">
+          <div class="sub-card-label">SUB<br>CAMPAIGN</div>
+        </div>
+        <div class="sub-card">
+          <img src="sub-campaign.png" alt="Sub Campaign 4">
+          <div class="sub-card-label">SUB<br>CAMPAIGN</div>
+        </div>
       </div>
-      <div class="sub-card">
-        <img src="sub-campaign.png" alt="Sub Campaign 2">
-        <div class="sub-card-label">SUB<br>CAMPAIGN</div>
-      </div>
-      <div class="sub-card">
-        <img src="sub-campaign.png" alt="Sub Campaign 3">
-        <div class="sub-card-label">SUB<br>CAMPAIGN</div>
-      </div>
-      <div class="sub-card">
-        <img src="sub-campaign.png" alt="Sub Campaign 4">
-        <div class="sub-card-label">SUB<br>CAMPAIGN</div>
+    </div>
+
+    <img class="workshop-photo" src="bg3.png" alt="Workshop JavasMedia">
+
+    <div class="about-box-wrap">
+      <div class="about-box">
+        <div class="about-title">ABOUT US</div>
+        <p class="about-text">
+          Javas Media is where creative ideas transform into high-quality reality. We specialize in custom apparel and merchandise, utilizing advanced printing techniques to ensure every color is sharp and every design is flawless. Our workflow is built on a passion for design excellence. We don't just print; we craft identities. By utilizing the latest industry tools and meticulous production processes, we provide professional solutions for jerseys, polo shirts, and custom merchandise that truly represent who you are. Experience a seamless production journey where quality is never compromised and your satisfaction is our ultimate priority.
+        </p>
       </div>
     </div>
   </div>
-
-  <!-- ABOUT US -->
-  <div class="about-section">
-    <div class="about-box">
-      <div class="about-title">ABOUT US</div>
-      <p class="about-text">
-        Javas Media is where creative ideas transform into high-quality reality. We specialize in custom apparel and merchandise, utilizing advanced printing techniques to ensure every color is sharp and every design is flawless. Our workflow is built on a passion for design excellence. We don't just print; we craft identities. By utilizing the latest industry tools and meticulous production processes, we provide professional solutions for jerseys, polo shirts, and custom merchandise that truly represent who you are. Experience a seamless production journey where quality is never compromised and your satisfaction is our ultimate priority.
-      </p>
-    </div>
-  </div>
-
-  <!-- WORKSHOP PHOTO -->
-  <img class="workshop-photo" src="bg3.png" alt="Workshop JavasMedia">
 
   <!-- BRAND PARTNER -->
   <div class="brand-section">
@@ -660,6 +691,10 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   </div>
 
 </div>
+
+<a class="floating-wa" href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+ingin+konsultasi" target="_blank" aria-label="Chat WhatsApp">
+  <img src="floating-wa.png" alt="Chat WhatsApp">
+</a>
 
 <script src="mobile-nav.js"></script>
 <script>
