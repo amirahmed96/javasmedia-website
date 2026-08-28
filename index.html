@@ -392,6 +392,77 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 .testi-track::-webkit-scrollbar { display: none; }
 #sliderTrack { scrollbar-width: none; -ms-overflow-style: none; }
 #sliderTrack::-webkit-scrollbar { display: none; }
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .page { width: 100%; overflow-x: hidden; }
+
+  /* Hero slider */
+  .hero-wrap { width: 100% !important; padding: 12px !important; margin-bottom: 24px !important; box-sizing: border-box; }
+  .slide-img { width: 100% !important; }
+
+  /* Sub Campaign (disederhanakan jadi grid 2x2, tidak overlap presisi kayak desktop) */
+  .campaign-about-wrap { width: 100%; }
+  .sub-section { width: 100% !important; height: auto !important; margin-top: 0 !important; }
+  .sub-bg { position: relative !important; width: 100% !important; height: 150px !important; }
+  .sub-grid {
+    position: relative !important;
+    top: auto !important;
+    transform: translateY(-28px) !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    padding: 0 16px !important;
+    justify-content: initial !important;
+    box-sizing: border-box;
+  }
+  .sub-card { width: 100% !important; height: 120px !important; }
+  .sub-card-label { font-size: 15px !important; top: 26px !important; }
+
+  .workshop-photo { width: 100% !important; height: 170px !important; margin-top: 0 !important; }
+
+  .about-box-wrap {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: translateY(-22px) !important;
+    padding: 0 16px !important;
+    box-sizing: border-box;
+  }
+  .about-box { padding: 20px 18px 24px !important; border-radius: 16px !important; }
+  .about-title { font-size: 20px !important; margin-bottom: 10px !important; }
+  .about-text { font-size: 13px !important; line-height: 1.6 !important; }
+
+  /* Brand Partner */
+  .brand-section { width: 100% !important; padding: 24px 16px !important; min-height: auto !important; box-sizing: border-box; }
+  .brand-overlay { left: 12px !important; right: 12px !important; top: 12px !important; bottom: 12px !important; }
+  .brand-title { font-size: 20px !important; padding-top: 16px !important; }
+  .brand-desc { font-size: 12px !important; margin-bottom: 20px !important; padding: 0 4px !important; }
+  .logo-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; margin-left: 0 !important; }
+  .logo-card { width: 100% !important; height: 72px !important; font-size: 12px !important; }
+
+  /* New Arrivals */
+  .arrivals-section { width: 100% !important; flex-wrap: wrap !important; padding: 0 16px 28px !important; gap: 10px !important; justify-content: center !important; box-sizing: border-box; }
+  .arrival-card { width: calc(50% - 5px) !important; height: 130px !important; }
+  .arrival-card span { font-size: 16px !important; }
+
+  /* Testimonials */
+  .testi-section { width: 100% !important; padding: 28px 16px !important; box-sizing: border-box; }
+  .testi-card { min-width: 80vw !important; max-width: 80vw !important; padding: 18px !important; }
+  .testi-arrow { display: none !important; }
+
+  /* CTA Banner */
+  .cta-banner { width: 100% !important; flex-direction: column !important; text-align: center !important; padding: 28px 20px !important; gap: 18px !important; box-sizing: border-box; }
+  .cta-banner h2 { font-size: 22px !important; }
+  .cta-banner p { max-width: 100% !important; }
+
+  /* Footer */
+  .footer-main { grid-template-columns: 1fr !important; padding: 28px 20px 8px !important; gap: 20px !important; }
+  .footer-newsletter { padding: 0 20px 20px !important; }
+
+  /* Floating WA lebih kecil di mobile */
+  .floating-wa { width: 52px !important; height: 52px !important; right: 16px !important; bottom: 16px !important; }
+}
 </style>
 
 <link rel="stylesheet" href="mobile-nav.css">
@@ -481,14 +552,14 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   </div>
 
   <!-- HERO SLIDER -->
-  <div style="position:relative;width:1440px;background:url('bg1.png') center/cover;padding:16px 120px;margin-bottom:60px;">
+  <div class="hero-wrap" style="position:relative;width:1440px;background:url('bg1.png') center/cover;padding:16px 120px;margin-bottom:60px;">
     <div class="slider-wrap" style="position:relative;border-radius:8px;overflow:hidden;">
       <div id="sliderTrack" style="display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;">
-        <img src="slide1.jpg" alt="" style="width:1200px;height:auto;display:block;flex-shrink:0;object-fit:cover;scroll-snap-align:start;">
-        <img src="slide2.jpg" alt="" style="width:1200px;height:auto;display:block;flex-shrink:0;object-fit:cover;scroll-snap-align:start;">
-        <img src="slide3.jpg" alt="" style="width:1200px;height:auto;display:block;flex-shrink:0;object-fit:cover;scroll-snap-align:start;">
-        <img src="slide4.jpg" alt="" style="width:1200px;height:auto;display:block;flex-shrink:0;object-fit:cover;scroll-snap-align:start;">
-        <img src="slide5.jpg" alt="" style="width:1200px;height:auto;display:block;flex-shrink:0;object-fit:cover;scroll-snap-align:start;">
+        <img class="slide-img" src="slide1.jpg" alt="" style="width:1200px;height:auto;display:block;flex-shrink:0;object-fit:cover;scroll-snap-align:start;">
+        <img class="slide-img" src="slide2.jpg" alt="" style="width:1200px;height:auto;display:block;flex-shrink:0;object-fit:cover;scroll-snap-align:start;">
+        <img class="slide-img" src="slide3.jpg" alt="" style="width:1200px;height:auto;display:block;flex-shrink:0;object-fit:cover;scroll-snap-align:start;">
+        <img class="slide-img" src="slide4.jpg" alt="" style="width:1200px;height:auto;display:block;flex-shrink:0;object-fit:cover;scroll-snap-align:start;">
+        <img class="slide-img" src="slide5.jpg" alt="" style="width:1200px;height:auto;display:block;flex-shrink:0;object-fit:cover;scroll-snap-align:start;">
       </div>
       <button onclick="moveSlide(-1)" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;border:none;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;z-index:10;">‹</button>
       <button onclick="moveSlide(1)" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;border:none;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;z-index:10;">›</button>
@@ -570,12 +641,12 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   </div>
 
   <!-- TESTIMONI -->
-  <div style="background:#FAF6EE;padding:60px 80px;width:1440px;">
+  <div class="testi-section" style="background:#FAF6EE;padding:60px 80px;width:1440px;">
     <h2 style="font-family:'Baloo Chettan 2',cursive;font-size:32px;text-align:center;color:#1e3a5f;margin-bottom:8px;letter-spacing:1px;">APA KATA MEREKA?</h2>
     <p style="text-align:center;color:#888;font-size:14px;margin-bottom:40px;">Lebih dari 500+ pelanggan puas dengan produk JavasMedia</p>
     <div style="position:relative;">
       <div id="testiTrack" class="testi-track" style="display:flex;gap:24px;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x mandatory;padding-bottom:8px;">
-        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+        <div class="testi-card" style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
           <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
           <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Cari jasa sablon custom Surabaya yang hasilnya rapi tapi harga tetap terjangkau? JavasMedia jawabannya. Kualitas sablon DTF-nya tajam dan awet meski sudah dicuci berkali-kali."</p>
           <div style="display:flex;align-items:center;gap:12px;">
@@ -583,7 +654,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
             <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Rizky A.</div><div style="font-size:11px;color:#999;">Kaos Custom DTF · 200 pcs</div></div>
           </div>
         </div>
-        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+        <div class="testi-card" style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
           <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
           <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Sudah 3x order jersey futsal di JavasMedia Surabaya. Harganya bersaing, prosesnya cepat, dan hasilnya selalu rapi. Pelayanannya juga ramah dan responsif."</p>
           <div style="display:flex;align-items:center;gap:12px;">
@@ -591,7 +662,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
             <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Dimas P.</div><div style="font-size:11px;color:#999;">Jersey Futsal · 30 pcs</div></div>
           </div>
         </div>
-        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+        <div class="testi-card" style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
           <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
           <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Patch DTF-nya detail dan kualitasnya awet tahan lama. Cocok buat merchandise event kampus di Surabaya. Pasti order lagi untuk acara berikutnya!"</p>
           <div style="display:flex;align-items:center;gap:12px;">
@@ -599,7 +670,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
             <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Sari W.</div><div style="font-size:11px;color:#999;">Patch DTF · Event Kampus</div></div>
           </div>
         </div>
-        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+        <div class="testi-card" style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
           <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
           <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Konsultasi desain gratis bikin proses order lanyard jadi gampang banget. Hasilnya presisi sesuai brand guideline kantor kami, dan pengerjaannya cepat."</p>
           <div style="display:flex;align-items:center;gap:12px;">
@@ -607,7 +678,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
             <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Andi K.</div><div style="font-size:11px;color:#999;">Lanyard Custom · 500 pcs</div></div>
           </div>
         </div>
-        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+        <div class="testi-card" style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
           <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
           <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Enaknya di JavasMedia bisa pesan satuan, nggak harus minimum order. Totebag buat goodie bag wedding kami jahitannya kuat dan desainnya persis sesuai request."</p>
           <div style="display:flex;align-items:center;gap:12px;">
@@ -615,7 +686,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
             <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Putri N.</div><div style="font-size:11px;color:#999;">Totebag Canvas · 100 pcs</div></div>
           </div>
         </div>
-        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+        <div class="testi-card" style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
           <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
           <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Vendor sablon Surabaya dengan harga paling murah yang pernah aku temuin, tapi kualitasnya nggak murahan. Topi trucker buat komunitas motor jadi awet dipakai harian."</p>
           <div style="display:flex;align-items:center;gap:12px;">
@@ -623,7 +694,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
             <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Budi S.</div><div style="font-size:11px;color:#999;">Topi Trucker · 50 pcs</div></div>
           </div>
         </div>
-        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+        <div class="testi-card" style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
           <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
           <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Order stiker vinyl 1000 pcs buat produk UMKM kami, dan JavasMedia bisa kirim sampai ke luar kota. Cetakannya tajam, warnanya nggak gampang pudar kena matahari."</p>
           <div style="display:flex;align-items:center;gap:12px;">
@@ -631,7 +702,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
             <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Maya L.</div><div style="font-size:11px;color:#999;">Stiker Vinyl · 1000 pcs</div></div>
           </div>
         </div>
-        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+        <div class="testi-card" style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
           <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
           <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Udah dipercaya banyak brand dan UMKM di Surabaya, dan sekarang aku ngerti kenapa. Bordir kaos polo kantor kami rapi, benangnya rapat, jauh di atas ekspektasi."</p>
           <div style="display:flex;align-items:center;gap:12px;">
@@ -639,7 +710,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
             <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Fajar R.</div><div style="font-size:11px;color:#999;">Kaos Polo Bordir · 75 pcs</div></div>
           </div>
         </div>
-        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+        <div class="testi-card" style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
           <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
           <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Bahan hoodie custom-nya awet dan sablonnya nggak retak meski dicuci puluhan kali. Worth it banget buat harga segini, apalagi produksinya cepat."</p>
           <div style="display:flex;align-items:center;gap:12px;">
@@ -647,7 +718,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
             <div><div style="font-weight:700;font-size:13px;color:#1a1a1a;">Nadia H.</div><div style="font-size:11px;color:#999;">Hoodie Custom · 40 pcs</div></div>
           </div>
         </div>
-        <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
+        <div class="testi-card" style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);min-width:380px;max-width:380px;scroll-snap-align:start;flex-shrink:0;">
           <div style="display:flex;gap:4px;margin-bottom:12px;"><span style="color:#ffc107;font-size:18px;">★★★★★</span></div>
           <p style="font-size:14px;color:#444;line-height:1.7;margin-bottom:16px;">"Detail gantungan kunci akrilik presisi banget, dan tim JavasMedia bantuin dari konsultasi desain sampai selesai. Pengiriman ke luar kota juga lancar dan cepat."</p>
           <div style="display:flex;align-items:center;gap:12px;">
@@ -656,13 +727,13 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
           </div>
         </div>
       </div>
-      <button onclick="document.getElementById('testiTrack').scrollBy({left:-404,behavior:'smooth'})" style="position:absolute;left:-44px;top:45%;transform:translateY(-50%);background:white;color:#1e3a5f;border:1px solid #e8e3d8;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.1);">‹</button>
-      <button onclick="document.getElementById('testiTrack').scrollBy({left:404,behavior:'smooth'})" style="position:absolute;right:-44px;top:45%;transform:translateY(-50%);background:white;color:#1e3a5f;border:1px solid #e8e3d8;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.1);">›</button>
+      <button class="testi-arrow" onclick="document.getElementById('testiTrack').scrollBy({left:-404,behavior:'smooth'})" style="position:absolute;left:-44px;top:45%;transform:translateY(-50%);background:white;color:#1e3a5f;border:1px solid #e8e3d8;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.1);">‹</button>
+      <button class="testi-arrow" onclick="document.getElementById('testiTrack').scrollBy({left:404,behavior:'smooth'})" style="position:absolute;right:-44px;top:45%;transform:translateY(-50%);background:white;color:#1e3a5f;border:1px solid #e8e3d8;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.1);">›</button>
     </div>
   </div>
 
   <!-- CTA BANNER -->
-  <div style="background:#1e3a5f;padding:60px 80px;width:1440px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden;">
+  <div class="cta-banner" style="background:#1e3a5f;padding:60px 80px;width:1440px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden;">
     <!-- Background pattern -->
     <div style="position:absolute;inset:0;background-image:repeating-conic-gradient(rgba(255,255,255,0.03) 0% 25%,transparent 0% 50%);background-size:40px 40px;"></div>
     <div style="position:relative;z-index:1;">
