@@ -476,8 +476,33 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   .footer-info { font-size: 10.5px !important; line-height: 1.6 !important; margin-bottom: 10px !important; }
   .social-icon { width: 24px !important; height: 24px !important; }
   .social-icon img { width: 12px !important; height: 12px !important; }
-  .footer-main { grid-template-columns: 1fr !important; padding: 24px 20px 8px !important; gap: 18px !important; }
+  .footer-main { grid-template-columns: 1fr !important; padding: 24px 20px 8px !important; gap: 0 !important; }
   .footer-newsletter { padding: 0 20px 20px !important; }
+
+  /* Footer link SHOP/HELP/COMPANY — jadi accordion biar hemat ruang */
+  .footer-col { border-bottom: 1px solid #1f1f1f; padding: 12px 0 !important; }
+  .footer-col:first-child { border-top: 1px solid #1f1f1f; }
+  .footer-col h4 {
+    margin-bottom: 0 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    cursor: pointer;
+  }
+  .footer-col h4::after {
+    content: '+';
+    font-size: 13px;
+    color: #777;
+    font-weight: 400;
+  }
+  .footer-col h4.open::after { content: '−'; }
+  .footer-col-links {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+  }
+  .footer-col-links.open { max-height: 300px; margin-top: 10px; }
+  .footer-col-links a { margin-bottom: 8px !important; }
 
   /* Floating WA — diperkecil ~25% */
   .floating-wa { width: 38px !important; height: 38px !important; right: 14px !important; bottom: 14px !important; }
@@ -780,29 +805,35 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
         </div>
       </div>
       <div class="footer-col">
-        <h4>SHOP</h4>
-        <a href="katalog.html">New Arrivals</a>
-        <a href="katalog.html">T-Shirts</a>
-        <a href="katalog.html">Hoodies</a>
-        <a href="katalog.html">Pants</a>
-        <a href="katalog.html">Accessories</a>
-        <a href="promo.html">Sale</a>
+        <h4 onclick="toggleFooterAccordion(this)">SHOP</h4>
+        <div class="footer-col-links">
+          <a href="katalog.html">New Arrivals</a>
+          <a href="katalog.html">T-Shirts</a>
+          <a href="katalog.html">Hoodies</a>
+          <a href="katalog.html">Pants</a>
+          <a href="katalog.html">Accessories</a>
+          <a href="promo.html">Sale</a>
+        </div>
       </div>
       <div class="footer-col">
-        <h4>HELP</h4>
-        <a href="#">FAQ</a>
-        <a href="#">Shipping Info</a>
-        <a href="#">Returns & Exchanges</a>
-        <a href="#">Track Order</a>
-        <a href="#">Contact Us</a>
+        <h4 onclick="toggleFooterAccordion(this)">HELP</h4>
+        <div class="footer-col-links">
+          <a href="#">FAQ</a>
+          <a href="#">Shipping Info</a>
+          <a href="#">Returns & Exchanges</a>
+          <a href="#">Track Order</a>
+          <a href="#">Contact Us</a>
+        </div>
       </div>
       <div class="footer-col">
-        <h4>COMPANY</h4>
-        <a href="#">About Us</a>
-        <a href="#">Careers</a>
-        <a href="#">Press</a>
-        <a href="#">Sustainability</a>
-        <a href="location.html">Pickup In Store</a>
+        <h4 onclick="toggleFooterAccordion(this)">COMPANY</h4>
+        <div class="footer-col-links">
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+          <a href="#">Sustainability</a>
+          <a href="location.html">Pickup In Store</a>
+        </div>
       </div>
     </div>
     <div class="footer-newsletter">
@@ -855,6 +886,13 @@ setInterval(() => moveSlide(1), 5000);
 function searchDesktop() {
   const val = document.getElementById('desktopSearchInput').value.trim();
   if (val) window.location.href = 'katalog.html?q=' + encodeURIComponent(val);
+}
+
+// ===== FOOTER ACCORDION (mobile) =====
+function toggleFooterAccordion(h4) {
+  const links = h4.nextElementSibling;
+  h4.classList.toggle('open');
+  links.classList.toggle('open');
 }
 </script>
 </body>
