@@ -863,23 +863,27 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 // ===== SLIDER (swipeable, scroll-snap) =====
 const sliderTrack = document.getElementById('sliderTrack');
 const dots = document.querySelectorAll('.dot');
-const slideWidth = 1200;
 const total = 5;
 
+function getSlideWidth() {
+  return sliderTrack.querySelector('.slide-img').getBoundingClientRect().width;
+}
+
 function updateDots() {
-  const idx = Math.round(sliderTrack.scrollLeft / slideWidth);
+  const idx = Math.round(sliderTrack.scrollLeft / getSlideWidth());
   dots.forEach((d, i) => d.style.opacity = i === idx ? '1' : '0.4');
 }
 sliderTrack.addEventListener('scroll', updateDots);
 
 function moveSlide(dir) {
+  const slideWidth = getSlideWidth();
   let idx = Math.round(sliderTrack.scrollLeft / slideWidth);
   idx = (idx + dir + total) % total;
   sliderTrack.scrollTo({ left: idx * slideWidth, behavior: 'smooth' });
 }
 
 function goToSlide(n) {
-  sliderTrack.scrollTo({ left: n * slideWidth, behavior: 'smooth' });
+  sliderTrack.scrollTo({ left: n * getSlideWidth(), behavior: 'smooth' });
 }
 
 // Auto slide setiap 5 detik
