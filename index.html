@@ -440,36 +440,37 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   .about-title { font-size: 15px !important; margin-bottom: 8px !important; }
   .about-text { font-size: 11px !important; line-height: 1.55 !important; }
 
-  /* Brand Partner — kotak logo jadi persegi 1:1, font diperkecil */
-  .brand-section { width: 100% !important; padding: 20px 14px !important; min-height: auto !important; box-sizing: border-box; }
-  .brand-overlay { left: 10px !important; right: 10px !important; top: 10px !important; bottom: 10px !important; }
-  .brand-title { font-size: 16px !important; padding-top: 14px !important; margin-bottom: 8px !important; }
-  .brand-desc { font-size: 10.5px !important; line-height: 1.5 !important; margin-bottom: 14px !important; padding: 0 2px !important; }
-  .logo-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; margin-left: 0 !important; }
-  .logo-card { width: 100% !important; height: auto !important; aspect-ratio: 1 / 1 !important; font-size: 9px !important; }
+  /* Brand Partner — kotak logo jadi persegi 1:1, font diperkecil, 4 per baris */
+  .brand-section { width: 100% !important; padding: 20px 16px !important; min-height: auto !important; box-sizing: border-box; }
+  .brand-overlay { left: 12px !important; right: 12px !important; top: 12px !important; bottom: 12px !important; }
+  .brand-title { font-size: 15px !important; padding-top: 14px !important; margin-bottom: 6px !important; }
+  .brand-desc { font-size: 10px !important; line-height: 1.5 !important; margin-bottom: 18px !important; padding: 0 6px !important; }
+  .logo-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 12px !important; margin-left: 0 !important; }
+  .logo-card { width: 100% !important; height: auto !important; aspect-ratio: 1 / 1 !important; font-size: 7px !important; border-radius: 8px !important; }
 
-  /* New Arrivals — kartu jadi persegi 1:1 */
-  .arrivals-section { width: 100% !important; flex-wrap: wrap !important; padding: 0 16px 24px !important; gap: 10px !important; justify-content: center !important; box-sizing: border-box; }
-  .arrival-card { width: calc(50% - 5px) !important; height: auto !important; aspect-ratio: 1 / 1 !important; }
-  .arrival-card span { font-size: 15px !important; }
+  /* New Arrivals — kartu jadi persegi 1:1, kasih space lebih */
+  .arrivals-section { width: 100% !important; flex-wrap: wrap !important; padding: 8px 24px 28px !important; gap: 16px !important; justify-content: center !important; box-sizing: border-box; }
+  .arrival-card { width: calc(50% - 8px) !important; height: auto !important; aspect-ratio: 1 / 1 !important; }
+  .arrival-card span { font-size: 14px !important; }
 
-  /* Testimonials — kotak & font diperkecil */
-  .testi-section { width: 100% !important; padding: 22px 14px !important; box-sizing: border-box; }
-  .testi-section h2 { font-size: 18px !important; }
-  .testi-section > p { font-size: 11px !important; margin-bottom: 24px !important; }
-  .testi-card { min-width: 70vw !important; max-width: 70vw !important; padding: 14px !important; }
-  .testi-card p { font-size: 12px !important; line-height: 1.55 !important; margin-bottom: 12px !important; }
-  .testi-card > div:first-child span { font-size: 14px !important; }
-  .testi-card div[style*="width:40px"] { width: 30px !important; height: 30px !important; font-size: 12px !important; }
-  .testi-card div[style*="font-weight:700;font-size:13px"] { font-size: 11px !important; }
-  .testi-card div[style*="font-size:11px;color:#999"] { font-size: 9.5px !important; }
+  /* Testimonials — kotak & font diperkecil lebih jauh */
+  .testi-section { width: 100% !important; padding: 18px 14px !important; box-sizing: border-box; }
+  .testi-section h2 { font-size: 15px !important; }
+  .testi-section > p { font-size: 9.5px !important; margin-bottom: 18px !important; }
+  .testi-card { min-width: 62vw !important; max-width: 62vw !important; padding: 12px !important; border-radius: 10px !important; }
+  .testi-card p { font-size: 10.5px !important; line-height: 1.5 !important; margin-bottom: 10px !important; }
+  .testi-card > div:first-child span { font-size: 12px !important; }
+  .testi-card div[style*="width:40px"] { width: 26px !important; height: 26px !important; font-size: 10px !important; }
+  .testi-card div[style*="font-weight:700;font-size:13px"] { font-size: 10px !important; }
+  .testi-card div[style*="font-size:11px;color:#999"] { font-size: 8.5px !important; }
   .testi-arrow { display: none !important; }
 
-  /* CTA Banner — dikecilin total */
-  .cta-banner { width: 100% !important; flex-direction: column !important; text-align: center !important; padding: 22px 18px !important; gap: 14px !important; box-sizing: border-box; }
-  .cta-banner h2 { font-size: 17px !important; margin-bottom: 6px !important; }
-  .cta-banner p { max-width: 100% !important; font-size: 11.5px !important; }
-  .cta-banner a[href*="wa.me"] { padding: 11px 26px !important; font-size: 13px !important; }
+  /* CTA Banner — dikecilin lebih jauh */
+  .cta-banner { width: 100% !important; flex-direction: column !important; text-align: center !important; padding: 16px 16px !important; gap: 10px !important; box-sizing: border-box; }
+  .cta-banner h2 { font-size: 14px !important; margin-bottom: 4px !important; line-height: 1.25 !important; }
+  .cta-banner p { max-width: 100% !important; font-size: 10px !important; line-height: 1.5 !important; }
+  .cta-banner a[href*="wa.me"] { padding: 9px 20px !important; font-size: 11px !important; }
+  .cta-banner p[style*="margin-top:12px"] { margin-top: 8px !important; font-size: 8.5px !important; }
 
   /* Footer — logo, alamat, icon sosmed diperkecil */
   .footer-logo { height: 56px !important; margin-bottom: 10px !important; }
@@ -623,19 +624,19 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
       <img class="sub-bg" src="bg2.jpg" alt="">
       <div class="sub-grid">
         <div class="sub-card">
-          <img src="sub-campaign.png" alt="Sub Campaign 1">
+          <img src="sub-campaign-1.png" alt="Sub Campaign 1">
           <div class="sub-card-label">SUB<br>CAMPAIGN</div>
         </div>
         <div class="sub-card">
-          <img src="sub-campaign.png" alt="Sub Campaign 2">
+          <img src="sub-campaign-2.png" alt="Sub Campaign 2">
           <div class="sub-card-label">SUB<br>CAMPAIGN</div>
         </div>
         <div class="sub-card">
-          <img src="sub-campaign.png" alt="Sub Campaign 3">
+          <img src="sub-campaign-3.png" alt="Sub Campaign 3">
           <div class="sub-card-label">SUB<br>CAMPAIGN</div>
         </div>
         <div class="sub-card">
-          <img src="sub-campaign.png" alt="Sub Campaign 4">
+          <img src="sub-campaign-4.png" alt="Sub Campaign 4">
           <div class="sub-card-label">SUB<br>CAMPAIGN</div>
         </div>
       </div>
