@@ -401,50 +401,49 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   .hero-wrap { width: 100% !important; padding: 12px !important; margin-top: 24px !important; margin-bottom: 20px !important; box-sizing: border-box; }
   .slide-img { width: 100% !important; }
 
-  /* Sub Campaign — FIX: 4 kartu tetap sejajar 1 baris, tidak ada gap hantu ke bg3 */
-  .campaign-about-wrap { width: 100%; display: flex !important; flex-direction: column !important; }
+  /* Sub Campaign — straddle di ATAS batas bg2 (sesuai konsep), kartu diperbesar & gap dipersempit */
+  .campaign-about-wrap { width: 100%; position: relative; }
   .sub-section {
     position: relative !important;
     width: 100% !important;
-    height: 130px !important;
+    height: 90px !important;
     margin-top: 0 !important;
-    margin-bottom: 26px !important;
-    order: 1 !important;
   }
-  .sub-bg { position: absolute !important; top: 0; left: 0; width: 100% !important; height: 130px !important; }
+  .sub-bg { position: absolute !important; top: 0; left: 0; width: 100% !important; height: 90px !important; }
   .sub-grid {
     position: absolute !important;
-    left: 14px !important; right: 14px !important;
-    top: auto !important;
-    bottom: -36px !important;
-    transform: none !important;
+    left: 8px !important; right: 8px !important;
+    top: 0 !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
     display: grid !important;
     grid-template-columns: repeat(4, 1fr) !important;
-    gap: 6px !important;
+    gap: 4px !important;
     justify-content: initial !important;
     box-sizing: border-box;
   }
-  .sub-card { width: 100% !important; height: 88px !important; border-radius: 6px; overflow: hidden; }
-  .sub-card-label { font-size: 7px !important; top: 16px !important; line-height: 1.2; letter-spacing: 0; }
+  .sub-card { width: 100% !important; height: auto !important; aspect-ratio: 801 / 979; border-radius: 6px; overflow: hidden; }
+  .sub-card-label { font-size: 6.5px !important; top: 18% !important; line-height: 1.2; letter-spacing: 0; }
 
-  .workshop-photo { width: 100% !important; height: 150px !important; margin-top: 0 !important; order: 3 !important; }
+  .workshop-photo { width: 100% !important; height: 120px !important; margin-top: 0 !important; }
 
-  /* About Us — ditaruh di antara bg2 & bg3, tidak numpuk keduanya */
+  /* About Us — straddle di batas bg2-bg3 (sesuai konsep desktop), font diperkecil 30% lagi */
   .about-box-wrap {
-    position: static !important;
-    transform: none !important;
+    position: absolute !important;
+    top: 210px !important;
+    left: 0 !important;
+    transform: translateY(-50%) !important;
     padding: 0 16px !important;
-    margin-bottom: 26px !important;
-    order: 2 !important;
     box-sizing: border-box;
+    width: 100%;
   }
-  .about-box { padding: 16px 16px 18px !important; border-radius: 14px !important; background: rgba(255,255,255,0.92) !important; }
-  .about-title { font-size: 15px !important; margin-bottom: 8px !important; }
-  .about-text { font-size: 11px !important; line-height: 1.55 !important; }
+  .about-box { padding: 11px 12px 13px !important; border-radius: 12px !important; background: rgba(255,255,255,0.5) !important; }
+  .about-title { font-size: 10.5px !important; margin-bottom: 5px !important; }
+  .about-text { font-size: 7.7px !important; line-height: 1.5 !important; }
 
-  /* Brand Partner — kotak logo jadi persegi 1:1, kasih jarak dari overlay */
+  /* Brand Partner — kotak logo jadi persegi 1:1, overlay diperlebar kebawah */
   .brand-section { width: 100% !important; padding: 20px 16px !important; min-height: auto !important; box-sizing: border-box; }
-  .brand-overlay { left: 14px !important; right: 14px !important; top: 14px !important; bottom: 14px !important; }
+  .brand-overlay { left: 14px !important; right: 14px !important; top: 14px !important; bottom: 6px !important; }
   .brand-title { font-size: 15px !important; padding-top: 14px !important; margin-bottom: 6px !important; }
   .brand-desc { font-size: 10px !important; line-height: 1.5 !important; margin-bottom: 18px !important; padding: 0 10px !important; }
   .brand-content { padding: 0 10px !important; box-sizing: border-box; }
@@ -456,16 +455,16 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   .arrival-card { width: calc(50% - 8px) !important; height: auto !important; aspect-ratio: 1 / 1 !important; }
   .arrival-card span { font-size: 14px !important; }
 
-  /* Testimonials — kotak & font diperkecil lebih jauh lagi */
-  .testi-section { width: 100% !important; padding: 16px 12px !important; box-sizing: border-box; }
-  .testi-section h2 { font-size: 13px !important; }
-  .testi-section > p { font-size: 8.5px !important; margin-bottom: 14px !important; }
-  .testi-card { min-width: 54vw !important; max-width: 54vw !important; padding: 10px !important; border-radius: 8px !important; }
-  .testi-card p { font-size: 9.5px !important; line-height: 1.45 !important; margin-bottom: 8px !important; }
-  .testi-card > div:first-child span { font-size: 10px !important; }
-  .testi-card div[style*="width:40px"] { width: 22px !important; height: 22px !important; font-size: 9px !important; }
-  .testi-card div[style*="font-weight:700;font-size:13px"] { font-size: 9px !important; }
-  .testi-card div[style*="font-size:11px;color:#999"] { font-size: 7.5px !important; }
+  /* Testimonials — kotak & font diperkecil lagi */
+  .testi-section { width: 100% !important; padding: 12px 10px !important; box-sizing: border-box; }
+  .testi-section h2 { font-size: 11px !important; }
+  .testi-section > p { font-size: 7.5px !important; margin-bottom: 10px !important; }
+  .testi-card { min-width: 48vw !important; max-width: 48vw !important; padding: 8px !important; border-radius: 6px !important; }
+  .testi-card p { font-size: 8.5px !important; line-height: 1.4 !important; margin-bottom: 6px !important; }
+  .testi-card > div:first-child span { font-size: 8px !important; }
+  .testi-card div[style*="width:40px"] { width: 18px !important; height: 18px !important; font-size: 7px !important; }
+  .testi-card div[style*="font-weight:700;font-size:13px"] { font-size: 8px !important; }
+  .testi-card div[style*="font-size:11px;color:#999"] { font-size: 6.5px !important; }
   .testi-arrow { display: none !important; }
 
   /* CTA Banner — dikecilin lagi */
