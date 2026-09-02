@@ -265,7 +265,9 @@
   .product-info { padding: 8px 8px 10px !important; }
   .product-cat { font-size: 6px !important; padding: 2px 5px !important; margin-bottom: 5px !important; }
   .product-name { font-size: 9px !important; margin-bottom: 5px !important; line-height: 1.25 !important; }
-  .price-old { font-size: 8px !important; }
+  /* Harga ditumpuk (bukan sejajar) supaya harga baru tidak kepotong kalau nominalnya panjang */
+  .product-price { flex-direction: column !important; align-items: flex-start !important; gap: 1px !important; }
+  .price-old { font-size: 7.5px !important; }
   .price-new { font-size: 11px !important; }
 
   /* Kartu ke-9 (placeholder) cuma tampil di mobile, biar grid 3x3 genap */

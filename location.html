@@ -574,6 +574,7 @@ body { background: #1c1a14; font-family: 'Inter', sans-serif; color: white; }
 .newsletter-consent { display: flex; align-items: center; justify-content: center; gap: 8px; color: #444; font-size: 11px; }
 </style>
 <link rel="stylesheet" href="mobile-nav.css">
+<link rel="stylesheet" href="mobile.css">
 </head>
 <body>
 <div class="page">
@@ -847,6 +848,10 @@ body { background: #1c1a14; font-family: 'Inter', sans-serif; color: white; }
     <a href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+ingin+konsultasi" target="_blank" class="cta-btn">CHAT SEKARANG →</a>
   </div>
 
+  </div></div>
+  <!-- Footer di luar mobile-scale-wrap sengaja - biar di HP ukurannya normal (accordion),
+       bukan ikut diperkecil kayak konten di atasnya. -->
+
   <!-- FOOTER -->
   <div class="footer">
     <div class="footer-main">
@@ -862,29 +867,35 @@ body { background: #1c1a14; font-family: 'Inter', sans-serif; color: white; }
         </div>
       </div>
       <div class="footer-col">
-        <h4>SHOP</h4>
-        <a href="katalog.html">New Arrivals</a>
-        <a href="katalog.html">T-Shirts</a>
-        <a href="katalog.html">Hoodies</a>
-        <a href="katalog.html">Pants</a>
-        <a href="katalog.html">Accessories</a>
-        <a href="promo.html">Sale</a>
+        <h4 onclick="toggleFooterAccordion(this)">SHOP</h4>
+        <div class="footer-col-links">
+          <a href="katalog.html">New Arrivals</a>
+          <a href="katalog.html">T-Shirts</a>
+          <a href="katalog.html">Hoodies</a>
+          <a href="katalog.html">Pants</a>
+          <a href="katalog.html">Accessories</a>
+          <a href="promo.html">Sale</a>
+        </div>
       </div>
       <div class="footer-col">
-        <h4>HELP</h4>
-        <a href="#">FAQ</a>
-        <a href="#">Shipping Info</a>
-        <a href="#">Returns & Exchanges</a>
-        <a href="#">Track Order</a>
-        <a href="#">Contact Us</a>
+        <h4 onclick="toggleFooterAccordion(this)">HELP</h4>
+        <div class="footer-col-links">
+          <a href="#">FAQ</a>
+          <a href="#">Shipping Info</a>
+          <a href="#">Returns & Exchanges</a>
+          <a href="#">Track Order</a>
+          <a href="#">Contact Us</a>
+        </div>
       </div>
       <div class="footer-col">
-        <h4>COMPANY</h4>
-        <a href="#">About Us</a>
-        <a href="#">Careers</a>
-        <a href="#">Press</a>
-        <a href="#">Sustainability</a>
-        <a href="location.html">Pickup In Store</a>
+        <h4 onclick="toggleFooterAccordion(this)">COMPANY</h4>
+        <div class="footer-col-links">
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+          <a href="#">Sustainability</a>
+          <a href="location.html">Pickup In Store</a>
+        </div>
       </div>
     </div>
     <div class="footer-newsletter">
@@ -900,7 +911,6 @@ body { background: #1c1a14; font-family: 'Inter', sans-serif; color: white; }
     </div>
   </div>
 
-</div></div>
 </div>
 
 <script>
