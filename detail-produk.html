@@ -84,6 +84,11 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 }
 
 /* ===== FOTO SECTION ===== */
+/* min-width:0 supaya kolom grid ini tidak ikut melebar mengikuti
+   thumbnail yang overflow (baru terlihat kalau foto > 5, sebelumnya
+   foto-thumbs malah bikin kolomnya ikut lebar, bukan geser sendiri) */
+.foto-col { min-width: 0; }
+
 .foto-main {
   background: white;
   border: 2.5px solid #1a1a1a;
@@ -111,14 +116,22 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
   font-family: 'Space Mono', monospace;
 }
 
+/* Bisa digeser ke samping kalau foto lebih dari yang muat di 1 baris
+   (dulu grid tetap 4 kolom, foto ke-5 dst malah pindah baris bukan digeser) */
 .foto-thumbs {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
   gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+.foto-thumbs::-webkit-scrollbar { display: none; height: 0; }
 
 .foto-thumb {
-  aspect-ratio: 1/1;
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
   background: white;
   border: 2px solid #e8e3d8;
   border-radius: 4px;
@@ -180,8 +193,11 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
   margin-bottom: 24px;
 }
 
-.price-old { font-size: 14px; color: #bbb; text-decoration: line-through; margin-bottom: 4px; }
-.price-new { font-size: 36px; font-weight: 900; color: #e85d04; font-family: 'Baloo Chettan 2', cursive; }
+/* Di-scope ke .price-section supaya tidak tabrakan dengan .price-new
+   di kartu "Produk Terkait" di bawah - class-nya sama tapi ukurannya
+   harus beda (harga besar di sini, harga kecil di kartu produk) */
+.price-section .price-old { font-size: 14px; color: #bbb; text-decoration: line-through; margin-bottom: 4px; }
+.price-section .price-new { font-size: 36px; font-weight: 900; color: #e85d04; font-family: 'Baloo Chettan 2', cursive; }
 .price-note { font-size: 11px; color: #888; margin-top: 4px; }
 
 /* Varian section */
@@ -530,7 +546,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
     <div class="detail-layout">
 
       <!-- KIRI: Foto -->
-      <div>
+      <div class="foto-col">
         <div class="foto-main">
           <div class="foto-badge">-50%</div>
           👕

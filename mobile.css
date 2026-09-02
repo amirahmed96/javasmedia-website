@@ -495,7 +495,7 @@
   .foto-main { font-size: 90px !important; margin-bottom: 10px !important; }
   .foto-badge { font-size: 10px !important; padding: 4px 9px !important; top: 10px !important; right: 10px !important; }
   .foto-thumbs { gap: 6px !important; }
-  .foto-thumb { font-size: 22px !important; }
+  .foto-thumb { width: 70px !important; height: 70px !important; font-size: 22px !important; }
 
   .info-section { padding-top: 0 !important; }
   .product-cat-badge { font-size: 8px !important; padding: 4px 10px !important; margin-bottom: 10px !important; }
@@ -505,8 +505,8 @@
   .rating-count, .rating-sold { font-size: 10px !important; }
 
   .price-section { padding: 12px 14px !important; margin-bottom: 16px !important; }
-  .price-old { font-size: 11px !important; }
-  .price-new { font-size: 26px !important; }
+  .price-section .price-old { font-size: 11px !important; }
+  .price-section .price-new { font-size: 26px !important; }
   .price-note { font-size: 9px !important; }
 
   .varian-section { margin-bottom: 16px !important; }
