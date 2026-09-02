@@ -276,7 +276,11 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
   color: white;
   cursor: pointer;
   font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+.search-katalog button img { width: 14px; height: 14px; object-fit: contain; display: block; }
 
 /* Product grid */
 .product-grid {
@@ -362,6 +366,12 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 .price-old { font-size: 11px; color: #bbb; text-decoration: line-through; }
 .price-new { font-size: 14px; font-weight: 800; color: #e85d04; }
 
+/* Elemen khusus mobile - disembunyikan di desktop (versi aslinya
+   ada di dalam .sidebar, ini cuma salinan buat posisi mobile) */
+.load-more-wrap { display: none; }
+.cat-chips-mobile-wrap { display: none; }
+.promo-banners-mobile { display: none; }
+
 /* ===== FOOTER ===== */
 .footer { background: black; }
 .footer-main { padding: 60px 80px 40px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; border-bottom: 1px solid #222; }
@@ -381,6 +391,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 .newsletter-consent { display: flex; align-items: center; justify-content: center; gap: 8px; color: #444; font-size: 11px; }
 </style>
 <link rel="stylesheet" href="mobile-nav.css">
+<link rel="stylesheet" href="mobile.css">
 </head>
 <body>
 <div class="page">
@@ -458,11 +469,23 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
     <div class="bar-ornamen"></div>
   </div>
 
-  <div class="mobile-scale-wrap"><div class="mobile-scale-inner">
-
   <!-- BREADCRUMB -->
   <div class="breadcrumb">
     <a href="index.html">Home</a> › <span>Semua Produk</span>
+  </div>
+
+  <!-- FILTER KATEGORI - versi mobile (chip bisa digeser), disembunyikan di desktop.
+       Salinan terpisah dari .sidebar punya, bukan hasil pindah posisi elemen yang sama. -->
+  <div class="cat-chips-mobile-wrap">
+    <div class="cat-chips-mobile">
+      <button class="cat-chip active">Semua</button>
+      <button class="cat-chip">Apparel</button>
+      <button class="cat-chip">Aksesori</button>
+      <button class="cat-chip">Packaging</button>
+      <button class="cat-chip">Promotion Item</button>
+      <button class="cat-chip">Homedecor</button>
+      <button class="cat-chip">Others</button>
+    </div>
   </div>
 
   <!-- KATALOG LAYOUT -->
@@ -527,7 +550,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
         <button class="sort-btn">Harga ↓</button>
         <div class="search-katalog">
           <input type="text" placeholder="Cari di katalog...">
-          <button>🔍</button>
+          <button><img src="search-icon.png" alt="Cari"></button>
         </div>
       </div>
 
@@ -871,6 +894,27 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
         </div>
 
       </div>
+
+      <!-- Tombol lihat produk lain - khusus mobile -->
+      <div class="load-more-wrap">
+        <button class="load-more-btn" onclick="showMoreProducts(this)"><span class="load-more-plus">+</span> Lihat produk lain dari Javas Media</button>
+      </div>
+
+      <!-- Banner promo - versi mobile, dipindah ke bawah grid produk.
+           Salinan terpisah dari .sidebar punya (yang disembunyikan di mobile). -->
+      <div class="promo-banners-mobile">
+        <div class="promo-banner-sidebar">
+          <div class="promo-banner-label">🔥 LIMITED!</div>
+          <div class="promo-banner-disc">DISC<br><span>50%</span></div>
+          <div class="promo-banner-desc">Untuk pelanggan baru! Gunakan kode:</div>
+          <div class="promo-banner-code">JAVASPERT</div>
+          <div class="promo-banner-desc" style="margin-bottom:8px;">Berlaku s/d 31 Jul 2026</div>
+          <button class="promo-banner-btn" onclick="location.href='promo.html'">KLAIM SEKARANG →</button>
+        </div>
+        <div class="arrival-banner-sidebar" onclick="location.href='katalog.html'">
+          <div class="arrival-banner-text">NEW<br>ARRIVAL</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -889,28 +933,34 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
         </div>
       </div>
       <div class="footer-col">
-        <h4>SHOP</h4>
-        <a href="katalog.html">New Arrivals</a>
-        <a href="katalog.html">Apparel</a>
-        <a href="katalog.html">Aksesori</a>
-        <a href="katalog.html">Packaging</a>
-        <a href="promo.html">Sale</a>
+        <h4 onclick="toggleFooterAccordion(this)">SHOP</h4>
+        <div class="footer-col-links">
+          <a href="katalog.html">New Arrivals</a>
+          <a href="katalog.html">Apparel</a>
+          <a href="katalog.html">Aksesori</a>
+          <a href="katalog.html">Packaging</a>
+          <a href="promo.html">Sale</a>
+        </div>
       </div>
       <div class="footer-col">
-        <h4>HELP</h4>
-        <a href="#">FAQ</a>
-        <a href="#">Shipping Info</a>
-        <a href="#">Returns & Exchanges</a>
-        <a href="#">Track Order</a>
-        <a href="#">Contact Us</a>
+        <h4 onclick="toggleFooterAccordion(this)">HELP</h4>
+        <div class="footer-col-links">
+          <a href="#">FAQ</a>
+          <a href="#">Shipping Info</a>
+          <a href="#">Returns & Exchanges</a>
+          <a href="#">Track Order</a>
+          <a href="#">Contact Us</a>
+        </div>
       </div>
       <div class="footer-col">
-        <h4>COMPANY</h4>
-        <a href="#">About Us</a>
-        <a href="#">Careers</a>
-        <a href="#">Press</a>
-        <a href="#">Sustainability</a>
-        <a href="location.html">Pickup In Store</a>
+        <h4 onclick="toggleFooterAccordion(this)">COMPANY</h4>
+        <div class="footer-col-links">
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+          <a href="#">Sustainability</a>
+          <a href="location.html">Pickup In Store</a>
+        </div>
       </div>
     </div>
     <div class="footer-newsletter">
@@ -926,7 +976,6 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
     </div>
   </div>
 
-</div></div>
 </div>
 
 <script>
@@ -938,7 +987,7 @@ document.querySelectorAll('.sort-btn').forEach(btn => {
   });
 });
 
-// Category filter
+// Category filter (versi desktop - sidebar)
 document.querySelectorAll('.cat-item').forEach(item => {
   item.addEventListener('click', function() {
     document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
@@ -946,9 +995,22 @@ document.querySelectorAll('.cat-item').forEach(item => {
   });
 });
 
+// Category filter (versi mobile - chip)
+document.querySelectorAll('.cat-chip').forEach(chip => {
+  chip.addEventListener('click', function() {
+    document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
 function searchDesktop() {
   const val = document.getElementById('desktopSearchInput').value.trim();
   if (val) window.location.href = 'katalog.html?q=' + encodeURIComponent(val);
+}
+
+function showMoreProducts(btn) {
+  document.getElementById('productGrid').classList.add('show-all');
+  btn.closest('.load-more-wrap').style.display = 'none';
 }
 </script>
 
