@@ -483,4 +483,100 @@
   .promo-banners-mobile .promo-banner-btn { font-size: 4.5px !important; padding: 4px 3px !important; letter-spacing: 0.2px !important; }
   .promo-banners-mobile .arrival-banner-sidebar { padding: 7px 5px !important; display: flex !important; align-items: center !important; justify-content: center !important; }
   .promo-banners-mobile .arrival-banner-text { font-size: 11px !important; letter-spacing: -0.3px !important; }
+
+  /* ============================================
+     HALAMAN DETAIL PRODUK (detail-produk.html)
+     Foto & info ditumpuk (bukan 2 kolom), produk terkait
+     pakai kartu yang sama gayanya dengan promo/katalog.
+     ============================================ */
+
+  .detail-layout { grid-template-columns: 1fr !important; gap: 20px !important; padding: 0 16px 32px !important; }
+
+  .foto-main { font-size: 90px !important; margin-bottom: 10px !important; }
+  .foto-badge { font-size: 10px !important; padding: 4px 9px !important; top: 10px !important; right: 10px !important; }
+  .foto-thumbs { gap: 6px !important; }
+  .foto-thumb { font-size: 22px !important; }
+
+  .info-section { padding-top: 0 !important; }
+  .product-cat-badge { font-size: 8px !important; padding: 4px 10px !important; margin-bottom: 10px !important; }
+  .product-title { font-size: 22px !important; margin-bottom: 10px !important; }
+  .rating-row { gap: 8px !important; margin-bottom: 14px !important; flex-wrap: wrap !important; }
+  .stars { font-size: 13px !important; }
+  .rating-count, .rating-sold { font-size: 10px !important; }
+
+  .price-section { padding: 12px 14px !important; margin-bottom: 16px !important; }
+  .price-old { font-size: 11px !important; }
+  .price-new { font-size: 26px !important; }
+  .price-note { font-size: 9px !important; }
+
+  .varian-section { margin-bottom: 16px !important; }
+  .varian-label { font-size: 9px !important; margin-bottom: 8px !important; }
+  .varian-btn { font-size: 10px !important; padding: 6px 12px !important; }
+
+  .qty-section { gap: 10px !important; margin-bottom: 16px !important; flex-wrap: wrap !important; }
+  .qty-label { font-size: 9px !important; }
+  .qty-btn { width: 30px !important; height: 30px !important; font-size: 15px !important; }
+  .qty-num { width: 40px !important; height: 30px !important; font-size: 12px !important; }
+  .qty-note { font-size: 9px !important; width: 100%; }
+
+  .benefit-mini { padding: 12px !important; gap: 4px !important; margin-bottom: 16px !important; }
+  .benefit-mini-icon { height: 20px !important; }
+  .benefit-mini-icon img { width: 18px !important; height: 18px !important; }
+  .benefit-mini-icon.icon-produksi img, .benefit-mini-icon.icon-kirim img { width: 28px !important; height: 28px !important; }
+  .benefit-mini-title { font-size: 9px !important; }
+  .benefit-mini-desc { font-size: 8px !important; }
+
+  .cta-group { gap: 10px !important; margin-bottom: 20px !important; }
+  .btn-wa { font-size: 12px !important; padding: 14px 20px !important; }
+  .btn-catalog { font-size: 11px !important; padding: 11px 20px !important; }
+
+  .detail-desc-wrap { padding: 0 16px 32px !important; }
+  .desc-section { margin-bottom: 24px !important; }
+  .desc-tabs {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  .desc-tabs::-webkit-scrollbar { display: none !important; height: 0 !important; }
+  .desc-tab { padding: 10px 14px !important; font-size: 10px !important; white-space: nowrap !important; flex-shrink: 0 !important; }
+  .desc-content { font-size: 12px !important; }
+
+  /* ---- Deskripsi bisa dipendekkan (tombol muncul dari JS kalau memang overflow) ---- */
+  .desc-collapsible {
+    max-height: 92px;
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.25s ease;
+  }
+  .desc-collapsible::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 28px;
+    background: linear-gradient(to bottom, rgba(250,246,238,0), #FAF6EE);
+  }
+  .desc-collapsible.expanded { max-height: 1000px; }
+  .desc-collapsible.expanded::after { display: none; }
+  .desc-toggle-btn {
+    display: none;
+    align-items: center;
+    gap: 4px;
+    margin-top: 10px;
+    background: none;
+    border: none;
+    color: #1e3a5f;
+    font-weight: 700;
+    font-size: 11px;
+    cursor: pointer;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+  }
+  .spek-table { font-size: 11px !important; }
+  .spek-table td { padding: 8px 6px !important; }
+  .spek-table td:first-child { width: 42% !important; }
+
+  .related-section { padding: 0 16px 40px !important; }
+  .section-title-text { font-size: 15px !important; }
+  .related-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
 }

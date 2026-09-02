@@ -333,7 +333,12 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
   text-align: center;
 }
 
-.benefit-mini-icon { font-size: 20px; }
+.benefit-mini-icon { height: 28px; display: flex; align-items: center; justify-content: center; }
+.benefit-mini-icon img { width: 24px; height: 24px; object-fit: contain; }
+/* icon-produksi-cepat.png & icon-kirim-indonesia.png punya banyak ruang kosong
+   di dalam kanvasnya sendiri (sama seperti di promo.html), jadi perlu di-render
+   lebih besar biar ukuran tampilnya kelihatan setara dengan icon lain */
+.benefit-mini-icon.icon-produksi img, .benefit-mini-icon.icon-kirim img { width: 38px; height: 38px; }
 .benefit-mini-title { font-size: 11px; font-weight: 700; color: #1a1a1a; }
 .benefit-mini-desc { font-size: 10px; color: #888; }
 
@@ -368,6 +373,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 .desc-content ul { padding-left: 20px; margin-top: 8px; }
 .desc-content li { margin-bottom: 6px; }
 .desc-content strong { color: #1a1a1a; }
+.desc-toggle-btn { display: none; }
 
 /* Spek tabel */
 .spek-table { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -433,6 +439,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 .newsletter-consent { display: flex; align-items: center; justify-content: center; gap: 8px; color: #444; font-size: 11px; }
 </style>
 <link rel="stylesheet" href="mobile-nav.css">
+<link rel="stylesheet" href="mobile.css">
 </head>
 <body>
 <div class="page">
@@ -510,8 +517,6 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
     <div class="bar-ornamen"></div>
   </div>
 
-  <div class="mobile-scale-wrap"><div class="mobile-scale-inner">
-
   <!-- BREADCRUMB -->
   <div class="breadcrumb grid-bg">
     <a href="index.html">Home</a> ›
@@ -570,14 +575,14 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
           </div>
         </div>
 
-        <!-- Varian Bahan -->
+        <!-- Tier Qty -->
         <div class="varian-section">
-          <div class="varian-label">Bahan</div>
+          <div class="varian-label">Tier Qty</div>
           <div class="varian-grid">
-            <button class="varian-btn active">Cotton Combed 30s</button>
-            <button class="varian-btn">Cotton Combed 24s</button>
-            <button class="varian-btn">Polyester</button>
-            <button class="varian-btn">Drifit</button>
+            <button class="varian-btn active">1–11 pcs</button>
+            <button class="varian-btn">12–49 pcs</button>
+            <button class="varian-btn">50–99 pcs</button>
+            <button class="varian-btn">100+ pcs</button>
           </div>
         </div>
 
@@ -595,17 +600,17 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
         <!-- Benefit mini -->
         <div class="benefit-mini">
           <div class="benefit-mini-item">
-            <div class="benefit-mini-icon">⚡</div>
+            <div class="benefit-mini-icon icon-produksi"><img src="icon-produksi-cepat.png" alt="Produksi Cepat"></div>
             <div class="benefit-mini-title">Produksi Cepat</div>
             <div class="benefit-mini-desc">3–5 hari kerja</div>
           </div>
           <div class="benefit-mini-item">
-            <div class="benefit-mini-icon">🚚</div>
+            <div class="benefit-mini-icon icon-kirim"><img src="icon-kirim-indonesia.png" alt="Kirim Seluruh Indonesia"></div>
             <div class="benefit-mini-title">Kirim ke Seluruh Indonesia</div>
-            <div class="benefit-mini-desc">JNE · JNT · Sicepat</div>
+            <div class="benefit-mini-desc">via Reguler Express - Cargo Laut- Kereta Api</div>
           </div>
           <div class="benefit-mini-item">
-            <div class="benefit-mini-icon">✅</div>
+            <div class="benefit-mini-icon"><img src="icon-check.png" alt="Bisa Satuan"></div>
             <div class="benefit-mini-title">Bisa Satuan</div>
             <div class="benefit-mini-desc">Tidak minimum order</div>
           </div>
@@ -625,7 +630,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
     </div>
 
     <!-- DESKRIPSI & SPESIFIKASI -->
-    <div style="max-width:1200px;margin:0 auto;padding:0 40px 60px;">
+    <div class="detail-desc-wrap" style="max-width:1200px;margin:0 auto;padding:0 40px 60px;">
       <div class="desc-section">
         <div class="desc-tabs">
           <button class="desc-tab active" onclick="showTab('deskripsi', this)">Deskripsi</button>
@@ -634,15 +639,18 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
         </div>
 
         <div id="tab-deskripsi" class="desc-content">
-          <p>Kaos custom dengan teknik sablon <strong>DTF (Direct to Film)</strong> — hasil cetak presisi, warna tajam, dan tahan lama setelah dicuci berkali-kali. Cocok untuk:</p>
-          <ul>
-            <li>Merchandise komunitas & organisasi</li>
-            <li>Seragam tim olahraga & ekstrakurikuler</li>
-            <li>Kaos event, gathering, reuni</li>
-            <li>UMKM yang butuh produk branded</li>
-          </ul>
-          <br>
-          <p>Sablon DTF memungkinkan cetakan detail seperti foto, gradasi warna, dan desain kompleks tanpa minimum warna. <strong>Bisa full color tanpa biaya tambahan.</strong></p>
+          <div class="desc-collapsible" id="descCollapsible">
+            <p>Kaos custom dengan teknik sablon <strong>DTF (Direct to Film)</strong> — hasil cetak presisi, warna tajam, dan tahan lama setelah dicuci berkali-kali. Cocok untuk:</p>
+            <ul>
+              <li>Merchandise komunitas & organisasi</li>
+              <li>Seragam tim olahraga & ekstrakurikuler</li>
+              <li>Kaos event, gathering, reuni</li>
+              <li>UMKM yang butuh produk branded</li>
+            </ul>
+            <br>
+            <p>Sablon DTF memungkinkan cetakan detail seperti foto, gradasi warna, dan desain kompleks tanpa minimum warna. <strong>Bisa full color tanpa biaya tambahan.</strong></p>
+          </div>
+          <button class="desc-toggle-btn" id="descToggleBtn" onclick="toggleDesc()">Baca selengkapnya <span class="desc-toggle-arrow">▾</span></button>
         </div>
 
         <div id="tab-spesifikasi" class="desc-content" style="display:none;">
@@ -731,28 +739,34 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
         </div>
       </div>
       <div class="footer-col">
-        <h4>SHOP</h4>
-        <a href="katalog.html">New Arrivals</a>
-        <a href="katalog.html">Apparel</a>
-        <a href="katalog.html">Aksesori</a>
-        <a href="katalog.html">Packaging</a>
-        <a href="promo.html">Sale</a>
+        <h4 onclick="toggleFooterAccordion(this)">SHOP</h4>
+        <div class="footer-col-links">
+          <a href="katalog.html">New Arrivals</a>
+          <a href="katalog.html">Apparel</a>
+          <a href="katalog.html">Aksesori</a>
+          <a href="katalog.html">Packaging</a>
+          <a href="promo.html">Sale</a>
+        </div>
       </div>
       <div class="footer-col">
-        <h4>HELP</h4>
-        <a href="#">FAQ</a>
-        <a href="#">Shipping Info</a>
-        <a href="#">Returns & Exchanges</a>
-        <a href="#">Track Order</a>
-        <a href="#">Contact Us</a>
+        <h4 onclick="toggleFooterAccordion(this)">HELP</h4>
+        <div class="footer-col-links">
+          <a href="#">FAQ</a>
+          <a href="#">Shipping Info</a>
+          <a href="#">Returns & Exchanges</a>
+          <a href="#">Track Order</a>
+          <a href="#">Contact Us</a>
+        </div>
       </div>
       <div class="footer-col">
-        <h4>COMPANY</h4>
-        <a href="#">About Us</a>
-        <a href="#">Careers</a>
-        <a href="#">Press</a>
-        <a href="#">Sustainability</a>
-        <a href="location.html">Pickup In Store</a>
+        <h4 onclick="toggleFooterAccordion(this)">COMPANY</h4>
+        <div class="footer-col-links">
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+          <a href="#">Sustainability</a>
+          <a href="location.html">Pickup In Store</a>
+        </div>
       </div>
     </div>
     <div class="footer-newsletter">
@@ -768,7 +782,6 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
     </div>
   </div>
 
-</div></div>
 </div>
 
 <script>
@@ -804,6 +817,30 @@ function searchDesktop() {
   const val = document.getElementById('desktopSearchInput').value.trim();
   if (val) window.location.href = 'katalog.html?q=' + encodeURIComponent(val);
 }
+
+// Deskripsi bisa dipendekkan - tombol cuma muncul kalau isinya
+// memang lebih panjang dari tinggi preview, dan cuma aktif di mobile.
+function initDescCollapse() {
+  const el = document.getElementById('descCollapsible');
+  const btn = document.getElementById('descToggleBtn');
+  if (!el || !btn) return;
+  if (window.innerWidth > 768) { btn.style.display = 'none'; el.style.maxHeight = 'none'; return; }
+  el.classList.remove('expanded');
+  requestAnimationFrame(() => {
+    const collapsedMax = 92;
+    btn.style.display = el.scrollHeight > collapsedMax + 4 ? 'flex' : 'none';
+  });
+}
+function toggleDesc() {
+  const el = document.getElementById('descCollapsible');
+  const btn = document.getElementById('descToggleBtn');
+  const expanded = el.classList.toggle('expanded');
+  btn.innerHTML = expanded
+    ? 'Tampil lebih sedikit <span class="desc-toggle-arrow">▴</span>'
+    : 'Baca selengkapnya <span class="desc-toggle-arrow">▾</span>';
+}
+window.addEventListener('load', initDescCollapse);
+window.addEventListener('resize', initDescCollapse);
 </script>
 
 <a class="floating-wa" href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+ingin+konsultasi" target="_blank" aria-label="Chat WhatsApp">
