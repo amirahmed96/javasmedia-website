@@ -408,6 +408,9 @@ body { background: #1c1a14; font-family: 'Inter', sans-serif; color: white; }
 .icon-circle img { width: 100px; height: 100px; object-fit: contain; }
 .icon-circle.icon-strip-tv img { width: 110px; height: 110px; }
 
+/* Salinan icon strip khusus mobile (di antara peta & alamat) - disembunyikan di desktop */
+.icon-strip-mobile-copy { display: none; }
+
 .strip-footer {
   text-align: center;
   margin-top: 24px;
@@ -647,17 +650,17 @@ body { background: #1c1a14; font-family: 'Inter', sans-serif; color: white; }
     <div class="bar-ornamen"></div>
   </div>
 
-  <div class="mobile-scale-wrap"><div class="mobile-scale-inner">
-
   <!-- HERO -->
   <div class="hero">
-    <div class="hero-tag">📍 FIND OUR WORKSHOP</div>
-    <div class="hero-title">HOUSE<br>OF<br><span style="color:#e85d04;">CUSTOMIZE</span></div>
-    <div class="hero-subtitle">Where your ideas come to life</div>
-    <div class="hero-tags">
-      <div class="hero-tag-item">📍 Ploso Timur 1b No. 3b</div>
-      <div class="hero-tag-item">🌆 Surabaya</div>
-      <div class="hero-tag-item">🇮🇩 Jawa Timur</div>
+    <div class="hero-text">
+      <div class="hero-tag">📍 FIND OUR WORKSHOP</div>
+      <div class="hero-title">HOUSE<br>OF<br><span style="color:#e85d04;">CUSTOMIZE</span></div>
+      <div class="hero-subtitle">Where your ideas come to life</div>
+      <div class="hero-tags">
+        <div class="hero-tag-item">📍 Ploso Timur 1b No. 3b</div>
+        <div class="hero-tag-item">🌆 Surabaya</div>
+        <div class="hero-tag-item">🇮🇩 Jawa Timur</div>
+      </div>
     </div>
 
     <!-- Ilustrasi globe (desain Amir) -->
@@ -704,6 +707,27 @@ body { background: #1c1a14; font-family: 'Inter', sans-serif; color: white; }
       </div>
     </div>
 
+    <!-- ICON STRIP (posisi khusus mobile - di antara peta & alamat, disembunyikan di desktop) -->
+    <div class="icon-strip icon-strip-mobile-copy">
+      <div class="icon-strip-icons">
+        <div class="icon-item">
+          <div class="icon-circle"><img src="icon-strip-1.png" alt="Globe"></div>
+        </div>
+        <div class="icon-item">
+          <div class="icon-circle icon-strip-tv"><img src="icon-strip-2.png" alt="Retro TV"></div>
+        </div>
+        <div class="icon-item">
+          <div class="icon-circle"><img src="icon-strip-3.png" alt="Location"></div>
+        </div>
+        <div class="icon-item">
+          <div class="icon-circle"><img src="icon-strip-4.png" alt="Compass"></div>
+        </div>
+        <div class="icon-item">
+          <div class="icon-circle"><img src="icon-strip-5.png" alt="Star + Key"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- Info card -->
     <div class="info-card">
       <div class="info-section-title">Alamat & Kontak</div>
@@ -747,8 +771,8 @@ body { background: #1c1a14; font-family: 'Inter', sans-serif; color: white; }
     </div>
   </div>
 
-  <!-- ICON STRIP -->
-  <div class="icon-strip">
+  <!-- ICON STRIP (posisi desktop - full width di bawah maps+info) -->
+  <div class="icon-strip icon-strip-desktop-copy">
     <div style="font-size:10px;letter-spacing:3px;color:rgba(255,255,255,0.2);text-transform:uppercase;">WORKSHOP · SBY</div>
     <div class="icon-strip-icons">
       <div class="icon-item">
@@ -810,10 +834,6 @@ body { background: #1c1a14; font-family: 'Inter', sans-serif; color: white; }
     </div>
     <a href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+ingin+konsultasi" target="_blank" class="cta-btn">CHAT SEKARANG →</a>
   </div>
-
-  </div></div>
-  <!-- Footer di luar mobile-scale-wrap sengaja - biar di HP ukurannya normal (accordion),
-       bukan ikut diperkecil kayak konten di atasnya. -->
 
   <!-- FOOTER -->
   <div class="footer">

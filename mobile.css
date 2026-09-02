@@ -282,4 +282,86 @@
   .benefit-title { font-size: 11px !important; }
   .benefit-desc { font-size: 9px !important; }
   .benefit-divider { display: none !important; }
+
+  /* ============================================
+     HALAMAN LOCATION (location.html)
+     Disusun ulang beneran (bukan cuma diperkecil dari desktop)
+     ============================================ */
+
+  /* ---- Hero (teks di kiri, globe di kanan, sejajar) ---- */
+  .hero {
+    padding: 20px 16px !important;
+    min-height: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+  }
+  .hero-text { flex: 1 !important; min-width: 0 !important; }
+  .hero-tag { font-size: 7px !important; padding: 3px 8px !important; margin-bottom: 8px !important; }
+  .hero-title { font-size: 24px !important; margin-bottom: 6px !important; letter-spacing: -0.5px !important; }
+  .hero-subtitle { font-size: 8px !important; margin-bottom: 10px !important; }
+  .hero-tags { flex-wrap: wrap !important; gap: 4px !important; margin-bottom: 0 !important; }
+  .hero-tag-item { font-size: 7px !important; padding: 3px 8px !important; }
+  .compass-directions {
+    position: static !important;
+    right: auto !important; top: auto !important; transform: none !important;
+    width: 112px !important; height: 112px !important;
+    margin: 0 10px 0 0 !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* ---- Marquee ---- */
+  .marquee-section { padding: 8px 0 !important; }
+  .marquee-item { font-size: 7px !important; padding: 0 8px !important; gap: 5px !important; }
+  .marquee-dot { width: 3px !important; height: 3px !important; }
+
+  /* ---- Maps + Info ---- */
+  .maps-section { grid-template-columns: 1fr !important; padding: 24px 16px !important; gap: 20px !important; }
+  .maps-title-tag { font-size: 9px !important; padding: 4px 10px !important; }
+  .maps-embed { height: 220px !important; }
+  .info-card { padding: 16px !important; }
+  .info-section-title { font-size: 9px !important; }
+  .info-row { font-size: 11px !important; }
+  .social-grid { gap: 6px !important; }
+  .social-btn { font-size: 10px !important; padding: 6px 10px !important; }
+
+  /* ---- Icon strip: pindah ke antara peta & alamat (pakai salinan khusus mobile,
+     lihat penjelasan di location.html - bukan trik CSS order karena pernah tidak
+     reliable di proyek ini) ---- */
+  .icon-strip-desktop-copy { display: none !important; }
+  .icon-strip-mobile-copy { display: flex !important; }
+  .icon-strip { flex-direction: column !important; padding: 16px 0 !important; gap: 0 !important; }
+  .icon-strip > div:not(.icon-strip-icons) { display: none !important; }   /* label "WORKSHOP · SBY" & no. telp disembunyikan, sudah ada di header/footer */
+  .icon-strip-icons { gap: 14px !important; }
+  .icon-circle { width: 44px !important; height: 44px !important; }
+  .icon-circle img { width: 44px !important; height: 44px !important; }
+  .icon-circle.icon-strip-tv img { width: 48px !important; height: 48px !important; }
+  .strip-footer { display: none !important; }   /* teks "HOUSE OF CUSTOMIZE (c) 2018" nempel di bawah icon strip versi desktop, disembunyikan di mobile */
+
+  /* ---- Cara Ke Sini (diperkecil) ---- */
+  .cara-section { padding: 20px 16px !important; }
+  .cara-header { margin-bottom: 12px !important; }
+  .cara-title { font-size: 11px !important; }
+  .cara-grid { grid-template-columns: 1fr !important; gap: 8px !important; }
+  .cara-card { padding: 12px !important; }
+  .cara-number { font-size: 18px !important; top: 10px !important; right: 12px !important; }
+  .cara-icon { margin-bottom: 6px !important; }
+  .cara-icon img { width: 26px !important; height: 26px !important; }
+  .cara-icon.icon-cara-mobil img { width: 32px !important; height: 32px !important; }
+  .cara-card-title { font-size: 10px !important; margin-bottom: 5px !important; }
+  .cara-card-text { font-size: 9px !important; line-height: 1.5 !important; }
+  .stars-divider { font-size: 7px !important; letter-spacing: 2px !important; padding: 8px !important; }
+
+  /* ---- CTA WhatsApp ---- */
+  .cta-section {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    margin: 0 16px 24px !important;
+    padding: 20px !important;
+    gap: 16px !important;
+  }
+  .cta-title { font-size: 22px !important; }
+  .cta-desc { font-size: 10px !important; max-width: 100% !important; }
+  .cta-btn { font-size: 10px !important; padding: 10px 20px !important; width: 100%; text-align: center; box-sizing: border-box; }
 }
