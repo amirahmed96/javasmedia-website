@@ -409,7 +409,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
     height: auto !important;
     aspect-ratio: 2879 / 928 !important;
     margin-top: 0 !important;
-    margin-bottom: 32px !important;
+    margin-bottom: -6px !important;
     order: 1 !important;
   }
   .sub-bg { position: absolute !important; top: 0; left: 0; width: 100% !important; height: 100% !important; object-fit: cover; }
@@ -431,15 +431,17 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 
   .workshop-photo { width: 100% !important; height: 120px !important; margin-top: 0 !important; order: 3 !important; }
 
-  /* About Us — layout normal (bukan absolute), otomatis dapat jarak dari margin sendiri */
+  /* About Us — layout normal, margin negatif kecil biar menindih sedikit ke bg2 & bg3 */
   .about-box-wrap {
     position: static !important;
     transform: none !important;
     padding: 0 16px !important;
-    margin: 0 0 32px !important;
+    margin: 0 0 -6px !important;
     order: 2 !important;
     box-sizing: border-box;
     width: 100%;
+    z-index: 5;
+    position: relative !important;
   }
   .about-box { padding: 16px 16px 18px !important; border-radius: 14px !important; background: rgba(255,255,255,0.5) !important; }
   .about-title { font-size: 14px !important; margin-bottom: 8px !important; }
