@@ -1,8 +1,892 @@
-&lt;!DOCTYPE html&gt;
-&lt;html lang="id"&gt;
-&lt;head&gt;
-&lt;meta charset="UTF-8"&gt;
-&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-&lt;meta name="format-detection" content="telephone=no"&gt;
-&lt;title&gt;Location — JavasMedia&lt;/title&gt;
-&lt;link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@400;700;800&amp;family=Inter:wght@300;400;500;700;800;900&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"&gt;
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<title>Location — JavasMedia</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@400;700;800&family=Inter:wght@300;400;500;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { overflow-x: hidden; }
+body { background: #1c1a14; font-family: 'Inter', sans-serif; color: white; }
+.page { width: 1440px; margin: 0 auto; overflow: hidden; }
+
+/* ===== HEADER (FINAL - JANGAN DIUBAH) ===== */
+.header {
+  position: relative; width: 1440px; height: 100px; z-index: 100;
+}
+.header .header-bar { position: absolute; top: 0; left: 0; width: 1440px; height: 80px; object-fit: cover; }
+.header .header-logo { position: absolute; top: 12px; left: 30px; height: 48px; width: auto; cursor: pointer; object-fit: contain; }
+.header .nav-btn { position: absolute; bottom: 20px; height: 52px; width: 140px; cursor: pointer; object-fit: fill; display: block; }
+.header .nav-btn-1 { left: 340px; }
+.header .nav-btn-2 { left: 455px; }
+.header .nav-btn-3 { left: 570px; }
+.header .nav-btn-4 { left: 685px; }
+.header .nav-label { position: absolute; font-family: 'Avenir Next Condensed','Arial Narrow',Arial,sans-serif; font-size: 18px; font-weight: 700; color: #1a1a1a; text-align: center; cursor: pointer; pointer-events: none; width: 140px; }
+.header .nav-label-1 { bottom: 33px; left: 340px; }
+.header .nav-label-2 { bottom: 33px; left: 455px; }
+.header .nav-label-3 { bottom: 33px; left: 570px; }
+.header .nav-label-4 { bottom: 33px; left: 685px; }
+.header .header-search-box {
+  position: absolute;
+  top: 24px; left: 1000px;
+  width: 190px; height: 32px;
+  background: #f5ecd8;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  box-sizing: border-box;
+}
+.header .header-search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 12px;
+  color: #1a1a1a;
+  font-family: 'Inter', sans-serif;
+  min-width: 0;
+}
+.header .header-search-box img {
+  width: 16px;
+  height: auto;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+.floating-wa { position: fixed; right: 30px; bottom: 30px; width: 68px; height: 68px; z-index: 5000; display: block; }
+.floating-wa img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); transition: transform 0.2s ease; }
+.floating-wa:hover img { transform: scale(1.08); }
+.header .header-cart { position: absolute; top: 24px; left: 1210px; height: 30px; width: 32px; cursor: pointer; object-fit: contain; }
+.header .header-profile { position: absolute; top: 24px; left: 1260px; height: 28px; width: 29px; cursor: pointer; object-fit: contain; }
+.header .bar-ornamen { position: absolute; top: 80px; left: 0; width: 1440px; height: 20px; background-image: repeating-conic-gradient(#8b1a1a 0% 25%, transparent 0% 50%); background-size: 20px 20px; }
+
+/* ===== HERO SECTION ===== */
+.hero {
+  background: #1c1a14;
+  padding: 60px 80px;
+  position: relative;
+  overflow: hidden;
+  min-height: 380px;
+}
+
+/* subtle texture */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 70% 50%, rgba(255,193,7,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #e85d04;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-family: 'Baloo Chettan 2', cursive;
+  font-size: 80px;
+  font-weight: 800;
+  line-height: 0.95;
+  color: #ffc107;
+  margin-bottom: 16px;
+  letter-spacing: -2px;
+}
+
+.hero-subtitle {
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  font-style: italic;
+  margin-bottom: 28px;
+  letter-spacing: 1px;
+}
+
+.hero-tags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.hero-tag-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,193,7,0.3);
+  color: rgba(255,255,255,0.8);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* Globe wireframe kanan */
+.hero-globe {
+  position: absolute;
+  right: 80px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+  height: 320px;
+}
+
+/* Compass */
+.hero-compass {
+  position: absolute;
+  right: 60px;
+  bottom: 40px;
+  font-size: 60px;
+  opacity: 0.7;
+}
+
+/* Decorative elements */
+.deco-triangle {
+  position: absolute;
+  right: 200px;
+  top: 60px;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 20px solid rgba(255,193,7,0.4);
+}
+
+/* Compass rose SVG */
+.compass-directions {
+  position: absolute;
+  right: 80px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 280px;
+  height: 280px;
+}
+
+/* ===== MARQUEE ===== */
+.marquee-section {
+  background: #ffc107;
+  padding: 12px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 2px solid rgba(0,0,0,0.1);
+  border-bottom: 2px solid rgba(0,0,0,0.1);
+}
+
+.marquee-track {
+  display: inline-flex;
+  animation: marquee 20s linear infinite;
+  gap: 0;
+}
+
+.marquee-item {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1c1a14;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.marquee-dot {
+  width: 6px;
+  height: 6px;
+  background: #1c1a14;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ===== MAPS + INFO SECTION ===== */
+.maps-section {
+  background: #1c1a14;
+  padding: 60px 80px;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 32px;
+  align-items: start;
+}
+
+.maps-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.maps-title-tag {
+  background: #e85d04;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 6px 16px;
+  border-radius: 4px;
+}
+
+.maps-embed {
+  background: #2a2820;
+  border: 1px solid rgba(255,193,7,0.2);
+  border-radius: 12px;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.maps-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+}
+
+.maps-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: #ffc107;
+  border-style: solid;
+  opacity: 0.6;
+}
+.maps-corner.tl { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
+.maps-corner.tr { top: 10px; right: 10px; border-width: 2px 2px 0 0; }
+.maps-corner.bl { bottom: 10px; left: 10px; border-width: 0 0 2px 2px; }
+.maps-corner.br { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
+
+/* Info card kanan */
+.info-card {
+  background: #2a2820;
+  border: 1px solid rgba(255,193,7,0.15);
+  border-radius: 12px;
+  padding: 28px;
+}
+
+.info-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #ffc107;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,193,7,0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-section-title::before {
+  content: '|';
+  color: #ffc107;
+  font-weight: 900;
+}
+
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.6;
+}
+
+.info-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.info-icon img { width: 18px; height: 18px; object-fit: contain; display: block; }
+
+.jam-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.7);
+}
+
+.jam-status {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 1px;
+}
+.jam-status.open { background: rgba(39,174,96,0.2); color: #27ae60; }
+.jam-status.closed { background: rgba(231,76,60,0.2); color: #e74c3c; }
+
+.social-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+.social-btn:hover { background: rgba(255,193,7,0.1); border-color: rgba(255,193,7,0.3); color: #ffc107; }
+.social-btn img { width: 16px; height: 16px; object-fit: contain; }
+
+/* ===== ICON STRIP ===== */
+.icon-strip {
+  background: #111009;
+  padding: 40px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255,193,7,0.1);
+  border-bottom: 1px solid rgba(255,193,7,0.1);
+}
+
+.icon-strip-icons {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+.icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: iconFloat 3s ease-in-out infinite;
+}
+.icon-item:nth-child(1) { animation-delay: 0s; }
+.icon-item:nth-child(2) { animation-delay: 0.2s; }
+.icon-item:nth-child(3) { animation-delay: 0.4s; }
+.icon-item:nth-child(4) { animation-delay: 0.6s; }
+.icon-item:nth-child(5) { animation-delay: 0.8s; }
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.icon-circle {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-circle img { width: 100px; height: 100px; object-fit: contain; }
+.icon-circle.icon-strip-tv img { width: 110px; height: 110px; }
+
+.strip-footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.2);
+  text-transform: uppercase;
+}
+
+/* ===== CARA KE SINI ===== */
+.cara-section {
+  background: #1c1a14;
+  padding: 60px 80px;
+}
+
+.cara-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.cara-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Space Mono', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 2px;
+}
+
+.cara-title::before {
+  content: '◆';
+  color: #ffc107;
+  font-size: 12px;
+}
+
+.cara-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.cara-card {
+  background: #2a2820;
+  border: 1px solid rgba(255,193,7,0.1);
+  border-radius: 12px;
+  padding: 28px;
+  position: relative;
+}
+
+.cara-number {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-size: 36px;
+  font-weight: 900;
+  color: rgba(255,193,7,0.15);
+  font-family: 'Baloo Chettan 2', cursive;
+}
+
+.cara-icon { font-size: 32px; margin-bottom: 16px; }
+.cara-icon img { width: 44px; height: 44px; object-fit: contain; }
+.cara-icon.icon-cara-mobil img { width: 62px; height: 62px; }
+.cara-card-title { font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: white; margin-bottom: 12px; }
+.cara-card-text { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.8; }
+
+/* Stars divider */
+.stars-divider {
+  text-align: center;
+  padding: 20px;
+  color: rgba(255,193,7,0.3);
+  font-size: 12px;
+  letter-spacing: 6px;
+}
+
+/* ===== CTA WHATSAPP ===== */
+.cta-section {
+  margin: 0 80px 60px;
+  background: #2a2820;
+  border: 1px solid rgba(255,193,7,0.2);
+  border-radius: 16px;
+  padding: 48px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cta-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #e85d04;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.cta-title {
+  font-family: 'Baloo Chettan 2', cursive;
+  font-size: 42px;
+  font-weight: 800;
+  color: white;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.cta-title span { color: #ffc107; }
+
+.cta-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  max-width: 400px;
+  line-height: 1.7;
+}
+
+.cta-btn {
+  display: inline-block;
+  background: #ffc107;
+  color: #1c1a14;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 18px 40px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.cta-btn:hover { background: #ffca2c; transform: translateY(-2px); }
+
+/* ===== FOOTER ===== */
+.footer { background: black; }
+
+.footer-main {
+  padding: 60px 80px 40px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  border-bottom: 1px solid #222;
+}
+
+.footer-logo { height: 90px; width: auto; margin-bottom: 16px; display: block; object-fit: contain; }
+.footer-info { color: #666; font-size: 13px; line-height: 1.8; margin-bottom: 16px; }
+.footer-social { display: flex; gap: 8px; }
+.social-icon { width: 32px; height: 32px; background: #111; border: 1px solid #222; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; }
+.social-icon img { width: 16px; height: 16px; object-fit: contain; }
+.footer-col h4 { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: white; text-transform: uppercase; margin-bottom: 16px; }
+.footer-col a { display: block; color: #555; font-size: 13px; text-decoration: none; margin-bottom: 10px; }
+.footer-col a:hover { color: #ffc107; }
+
+.footer-newsletter { padding: 40px 80px; text-align: center; border-bottom: 1px solid #111; }
+.newsletter-text { color: #555; font-size: 13px; margin-bottom: 20px; }
+.newsletter-form { display: flex; max-width: 512px; margin: 0 auto 12px; }
+.newsletter-input { flex: 1; padding: 16px 20px; background: white; border: none; font-size: 13px; color: #999; outline: none; }
+.newsletter-btn { background: #ffbb00; border: none; padding: 16px 32px; font-size: 12px; font-weight: 700; color: black; cursor: pointer; letter-spacing: 1.4px; text-transform: uppercase; }
+.newsletter-consent { display: flex; align-items: center; justify-content: center; gap: 8px; color: #444; font-size: 11px; }
+</style>
+<link rel="stylesheet" href="mobile-nav.css">
+<link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+<div class="page">
+
+  <!-- ===== MOBILE HEADER (mobile only, see mobile-nav.css) ===== -->
+  <div class="mobile-header-bar">
+    <button class="mh-hamburger" aria-label="Menu"><img src="hamburger.png" alt="Menu"></button>
+    <img class="mh-logo" src="logo.png" alt="JavasMedia" onclick="location.href='index.html'">
+    <div class="mh-right">
+      <button class="mh-search-toggle" aria-label="Cari"><img src="search-icon.png" alt="Cari"></button>
+      <img class="mh-icon" src="cart.png" alt="Cart">
+      <img class="mh-icon" src="profile.png" alt="Profile" onclick="location.href='login.html'">
+    </div>
+  </div>
+  <div class="mh-search-box">
+    <input type="text" placeholder="Cari produk...">
+    <button class="mh-search-close" aria-label="Tutup pencarian">&times;</button>
+  </div>
+
+  <!-- ===== MOBILE DRAWER NAV ===== -->
+  <div class="mobile-nav-overlay"></div>
+  <div class="mobile-nav-drawer">
+    <button class="mnd-close" aria-label="Tutup"><img src="drawer-close.png" alt="Tutup"></button>
+    <div class="mnd-brand">
+      <img class="mnd-brand-logo" src="house-of-customize.png" alt="House of Customize">
+    </div>
+    <div class="mnd-nav">
+      <a href="promo.html"><img src="btn-promo.png" alt="Promo"><span>PROMO</span></a>
+      <a href="katalog.html"><img src="btn-product.png" alt="Product"><span>PRODUCT</span></a>
+      <a href="articles.html"><img src="btn-articles.png" alt="Articles"><span>ARTICLES</span></a>
+      <a href="location.html"><img src="btn-location.png" alt="Location"><span>LOCATION</span></a>
+    </div>
+    <div class="mnd-footer">
+      <img class="mnd-footer-logo" src="javas-media-badge.png" alt="JavasMedia">
+      <p>Ploso Timur 1B No. 3b<br>Tambaksari - Surabaya<br>javasmediasurabaya@gmail.com<br>082143777463</p>
+      <div class="mnd-social">
+        <a href="#" aria-label="Facebook"><img src="fb-icon.png" alt="Facebook"></a>
+        <a href="#" aria-label="TikTok"><img src="tiktok-icon.png" alt="TikTok"></a>
+        <a href="#" aria-label="YouTube"><img src="youtube-icon.png" alt="YouTube"></a>
+        <a href="#" aria-label="Instagram"><img src="instagram-icon.png" alt="Instagram"></a>
+        <a href="https://wa.me/6282143777463" aria-label="WhatsApp"><img src="whatsapp-icon.png" alt="WhatsApp"></a>
+      </div>
+      <div class="mnd-links">
+        <a href="#">About Us</a>
+        <a href="#">Production</a>
+        <a href="location.html">Alamat</a>
+        <a href="katalog.html">Kaos Custom</a>
+        <a href="#">Career</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Track Order</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- HEADER -->
+  <div class="header">
+    <img class="header-bar" src="bar-header.png" alt="">
+    <img class="header-logo" src="logo.png" alt="JavasMedia" onclick="location.href='index.html'" style="cursor:pointer;">
+    <img class="nav-btn nav-btn-1" src="btn1.png" alt="" onclick="location.href='promo.html'">
+    <img class="nav-btn nav-btn-2" src="btn2.png" alt="" onclick="location.href='katalog.html'">
+    <img class="nav-btn nav-btn-3" src="btn3.png" alt="" onclick="location.href='articles.html'">
+    <img class="nav-btn nav-btn-4" src="btn4.png" alt="" onclick="location.href='location.html'">
+    <span class="nav-label nav-label-1" onclick="location.href='promo.html'">PROMO</span>
+    <span class="nav-label nav-label-2" onclick="location.href='katalog.html'">PRODUCT</span>
+    <span class="nav-label nav-label-3" onclick="location.href='articles.html'">ARTICLES</span>
+    <span class="nav-label nav-label-4" onclick="location.href='location.html'">LOCATION</span>
+    <div class="header-search-box">
+      <input type="text" id="desktopSearchInput" placeholder="Cari produk..." onkeypress="if(event.key==='Enter'){searchDesktop()}">
+      <img src="search-icon-navy.png" alt="Cari" onclick="searchDesktop()">
+    </div>
+    <img class="header-cart" src="cart.png" alt="">
+    <img class="header-profile" src="profile.png" alt="" onclick="location.href='login.html'">
+    <div class="bar-ornamen"></div>
+  </div>
+
+  <div class="mobile-scale-wrap"><div class="mobile-scale-inner">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">📍 FIND OUR WORKSHOP</div>
+    <div class="hero-title">HOUSE<br>OF<br><span style="color:#e85d04;">CUSTOMIZE</span></div>
+    <div class="hero-subtitle">Where your ideas come to life</div>
+    <div class="hero-tags">
+      <div class="hero-tag-item">📍 Ploso Timur 1b No. 3b</div>
+      <div class="hero-tag-item">🌆 Surabaya</div>
+      <div class="hero-tag-item">🇮🇩 Jawa Timur</div>
+    </div>
+
+    <!-- Ilustrasi globe (desain Amir) -->
+    <div class="compass-directions">
+      <img src="icon-globe-hero.png" alt="" style="width:100%;height:100%;object-fit:contain;">
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <span class="marquee-item">JAVASMEDIA <span class="marquee-dot"></span></span>
+      <span class="marquee-item">SURABAYA <span class="marquee-dot"></span></span>
+      <span class="marquee-item">082143777463 <span class="marquee-dot"></span></span>
+      <span class="marquee-item">KUNJUNGI WORKSHOP KAMI <span class="marquee-dot"></span></span>
+      <span class="marquee-item">CUSTOM PRINTING <span class="marquee-dot"></span></span>
+      <span class="marquee-item">HOUSE OF CUSTOMIZE <span class="marquee-dot"></span></span>
+      <span class="marquee-item">JAVASMEDIA <span class="marquee-dot"></span></span>
+      <span class="marquee-item">SURABAYA <span class="marquee-dot"></span></span>
+      <span class="marquee-item">082143777463 <span class="marquee-dot"></span></span>
+      <span class="marquee-item">KUNJUNGI WORKSHOP KAMI <span class="marquee-dot"></span></span>
+      <span class="marquee-item">CUSTOM PRINTING <span class="marquee-dot"></span></span>
+      <span class="marquee-item">HOUSE OF CUSTOMIZE <span class="marquee-dot"></span></span>
+    </div>
+  </div>
+
+  <!-- MAPS + INFO -->
+  <div class="maps-section">
+    <div>
+      <div class="maps-title">
+        <span class="maps-title-tag">📍 LOKASI WORKSHOP</span>
+      </div>
+      <div class="maps-embed">
+        <div class="maps-corner tl"></div>
+        <div class="maps-corner tr"></div>
+        <div class="maps-corner bl"></div>
+        <div class="maps-corner br"></div>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.5!2d112.7677196!3d-7.2544706!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7f91bc4e83a41%3A0xbc04da309dfda971!2sJavas+Media!5e0!3m2!1sid!2sid!4v1724487600000"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Info card -->
+    <div class="info-card">
+      <div class="info-section-title">Alamat & Kontak</div>
+      <div class="info-row">
+        <span class="info-icon"><img src="icon-workshop.png" alt=""></span>
+        <div><strong>Workshop</strong><br>Jl. Ploso Timur 1b No. 3b<br>Kel. Tambaksari, Surabaya</div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon"><img src="whatsapp-icon.png" alt=""></span>
+        <div><strong>WhatsApp</strong><br>082143777463</div>
+      </div>
+      <div class="info-row" style="margin-bottom:24px;">
+        <span class="info-icon"><img src="icon-email.png" alt=""></span>
+        <div><strong>Email</strong><br>javasmediasurabaya@gmail.com</div>
+      </div>
+
+      <div class="info-section-title">Jam Operasional</div>
+      <div class="jam-row">
+        <span>Senin – Jumat</span>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="jam-status open">BUKA</span>
+          <span>08.00–17.00</span>
+        </div>
+      </div>
+      <div class="jam-row">
+        <span>Sabtu</span>
+        <span>08.00–14.00</span>
+      </div>
+      <div class="jam-row" style="margin-bottom:24px;">
+        <span>Minggu</span>
+        <span class="jam-status closed">TUTUP</span>
+      </div>
+
+      <div class="info-section-title">Temukan Kami Di</div>
+      <div class="social-grid">
+        <a href="#" class="social-btn"><img src="instagram-icon.png" alt=""> Instagram</a>
+        <a href="#" class="social-btn"><img src="tiktok-icon.png" alt=""> TikTok</a>
+        <a href="#" class="social-btn"><img src="fb-icon.png" alt=""> Facebook</a>
+        <a href="#" class="social-btn"><img src="youtube-icon.png" alt=""> YouTube</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ICON STRIP -->
+  <div class="icon-strip">
+    <div style="font-size:10px;letter-spacing:3px;color:rgba(255,255,255,0.2);text-transform:uppercase;">WORKSHOP · SBY</div>
+    <div class="icon-strip-icons">
+      <div class="icon-item">
+        <div class="icon-circle"><img src="icon-strip-1.png" alt="Globe"></div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-circle icon-strip-tv"><img src="icon-strip-2.png" alt="Retro TV"></div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-circle"><img src="icon-strip-3.png" alt="Location"></div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-circle"><img src="icon-strip-4.png" alt="Compass"></div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-circle"><img src="icon-strip-5.png" alt="Star + Key"></div>
+      </div>
+    </div>
+    <div style="font-size:10px;letter-spacing:3px;color:rgba(255,255,255,0.2);text-transform:uppercase;">082143777463</div>
+  </div>
+  <div class="strip-footer">HOUSE OF CUSTOMIZE © 2018</div>
+
+  <!-- CARA KE SINI -->
+  <div class="cara-section">
+    <div class="cara-header">
+      <div class="cara-title">CARA KE SINI</div>
+      <div style="color:rgba(255,193,7,0.4);font-size:18px;">◆</div>
+    </div>
+    <div class="cara-grid">
+      <div class="cara-card">
+        <div class="cara-number">01</div>
+        <div class="cara-icon icon-cara-mobil"><img src="icon-cara-mobil.png" alt=""></div>
+        <div class="cara-card-title">Kendaraan Pribadi</div>
+        <div class="cara-card-text">Dari pusat kota Surabaya, ambil arah Tambaksari. Parkir tersedia di depan workshop. Estimasi 10–20 menit dari pusat kota.</div>
+      </div>
+      <div class="cara-card">
+        <div class="cara-number">02</div>
+        <div class="cara-icon"><img src="icon-cara-ojek.png" alt=""></div>
+        <div class="cara-card-title">Ojek Online</div>
+        <div class="cara-card-text">Cari "Jl. Ploso Timur 1b No. 3b Surabaya" di Gojek atau Grab. Mudah ditemukan dan terjangkau dari berbagai penjuru kota.</div>
+      </div>
+      <div class="cara-card">
+        <div class="cara-number">03</div>
+        <div class="cara-icon"><img src="icon-cara-bus.png" alt=""></div>
+        <div class="cara-card-title">Transportasi Umum</div>
+        <div class="cara-card-text">Naik Suroboyo Bus atau angkot arah Tambaksari. Turun di halte terdekat, lalu jalan kaki ±5 menit menuju lokasi.</div>
+      </div>
+    </div>
+
+    <div class="stars-divider">★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</div>
+  </div>
+
+  <!-- CTA WHATSAPP -->
+  <div class="cta-section">
+    <div>
+      <div class="cta-label">Order Online · Konsultasi</div>
+      <div class="cta-title">KONSULTASI<br><span>VIA WHATSAPP</span></div>
+      <div class="cta-desc">Biar kami siapkan sampel & referensi material buat kamu. Gratis konsultasi!</div>
+    </div>
+    <a href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+ingin+konsultasi" target="_blank" class="cta-btn">CHAT SEKARANG →</a>
+  </div>
+
+  </div></div>
+  <!-- Footer di luar mobile-scale-wrap sengaja - biar di HP ukurannya normal (accordion),
+       bukan ikut diperkecil kayak konten di atasnya. -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-main">
+      <div>
+        <img src="logo.png" alt="JavasMedia" class="footer-logo">
+        <div class="footer-info">Ploso Timur 1b No. 3b Surabaya<br>082143777463<br>javasmediasurabaya@gmail.com</div>
+        <div class="footer-social">
+          <a class="social-icon" href="#" aria-label="Facebook"><img src="fb-icon.png" alt="Facebook"></a>
+          <a class="social-icon" href="#" aria-label="TikTok"><img src="tiktok-icon.png" alt="TikTok"></a>
+          <a class="social-icon" href="#" aria-label="YouTube"><img src="youtube-icon.png" alt="YouTube"></a>
+          <a class="social-icon" href="#" aria-label="Instagram"><img src="instagram-icon.png" alt="Instagram"></a>
+          <a class="social-icon" href="https://wa.me/6282143777463" aria-label="WhatsApp"><img src="whatsapp-icon.png" alt="WhatsApp"></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 onclick="toggleFooterAccordion(this)">SHOP</h4>
+        <div class="footer-col-links">
+          <a href="katalog.html">New Arrivals</a>
+          <a href="katalog.html">T-Shirts</a>
+          <a href="katalog.html">Hoodies</a>
+          <a href="katalog.html">Pants</a>
+          <a href="katalog.html">Accessories</a>
+          <a href="promo.html">Sale</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 onclick="toggleFooterAccordion(this)">HELP</h4>
+        <div class="footer-col-links">
+          <a href="#">FAQ</a>
+          <a href="#">Shipping Info</a>
+          <a href="#">Returns & Exchanges</a>
+          <a href="#">Track Order</a>
+          <a href="#">Contact Us</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 onclick="toggleFooterAccordion(this)">COMPANY</h4>
+        <div class="footer-col-links">
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+          <a href="#">Sustainability</a>
+          <a href="location.html">Pickup In Store</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-newsletter">
+      <p class="newsletter-text">Be the first to know about new product drops and exclusive deals from Javas Media.</p>
+      <div class="newsletter-form">
+        <input class="newsletter-input" type="email" placeholder="Enter your email address">
+        <button class="newsletter-btn">SUBSCRIBE</button>
+      </div>
+      <div class="newsletter-consent">
+        <input type="checkbox" style="width:12px;height:12px;">
+        <span>I agree to receive marketing emails from Javas Media. Unsubscribe anytime.</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function searchDesktop() {
+  const val = document.getElementById('desktopSearchInput').value.trim();
+  if (val) window.location.href = 'katalog.html?q=' + encodeURIComponent(val);
+}
+</script>
+
+<a class="floating-wa" href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+ingin+konsultasi" target="_blank" aria-label="Chat WhatsApp">
+  <img src="floating-wa.png" alt="Chat WhatsApp">
+</a>
+
+<script src="mobile-nav.js"></script>
+</body>
+</html>
