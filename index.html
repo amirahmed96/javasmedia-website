@@ -402,7 +402,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   .slide-img { width: 100% !important; }
 
   /* Sub Campaign — bg2 pakai aspect-ratio asli (TIDAK di-crop), kartu straddle di atas */
-  .campaign-about-wrap { width: 100%; display: flex !important; flex-direction: column !important; }
+  .campaign-about-wrap { width: 100%; display: block !important; }
   .sub-section {
     position: relative !important;
     width: 100% !important;
@@ -410,7 +410,6 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
     aspect-ratio: 2879 / 928 !important;
     margin-top: 0 !important;
     margin-bottom: -6px !important;
-    order: 1 !important;
   }
   .sub-bg { position: absolute !important; top: 0; left: 0; width: 100% !important; height: 100% !important; object-fit: cover; }
   .sub-grid {
@@ -429,19 +428,17 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   .sub-card { width: 72px !important; height: auto !important; aspect-ratio: 801 / 979; border-radius: 6px; overflow: hidden; flex-shrink: 0; }
   .sub-card-label { font-size: 6px !important; top: 18% !important; line-height: 1.2; letter-spacing: 0; }
 
-  .workshop-photo { width: 100% !important; height: 120px !important; margin-top: 0 !important; order: 3 !important; }
+  .workshop-photo { width: 100% !important; height: 120px !important; margin-top: 0 !important; }
 
-  /* About Us — layout normal, margin negatif kecil biar menindih sedikit ke bg2 & bg3 */
+  /* About Us — layout normal (DOM sudah diurutkan di antara bg2 & bg3), margin negatif kecil biar menindih sedikit */
   .about-box-wrap {
-    position: static !important;
+    position: relative !important;
     transform: none !important;
     padding: 0 16px !important;
     margin: 0 0 -6px !important;
-    order: 2 !important;
     box-sizing: border-box;
     width: 100%;
     z-index: 5;
-    position: relative !important;
   }
   .about-box { padding: 16px 16px 18px !important; border-radius: 14px !important; background: rgba(255,255,255,0.5) !important; }
   .about-title { font-size: 14px !important; margin-bottom: 8px !important; }
@@ -650,8 +647,6 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
       </div>
     </div>
 
-    <img class="workshop-photo" src="bg3.jpg" alt="Workshop JavasMedia">
-
     <div class="about-box-wrap">
       <div class="about-box">
         <div class="about-title">ABOUT US</div>
@@ -660,6 +655,8 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
         </p>
       </div>
     </div>
+
+    <img class="workshop-photo" src="bg3.jpg" alt="Workshop JavasMedia">
   </div>
 
   <!-- BRAND PARTNER -->
