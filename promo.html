@@ -436,16 +436,18 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 }
 
 .benefit-icon-wrap {
-  width: 48px;
-  height: 48px;
-  background: rgba(0,0,0,0.1);
-  border-radius: 50%;
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 22px;
 }
-.benefit-icon-wrap img { width: 24px; height: 24px; object-fit: contain; }
+.benefit-icon-wrap img { width: 40px; height: 40px; object-fit: contain; }
+/* icon-produksi-cepat.png & icon-kirim-indonesia.png punya banyak ruang kosong
+   di dalam kanvasnya sendiri, jadi perlu di-render lebih besar dari yang lain
+   biar ukuran tampilnya kelihatan setara dengan icon WhatsApp */
+.icon-produksi img, .icon-kirim img { width: 64px; height: 64px; }
 
 .benefit-title {
   font-size: 14px;
@@ -739,7 +741,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   <!-- BENEFIT STRIP -->
   <div class="benefit-strip">
     <div class="benefit-item">
-      <div class="benefit-icon-wrap"><img src="icon-produksi-cepat.png" alt="Produksi Cepat"></div>
+      <div class="benefit-icon-wrap icon-produksi"><img src="icon-produksi-cepat.png" alt="Produksi Cepat"></div>
       <div>
         <div class="benefit-title">Produksi Cepat</div>
         <div class="benefit-desc">3–5 hari kerja</div>
@@ -755,7 +757,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
     </div>
     <div class="benefit-divider"></div>
     <div class="benefit-item">
-      <div class="benefit-icon-wrap"><img src="icon-kirim-indonesia.png" alt="Kirim Seluruh Indonesia"></div>
+      <div class="benefit-icon-wrap icon-kirim"><img src="icon-kirim-indonesia.png" alt="Kirim Seluruh Indonesia"></div>
       <div>
         <div class="benefit-title">Kirim Seluruh Indonesia</div>
         <div class="benefit-desc">JNE · JNT · Sicepat</div>
