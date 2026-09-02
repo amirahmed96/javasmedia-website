@@ -1,3 +1,9 @@
+window.toggleFooterAccordion = function (h4) {
+  var links = h4.nextElementSibling;
+  h4.classList.toggle('open');
+  if (links) links.classList.toggle('open');
+};
+
 (function () {
   function qs(sel) { return document.querySelector(sel); }
 

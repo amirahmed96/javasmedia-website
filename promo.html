@@ -417,6 +417,9 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   color: #e85d04;
 }
 
+/* Kartu ke-9: cuma tampil di mobile supaya grid mobile 3x3 genap, desktop tetap 4x2 = 8 kartu */
+.product-card-placeholder { display: none; }
+
 /* ===== BENEFIT STRIP ===== */
 .benefit-strip {
   background: #00bcd4;
@@ -480,6 +483,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 .newsletter-consent { display: flex; align-items: center; justify-content: center; gap: 8px; color: #444; font-size: 11px; }
 </style>
 <link rel="stylesheet" href="mobile-nav.css">
+<link rel="stylesheet" href="mobile.css">
 </head>
 <body>
 <div class="page">
@@ -722,6 +726,12 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
           <div class="product-price"><span class="price-old">Rp 230.000</span><span class="price-new">Rp 125.000</span></div>
         </div>
       </div>
+      <div class="product-card product-card-placeholder gray" style="border-style:dashed;box-shadow:none;cursor:default;">
+        <div class="product-img" style="color:#ccc;">➕</div>
+        <div class="product-info" style="text-align:center;">
+          <div class="product-name" style="color:#999;">PROMO LAINNYA<br>SEGERA HADIR</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -767,29 +777,35 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
         </div>
       </div>
       <div class="footer-col">
-        <h4>SHOP</h4>
-        <a href="katalog.html">New Arrivals</a>
-        <a href="katalog.html">T-Shirts</a>
-        <a href="katalog.html">Hoodies</a>
-        <a href="katalog.html">Pants</a>
-        <a href="katalog.html">Accessories</a>
-        <a href="promo.html">Sale</a>
+        <h4 onclick="toggleFooterAccordion(this)">SHOP</h4>
+        <div class="footer-col-links">
+          <a href="katalog.html">New Arrivals</a>
+          <a href="katalog.html">T-Shirts</a>
+          <a href="katalog.html">Hoodies</a>
+          <a href="katalog.html">Pants</a>
+          <a href="katalog.html">Accessories</a>
+          <a href="promo.html">Sale</a>
+        </div>
       </div>
       <div class="footer-col">
-        <h4>HELP</h4>
-        <a href="#">FAQ</a>
-        <a href="#">Shipping Info</a>
-        <a href="#">Returns & Exchanges</a>
-        <a href="#">Track Order</a>
-        <a href="#">Contact Us</a>
+        <h4 onclick="toggleFooterAccordion(this)">HELP</h4>
+        <div class="footer-col-links">
+          <a href="#">FAQ</a>
+          <a href="#">Shipping Info</a>
+          <a href="#">Returns & Exchanges</a>
+          <a href="#">Track Order</a>
+          <a href="#">Contact Us</a>
+        </div>
       </div>
       <div class="footer-col">
-        <h4>COMPANY</h4>
-        <a href="#">About Us</a>
-        <a href="#">Careers</a>
-        <a href="#">Press</a>
-        <a href="#">Sustainability</a>
-        <a href="location.html">Pickup In Store</a>
+        <h4 onclick="toggleFooterAccordion(this)">COMPANY</h4>
+        <div class="footer-col-links">
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+          <a href="#">Sustainability</a>
+          <a href="location.html">Pickup In Store</a>
+        </div>
       </div>
     </div>
     <div class="footer-newsletter">
