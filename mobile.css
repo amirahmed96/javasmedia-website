@@ -542,22 +542,23 @@
   .desc-tab { padding: 10px 14px !important; font-size: 10px !important; white-space: nowrap !important; flex-shrink: 0 !important; }
   .desc-content { font-size: 12px !important; }
 
-  /* ---- Deskripsi bisa dipendekkan (tombol muncul dari JS kalau memang overflow) ---- */
-  .desc-collapsible {
-    max-height: 92px;
+  /* ---- Deskripsi dipotong tepat 10 baris teks (bukan tinggi piksel sembarangan),
+     pakai line-clamp supaya tombol selalu nempel persis di baris ke-10.
+     Tombol cuma muncul kalau JS ukur isinya memang lebih dari 10 baris. ---- */
+  .desc-collapsible { position: relative; }
+  .desc-collapsible:not(.expanded):not(.fits) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 10;
     overflow: hidden;
-    position: relative;
-    transition: max-height 0.25s ease;
   }
-  .desc-collapsible::after {
+  .desc-collapsible:not(.expanded):not(.fits)::after {
     content: '';
     position: absolute;
     left: 0; right: 0; bottom: 0;
     height: 28px;
     background: linear-gradient(to bottom, rgba(250,246,238,0), #FAF6EE);
   }
-  .desc-collapsible.expanded { max-height: 1000px; }
-  .desc-collapsible.expanded::after { display: none; }
   .desc-toggle-btn {
     display: none;
     align-items: center;

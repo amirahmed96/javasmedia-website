@@ -549,13 +549,17 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
       <div class="foto-col">
         <div class="foto-main">
           <div class="foto-badge">-50%</div>
-          👕
+          <span id="fotoMainEmoji">👕</span>
         </div>
         <div class="foto-thumbs">
           <div class="foto-thumb active">👕</div>
           <div class="foto-thumb">📐</div>
           <div class="foto-thumb">🎨</div>
           <div class="foto-thumb">📦</div>
+          <div class="foto-thumb">🧵</div>
+          <div class="foto-thumb">🖨️</div>
+          <div class="foto-thumb">📏</div>
+          <div class="foto-thumb">🔖</div>
         </div>
       </div>
 
@@ -665,6 +669,12 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
             </ul>
             <br>
             <p>Sablon DTF memungkinkan cetakan detail seperti foto, gradasi warna, dan desain kompleks tanpa minimum warna. <strong>Bisa full color tanpa biaya tambahan.</strong></p>
+            <br>
+            <p>Bahan dasar <strong>Cotton Combed</strong> yang kami pakai dipilih karena seratnya lembut, menyerap keringat, dan tetap nyaman dipakai seharian meski di cuaca panas. Jahitan rantai (chainstitch) di bagian bawah dan lengan membuat kaos lebih awet dan tidak mudah melar dibanding jahitan biasa.</p>
+            <br>
+            <p><strong>Tips perawatan:</strong> cuci bagian dalam terbalik dengan air dingin, hindari pemutih, dan jangan disetrika langsung di atas area sablon supaya hasil cetak DTF tetap tajam sampai puluhan kali cuci.</p>
+            <br>
+            <p>Kami juga menyediakan opsi <strong>revisi desain gratis 2x</strong> sebelum masuk produksi, jadi kamu bisa memastikan hasil akhirnya benar-benar sesuai sebelum dicetak. Tim desain kami siap bantu kalau kamu belum punya file desain sendiri.</p>
           </div>
           <button class="desc-toggle-btn" id="descToggleBtn" onclick="toggleDesc()">Baca selengkapnya <span class="desc-toggle-arrow">▾</span></button>
         </div>
@@ -826,6 +836,7 @@ document.querySelectorAll('.foto-thumb').forEach(thumb => {
   thumb.addEventListener('click', function() {
     document.querySelectorAll('.foto-thumb').forEach(t => t.classList.remove('active'));
     this.classList.add('active');
+    document.getElementById('fotoMainEmoji').textContent = this.textContent.trim();
   });
 });
 
@@ -834,18 +845,25 @@ function searchDesktop() {
   if (val) window.location.href = 'katalog.html?q=' + encodeURIComponent(val);
 }
 
-// Deskripsi bisa dipendekkan - tombol cuma muncul kalau isinya
-// memang lebih panjang dari tinggi preview, dan cuma aktif di mobile.
+// Deskripsi dipotong tepat 10 baris teks - tombol cuma muncul kalau isinya
+// memang lebih dari 10 baris, dan cuma aktif di mobile.
 function initDescCollapse() {
   const el = document.getElementById('descCollapsible');
   const btn = document.getElementById('descToggleBtn');
   if (!el || !btn) return;
-  if (window.innerWidth > 768) { btn.style.display = 'none'; el.style.maxHeight = 'none'; return; }
   el.classList.remove('expanded');
-  requestAnimationFrame(() => {
-    const collapsedMax = 92;
-    btn.style.display = el.scrollHeight > collapsedMax + 4 ? 'flex' : 'none';
-  });
+  if (window.innerWidth > 768) { btn.style.display = 'none'; el.classList.add('fits'); return; }
+  // ukur tinggi asli (tanpa dipotong) dulu buat tahu apakah beneran > 10 baris
+  el.classList.add('fits');
+  const lineHeight = parseFloat(getComputedStyle(el).lineHeight) || 20;
+  const naturalHeight = el.scrollHeight;
+  const maxAllowed = lineHeight * 10;
+  if (naturalHeight > maxAllowed + 4) {
+    el.classList.remove('fits');
+    btn.style.display = 'flex';
+  } else {
+    btn.style.display = 'none';
+  }
 }
 function toggleDesc() {
   const el = document.getElementById('descCollapsible');
