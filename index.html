@@ -430,9 +430,11 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 
   .workshop-photo { width: 100% !important; height: 120px !important; margin-top: 0 !important; }
 
-  /* About Us — layout normal (DOM sudah diurutkan di antara bg2 & bg3), margin negatif kecil biar menindih sedikit */
+  /* About Us — layout normal (DOM sudah diurutkan di antara bg2 & bg3), reset top desktop yang tidak kepakai, margin negatif kecil biar menindih sedikit */
   .about-box-wrap {
     position: relative !important;
+    top: auto !important;
+    left: auto !important;
     transform: none !important;
     padding: 0 16px !important;
     margin: 0 0 -6px !important;
