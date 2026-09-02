@@ -277,6 +277,7 @@
   .benefit-strip { flex-direction: column !important; padding: 20px 16px !important; gap: 16px !important; }
   .benefit-item { width: 100% !important; }
   .benefit-icon-wrap { width: 36px !important; height: 36px !important; font-size: 16px !important; flex-shrink: 0; }
+  .benefit-icon-wrap img { width: 18px !important; height: 18px !important; }
   .benefit-title { font-size: 11px !important; }
   .benefit-desc { font-size: 9px !important; }
   .benefit-divider { display: none !important; }
