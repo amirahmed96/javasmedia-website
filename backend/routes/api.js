@@ -11,6 +11,7 @@ const router = express.Router();
 const PRODUCTS_QUERY = `
   SELECT
     p.id, p.name, p.category, p.description, p.image_url,
+    p.variant_axis_1_name, p.variant_axis_2_name,
     (SELECT v.price FROM product_variants v
       WHERE v.product_id = p.id AND v.is_active = true
       ORDER BY v.price ASC LIMIT 1) AS price,
@@ -19,13 +20,18 @@ const PRODUCTS_QUERY = `
       ORDER BY v.price ASC LIMIT 1) AS price_old,
     COALESCE(
       (SELECT json_agg(json_build_object(
-          'id', v.id, 'sku', v.sku, 'variant_label', v.variant_label,
-          'price', v.price, 'price_old', v.price_old
+          'id', v.id, 'sku', v.sku, 'variant_option_1', v.variant_option_1,
+          'variant_option_2', v.variant_option_2, 'price', v.price, 'price_old', v.price_old
         ) ORDER BY v.price ASC)
         FROM product_variants v
         WHERE v.product_id = p.id AND v.is_active = true),
       '[]'
-    ) AS variants
+    ) AS variants,
+    COALESCE(
+      (SELECT json_agg(json_build_object('id', i.id, 'image_url', i.image_url) ORDER BY i.sort_order ASC)
+        FROM product_images i WHERE i.product_id = p.id),
+      '[]'
+    ) AS images
   FROM products p
   WHERE p.is_active = true
 `;
@@ -104,7 +110,7 @@ router.get('/api/vouchers', async (req, res) => {
 router.get('/api/hero-slides', async (req, res) => {
   try {
     const result = await pool.query(
-      'SELECT id, image_url FROM hero_slides ORDER BY sort_order ASC, id ASC'
+      'SELECT id, image_url, link_url FROM hero_slides ORDER BY sort_order ASC, id ASC'
     );
     res.json(result.rows);
   } catch (err) {
@@ -116,7 +122,7 @@ router.get('/api/hero-slides', async (req, res) => {
 router.get('/api/sub-campaigns', async (req, res) => {
   try {
     const result = await pool.query(
-      'SELECT id, image_url, label_text FROM sub_campaigns ORDER BY sort_order ASC, id ASC'
+      'SELECT id, image_url, label_text, link_url FROM sub_campaigns ORDER BY sort_order ASC, id ASC'
     );
     res.json(result.rows);
   } catch (err) {
