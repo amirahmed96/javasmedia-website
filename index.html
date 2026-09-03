@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -485,22 +485,10 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   <!-- HERO SLIDER -->
   <div class="hero-wrap" style="position:relative;width:1440px;background:url('bg1.png') center/cover;padding:16px 120px;margin-bottom:60px;">
     <div class="slider-wrap" style="position:relative;border-radius:8px;overflow:hidden;">
-      <div id="sliderTrack" style="display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;">
-        <img class="slide-img" src="slide1.jpg" alt="" style="width:1200px;height:auto;display:block;flex-shrink:0;object-fit:cover;scroll-snap-align:start;">
-        <img class="slide-img" src="slide2.jpg" alt="" style="width:1200px;height:auto;display:block;flex-shrink:0;object-fit:cover;scroll-snap-align:start;">
-        <img class="slide-img" src="slide3.jpg" alt="" style="width:1200px;height:auto;display:block;flex-shrink:0;object-fit:cover;scroll-snap-align:start;">
-        <img class="slide-img" src="slide4.jpg" alt="" style="width:1200px;height:auto;display:block;flex-shrink:0;object-fit:cover;scroll-snap-align:start;">
-        <img class="slide-img" src="slide5.jpg" alt="" style="width:1200px;height:auto;display:block;flex-shrink:0;object-fit:cover;scroll-snap-align:start;">
-      </div>
+      <div id="sliderTrack" style="display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;"></div>
       <button onclick="moveSlide(-1)" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;border:none;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;z-index:10;">‹</button>
       <button onclick="moveSlide(1)" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;border:none;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;z-index:10;">›</button>
-      <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:10;">
-        <button onclick="goToSlide(0)" class="dot" style="width:9px;height:9px;border-radius:50%;border:none;background:white;cursor:pointer;padding:0;opacity:1;"></button>
-        <button onclick="goToSlide(1)" class="dot" style="width:9px;height:9px;border-radius:50%;border:none;background:white;cursor:pointer;padding:0;opacity:0.4;"></button>
-        <button onclick="goToSlide(2)" class="dot" style="width:9px;height:9px;border-radius:50%;border:none;background:white;cursor:pointer;padding:0;opacity:0.4;"></button>
-        <button onclick="goToSlide(3)" class="dot" style="width:9px;height:9px;border-radius:50%;border:none;background:white;cursor:pointer;padding:0;opacity:0.4;"></button>
-        <button onclick="goToSlide(4)" class="dot" style="width:9px;height:9px;border-radius:50%;border:none;background:white;cursor:pointer;padding:0;opacity:0.4;"></button>
-      </div>
+      <div id="sliderDots" style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:10;"></div>
     </div>
   </div>
 
@@ -508,24 +496,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
   <div class="campaign-about-wrap">
     <div class="sub-section">
       <img class="sub-bg" src="bg2.jpg" alt="">
-      <div class="sub-grid">
-        <div class="sub-card">
-          <img src="sub-campaign-1.png" alt="Sub Campaign 1">
-          <div class="sub-card-label">SUB<br>CAMPAIGN</div>
-        </div>
-        <div class="sub-card">
-          <img src="sub-campaign-2.png" alt="Sub Campaign 2">
-          <div class="sub-card-label">SUB<br>CAMPAIGN</div>
-        </div>
-        <div class="sub-card">
-          <img src="sub-campaign-3.png" alt="Sub Campaign 3">
-          <div class="sub-card-label">SUB<br>CAMPAIGN</div>
-        </div>
-        <div class="sub-card">
-          <img src="sub-campaign-4.png" alt="Sub Campaign 4">
-          <div class="sub-card-label">SUB<br>CAMPAIGN</div>
-        </div>
-      </div>
+      <div class="sub-grid"></div>
     </div>
 
     <div class="about-box-wrap">
@@ -745,22 +716,43 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; }
 <script src="mobile-nav.js"></script>
 <script src="cart.js"></script>
 <script>
+const API_BASE = 'https://javasmedia-backend-production.up.railway.app';
+
+// Fallback ke foto asli kalau backend kosong/gak bisa dihubungi - homepage
+// tidak boleh pernah tampil kosong buat pengunjung.
+const FALLBACK_SLIDES = [
+  { image_url: 'slide1.jpg', link_url: null },
+  { image_url: 'slide2.jpg', link_url: null },
+  { image_url: 'slide3.jpg', link_url: null },
+  { image_url: 'slide4.jpg', link_url: null },
+  { image_url: 'slide5.jpg', link_url: null }
+];
+const FALLBACK_SUB_CAMPAIGNS = [
+  { image_url: 'sub-campaign-1.png', label_text: 'SUB CAMPAIGN', link_url: null },
+  { image_url: 'sub-campaign-2.png', label_text: 'SUB CAMPAIGN', link_url: null },
+  { image_url: 'sub-campaign-3.png', label_text: 'SUB CAMPAIGN', link_url: null },
+  { image_url: 'sub-campaign-4.png', label_text: 'SUB CAMPAIGN', link_url: null }
+];
+
 // ===== SLIDER (swipeable, scroll-snap) =====
 const sliderTrack = document.getElementById('sliderTrack');
-const dots = document.querySelectorAll('.dot');
-const total = 5;
+let total = 0;
 
 function getSlideWidth() {
-  return sliderTrack.querySelector('.slide-img').getBoundingClientRect().width;
+  const img = sliderTrack.querySelector('.slide-img');
+  return img ? img.getBoundingClientRect().width : 0;
 }
 
 function updateDots() {
-  const idx = Math.round(sliderTrack.scrollLeft / getSlideWidth());
-  dots.forEach((d, i) => d.style.opacity = i === idx ? '1' : '0.4');
+  const w = getSlideWidth();
+  if (total === 0 || !w) return;
+  const idx = Math.round(sliderTrack.scrollLeft / w);
+  document.querySelectorAll('#sliderDots .dot').forEach((d, i) => d.style.opacity = i === idx ? '1' : '0.4');
 }
 sliderTrack.addEventListener('scroll', updateDots);
 
 function moveSlide(dir) {
+  if (total === 0) return;
   const slideWidth = getSlideWidth();
   let idx = Math.round(sliderTrack.scrollLeft / slideWidth);
   idx = (idx + dir + total) % total;
@@ -771,8 +763,59 @@ function goToSlide(n) {
   sliderTrack.scrollTo({ left: n * getSlideWidth(), behavior: 'smooth' });
 }
 
+function renderSlides(slides) {
+  sliderTrack.innerHTML = slides.map((s) => {
+    const cursorStyle = s.link_url ? 'cursor:pointer;' : '';
+    const clickAttr = s.link_url ? ' onclick="location.href=\'' + s.link_url + '\'"' : '';
+    return '<img class="slide-img" src="' + s.image_url + '" alt=""' + clickAttr +
+      ' style="width:1200px;height:auto;display:block;flex-shrink:0;object-fit:cover;scroll-snap-align:start;' + cursorStyle + '">';
+  }).join('');
+
+  document.getElementById('sliderDots').innerHTML = slides.map((s, i) =>
+    '<button onclick="goToSlide(' + i + ')" class="dot" style="width:9px;height:9px;border-radius:50%;border:none;background:white;cursor:pointer;padding:0;opacity:' + (i === 0 ? '1' : '0.4') + ';"></button>'
+  ).join('');
+
+  total = slides.length;
+}
+
+async function loadSlides() {
+  try {
+    const res = await fetch(API_BASE + '/api/hero-slides');
+    const data = await res.json();
+    renderSlides(data.length > 0 ? data : FALLBACK_SLIDES);
+  } catch (err) {
+    renderSlides(FALLBACK_SLIDES);
+  }
+}
+
 // Auto slide setiap 5 detik
 setInterval(() => moveSlide(1), 5000);
+
+// ===== SUB CAMPAIGN =====
+function renderSubCampaigns(items) {
+  const grid = document.querySelector('.sub-grid');
+  grid.innerHTML = items.map((item) => {
+    const clickAttr = item.link_url ? ' onclick="location.href=\'' + item.link_url + '\'" style="cursor:pointer;"' : '';
+    const label = (item.label_text || 'SUB CAMPAIGN').toUpperCase().replace(' ', '<br>');
+    return '<div class="sub-card"' + clickAttr + '>' +
+      '<img src="' + item.image_url + '" alt="Sub Campaign">' +
+      '<div class="sub-card-label">' + label + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+async function loadSubCampaigns() {
+  try {
+    const res = await fetch(API_BASE + '/api/sub-campaigns');
+    const data = await res.json();
+    renderSubCampaigns(data.length > 0 ? data : FALLBACK_SUB_CAMPAIGNS);
+  } catch (err) {
+    renderSubCampaigns(FALLBACK_SUB_CAMPAIGNS);
+  }
+}
+
+loadSlides();
+loadSubCampaigns();
 
 // ===== DESKTOP SEARCH =====
 function searchDesktop() {
