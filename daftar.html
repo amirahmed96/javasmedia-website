@@ -53,17 +53,6 @@ body {
   text-decoration: none;
 }
 
-.header-right {
-  font-size: 12px;
-  color: rgba(255,255,255,0.5);
-}
-
-.header-right a {
-  color: var(--yellow);
-  text-decoration: none;
-  font-weight: 700;
-}
-
 .checkered {
   height: 18px;
   background: repeating-linear-gradient(90deg, var(--red) 0px, var(--red) 18px, var(--bg) 18px, var(--bg) 36px);
@@ -454,10 +443,7 @@ body {
 
 <!-- MINI HEADER -->
 <div class="mini-header">
-  <a href="#" class="logo">JavasMedia</a>
-  <div class="header-right">
-    Sudah punya akun? <a href="#">Masuk sekarang →</a>
-  </div>
+  <a href="index.html" class="logo">JavasMedia</a>
 </div>
 <div class="checkered"></div>
 
@@ -553,7 +539,7 @@ body {
       <div class="form-header">
         <div class="form-eyebrow">Daftar Gratis</div>
         <div class="form-title">Buat<br>Akun</div>
-        <div class="form-sub">Sudah punya akun? <a href="#" style="color:var(--orange);font-weight:700;">Masuk sekarang →</a></div>
+        <div class="form-sub">Sudah punya akun? <a href="login.html" style="color:var(--orange);font-weight:700;">Masuk sekarang →</a></div>
       </div>
 
       <!-- Google register -->
@@ -608,7 +594,7 @@ body {
       <button class="btn-login">DAFTAR SEKARANG →</button>
 
       <div class="register-row">
-        Sudah punya akun? <a href="#">Masuk di sini</a>
+        Sudah punya akun? <a href="login.html">Masuk di sini</a>
       </div>
 
     </div>
@@ -616,12 +602,13 @@ body {
 </div>
 
 <script>
-// Tab switcher
-const tabs = document.querySelectorAll('.form-tab');
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    tabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
+// Show/hide password
+document.querySelectorAll('.show-pass').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const input = btn.previousElementSibling;
+    const isHidden = input.type === 'password';
+    input.type = isHidden ? 'text' : 'password';
+    btn.textContent = isHidden ? '🙈' : '👁';
   });
 });
 </script>
