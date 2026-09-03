@@ -796,4 +796,41 @@
      dalam, kalau ikut ke-set di .info-card sendiri, header hitamnya jadi
      tidak rata sampai pinggir kartu. */
   .bottom-grid .info-card { padding: 0 !important; }
+
+  /* ============================================
+     HALAMAN KERANJANG (cart.html)
+     Ringkasan turun ke bawah daftar item (bukan
+     kolom kanan sticky), tiap kartu item dipecah
+     jadi 2 baris (foto+info di atas, qty/subtotal/
+     hapus di bawah) - pakai flex-wrap alami, BUKAN
+     CSS order (pernah gak reliable di proyek ini).
+     ============================================ */
+
+  .cart-page-wrap { padding: 20px 16px 40px !important; }
+  .cart-page-header { margin-bottom: 18px !important; }
+  .cart-page-title { font-size: 24px !important; }
+  .cart-page-count { font-size: 10px !important; padding: 5px 10px !important; }
+
+  .cart-empty { padding: 50px 16px !important; }
+  .cart-empty-icon { font-size: 48px !important; margin-bottom: 12px !important; }
+  .cart-empty-title { font-size: 20px !important; }
+  .cart-empty-desc { font-size: 11px !important; margin-bottom: 18px !important; }
+  .cart-empty-btn { font-size: 15px !important; padding: 10px 22px !important; }
+
+  .cart-layout { grid-template-columns: 1fr !important; gap: 16px !important; }
+
+  .cart-item-card { flex-wrap: wrap !important; gap: 10px 12px !important; padding: 12px !important; }
+  .cart-item-img { width: 48px !important; height: 48px !important; font-size: 22px !important; }
+  /* Info dipaksa ambil hampir semua lebar baris pertama, sisanya (qty/
+     subtotal/hapus) otomatis turun ke baris ke-2 karena flex-wrap. */
+  .cart-item-info { flex: 1 1 calc(100% - 60px) !important; min-width: 0 !important; }
+  .cart-item-name { font-size: 12px !important; }
+  .cart-item-variant { font-size: 10px !important; }
+  .cart-item-price { font-size: 11px !important; }
+  .cart-item-subtotal { width: auto !important; font-size: 12px !important; }
+
+  .cart-summary { position: static !important; padding: 18px !important; }
+  .cart-summary-title { font-size: 18px !important; margin-bottom: 12px !important; }
+  .cart-summary-divider { margin: 14px -18px 14px !important; }
+  .cart-checkout-btn { font-size: 12.5px !important; padding: 13px !important; }
 }
