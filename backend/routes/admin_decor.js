@@ -104,7 +104,10 @@ function decorRoutes(table, extraFields = []) {
   return r;
 }
 
-router.use('/api/admin/hero-slides', decorRoutes('hero_slides'));
-router.use('/api/admin/sub-campaigns', decorRoutes('sub_campaigns', [{ name: 'label_text', default: 'SUB CAMPAIGN' }]));
+router.use('/api/admin/hero-slides', decorRoutes('hero_slides', [{ name: 'link_url', default: null }]));
+router.use('/api/admin/sub-campaigns', decorRoutes('sub_campaigns', [
+  { name: 'label_text', default: 'SUB CAMPAIGN' },
+  { name: 'link_url', default: null }
+]));
 
 module.exports = router;
