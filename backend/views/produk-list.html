@@ -34,7 +34,10 @@ async function loadProducts() {
   }
   let html = '<table><thead><tr><th>Foto</th><th>Nama</th><th>Kategori</th><th>Varian</th><th>Status</th><th>Aksi</th></tr></thead><tbody>';
   products.forEach((p) => {
-    const variantSummary = p.variants.map((v) => v.sku + (v.variant_label ? ' (' + v.variant_label + ')' : '')).join(', ') || '-';
+    const variantSummary = p.variants.map((v) => {
+      const opts = [v.variant_option_1, v.variant_option_2].filter(Boolean).join(' / ');
+      return v.sku + (opts ? ' (' + opts + ')' : '');
+    }).join(', ') || '-';
     html += '<tr>' +
       '<td>' + (p.image_url ? '<img class="thumb" src="' + p.image_url + '">' : '<div class="thumb"></div>') + '</td>' +
       '<td>' + p.name + '</td>' +
