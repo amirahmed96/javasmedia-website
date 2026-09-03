@@ -51,6 +51,7 @@ body {
   color: white;
   letter-spacing: 3px;
   font-style: italic;
+  text-decoration: none;
 }
 
 .header-nav {
@@ -564,11 +565,11 @@ tr:hover td { background: #fef9f0; }
 
 <!-- HEADER -->
 <div class="header">
-  <div class="logo">JavasMedia</div>
+  <a href="index.html" class="logo">JavasMedia</a>
   <div class="header-nav">
-    <a href="#" class="header-link">Katalog</a>
-    <a href="#" class="header-link">Promo</a>
-    <a href="#" class="header-link">Articles</a>
+    <a href="katalog.html" class="header-link">Katalog</a>
+    <a href="promo.html" class="header-link">Promo</a>
+    <a href="articles.html" class="header-link">Articles</a>
   </div>
   <div class="header-user">
     <div class="user-avatar">AD</div>
@@ -664,7 +665,7 @@ tr:hover td { background: #fef9f0; }
         <div class="promo-title">Diskon 20% Order Berikutnya!</div>
         <div class="promo-sub">Berlaku s/d 31 Juli 2024 · Min. order Rp 500.000</div>
       </div>
-      <div class="promo-code">MEMBER20</div>
+      <div class="promo-code" onclick="copyPromoCode(this)">MEMBER20</div>
     </div>
 
     <!-- ORDER TERBARU -->
@@ -695,7 +696,7 @@ tr:hover td { background: #fef9f0; }
             <td>
               <div class="action-btns">
                 <button class="action-btn primary">📄 Invoice</button>
-                <button class="action-btn green">💬 WA</button>
+                <a href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+mau+tanya+soal+order+JVS/WA/020726/00142" target="_blank" class="action-btn green" style="text-decoration:none;">💬 WA</a>
               </div>
             </td>
           </tr>
@@ -807,5 +808,31 @@ tr:hover td { background: #fef9f0; }
   </div>
 </div>
 
+<script>
+function copyPromoCode(el) {
+  const code = el.textContent.trim();
+  const showCopied = () => {
+    const original = el.textContent;
+    el.textContent = 'Tersalin!';
+    setTimeout(() => { el.textContent = original; }, 1500);
+  };
+  const fallbackCopy = () => {
+    const temp = document.createElement('textarea');
+    temp.value = code;
+    temp.style.position = 'fixed';
+    temp.style.opacity = '0';
+    document.body.appendChild(temp);
+    temp.focus();
+    temp.select();
+    try { document.execCommand('copy'); showCopied(); } catch (e) {}
+    document.body.removeChild(temp);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(code).then(showCopied).catch(fallbackCopy);
+  } else {
+    fallbackCopy();
+  }
+}
+</script>
 </body>
 </html>
