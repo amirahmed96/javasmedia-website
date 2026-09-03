@@ -348,6 +348,12 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
   border-radius: 2px;
   margin-bottom: 6px;
 }
+.product-cat.aksesori { background: #00bcd4; }
+.product-cat.packaging { background: #9c27b0; }
+.product-cat.promotion { background: #e85d04; }
+.product-cat.homedecor { background: #4caf50; }
+.product-cat.others { background: #795548; }
+.product-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .product-name {
   font-size: 12px;
@@ -497,13 +503,13 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
        Salinan terpisah dari .sidebar punya, bukan hasil pindah posisi elemen yang sama. -->
   <div class="cat-chips-mobile-wrap">
     <div class="cat-chips-mobile">
-      <button class="cat-chip active">Semua</button>
-      <button class="cat-chip">Apparel</button>
-      <button class="cat-chip">Aksesori</button>
-      <button class="cat-chip">Packaging</button>
-      <button class="cat-chip">Promotion Item</button>
-      <button class="cat-chip">Homedecor</button>
-      <button class="cat-chip">Others</button>
+      <button class="cat-chip active" data-cat="all">Semua</button>
+      <button class="cat-chip" data-cat="apparel">Apparel</button>
+      <button class="cat-chip" data-cat="aksesori">Aksesori</button>
+      <button class="cat-chip" data-cat="packaging">Packaging</button>
+      <button class="cat-chip" data-cat="promotion">Promotion Item</button>
+      <button class="cat-chip" data-cat="homedecor">Homedecor</button>
+      <button class="cat-chip" data-cat="others">Others</button>
     </div>
   </div>
 
@@ -517,25 +523,25 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
       <div class="sidebar-section">
         <div class="sidebar-title">☰ KATEGORI</div>
         <div class="sidebar-body">
-          <div class="cat-item active">
+          <div class="cat-item active" data-cat="all">
             <input type="checkbox" checked> Semua
           </div>
-          <div class="cat-item">
+          <div class="cat-item" data-cat="apparel">
             <input type="checkbox"> Apparel
           </div>
-          <div class="cat-item">
+          <div class="cat-item" data-cat="aksesori">
             <input type="checkbox"> Aksesori
           </div>
-          <div class="cat-item">
+          <div class="cat-item" data-cat="packaging">
             <input type="checkbox"> Packaging
           </div>
-          <div class="cat-item">
+          <div class="cat-item" data-cat="promotion">
             <input type="checkbox"> Promotion Item
           </div>
-          <div class="cat-item">
+          <div class="cat-item" data-cat="homedecor">
             <input type="checkbox"> Homedecor
           </div>
-          <div class="cat-item">
+          <div class="cat-item" data-cat="others">
             <input type="checkbox"> Others
           </div>
         </div>
@@ -564,9 +570,9 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
       <!-- Sort Bar -->
       <div class="sort-bar">
         <span class="sort-label">Urutkan:</span>
-        <button class="sort-btn active">Terbaru</button>
-        <button class="sort-btn">Harga ↑</button>
-        <button class="sort-btn">Harga ↓</button>
+        <button class="sort-btn active" data-sort="newest">Terbaru</button>
+        <button class="sort-btn" data-sort="price_asc">Harga ↑</button>
+        <button class="sort-btn" data-sort="price_desc">Harga ↓</button>
         <div class="search-katalog">
           <input type="text" placeholder="Cari di katalog...">
           <button><img src="search-icon.png" alt="Cari"></button>
@@ -575,375 +581,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 
       <!-- Product Grid -->
       <div class="product-grid" id="productGrid">
-
-        <!-- Row 1 -->
-        <div class="product-card apparel" onclick="location.href='detail-produk.html'">
-          <div class="product-img">👕</div>
-          <div class="product-info">
-            <div class="product-cat">APPAREL</div>
-            <div class="product-name">Kaos Custom Sablon DTF</div>
-            <div class="product-price">
-              <span class="price-old">Rp 90.000</span>
-              <span class="price-new">Rp 45.000</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <div class="product-card apparel" onclick="location.href='detail-produk.html'">
-          <div class="product-badge" style="background:#1e3a5f;">NEW</div>
-          <div class="product-img">🧥</div>
-          <div class="product-info">
-            <div class="product-cat">APPAREL</div>
-            <div class="product-name">Coach Jacket Sablon Polyflex Reflektif</div>
-            <div class="product-price">
-              <span class="price-new">Rp 125.000</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <div class="product-card aksesori" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🪩</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#00bcd4;">AKSESORI</div>
-            <div class="product-name">Lanyard Print + ID Card</div>
-            <div class="product-price">
-              <span class="price-new">Rp 25.000</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <div class="product-card packaging" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🏷️</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#9c27b0;">PACKAGING</div>
-            <div class="product-name">Label Tag Polyflex 8×2cm</div>
-            <div class="product-price">
-              <span class="price-new">Rp 3.700</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <!-- Row 2 -->
-        <div class="product-card apparel" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🧢</div>
-          <div class="product-info">
-            <div class="product-cat">APPAREL</div>
-            <div class="product-name">Topi Trucker + Sablon DTF</div>
-            <div class="product-price">
-              <span class="price-new">Rp 17.000</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <div class="product-card apparel" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🛍️</div>
-          <div class="product-info">
-            <div class="product-cat">APPAREL</div>
-            <div class="product-name">Totebag Kanvas Custom</div>
-            <div class="product-price">
-              <span class="price-new">Rp 28.000</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <div class="product-card promotion" onclick="location.href='detail-produk.html'">
-          <div class="product-img">📢</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#e85d04;">PROMOTION</div>
-            <div class="product-name">Banner Meteran Roll Up</div>
-            <div class="product-price">
-              <span class="price-new">Rp 11.700</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <div class="product-card homedecor" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🖼️</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#4caf50;">HOMEDECOR</div>
-            <div class="product-name">Pilbox Apet Karst 30×40cm</div>
-            <div class="product-price">
-              <span class="price-new">Rp 69.000</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <!-- Row 3 -->
-        <div class="product-card apparel" onclick="location.href='detail-produk.html'">
-          <div class="product-badge" style="background:#e85d04;">-50%</div>
-          <div class="product-img">👕</div>
-          <div class="product-info">
-            <div class="product-cat">APPAREL</div>
-            <div class="product-name">Kaos Custom Sablon DTF</div>
-            <div class="product-price">
-              <span class="price-old">Rp 90.000</span>
-              <span class="price-new">Rp 45.000</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <div class="product-card apparel" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🧥</div>
-          <div class="product-info">
-            <div class="product-cat">APPAREL</div>
-            <div class="product-name">Coach Jacket Sablon Polyflex Reflektif</div>
-            <div class="product-price">
-              <span class="price-new">Rp 125.000</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <div class="product-card aksesori" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🪩</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#00bcd4;">AKSESORI</div>
-            <div class="product-name">Lanyard Print + ID Card</div>
-            <div class="product-price">
-              <span class="price-new">Rp 25.000</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <div class="product-card packaging" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🏷️</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#9c27b0;">PACKAGING</div>
-            <div class="product-name">Label Tag Polyflex 8×2cm</div>
-            <div class="product-price">
-              <span class="price-new">Rp 3.700</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <!-- Row 4 -->
-        <div class="product-card apparel" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🧢</div>
-          <div class="product-info">
-            <div class="product-cat">APPAREL</div>
-            <div class="product-name">Topi Trucker + Sablon DTF</div>
-            <div class="product-price">
-              <span class="price-new">Rp 17.000</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <div class="product-card apparel" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🛍️</div>
-          <div class="product-info">
-            <div class="product-cat">APPAREL</div>
-            <div class="product-name">Totebag Kanvas Custom</div>
-            <div class="product-price">
-              <span class="price-new">Rp 28.000</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <div class="product-card promotion" onclick="location.href='detail-produk.html'">
-          <div class="product-img">📢</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#e85d04;">PROMOTION</div>
-            <div class="product-name">Banner Meteran Roll Up</div>
-            <div class="product-price">
-              <span class="price-new">Rp 11.700</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <div class="product-card homedecor" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🖼️</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#4caf50;">HOMEDECOR</div>
-            <div class="product-name">Pilbox Apet Karst 30×40cm</div>
-            <div class="product-price">
-              <span class="price-new">Rp 69.000</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <!-- Row 5 -->
-        <div class="product-card apparel" onclick="location.href='detail-produk.html'">
-          <div class="product-badge" style="background:#e85d04;">-50%</div>
-          <div class="product-img">👕</div>
-          <div class="product-info">
-            <div class="product-cat">APPAREL</div>
-            <div class="product-name">Kaos Custom Sablon DTF</div>
-            <div class="product-price">
-              <span class="price-old">Rp 90.000</span>
-              <span class="price-new">Rp 45.000</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <div class="product-card apparel" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🧥</div>
-          <div class="product-info">
-            <div class="product-cat">APPAREL</div>
-            <div class="product-name">Coach Jacket Sablon Polyflex Reflektif</div>
-            <div class="product-price">
-              <span class="price-new">Rp 125.000</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <div class="product-card aksesori" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🪩</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#00bcd4;">AKSESORI</div>
-            <div class="product-name">Lanyard Print + ID Card</div>
-            <div class="product-price">
-              <span class="price-new">Rp 25.000</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <div class="product-card packaging" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🏷️</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#9c27b0;">PACKAGING</div>
-            <div class="product-name">Label Tag Polyflex 8×2cm</div>
-            <div class="product-price">
-              <span class="price-new">Rp 3.700</span>
-            </div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <!-- Row 6 -->
-        <div class="product-card apparel" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🧦</div>
-          <div class="product-info">
-            <div class="product-cat">APPAREL</div>
-            <div class="product-name">Kaos Polo Custom Bordir</div>
-            <div class="product-price"><span class="price-new">Rp 65.000</span></div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-        <div class="product-card aksesori" onclick="location.href='detail-produk.html'">
-          <div class="product-badge" style="background:#00bcd4;">NEW</div>
-          <div class="product-img">🔑</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#00bcd4;">AKSESORI</div>
-            <div class="product-name">Gantungan Kunci Akrilik Custom</div>
-            <div class="product-price"><span class="price-new">Rp 8.500</span></div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-        <div class="product-card packaging" onclick="location.href='detail-produk.html'">
-          <div class="product-img">📦</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#9c27b0;">PACKAGING</div>
-            <div class="product-name">Dus Box Custom Print</div>
-            <div class="product-price"><span class="price-new">Rp 12.000</span></div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-        <div class="product-card promotion" onclick="location.href='detail-produk.html'">
-          <div class="product-img">📋</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#e85d04;">PROMOTION</div>
-            <div class="product-name">Brosur A5 Full Color</div>
-            <div class="product-price"><span class="price-new">Rp 2.500</span></div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <!-- Row 7 -->
-        <div class="product-card apparel" onclick="location.href='detail-produk.html'">
-          <div class="product-badge" style="background:#e85d04;">-30%</div>
-          <div class="product-img">⚽</div>
-          <div class="product-info">
-            <div class="product-cat">APPAREL</div>
-            <div class="product-name">Jersey Futsal Full Print</div>
-            <div class="product-price"><span class="price-old">Rp 80.000</span><span class="price-new">Rp 56.000</span></div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-        <div class="product-card aksesori" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🎫</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#00bcd4;">AKSESORI</div>
-            <div class="product-name">ID Card PVC + Holder</div>
-            <div class="product-price"><span class="price-new">Rp 15.000</span></div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-        <div class="product-card homedecor" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🖼️</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#4caf50;">HOMEDECOR</div>
-            <div class="product-name">Poster Vinyl Indoor A2</div>
-            <div class="product-price"><span class="price-new">Rp 35.000</span></div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-        <div class="product-card packaging" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🎁</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#9c27b0;">PACKAGING</div>
-            <div class="product-name">Paperbag Custom Handle Tali</div>
-            <div class="product-price"><span class="price-new">Rp 9.000</span></div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
-        <!-- Row 8 -->
-        <div class="product-card apparel" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🧤</div>
-          <div class="product-info">
-            <div class="product-cat">APPAREL</div>
-            <div class="product-name">Hoodie Custom DTF</div>
-            <div class="product-price"><span class="price-new">Rp 145.000</span></div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-        <div class="product-card promotion" onclick="location.href='detail-produk.html'">
-          <div class="product-img">📣</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#e85d04;">PROMOTION</div>
-            <div class="product-name">Spanduk Vinyl 1×2m</div>
-            <div class="product-price"><span class="price-new">Rp 28.000</span></div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-        <div class="product-card aksesori" onclick="location.href='detail-produk.html'">
-          <div class="product-badge" style="background:#e85d04;">-20%</div>
-          <div class="product-img">⭐</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#00bcd4;">AKSESORI</div>
-            <div class="product-name">Stiker Vinil Cutting Custom</div>
-            <div class="product-price"><span class="price-old">Rp 5.000</span><span class="price-new">Rp 4.000</span></div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-        <div class="product-card homedecor" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🎨</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#4caf50;">HOMEDECOR</div>
-            <div class="product-name">Canvas Print Bingkai Custom</div>
-            <div class="product-price"><span class="price-new">Rp 89.000</span></div>
-            <button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>
-          </div>
-        </div>
-
+        <div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:#999;">Memuat produk...</div>
       </div>
 
       <!-- Tombol lihat produk lain - khusus mobile -->
@@ -1030,19 +668,96 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 </div>
 
 <script>
+const API_BASE = 'https://javasmedia-backend-production.up.railway.app';
+const CATEGORY_EMOJI = { apparel: '👕', aksesori: '🪩', packaging: '🏷️', promotion: '📢', homedecor: '🖼️', others: '📦' };
+
+let allProducts = [];
+let currentCategory = 'all';
+let currentSort = 'newest';
+let currentSearch = new URLSearchParams(window.location.search).get('q') || '';
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str == null ? '' : str;
+  return div.innerHTML;
+}
+
+function formatRupiah(n) {
+  return Number(n).toLocaleString('id-ID');
+}
+
+function renderProductCard(p) {
+  const imgHtml = p.image_url
+    ? '<img src="' + p.image_url + '" alt="' + escapeHtml(p.name) + '">'
+    : (CATEGORY_EMOJI[p.category] || '🛍️');
+  const priceHtml = (p.price_old && p.price_old > p.price)
+    ? '<span class="price-old">Rp ' + formatRupiah(p.price_old) + '</span><span class="price-new">Rp ' + formatRupiah(p.price) + '</span>'
+    : '<span class="price-new">Rp ' + formatRupiah(p.price) + '</span>';
+  let badgeHtml = '';
+  if (p.price_old && p.price_old > p.price) {
+    const pct = Math.round((1 - p.price / p.price_old) * 100);
+    badgeHtml = '<div class="product-badge" style="background:#e85d04;">-' + pct + '%</div>';
+  }
+  return '' +
+    '<div class="product-card ' + p.category + '" onclick="location.href=\'detail-produk.html?id=' + p.id + '\'">' +
+      badgeHtml +
+      '<div class="product-img">' + imgHtml + '</div>' +
+      '<div class="product-info">' +
+        '<div class="product-cat ' + p.category + '">' + p.category.toUpperCase() + '</div>' +
+        '<div class="product-name">' + escapeHtml(p.name) + '</div>' +
+        '<div class="product-price">' + priceHtml + '</div>' +
+        '<button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>' +
+      '</div>' +
+    '</div>';
+}
+
+function renderProducts() {
+  let list = allProducts.slice();
+  if (currentCategory !== 'all') list = list.filter((p) => p.category === currentCategory);
+  if (currentSearch) {
+    const q = currentSearch.toLowerCase();
+    list = list.filter((p) => p.name.toLowerCase().includes(q));
+  }
+  if (currentSort === 'price_asc') list.sort((a, b) => a.price - b.price);
+  else if (currentSort === 'price_desc') list.sort((a, b) => b.price - a.price);
+
+  const grid = document.getElementById('productGrid');
+  if (list.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:#999;">Belum ada produk yang cocok.</div>';
+    return;
+  }
+  grid.innerHTML = list.map(renderProductCard).join('');
+}
+
+async function loadProducts() {
+  try {
+    const res = await fetch(API_BASE + '/api/products');
+    allProducts = await res.json();
+  } catch (err) {
+    allProducts = [];
+  }
+  renderProducts();
+}
+
 // Sort buttons
 document.querySelectorAll('.sort-btn').forEach(btn => {
   btn.addEventListener('click', function() {
     document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
     this.classList.add('active');
+    currentSort = this.dataset.sort;
+    renderProducts();
   });
 });
 
 // Category filter (versi desktop - sidebar)
 document.querySelectorAll('.cat-item').forEach(item => {
   item.addEventListener('click', function() {
-    document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
+    document.querySelectorAll('.cat-item').forEach(i => { i.classList.remove('active'); i.querySelector('input').checked = false; });
     this.classList.add('active');
+    this.querySelector('input').checked = true;
+    currentCategory = this.dataset.cat;
+    document.querySelectorAll('.cat-chip').forEach(c => c.classList.toggle('active', c.dataset.cat === currentCategory));
+    renderProducts();
   });
 });
 
@@ -1051,8 +766,31 @@ document.querySelectorAll('.cat-chip').forEach(chip => {
   chip.addEventListener('click', function() {
     document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
     this.classList.add('active');
+    currentCategory = this.dataset.cat;
+    document.querySelectorAll('.cat-item').forEach(i => {
+      const match = i.dataset.cat === currentCategory;
+      i.classList.toggle('active', match);
+      i.querySelector('input').checked = match;
+    });
+    renderProducts();
   });
 });
+
+// Pencarian di dalam katalog (kotak search di sort-bar)
+const inPageSearchInput = document.querySelector('.search-katalog input');
+const inPageSearchBtn = document.querySelector('.search-katalog button');
+if (inPageSearchInput) {
+  inPageSearchInput.value = currentSearch;
+  inPageSearchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') { currentSearch = inPageSearchInput.value.trim(); renderProducts(); }
+  });
+}
+if (inPageSearchBtn) {
+  inPageSearchBtn.addEventListener('click', () => {
+    currentSearch = inPageSearchInput.value.trim();
+    renderProducts();
+  });
+}
 
 function searchDesktop() {
   const val = document.getElementById('desktopSearchInput').value.trim();
@@ -1063,6 +801,8 @@ function showMoreProducts(btn) {
   document.getElementById('productGrid').classList.add('show-all');
   btn.closest('.load-more-wrap').style.display = 'none';
 }
+
+loadProducts();
 </script>
 
 <a class="floating-wa" href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+ingin+konsultasi" target="_blank" aria-label="Chat WhatsApp">
