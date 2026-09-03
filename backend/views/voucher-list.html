@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelola Voucher — Admin JavasMedia</title>
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+<nav class="admin-nav">
+  <span class="brand">JavasMedia Admin</span>
+  <a href="/admin/produk">Produk</a>
+  <a href="/admin/artikel">Artikel</a>
+  <a href="/admin/voucher" class="active">Voucher</a>
+  <a href="/admin/dekorasi">Dekorasi Toko</a>
+  <span class="spacer"></span>
+  <button id="logoutBtn">Keluar</button>
+</nav>
+<div class="admin-wrap">
+  <div class="admin-header">
+    <h1>Voucher & Promo</h1>
+  </div>
+
+  <div class="form-card" style="margin-bottom:24px;">
+    <h3 id="formTitle" style="margin-bottom:14px;font-size:14px;">Tambah Voucher Baru</h3>
+    <div id="alertBox"></div>
+    <form id="voucherForm">
+      <input type="hidden" id="editId">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Kode Voucher</label>
+          <input type="text" id="code" required placeholder="Contoh: JAVASPERT">
+        </div>
+        <div class="form-group">
+          <label>Diskon (%)</label>
+          <input type="number" id="discountPercent" required min="1" max="100">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Deskripsi</label>
+        <input type="text" id="description" placeholder="Contoh: Untuk pelanggan baru">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Berlaku Sampai (opsional)</label>
+          <input type="date" id="validUntil">
+        </div>
+        <div class="form-group">
+          <label>Status</label>
+          <select id="isActive">
+            <option value="true">Aktif</option>
+            <option value="false">Nonaktif</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" id="submitBtn">Simpan Voucher</button>
+      <button type="button" class="btn btn-secondary" id="cancelEditBtn" style="display:none;">Batal Edit</button>
+    </form>
+  </div>
+
+  <div id="content">Memuat...</div>
+</div>
+<script>
+async function loadVouchers() {
+  const res = await fetch('/api/admin/vouchers');
+  const vouchers = await res.json();
+  const content = document.getElementById('content');
+  if (vouchers.length === 0) {
+    content.innerHTML = '<div class="empty-state">Belum ada voucher.</div>';
+    return;
+  }
+  let html = '<table><thead><tr><th>Kode</th><th>Diskon</th><th>Deskripsi</th><th>Berlaku Sampai</th><th>Status</th><th>Aksi</th></tr></thead><tbody>';
+  vouchers.forEach((v) => {
+    html += '<tr>' +
+      '<td><strong>' + v.code + '</strong></td>' +
+      '<td>' + v.discount_percent + '%</td>' +
+      '<td>' + (v.description || '-') + '</td>' +
+      '<td>' + (v.valid_until ? new Date(v.valid_until).toLocaleDateString('id-ID') : '-') + '</td>' +
+      '<td>' + (v.is_active ? 'Aktif' : 'Nonaktif') + '</td>' +
+      '<td><div class="action-group">' +
+        '<button class="btn btn-secondary btn-small" onclick=\'editVoucher(' + JSON.stringify(v) + ')\'>Edit</button>' +
+        '<button class="btn btn-danger btn-small" onclick="hapusVoucher(' + v.id + ', \'' + v.code + '\')">Hapus</button>' +
+      '</div></td>' +
+    '</tr>';
+  });
+  html += '</tbody></table>';
+  content.innerHTML = html;
+}
+
+function editVoucher(v) {
+  document.getElementById('editId').value = v.id;
+  document.getElementById('code').value = v.code;
+  document.getElementById('discountPercent').value = v.discount_percent;
+  document.getElementById('description').value = v.description || '';
+  document.getElementById('validUntil').value = v.valid_until ? v.valid_until.substring(0, 10) : '';
+  document.getElementById('isActive').value = String(v.is_active);
+  document.getElementById('formTitle').textContent = 'Edit Voucher: ' + v.code;
+  document.getElementById('submitBtn').textContent = 'Simpan Perubahan';
+  document.getElementById('cancelEditBtn').style.display = 'inline-flex';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetForm() {
+  document.getElementById('voucherForm').reset();
+  document.getElementById('editId').value = '';
+  document.getElementById('formTitle').textContent = 'Tambah Voucher Baru';
+  document.getElementById('submitBtn').textContent = 'Simpan Voucher';
+  document.getElementById('cancelEditBtn').style.display = 'none';
+}
+document.getElementById('cancelEditBtn').addEventListener('click', resetForm);
+
+async function hapusVoucher(id, code) {
+  if (!confirm('Hapus voucher "' + code + '"?')) return;
+  const res = await fetch('/api/admin/vouchers/' + id, { method: 'DELETE' });
+  if (res.ok) loadVouchers();
+  else alert((await res.json()).error || 'Gagal menghapus voucher.');
+}
+
+document.getElementById('voucherForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const alertBox = document.getElementById('alertBox');
+  alertBox.innerHTML = '';
+  const editId = document.getElementById('editId').value;
+  const payload = {
+    code: document.getElementById('code').value.trim(),
+    discount_percent: parseInt(document.getElementById('discountPercent').value, 10),
+    description: document.getElementById('description').value.trim(),
+    valid_until: document.getElementById('validUntil').value || null,
+    is_active: document.getElementById('isActive').value === 'true'
+  };
+  const url = editId ? '/api/admin/vouchers/' + editId : '/api/admin/vouchers';
+  const method = editId ? 'PUT' : 'POST';
+  const res = await fetch(url, {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    alertBox.innerHTML = '<div class="alert alert-error">' + (data.error || 'Gagal menyimpan voucher.') + '</div>';
+    return;
+  }
+  resetForm();
+  loadVouchers();
+});
+
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  await fetch('/admin/logout', { method: 'POST' });
+  window.location.href = '/admin/login';
+});
+
+loadVouchers();
+</script>
+</body>
+</html>

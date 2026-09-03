@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Produk — Admin JavasMedia</title>
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+<nav class="admin-nav">
+  <span class="brand">JavasMedia Admin</span>
+  <a href="/admin/produk" class="active">Produk</a>
+  <a href="/admin/artikel">Artikel</a>
+  <a href="/admin/voucher">Voucher</a>
+  <a href="/admin/dekorasi">Dekorasi Toko</a>
+  <span class="spacer"></span>
+  <button id="logoutBtn">Keluar</button>
+</nav>
+<div class="admin-wrap">
+  <div class="admin-header">
+    <h1 id="pageTitle">Tambah Produk</h1>
+    <a href="/admin/produk" class="btn btn-secondary">← Kembali</a>
+  </div>
+  <div id="alertBox"></div>
+  <div class="form-card">
+    <form id="productForm">
+      <div class="form-group">
+        <label>Nama Produk</label>
+        <input type="text" id="name" required placeholder="Contoh: Kaos Reguler Black">
+      </div>
+      <div class="form-group">
+        <label>Kategori</label>
+        <select id="category" required>
+          <option value="apparel">Apparel</option>
+          <option value="aksesori">Aksesori</option>
+          <option value="packaging">Packaging</option>
+          <option value="promotion">Promotion Item</option>
+          <option value="homedecor">Homedecor</option>
+          <option value="others">Others</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Deskripsi</label>
+        <textarea id="description" placeholder="Deskripsi produk untuk halaman detail..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Foto Produk</label>
+        <div id="currentPhotoWrap" class="current-photo" style="display:none;">
+          <img id="currentPhoto">
+          <span class="form-hint">Foto sekarang. Upload baru buat ganti.</span>
+        </div>
+        <input type="file" id="photo" accept="image/*">
+        <div class="form-hint">Format JPG/PNG/WEBP, maksimal 5MB.</div>
+      </div>
+      <div class="form-group">
+        <label>Varian (SKU, Ukuran/Label, Harga)</label>
+        <div id="variantsWrap"></div>
+        <button type="button" class="btn btn-secondary btn-small" onclick="addVariantRow()">+ Tambah Varian</button>
+        <div class="form-hint">Kalau produk gak punya pilihan ukuran, cukup 1 baris varian dengan Label dikosongkan (SKU tetap wajib).</div>
+      </div>
+      <button type="submit" class="btn btn-primary">Simpan Produk</button>
+    </form>
+  </div>
+</div>
+<script>
+const pathParts = window.location.pathname.split('/').filter(Boolean); // ["admin","produk","5","edit"] atau ["admin","produk","baru"]
+const isEdit = pathParts[2] !== 'baru';
+const productId = isEdit ? pathParts[2] : null;
+if (isEdit) document.getElementById('pageTitle').textContent = 'Edit Produk';
+
+function variantRowHtml(v) {
+  v = v || { sku: '', variant_label: '', price: '', price_old: '' };
+  return '<div class="variant-row">' +
+    '<input type="text" placeholder="SKU (mis. RB-M)" class="v-sku" value="' + (v.sku || '') + '">' +
+    '<input type="text" placeholder="Label ukuran (opsional)" class="v-label" value="' + (v.variant_label || '') + '">' +
+    '<input type="number" placeholder="Harga" class="v-price" value="' + (v.price || '') + '">' +
+    '<input type="number" placeholder="Harga coret (opsional)" class="v-price-old" value="' + (v.price_old || '') + '">' +
+    '<button type="button" class="btn-remove-variant" onclick="this.closest(\'.variant-row\').remove()">&times;</button>' +
+  '</div>';
+}
+
+function addVariantRow(v) {
+  document.getElementById('variantsWrap').insertAdjacentHTML('beforeend', variantRowHtml(v));
+}
+
+function collectVariants() {
+  const rows = document.querySelectorAll('#variantsWrap .variant-row');
+  const variants = [];
+  rows.forEach((row) => {
+    const sku = row.querySelector('.v-sku').value.trim();
+    const price = row.querySelector('.v-price').value;
+    if (!sku || !price) return;
+    variants.push({
+      sku,
+      variant_label: row.querySelector('.v-label').value.trim() || null,
+      price: parseInt(price, 10),
+      price_old: row.querySelector('.v-price-old').value ? parseInt(row.querySelector('.v-price-old').value, 10) : null
+    });
+  });
+  return variants;
+}
+
+async function loadForEdit() {
+  const res = await fetch('/api/admin/products/' + productId);
+  if (!res.ok) {
+    document.getElementById('alertBox').innerHTML = '<div class="alert alert-error">Produk tidak ditemukan.</div>';
+    return;
+  }
+  const p = await res.json();
+  document.getElementById('name').value = p.name;
+  document.getElementById('category').value = p.category;
+  document.getElementById('description').value = p.description || '';
+  if (p.image_url) {
+    document.getElementById('currentPhotoWrap').style.display = 'flex';
+    document.getElementById('currentPhoto').src = p.image_url;
+  }
+  if (p.variants.length > 0) {
+    p.variants.forEach((v) => addVariantRow(v));
+  } else {
+    addVariantRow();
+  }
+}
+
+if (isEdit) {
+  loadForEdit();
+} else {
+  addVariantRow();
+}
+
+document.getElementById('productForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const variants = collectVariants();
+  const alertBox = document.getElementById('alertBox');
+  alertBox.innerHTML = '';
+  if (variants.length === 0) {
+    alertBox.innerHTML = '<div class="alert alert-error">Minimal 1 varian dengan SKU dan harga wajib diisi.</div>';
+    return;
+  }
+  const formData = new FormData();
+  formData.append('name', document.getElementById('name').value.trim());
+  formData.append('category', document.getElementById('category').value);
+  formData.append('description', document.getElementById('description').value.trim());
+  formData.append('variants_json', JSON.stringify(variants));
+  const photoFile = document.getElementById('photo').files[0];
+  if (photoFile) formData.append('photo', photoFile);
+
+  const url = isEdit ? '/api/admin/products/' + productId : '/api/admin/products';
+  const method = isEdit ? 'PUT' : 'POST';
+  const res = await fetch(url, { method, body: formData });
+  const data = await res.json();
+  if (!res.ok) {
+    alertBox.innerHTML = '<div class="alert alert-error">' + (data.error || 'Gagal menyimpan produk.') + '</div>';
+    return;
+  }
+  window.location.href = '/admin/produk';
+});
+
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  await fetch('/admin/logout', { method: 'POST' });
+  window.location.href = '/admin/login';
+});
+</script>
+</body>
+</html>

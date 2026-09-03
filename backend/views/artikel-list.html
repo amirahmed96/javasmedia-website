@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelola Artikel — Admin JavasMedia</title>
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+<nav class="admin-nav">
+  <span class="brand">JavasMedia Admin</span>
+  <a href="/admin/produk">Produk</a>
+  <a href="/admin/artikel" class="active">Artikel</a>
+  <a href="/admin/voucher">Voucher</a>
+  <a href="/admin/dekorasi">Dekorasi Toko</a>
+  <span class="spacer"></span>
+  <button id="logoutBtn">Keluar</button>
+</nav>
+<div class="admin-wrap">
+  <div class="admin-header">
+    <h1>Artikel</h1>
+    <a href="/admin/artikel/baru" class="btn btn-primary">+ Tulis Artikel</a>
+  </div>
+  <div id="content">Memuat...</div>
+</div>
+<script>
+async function loadArticles() {
+  const res = await fetch('/api/admin/articles');
+  const articles = await res.json();
+  const content = document.getElementById('content');
+  if (articles.length === 0) {
+    content.innerHTML = '<div class="empty-state">Belum ada artikel. Klik "+ Tulis Artikel" buat mulai.</div>';
+    return;
+  }
+  let html = '<table><thead><tr><th>Foto</th><th>Judul</th><th>Kategori</th><th>Status</th><th>Aksi</th></tr></thead><tbody>';
+  articles.forEach((a) => {
+    html += '<tr>' +
+      '<td>' + (a.image_url ? '<img class="thumb" src="' + a.image_url + '">' : '<div class="thumb"></div>') + '</td>' +
+      '<td>' + a.title + '</td>' +
+      '<td>' + a.category + '</td>' +
+      '<td>' + (a.is_published ? 'Terbit' : 'Draft') + '</td>' +
+      '<td><div class="action-group">' +
+        '<a href="/admin/artikel/' + a.id + '/edit" class="btn btn-secondary btn-small">Edit</a>' +
+        '<button class="btn btn-danger btn-small" onclick="hapusArtikel(' + a.id + ', \'' + a.title.replace(/'/g, "\\'") + '\')">Hapus</button>' +
+      '</div></td>' +
+    '</tr>';
+  });
+  html += '</tbody></table>';
+  content.innerHTML = html;
+}
+
+async function hapusArtikel(id, title) {
+  if (!confirm('Hapus artikel "' + title + '"? Ini gak bisa dibatalkan.')) return;
+  const res = await fetch('/api/admin/articles/' + id, { method: 'DELETE' });
+  if (res.ok) {
+    loadArticles();
+  } else {
+    const data = await res.json();
+    alert(data.error || 'Gagal menghapus artikel.');
+  }
+}
+
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  await fetch('/admin/logout', { method: 'POST' });
+  window.location.href = '/admin/login';
+});
+
+loadArticles();
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelola Produk — Admin JavasMedia</title>
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+<nav class="admin-nav">
+  <span class="brand">JavasMedia Admin</span>
+  <a href="/admin/produk" class="active">Produk</a>
+  <a href="/admin/artikel">Artikel</a>
+  <a href="/admin/voucher">Voucher</a>
+  <a href="/admin/dekorasi">Dekorasi Toko</a>
+  <span class="spacer"></span>
+  <button id="logoutBtn">Keluar</button>
+</nav>
+<div class="admin-wrap">
+  <div class="admin-header">
+    <h1>Produk</h1>
+    <a href="/admin/produk/baru" class="btn btn-primary">+ Tambah Produk</a>
+  </div>
+  <div id="content">Memuat...</div>
+</div>
+<script>
+async function loadProducts() {
+  const res = await fetch('/api/admin/products');
+  const products = await res.json();
+  const content = document.getElementById('content');
+  if (products.length === 0) {
+    content.innerHTML = '<div class="empty-state">Belum ada produk. Klik "+ Tambah Produk" buat mulai.</div>';
+    return;
+  }
+  let html = '<table><thead><tr><th>Foto</th><th>Nama</th><th>Kategori</th><th>Varian</th><th>Status</th><th>Aksi</th></tr></thead><tbody>';
+  products.forEach((p) => {
+    const variantSummary = p.variants.map((v) => v.sku + (v.variant_label ? ' (' + v.variant_label + ')' : '')).join(', ') || '-';
+    html += '<tr>' +
+      '<td>' + (p.image_url ? '<img class="thumb" src="' + p.image_url + '">' : '<div class="thumb"></div>') + '</td>' +
+      '<td>' + p.name + '</td>' +
+      '<td>' + p.category + '</td>' +
+      '<td style="max-width:220px;font-size:11px;color:#666;">' + variantSummary + '</td>' +
+      '<td>' + (p.is_active ? 'Aktif' : 'Nonaktif') + '</td>' +
+      '<td><div class="action-group">' +
+        '<a href="/admin/produk/' + p.id + '/edit" class="btn btn-secondary btn-small">Edit</a>' +
+        '<button class="btn btn-danger btn-small" onclick="hapusProduk(' + p.id + ', \'' + p.name.replace(/'/g, "\\'") + '\')">Hapus</button>' +
+      '</div></td>' +
+    '</tr>';
+  });
+  html += '</tbody></table>';
+  content.innerHTML = html;
+}
+
+async function hapusProduk(id, name) {
+  if (!confirm('Hapus produk "' + name + '"? Ini gak bisa dibatalkan.')) return;
+  const res = await fetch('/api/admin/products/' + id, { method: 'DELETE' });
+  if (res.ok) {
+    loadProducts();
+  } else {
+    const data = await res.json();
+    alert(data.error || 'Gagal menghapus produk.');
+  }
+}
+
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  await fetch('/admin/logout', { method: 'POST' });
+  window.location.href = '/admin/login';
+});
+
+loadProducts();
+</script>
+</body>
+</html>

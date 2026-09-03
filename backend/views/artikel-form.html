@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Artikel — Admin JavasMedia</title>
+<link rel="stylesheet" href="/admin/admin.css">
+<link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
+<style>.form-card { max-width: 760px; } #editor { height: 300px; background: white; }</style>
+</head>
+<body>
+<nav class="admin-nav">
+  <span class="brand">JavasMedia Admin</span>
+  <a href="/admin/produk">Produk</a>
+  <a href="/admin/artikel" class="active">Artikel</a>
+  <a href="/admin/voucher">Voucher</a>
+  <a href="/admin/dekorasi">Dekorasi Toko</a>
+  <span class="spacer"></span>
+  <button id="logoutBtn">Keluar</button>
+</nav>
+<div class="admin-wrap">
+  <div class="admin-header">
+    <h1 id="pageTitle">Tulis Artikel</h1>
+    <a href="/admin/artikel" class="btn btn-secondary">← Kembali</a>
+  </div>
+  <div id="alertBox"></div>
+  <div class="form-card">
+    <form id="articleForm">
+      <div class="form-group">
+        <label>Judul</label>
+        <input type="text" id="title" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Kategori</label>
+          <select id="category" required>
+            <option>Tips & Tutorial</option>
+            <option>Behind the Scenes</option>
+            <option>Update Produk</option>
+            <option>Promo & Info</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Status</label>
+          <select id="isPublished">
+            <option value="true">Terbit</option>
+            <option value="false">Draft (belum tampil di web)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Ringkasan Singkat (excerpt)</label>
+        <textarea id="excerpt" style="min-height:60px;" placeholder="Muncul di daftar artikel..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Foto Utama</label>
+        <div id="currentPhotoWrap" class="current-photo" style="display:none;">
+          <img id="currentPhoto">
+          <span class="form-hint">Foto sekarang. Upload baru buat ganti.</span>
+        </div>
+        <input type="file" id="photo" accept="image/*">
+      </div>
+      <div class="form-group">
+        <label>Isi Artikel</label>
+        <div id="editor"></div>
+        <div class="form-hint">Bisa bold/italic, heading, list, dan sisip gambar. Kotak highlight & tabel perbandingan belum bisa dibuat di sini.</div>
+      </div>
+      <button type="submit" class="btn btn-primary">Simpan Artikel</button>
+    </form>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
+<script>
+const quill = new Quill('#editor', {
+  theme: 'snow',
+  modules: {
+    toolbar: [
+      ['bold', 'italic', 'underline'],
+      [{ header: [2, 3, false] }],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      ['image', 'link'],
+      ['clean']
+    ]
+  }
+});
+
+const pathParts = window.location.pathname.split('/').filter(Boolean);
+const isEdit = pathParts[2] !== 'baru';
+const articleId = isEdit ? pathParts[2] : null;
+if (isEdit) document.getElementById('pageTitle').textContent = 'Edit Artikel';
+
+async function loadForEdit() {
+  const res = await fetch('/api/admin/articles/' + articleId);
+  if (!res.ok) {
+    document.getElementById('alertBox').innerHTML = '<div class="alert alert-error">Artikel tidak ditemukan.</div>';
+    return;
+  }
+  const a = await res.json();
+  document.getElementById('title').value = a.title;
+  document.getElementById('category').value = a.category;
+  document.getElementById('excerpt').value = a.excerpt || '';
+  document.getElementById('isPublished').value = String(a.is_published);
+  quill.root.innerHTML = a.content || '';
+  if (a.image_url) {
+    document.getElementById('currentPhotoWrap').style.display = 'flex';
+    document.getElementById('currentPhoto').src = a.image_url;
+  }
+}
+if (isEdit) loadForEdit();
+
+document.getElementById('articleForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const alertBox = document.getElementById('alertBox');
+  alertBox.innerHTML = '';
+  const formData = new FormData();
+  formData.append('title', document.getElementById('title').value.trim());
+  formData.append('category', document.getElementById('category').value);
+  formData.append('excerpt', document.getElementById('excerpt').value.trim());
+  formData.append('content', quill.root.innerHTML);
+  formData.append('is_published', document.getElementById('isPublished').value);
+  const photoFile = document.getElementById('photo').files[0];
+  if (photoFile) formData.append('photo', photoFile);
+
+  const url = isEdit ? '/api/admin/articles/' + articleId : '/api/admin/articles';
+  const method = isEdit ? 'PUT' : 'POST';
+  const res = await fetch(url, { method, body: formData });
+  const data = await res.json();
+  if (!res.ok) {
+    alertBox.innerHTML = '<div class="alert alert-error">' + (data.error || 'Gagal menyimpan artikel.') + '</div>';
+    return;
+  }
+  window.location.href = '/admin/artikel';
+});
+
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  await fetch('/admin/logout', { method: 'POST' });
+  window.location.href = '/admin/login';
+});
+</script>
+</body>
+</html>

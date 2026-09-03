@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dekorasi Toko — Admin JavasMedia</title>
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+<nav class="admin-nav">
+  <span class="brand">JavasMedia Admin</span>
+  <a href="/admin/produk">Produk</a>
+  <a href="/admin/artikel">Artikel</a>
+  <a href="/admin/voucher">Voucher</a>
+  <a href="/admin/dekorasi" class="active">Dekorasi Toko</a>
+  <span class="spacer"></span>
+  <button id="logoutBtn">Keluar</button>
+</nav>
+<div class="admin-wrap">
+  <div class="admin-header"><h1>Slider Homepage</h1></div>
+  <div class="upload-card">
+    <form id="sliderForm">
+      <input type="file" id="sliderPhoto" accept="image/*" required>
+      <button type="submit" class="btn btn-primary btn-small" style="margin-top:10px;">+ Tambah Slide</button>
+    </form>
+    <div class="form-hint">Slide tampil sesuai urutan, bisa diubah dengan tombol ↑↓ di tiap kartu.</div>
+  </div>
+  <div id="slidesContent" class="decor-grid">Memuat...</div>
+
+  <div class="admin-header" style="margin-top:36px;"><h1>Sub Campaign</h1></div>
+  <div class="upload-card">
+    <form id="subCampaignForm">
+      <div class="form-row">
+        <input type="file" id="subCampaignPhoto" accept="image/*" required>
+        <input type="text" id="subCampaignLabel" placeholder="Teks label (default: SUB CAMPAIGN)" style="max-width:220px;">
+      </div>
+      <button type="submit" class="btn btn-primary btn-small" style="margin-top:10px;">+ Tambah Sub Campaign</button>
+    </form>
+    <div class="form-hint">Sebaiknya 4 kartu, sesuai desain homepage.</div>
+  </div>
+  <div id="subCampaignContent" class="decor-grid">Memuat...</div>
+</div>
+<script>
+async function loadDecor(endpoint, containerId, extraLabel) {
+  const res = await fetch(endpoint);
+  const items = await res.json();
+  const container = document.getElementById(containerId);
+  if (items.length === 0) {
+    container.innerHTML = '<div class="empty-state">Belum ada.</div>';
+    return;
+  }
+  container.innerHTML = items.map((item, i) => `
+    <div class="decor-card">
+      <img src="${item.image_url}">
+      <div class="decor-body">
+        ${extraLabel ? '<div style="font-size:12px;font-weight:700;margin-bottom:6px;">' + (item.label_text || '') + '</div>' : ''}
+        <div class="decor-actions">
+          <button class="btn btn-secondary btn-small" ${i === 0 ? 'disabled' : ''} onclick="moveItem('${endpoint}', ${item.id}, 'up', '${containerId}', ${!!extraLabel})">↑</button>
+          <button class="btn btn-secondary btn-small" ${i === items.length - 1 ? 'disabled' : ''} onclick="moveItem('${endpoint}', ${item.id}, 'down', '${containerId}', ${!!extraLabel})">↓</button>
+          <button class="btn btn-danger btn-small" onclick="deleteItem('${endpoint}', ${item.id}, '${containerId}', ${!!extraLabel})">Hapus</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function moveItem(endpoint, id, direction, containerId, extraLabel) {
+  await fetch(endpoint + '/' + id + '/move', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ direction })
+  });
+  reloadContainer(containerId, extraLabel);
+}
+
+async function deleteItem(endpoint, id, containerId, extraLabel) {
+  if (!confirm('Hapus item ini?')) return;
+  await fetch(endpoint + '/' + id, { method: 'DELETE' });
+  reloadContainer(containerId, extraLabel);
+}
+
+function reloadContainer(containerId, extraLabel) {
+  if (containerId === 'slidesContent') loadDecor('/api/admin/hero-slides', 'slidesContent', false);
+  else loadDecor('/api/admin/sub-campaigns', 'subCampaignContent', true);
+}
+
+document.getElementById('sliderForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const file = document.getElementById('sliderPhoto').files[0];
+  if (!file) return;
+  const formData = new FormData();
+  formData.append('photo', file);
+  const res = await fetch('/api/admin/hero-slides', { method: 'POST', body: formData });
+  if (res.ok) {
+    document.getElementById('sliderForm').reset();
+    loadDecor('/api/admin/hero-slides', 'slidesContent', false);
+  } else {
+    alert((await res.json()).error || 'Gagal upload slide.');
+  }
+});
+
+document.getElementById('subCampaignForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const file = document.getElementById('subCampaignPhoto').files[0];
+  if (!file) return;
+  const formData = new FormData();
+  formData.append('photo', file);
+  const label = document.getElementById('subCampaignLabel').value.trim();
+  if (label) formData.append('label_text', label);
+  const res = await fetch('/api/admin/sub-campaigns', { method: 'POST', body: formData });
+  if (res.ok) {
+    document.getElementById('subCampaignForm').reset();
+    loadDecor('/api/admin/sub-campaigns', 'subCampaignContent', true);
+  } else {
+    alert((await res.json()).error || 'Gagal upload sub campaign.');
+  }
+});
+
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  await fetch('/admin/logout', { method: 'POST' });
+  window.location.href = '/admin/login';
+});
+
+loadDecor('/api/admin/hero-slides', 'slidesContent', false);
+loadDecor('/api/admin/sub-campaigns', 'subCampaignContent', true);
+</script>
+</body>
+</html>
