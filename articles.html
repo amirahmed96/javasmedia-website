@@ -624,11 +624,11 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
   <!-- CATEGORY TABS -->
   <div class="cat-tabs">
     <div class="cat-tabs-inner">
-      <button class="cat-tab active">Semua</button>
-      <button class="cat-tab">Tips & Tutorial</button>
-      <button class="cat-tab">Behind the Scenes</button>
-      <button class="cat-tab">Update Produk</button>
-      <button class="cat-tab">Promo & Info</button>
+      <button class="cat-tab active" data-cat="all">Semua</button>
+      <button class="cat-tab" data-cat="Tips & Tutorial">Tips & Tutorial</button>
+      <button class="cat-tab" data-cat="Behind the Scenes">Behind the Scenes</button>
+      <button class="cat-tab" data-cat="Update Produk">Update Produk</button>
+      <button class="cat-tab" data-cat="Promo & Info">Promo & Info</button>
     </div>
   </div>
 
@@ -640,73 +640,12 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
       <div>
         <!-- Artikel Pilihan -->
         <div class="section-label">Artikel Pilihan</div>
-
-        <div class="featured-card" onclick="location.href='detail-artikel.html'">
-          <div class="featured-img">
-            🎨
-            <div class="featured-img-label">FOTO ARTIKEL</div>
-          </div>
-          <div class="featured-body">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
-              <span class="article-cat-badge">Tips & Tutorial</span>
-            </div>
-            <div class="article-meta">5 Jul 2026 · 8 min baca</div>
-            <div class="featured-title">Panduan Lengkap Memilih Teknik Sablon yang Tepat untuk Brand Kamu</div>
-            <p class="featured-excerpt">DTF, polyflex, atau sablon plastisol — mana yang paling cocok buat kamu? Simak panduan lengkapnya.</p>
-            <div class="article-footer">
-              <div class="author">
-                <div class="author-avatar">JM</div>
-                <div class="author-name">Tim Javas Media</div>
-              </div>
-              <a href="detail-artikel.html" class="read-more">Baca selengkapnya →</a>
-            </div>
-          </div>
-        </div>
+        <div id="featuredWrap"></div>
 
         <!-- Artikel Terbaru -->
         <div class="section-label">Artikel Terbaru</div>
-
-        <div class="articles-list">
-          <div class="article-row" onclick="location.href='detail-artikel.html'">
-            <div class="article-thumb">🏭</div>
-            <div class="article-row-body">
-              <div class="article-row-cat">Behind the Scenes · 2 Jul 2026</div>
-              <div class="article-row-title">Sehari di Workshop JavasMedia: Dari Desain ke Produk Jadi</div>
-              <div class="article-row-excerpt">Proses produksi custom kaos dari awal sampai akhir – mulai dari cek file desain, printing DTF, pressing, quality control, sampai packing pengiriman.</div>
-            </div>
-          </div>
-          <div class="article-row" onclick="location.href='detail-artikel.html'">
-            <div class="article-thumb">✨</div>
-            <div class="article-row-body">
-              <div class="article-row-cat" style="color:#1e3a5f;">Update Produk · 28 Jun 2026</div>
-              <div class="article-row-title">Produk Baru: Polyflex Reflektif untuk Safety & Streetwear</div>
-              <div class="article-row-excerpt">Kini tersedia polyflex reflektif yang bisa menyala di gelap – cocok untuk seragam keselamatan, jersey outdoor, atau estetika streetwear yang unik.</div>
-            </div>
-          </div>
-          <div class="article-row" onclick="location.href='detail-artikel.html'">
-            <div class="article-thumb">⚠️</div>
-            <div class="article-row-body">
-              <div class="article-row-cat">Tips & Tutorial · 15 Jun 2026</div>
-              <div class="article-row-title">5 Kesalahan Umum Saat Order Kaos Custom (dan Cara Menghindarinya)</div>
-              <div class="article-row-excerpt">Resolusi file terlalu rendah, warna tidak sesuai ekspektasi, ukuran salah – ini kesalahan yang paling sering terjadi dan cara mudah menghindarinya.</div>
-            </div>
-          </div>
-          <div class="article-row" onclick="location.href='detail-artikel.html'">
-            <div class="article-thumb">🏷️</div>
-            <div class="article-row-body">
-              <div class="article-row-cat" style="color:#e91e63;">Promo & Info · 10 Jun 2026</div>
-              <div class="article-row-title">Promo Juli: Diskon 50% untuk Order Perdana + Gratis Ongkir Surabaya</div>
-              <div class="article-row-excerpt">Belum pernah order di JavasMedia? Dapatkan diskon 50% untuk order pertama kamu dengan kode JAVASPERT, berlaku sampai 31 Juli 2026.</div>
-            </div>
-          </div>
-          <div class="article-row" onclick="location.href='detail-artikel.html'">
-            <div class="article-thumb">📁</div>
-            <div class="article-row-body">
-              <div class="article-row-cat">Tips & Tutorial · 3 Jun 2026</div>
-              <div class="article-row-title">Cara Siapkan File Desain untuk Sablon DTF yang Sempurna</div>
-              <div class="article-row-excerpt">Format file, resolusi minimum, mode warna, ukuran artwork – semua yang perlu kamu ketahui sebelum kirim file ke kami agar hasil sablon maksimal.</div>
-            </div>
-          </div>
+        <div class="articles-list" id="articlesList">
+          <div style="padding:20px 0;color:#999;">Memuat artikel...</div>
         </div>
       </div>
 
@@ -718,8 +657,8 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
           <div class="sidebar-title">Cari Artikel</div>
           <div class="sidebar-content">
             <div class="search-wrap">
-              <input class="search-input" type="text" placeholder="Kata kunci...">
-              <button class="search-btn">🔍</button>
+              <input class="search-input" type="text" id="articleSearchInput" placeholder="Kata kunci...">
+              <button class="search-btn" id="articleSearchBtn">🔍</button>
             </div>
           </div>
         </div>
@@ -728,37 +667,14 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
         <div class="sidebar-block">
           <div class="sidebar-title">Kategori</div>
           <div class="sidebar-content">
-            <ul class="cat-list">
-              <li>Semua Artikel <span class="cat-count">18</span></li>
-              <li>Tips & Tutorial <span class="cat-count">7</span></li>
-              <li>Behind the Scenes <span class="cat-count">4</span></li>
-              <li>Update Produk <span class="cat-count">4</span></li>
-              <li>Promo & Info <span class="cat-count">3</span></li>
-            </ul>
+            <ul class="cat-list" id="catList"></ul>
           </div>
         </div>
 
         <!-- Paling Banyak Dibaca -->
         <div class="sidebar-block">
-          <div class="sidebar-title">Paling Banyak Dibaca</div>
-          <div class="sidebar-content">
-            <div class="top-article">
-              <div class="top-num">01</div>
-              <div class="top-title">Panduan Memilih Teknik Sablon yang Tepat</div>
-            </div>
-            <div class="top-article">
-              <div class="top-num">02</div>
-              <div class="top-title">Cara Siapkan File Desain untuk DTF</div>
-            </div>
-            <div class="top-article">
-              <div class="top-num">03</div>
-              <div class="top-title">5 Kesalahan Umum Order Kaos Custom</div>
-            </div>
-            <div class="top-article">
-              <div class="top-num">04</div>
-              <div class="top-title">Polyflex vs DTF: Mana yang Lebih Bagus?</div>
-            </div>
-          </div>
+          <div class="sidebar-title">Artikel Lainnya</div>
+          <div class="sidebar-content" id="topArticlesWrap"></div>
         </div>
 
         <!-- Newsletter -->
@@ -835,18 +751,161 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 </div>
 
 <script>
-// Category tab switching
-document.querySelectorAll('.cat-tab').forEach(tab => {
-  tab.addEventListener('click', function() {
-    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
-    this.classList.add('active');
+const API_BASE = 'https://javasmedia-backend-production.up.railway.app';
+const ARTICLE_CATEGORIES = ['Tips & Tutorial', 'Behind the Scenes', 'Update Produk', 'Promo & Info'];
+const ARTICLE_CATEGORY_EMOJI = { 'Tips & Tutorial': '📝', 'Behind the Scenes': '🏭', 'Update Produk': '✨', 'Promo & Info': '🏷️' };
+const ARTICLE_CATEGORY_COLOR = { 'Tips & Tutorial': '#e85d04', 'Behind the Scenes': '#1e3a5f', 'Update Produk': '#4caf50', 'Promo & Info': '#e91e63' };
+
+let allArticles = [];
+let currentCategory = 'all';
+let currentSearch = '';
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str == null ? '' : str;
+  return div.innerHTML;
+}
+function formatTanggal(dateStr) {
+  return new Date(dateStr).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+function articleThumb(a) {
+  return a.image_url
+    ? '<img src="' + a.image_url + '" alt="" style="width:100%;height:100%;object-fit:cover;">'
+    : (ARTICLE_CATEGORY_EMOJI[a.category] || '📰');
+}
+
+function renderCatList() {
+  const counts = {};
+  ARTICLE_CATEGORIES.forEach(c => { counts[c] = 0; });
+  allArticles.forEach(a => { if (counts[a.category] !== undefined) counts[a.category]++; });
+  const items = [{ cat: 'all', label: 'Semua Artikel', count: allArticles.length }]
+    .concat(ARTICLE_CATEGORIES.map(c => ({ cat: c, label: c, count: counts[c] })));
+  document.getElementById('catList').innerHTML = items.map(item =>
+    '<li data-cat="' + escapeHtml(item.cat) + '" class="' + (item.cat === currentCategory ? 'cat-active' : '') + '" style="' + (item.cat === currentCategory ? 'color:#e85d04;font-weight:700;' : '') + '">' +
+      escapeHtml(item.label) + ' <span class="cat-count">' + item.count + '</span>' +
+    '</li>'
+  ).join('');
+  document.querySelectorAll('#catList li').forEach(li => {
+    li.addEventListener('click', function () { setCategory(this.dataset.cat); });
   });
+}
+
+function setCategory(cat) {
+  currentCategory = cat;
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
+  renderCatList();
+  renderArticles();
+}
+
+function filteredArticles() {
+  let list = allArticles.slice();
+  if (currentCategory !== 'all') list = list.filter(a => a.category === currentCategory);
+  if (currentSearch) {
+    const q = currentSearch.toLowerCase();
+    list = list.filter(a => a.title.toLowerCase().includes(q) || (a.excerpt || '').toLowerCase().includes(q));
+  }
+  return list;
+}
+
+function renderFeatured(article) {
+  const wrap = document.getElementById('featuredWrap');
+  if (!article) {
+    wrap.innerHTML = '<div style="padding:32px 0;color:#999;">Belum ada artikel.</div>';
+    return;
+  }
+  const color = ARTICLE_CATEGORY_COLOR[article.category] || '#e85d04';
+  wrap.innerHTML =
+    '<div class="featured-card" onclick="location.href=\'detail-artikel.html?id=' + article.id + '\'">' +
+      '<div class="featured-img" style="' + (article.image_url ? '' : 'background:' + color + ';') + '">' +
+        articleThumb(article) +
+      '</div>' +
+      '<div class="featured-body">' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">' +
+          '<span class="article-cat-badge" style="background:' + color + ';">' + escapeHtml(article.category) + '</span>' +
+        '</div>' +
+        '<div class="article-meta">' + formatTanggal(article.created_at) + '</div>' +
+        '<div class="featured-title">' + escapeHtml(article.title) + '</div>' +
+        '<p class="featured-excerpt">' + escapeHtml(article.excerpt || '') + '</p>' +
+        '<div class="article-footer">' +
+          '<div class="author"><div class="author-avatar">JM</div><div class="author-name">Tim Javas Media</div></div>' +
+          '<a href="detail-artikel.html?id=' + article.id + '" class="read-more">Baca selengkapnya →</a>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+}
+
+function renderArticles() {
+  const list = filteredArticles();
+  const featured = list[0] || null;
+  const rest = list.slice(1);
+  renderFeatured(featured);
+
+  const listEl = document.getElementById('articlesList');
+  if (rest.length === 0) {
+    listEl.innerHTML = list.length === 0
+      ? '<div style="padding:20px 0;color:#999;">Belum ada artikel yang cocok.</div>'
+      : '';
+    return;
+  }
+  listEl.innerHTML = rest.map(a => {
+    const color = ARTICLE_CATEGORY_COLOR[a.category] || '#e85d04';
+    return '<div class="article-row" onclick="location.href=\'detail-artikel.html?id=' + a.id + '\'">' +
+      '<div class="article-thumb">' + articleThumb(a) + '</div>' +
+      '<div class="article-row-body">' +
+        '<div class="article-row-cat" style="color:' + color + ';">' + escapeHtml(a.category) + ' · ' + formatTanggal(a.created_at) + '</div>' +
+        '<div class="article-row-title">' + escapeHtml(a.title) + '</div>' +
+        '<div class="article-row-excerpt">' + escapeHtml(a.excerpt || '') + '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function renderTopArticles() {
+  const wrap = document.getElementById('topArticlesWrap');
+  const list = allArticles.slice(0, 4);
+  if (list.length === 0) {
+    wrap.innerHTML = '<div style="color:#999;font-size:12px;">Belum ada artikel.</div>';
+    return;
+  }
+  wrap.innerHTML = list.map((a, i) =>
+    '<div class="top-article" onclick="location.href=\'detail-artikel.html?id=' + a.id + '\'">' +
+      '<div class="top-num">' + String(i + 1).padStart(2, '0') + '</div>' +
+      '<div class="top-title">' + escapeHtml(a.title) + '</div>' +
+    '</div>'
+  ).join('');
+}
+
+async function loadArticles() {
+  try {
+    const res = await fetch(API_BASE + '/api/articles');
+    allArticles = await res.json();
+  } catch (err) {
+    allArticles = [];
+  }
+  renderCatList();
+  renderArticles();
+  renderTopArticles();
+}
+
+document.querySelectorAll('.cat-tab').forEach(tab => {
+  tab.addEventListener('click', function () { setCategory(this.dataset.cat); });
 });
+
+document.getElementById('articleSearchBtn').addEventListener('click', applyArticleSearch);
+document.getElementById('articleSearchInput').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') applyArticleSearch();
+});
+function applyArticleSearch() {
+  currentSearch = document.getElementById('articleSearchInput').value.trim();
+  renderArticles();
+}
 
 function searchDesktop() {
   const val = document.getElementById('desktopSearchInput').value.trim();
   if (val) window.location.href = 'katalog.html?q=' + encodeURIComponent(val);
 }
+
+loadArticles();
 </script>
 
 <a class="floating-wa" href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+ingin+konsultasi" target="_blank" aria-label="Chat WhatsApp">
