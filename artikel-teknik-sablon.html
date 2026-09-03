@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<title>Panduan Lengkap Memilih Teknik Sablon — JavasMedia Journal</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@400;700;800&family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { overflow-x: hidden; }
+body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
+.page { width: 1440px; margin: 0 auto; overflow: hidden; }
+
+/* ===== HEADER FINAL ===== */
+.header { position: relative; width: 1440px; height: 100px; z-index: 1000; }
+.header .header-bar { position: absolute; top: 0; left: 0; width: 1440px; height: 80px; object-fit: cover; }
+.header .header-logo { position: absolute; top: 12px; left: 30px; height: 48px; width: 121px; cursor: pointer; object-fit: contain; }
+.header .nav-btn { position: absolute; bottom: 20px; height: 52px; width: 140px; cursor: pointer; object-fit: fill; display: block; }
+.header .nav-btn-1 { left: 340px; } .header .nav-btn-2 { left: 455px; } .header .nav-btn-3 { left: 570px; } .header .nav-btn-4 { left: 685px; }
+.header .nav-label { position: absolute; font-family: 'Avenir Next Condensed','Arial Narrow',Arial,sans-serif; font-size: 18px; font-weight: 700; color: #1a1a1a; text-align: center; cursor: pointer; pointer-events: all; width: 140px; }
+.header .nav-label-1 { bottom: 33px; left: 340px; } .header .nav-label-2 { bottom: 33px; left: 455px; } .header .nav-label-3 { bottom: 33px; left: 570px; } .header .nav-label-4 { bottom: 33px; left: 685px; }
+.header .header-search-box {
+  position: absolute;
+  top: 24px; left: 1000px;
+  width: 190px; height: 32px;
+  background: #f5ecd8;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  box-sizing: border-box;
+}
+.header .header-search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 12px;
+  color: #1a1a1a;
+  font-family: 'Inter', sans-serif;
+  min-width: 0;
+}
+.header .header-search-box img {
+  width: 16px;
+  height: auto;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+.floating-wa { position: fixed; right: 30px; bottom: 30px; width: 68px; height: 68px; z-index: 5000; display: block; }
+.floating-wa img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); transition: transform 0.2s ease; }
+.floating-wa:hover img { transform: scale(1.08); }
+.header .header-cart { position: absolute; top: 24px; left: 1210px; height: 30px; width: 32px; cursor: pointer; object-fit: contain; }
+.header .header-profile { position: absolute; top: 24px; left: 1260px; height: 28px; width: 29px; cursor: pointer; object-fit: contain; }
+.header .bar-ornamen { position: absolute; top: 80px; left: 0; width: 1440px; height: 20px; background-image: repeating-conic-gradient(#8b1a1a 0% 25%, transparent 0% 50%); background-size: 20px 20px; }
+
+/* ===== GRID BG ===== */
+.grid-bg {
+  background-color: #FAF6EE;
+  background-image: linear-gradient(#e8e3d8 1px, transparent 1px), linear-gradient(90deg, #e8e3d8 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ===== BREADCRUMB ===== */
+.breadcrumb {
+  padding: 16px 120px;
+  font-size: 12px;
+  color: #aaa;
+}
+.breadcrumb a { color: #aaa; text-decoration: none; }
+.breadcrumb a:hover { color: #1e3a5f; }
+.breadcrumb span { color: #1a1a1a; font-weight: 600; }
+
+/* ===== LAYOUT ARTIKEL ===== */
+.artikel-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 40px 60px;
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ===== ARTIKEL UTAMA ===== */
+.artikel-main {}
+
+/* Header artikel */
+.artikel-cat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #e85d04;
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+.artikel-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.artikel-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #1a1a1a;
+  margin-bottom: 28px;
+}
+
+.meta-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.meta-avatar {
+  width: 36px;
+  height: 36px;
+  background: #1e3a5f;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.meta-name { font-size: 13px; font-weight: 700; color: #1a1a1a; }
+.meta-date { font-size: 12px; color: #888; }
+.meta-sep { color: #ddd; }
+.meta-read { font-size: 12px; color: #888; }
+.meta-share {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.share-btn {
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  border: 1.5px solid #e8e3d8;
+  background: white;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  color: #555;
+  transition: all 0.1s;
+}
+.share-btn:hover { border-color: #1e3a5f; color: #1e3a5f; }
+
+/* Foto utama artikel */
+.artikel-foto {
+  width: 100%;
+  aspect-ratio: 16/7;
+  background: #1e3a5f;
+  border: 2.5px solid #1a1a1a;
+  box-shadow: 5px 5px 0 #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.foto-caption {
+  font-size: 11px;
+  color: #aaa;
+  text-align: center;
+  margin-bottom: 32px;
+  font-style: italic;
+}
+
+/* Konten artikel */
+.artikel-body {
+  font-size: 15px;
+  line-height: 1.9;
+  color: #333;
+}
+
+.artikel-body p { margin-bottom: 20px; }
+
+.artikel-body h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 36px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e8e3d8;
+}
+
+.artikel-body h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 24px 0 10px;
+}
+
+.artikel-body ul, .artikel-body ol {
+  padding-left: 24px;
+  margin-bottom: 20px;
+}
+
+.artikel-body li { margin-bottom: 8px; }
+
+.artikel-body strong { color: #1a1a1a; font-weight: 700; }
+
+/* Highlight box */
+.highlight-box {
+  background: #f0f4f8;
+  border-left: 4px solid #1e3a5f;
+  padding: 20px 24px;
+  margin: 28px 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.highlight-box p {
+  margin: 0;
+  font-size: 14px;
+  color: #1e3a5f;
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+/* Comparison table */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0 28px;
+  font-size: 13px;
+}
+
+.compare-table th {
+  background: #1a1a1a;
+  color: white;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.compare-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e8e3d8;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.compare-table tr:nth-child(even) td { background: #f8f7f4; }
+
+.compare-table .check { color: #27ae60; font-weight: 700; }
+.compare-table .cross { color: #e74c3c; }
+
+/* Tag artikel */
+.artikel-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 36px 0 28px;
+  padding-top: 24px;
+  border-top: 1px solid #e8e3d8;
+}
+
+.tag {
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1.5px solid #e8e3d8;
+  border-radius: 20px;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.1s;
+  text-decoration: none;
+}
+.tag:hover { border-color: #1e3a5f; color: #1e3a5f; background: #f0f4f8; }
+
+/* ===== CTA BOX (untuk artikel iklan) ===== */
+.cta-artikel {
+  background: #1e3a5f;
+  border: 2.5px solid #1a1a1a;
+  box-shadow: 5px 5px 0 #1a1a1a;
+  padding: 32px;
+  margin: 36px 0;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-artikel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-conic-gradient(rgba(255,255,255,0.03) 0% 25%, transparent 0% 50%);
+  background-size: 30px 30px;
+  pointer-events: none;
+}
+
+.cta-artikel-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #ffc107;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.cta-artikel-title {
+  font-family: 'Baloo Chettan 2', cursive;
+  font-size: 26px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 10px;
+  line-height: 1.2;
+  position: relative;
+}
+
+.cta-artikel-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 20px;
+  line-height: 1.7;
+  position: relative;
+}
+
+.cta-artikel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #25D366;
+  color: white;
+  font-size: 14px;
+  font-weight: 800;
+  padding: 14px 28px;
+  border: 2px solid #1a1a1a;
+  box-shadow: 3px 3px 0 #1a1a1a;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: all 0.15s;
+  position: relative;
+}
+.cta-artikel-btn:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 #1a1a1a; }
+
+/* Author box bawah */
+.author-box {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  background: white;
+  border: 2px solid #1a1a1a;
+  box-shadow: 4px 4px 0 #1a1a1a;
+  padding: 24px;
+  margin: 36px 0;
+  border-radius: 4px;
+}
+
+.author-box-avatar {
+  width: 60px;
+  height: 60px;
+  background: #1e3a5f;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  flex-shrink: 0;
+  border: 2px solid #1a1a1a;
+}
+
+.author-box-name { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+.author-box-role { font-size: 11px; color: #888; margin-bottom: 8px; letter-spacing: 1px; text-transform: uppercase; }
+.author-box-desc { font-size: 13px; color: #666; line-height: 1.7; }
+
+/* ===== SIDEBAR ===== */
+.sidebar { position: sticky; top: 20px; }
+
+.sidebar-block {
+  background: white;
+  border: 2px solid #1a1a1a;
+  margin-bottom: 20px;
+  box-shadow: 3px 3px 0 #1a1a1a;
+}
+
+.sidebar-title {
+  background: #1a1a1a;
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 10px 16px;
+}
+
+.sidebar-content { padding: 16px; }
+
+/* CTA sidebar */
+.cta-sidebar {
+  background: #e85d04;
+  border: 2px solid #1a1a1a;
+  box-shadow: 3px 3px 0 #1a1a1a;
+  padding: 20px 16px;
+  margin-bottom: 20px;
+}
+
+.cta-sidebar-title {
+  font-family: 'Baloo Chettan 2', cursive;
+  font-size: 20px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.cta-sidebar-desc {
+  font-size: 11px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.cta-sidebar-btn {
+  display: block;
+  background: #1a1a1a;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  transition: background 0.1s;
+  font-family: 'Inter', sans-serif;
+}
+.cta-sidebar-btn:hover { background: #333; }
+
+/* Related articles sidebar */
+.related-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0ede6;
+  cursor: pointer;
+  text-decoration: none;
+}
+.related-item:last-child { border-bottom: none; }
+
+.related-thumb {
+  width: 56px;
+  height: 56px;
+  background: #f0ede6;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  border: 1px solid #e8e3d8;
+}
+
+.related-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.4;
+}
+.related-item:hover .related-title { color: #e85d04; }
+
+.related-cat {
+  font-size: 9px;
+  color: #e85d04;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+/* Daftar isi */
+.toc-list { list-style: none; }
+.toc-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid #f0ede6;
+  font-size: 12px;
+}
+.toc-list li:last-child { border-bottom: none; }
+.toc-list a {
+  color: #555;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.toc-list a::before {
+  content: '→';
+  color: #e85d04;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+.toc-list a:hover { color: #1e3a5f; }
+
+/* ===== ARTIKEL TERKAIT BAWAH ===== */
+.related-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px 60px;
+}
+
+.section-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.section-title-bar { width: 5px; height: 24px; background: #e85d04; border-radius: 2px; }
+.section-title-text { font-family: 'Baloo Chettan 2', cursive; font-size: 20px; font-weight: 800; color: #1a1a1a; }
+
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+.article-card {
+  background: white;
+  border: 2px solid #1a1a1a;
+  box-shadow: 3px 3px 0 #1a1a1a;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+  display: block;
+}
+.article-card:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 #1a1a1a; }
+
+.article-card-img {
+  height: 160px;
+  background: #1e3a5f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  border-bottom: 2px solid #1a1a1a;
+}
+
+.article-card-body { padding: 16px; }
+
+.article-card-cat {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #e85d04;
+  margin-bottom: 8px;
+}
+
+.article-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.article-card-meta { font-size: 11px; color: #aaa; }
+
+/* ===== FOOTER ===== */
+.footer { background: black; }
+.footer-main { padding: 60px 80px 40px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; border-bottom: 1px solid #222; }
+.footer-logo { height: 90px; width: auto; margin-bottom: 16px; display: block; object-fit: contain; }
+.footer-info { color: #666; font-size: 13px; line-height: 1.8; margin-bottom: 16px; }
+.footer-social { display: flex; gap: 8px; }
+.social-icon { width: 32px; height: 32px; background: #111; border: 1px solid #222; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; }
+.social-icon img { width: 16px; height: 16px; object-fit: contain; }
+.footer-col h4 { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: white; text-transform: uppercase; margin-bottom: 16px; }
+.footer-col a { display: block; color: #555; font-size: 13px; text-decoration: none; margin-bottom: 10px; }
+.footer-col a:hover { color: #ffc107; }
+.footer-newsletter { padding: 40px 80px; text-align: center; }
+.newsletter-text { color: #555; font-size: 13px; margin-bottom: 20px; }
+.newsletter-form { display: flex; max-width: 512px; margin: 0 auto 12px; }
+.newsletter-input { flex: 1; padding: 16px 20px; background: white; border: none; font-size: 13px; color: #999; outline: none; }
+.newsletter-btn { background: #ffbb00; border: none; padding: 16px 32px; font-size: 12px; font-weight: 700; color: black; cursor: pointer; letter-spacing: 1.4px; text-transform: uppercase; }
+.newsletter-consent { display: flex; align-items: center; justify-content: center; gap: 8px; color: #444; font-size: 11px; }
+</style>
+<link rel="stylesheet" href="mobile-nav.css">
+<link rel="stylesheet" href="mobile.css">
+<link rel="stylesheet" href="cart.css">
+</head>
+<body>
+<div class="page">
+
+  <!-- ===== MOBILE HEADER (mobile only, see mobile-nav.css) ===== -->
+  <div class="mobile-header-bar">
+    <button class="mh-hamburger" aria-label="Menu"><img src="hamburger.png" alt="Menu"></button>
+    <img class="mh-logo" src="logo.png" alt="JavasMedia" onclick="location.href='index.html'">
+    <div class="mh-right">
+      <button class="mh-search-toggle" aria-label="Cari"><img src="search-icon.png" alt="Cari"></button>
+      <img class="mh-icon" src="cart.png" alt="Cart">
+      <img class="mh-icon" src="profile.png" alt="Profile" onclick="location.href='login.html'">
+    </div>
+  </div>
+  <div class="mh-search-box">
+    <input type="text" placeholder="Cari produk...">
+    <button class="mh-search-close" aria-label="Tutup pencarian">&times;</button>
+  </div>
+
+  <!-- ===== MOBILE DRAWER NAV ===== -->
+  <div class="mobile-nav-overlay"></div>
+  <div class="mobile-nav-drawer">
+    <button class="mnd-close" aria-label="Tutup"><img src="drawer-close.png" alt="Tutup"></button>
+    <div class="mnd-brand">
+      <img class="mnd-brand-logo" src="house-of-customize.png" alt="House of Customize">
+    </div>
+    <div class="mnd-nav">
+      <a href="promo.html"><img src="btn-promo.png" alt="Promo"><span>PROMO</span></a>
+      <a href="katalog.html"><img src="btn-product.png" alt="Product"><span>PRODUCT</span></a>
+      <a href="articles.html"><img src="btn-articles.png" alt="Articles"><span>ARTICLES</span></a>
+      <a href="location.html"><img src="btn-location.png" alt="Location"><span>LOCATION</span></a>
+    </div>
+    <div class="mnd-footer">
+      <img class="mnd-footer-logo" src="javas-media-badge.png" alt="JavasMedia">
+      <p>Ploso Timur 1B No. 3b<br>Tambaksari - Surabaya<br>javasmediasurabaya@gmail.com<br>082143777463</p>
+      <div class="mnd-social">
+        <a href="#" aria-label="Facebook"><img src="fb-icon.png" alt="Facebook"></a>
+        <a href="#" aria-label="TikTok"><img src="tiktok-icon.png" alt="TikTok"></a>
+        <a href="#" aria-label="YouTube"><img src="youtube-icon.png" alt="YouTube"></a>
+        <a href="#" aria-label="Instagram"><img src="instagram-icon.png" alt="Instagram"></a>
+        <a href="https://wa.me/6282143777463" aria-label="WhatsApp"><img src="whatsapp-icon.png" alt="WhatsApp"></a>
+      </div>
+      <div class="mnd-links">
+        <a href="#">About Us</a>
+        <a href="#">Production</a>
+        <a href="location.html">Alamat</a>
+        <a href="katalog.html">Kaos Custom</a>
+        <a href="#">Career</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Track Order</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- HEADER -->
+  <div class="header">
+    <img class="header-bar" src="bar-header.png" alt="">
+    <img class="header-logo" src="logo.png" alt="JavasMedia" onclick="location.href='index.html'" style="cursor:pointer;">
+    <img class="nav-btn nav-btn-1" src="btn1.png" alt="" onclick="location.href='promo.html'">
+    <img class="nav-btn nav-btn-2" src="btn2.png" alt="" onclick="location.href='katalog.html'">
+    <img class="nav-btn nav-btn-3" src="btn3.png" alt="" onclick="location.href='articles.html'">
+    <img class="nav-btn nav-btn-4" src="btn4.png" alt="" onclick="location.href='location.html'">
+    <span class="nav-label nav-label-1" onclick="location.href='promo.html'">PROMO</span>
+    <span class="nav-label nav-label-2" onclick="location.href='katalog.html'">PRODUCT</span>
+    <span class="nav-label nav-label-3" onclick="location.href='articles.html'">ARTICLES</span>
+    <span class="nav-label nav-label-4" onclick="location.href='location.html'">LOCATION</span>
+    <div class="header-search-box">
+      <input type="text" id="desktopSearchInput" placeholder="Cari produk..." onkeypress="if(event.key==='Enter'){searchDesktop()}">
+      <img src="search-icon-navy.png" alt="Cari" onclick="searchDesktop()">
+    </div>
+    <img class="header-cart" src="cart.png" alt="">
+    <img class="header-profile" src="profile.png" alt="" onclick="location.href='login.html'">
+    <div class="bar-ornamen"></div>
+  </div>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb grid-bg">
+    <a href="index.html">Home</a> ›
+    <a href="articles.html">Articles</a> ›
+    <a href="articles.html">Tips & Tutorial</a> ›
+    <span>Panduan Lengkap Memilih Teknik Sablon</span>
+  </div>
+
+  <!-- KONTEN ARTIKEL -->
+  <div class="grid-bg" style="padding-top:8px;">
+    <div class="artikel-layout">
+
+      <!-- KIRI: Artikel utama -->
+      <div class="artikel-main">
+
+        <div class="artikel-cat-badge">Tips & Tutorial</div>
+        <h1 class="artikel-title">Panduan Lengkap Memilih Teknik Sablon yang Tepat untuk Brand Kamu</h1>
+
+        <div class="artikel-meta">
+          <div class="meta-author">
+            <div class="meta-avatar">JM</div>
+            <div>
+              <div class="meta-name">Tim Javas Media</div>
+              <div class="meta-date">5 Juli 2026</div>
+            </div>
+          </div>
+          <span class="meta-sep">·</span>
+          <span class="meta-read">8 menit baca</span>
+          <div class="meta-share">
+            <button class="share-btn">📤 Share</button>
+            <button class="share-btn">🔗 Copy Link</button>
+          </div>
+        </div>
+
+        <!-- Foto utama -->
+        <div class="artikel-foto">🎨</div>
+        <p class="foto-caption">Berbagai teknik sablon tersedia untuk kebutuhan produksi custom yang berbeda-beda</p>
+
+        <!-- Konten -->
+        <div class="artikel-body">
+
+          <p>Kalau kamu baru mau bikin kaos atau produk custom, pasti bingung: <strong>DTF, polyflex, atau sablon plastisol?</strong> Tenang — artikel ini bakal bantu kamu pilih teknik yang paling pas sesuai kebutuhan, budget, dan jumlah produksi.</p>
+
+          <p>Di JavasMedia, kami menerima berbagai teknik sablon dan sering bantu klien memilih yang paling sesuai. Dari pengalaman kami, banyak yang akhirnya kecewa bukan karena hasil sablon-nya jelek — tapi karena salah pilih teknik sejak awal.</p>
+
+          <div class="highlight-box">
+            <p>💡 Tidak ada teknik sablon yang "terbaik" secara universal. Setiap teknik punya kelebihan dan kekurangan tergantung konteks penggunaannya.</p>
+          </div>
+
+          <h2 id="dtf">1. DTF (Direct to Film)</h2>
+
+          <p>DTF adalah teknologi cetak terbaru yang sedang booming. Prosesnya: desain dicetak ke film khusus, lalu di-press ke kain menggunakan heat press.</p>
+
+          <h3>Kelebihan DTF:</h3>
+          <ul>
+            <li><strong>Full color tanpa batas</strong> — gradasi, foto, desain kompleks semuanya bisa</li>
+            <li><strong>Bisa satuan</strong> — tidak ada minimum order</li>
+            <li><strong>Cocok untuk semua bahan kain</strong> — cotton, polyester, drifit, bahkan denim</li>
+            <li><strong>Tahan lama</strong> — tidak mudah retak atau mengelupas jika proses pressing benar</li>
+          </ul>
+
+          <h3>Kekurangan DTF:</h3>
+          <ul>
+            <li>Harga per pcs lebih tinggi dibanding screen printing untuk jumlah banyak</li>
+            <li>Tekstur sedikit terasa di permukaan kain (ada lapisan film)</li>
+          </ul>
+
+          <p><strong>DTF cocok untuk:</strong> merchandise event, kaos komunitas dengan desain detail, UMKM yang butuh fleksibilitas quantity, atau siapapun yang desainnya full color dan kompleks.</p>
+
+          <h2 id="polyflex">2. Polyflex (Heat Transfer Vinyl)</h2>
+
+          <p>Polyflex atau HTV adalah bahan vinyl yang dipotong menggunakan mesin cutting sesuai bentuk desain, lalu ditempel ke kain dengan heat press.</p>
+
+          <h3>Kelebihan Polyflex:</h3>
+          <ul>
+            <li><strong>Warna sangat solid dan cerah</strong> — tidak ada yang mengalahkan ketajaman warna polyflex</li>
+            <li><strong>Pilihan material beragam</strong> — ada reflektif, hologram, glitter, metalik</li>
+            <li><strong>Sangat tahan lama</strong> — bisa bertahan puluhan kali cuci</li>
+            <li><strong>Cocok untuk logo sederhana dan teks</strong></li>
+          </ul>
+
+          <h3>Kekurangan Polyflex:</h3>
+          <ul>
+            <li>Tidak bisa full color — tiap warna harus dipotong terpisah</li>
+            <li>Desain dengan detail kecil atau gradasi tidak bisa dilakukan</li>
+            <li>Ada batas minimum detail (ukuran huruf minimum sekitar 5mm)</li>
+          </ul>
+
+          <p><strong>Polyflex cocok untuk:</strong> jersey, seragam tim, nama punggung, logo brand minimalis, atau produk yang butuh efek khusus seperti reflektif.</p>
+
+          <!-- CTA Box tengah artikel -->
+          <div class="cta-artikel">
+            <div class="cta-artikel-label">Mau Konsultasi Gratis?</div>
+            <div class="cta-artikel-title">Bingung pilih teknik yang tepat?<br>Tanya langsung ke kami!</div>
+            <div class="cta-artikel-desc">Tim JavasMedia siap bantu analisis desain kamu dan rekomendasikan teknik yang paling pas — gratis, tanpa komitmen order.</div>
+            <a href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+mau+konsultasi+teknik+sablon+yang+tepat+untuk+produk+saya" target="_blank" class="cta-artikel-btn">
+              💬 Chat WhatsApp Sekarang
+            </a>
+          </div>
+
+          <h2 id="plastisol">3. Sablon Plastisol</h2>
+
+          <p>Sablon plastisol adalah teknik sablon manual tradisional yang masih sangat relevan, terutama untuk produksi skala besar. Tinta berbasis PVC yang tebal memberikan hasil yang bold dan khas.</p>
+
+          <h3>Kelebihan Plastisol:</h3>
+          <ul>
+            <li><strong>Harga paling murah untuk jumlah banyak</strong> — makin banyak, makin hemat</li>
+            <li><strong>Hasil bold dan tebal</strong> — khas kaos streetwear</li>
+            <li><strong>Tahan lama</strong> jika proses curing dilakukan dengan benar</li>
+          </ul>
+
+          <h3>Kekurangan Plastisol:</h3>
+          <ul>
+            <li>Minimum order biasanya 24–36 pcs per desain per warna bahan</li>
+            <li>Setiap penambahan warna desain menambah biaya</li>
+            <li>Tidak cocok untuk desain dengan banyak warna atau gradasi</li>
+          </ul>
+
+          <h2 id="comparison">Perbandingan Singkat</h2>
+
+          <div class="table-scroll">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>Aspek</th>
+                <th>DTF</th>
+                <th>Polyflex</th>
+                <th>Plastisol</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Full Color</strong></td>
+                <td><span class="check">✓ Ya</span></td>
+                <td><span class="cross">✗ Tidak</span></td>
+                <td>Terbatas</td>
+              </tr>
+              <tr>
+                <td><strong>Bisa Satuan</strong></td>
+                <td><span class="check">✓ Ya</span></td>
+                <td><span class="check">✓ Ya</span></td>
+                <td><span class="cross">✗ Min. order</span></td>
+              </tr>
+              <tr>
+                <td><strong>Efek Khusus</strong></td>
+                <td>Tidak</td>
+                <td><span class="check">✓ Reflektif, hologram</span></td>
+                <td>Terbatas</td>
+              </tr>
+              <tr>
+                <td><strong>Harga (satuan)</strong></td>
+                <td>Menengah</td>
+                <td>Menengah</td>
+                <td>Mahal</td>
+              </tr>
+              <tr>
+                <td><strong>Harga (massal)</strong></td>
+                <td>Menengah</td>
+                <td>Menengah</td>
+                <td><span class="check">✓ Paling murah</span></td>
+              </tr>
+              <tr>
+                <td><strong>Ketahanan</strong></td>
+                <td>Baik</td>
+                <td>Sangat baik</td>
+                <td>Baik</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+
+          <h2>Kesimpulan: Mana yang Harus Dipilih?</h2>
+
+          <p>Pilih <strong>DTF</strong> kalau desain kamu kompleks, full color, atau kamu butuh fleksibilitas quantity — bisa pesan satuan sampai ribuan pcs.</p>
+
+          <p>Pilih <strong>Polyflex</strong> kalau desain kamu simpel (logo, teks), kamu mau warna yang solid dan cerah, atau butuh efek khusus seperti reflektif untuk seragam keselamatan atau streetwear.</p>
+
+          <p>Pilih <strong>Plastisol</strong> kalau kamu produksi dalam jumlah besar (50 pcs ke atas), desainnya tidak terlalu banyak warna, dan harga per pcs harus serendah mungkin.</p>
+
+          <div class="highlight-box">
+            <p>🎯 Di JavasMedia, kami tersedia untuk semua teknik di atas. Tidak yakin mana yang tepat? Chat kami dan kami bantu analisis desain kamu secara gratis.</p>
+          </div>
+
+        </div>
+
+        <!-- Tags -->
+        <div class="artikel-tags">
+          <a href="articles.html" class="tag">DTF</a>
+          <a href="articles.html" class="tag">Polyflex</a>
+          <a href="articles.html" class="tag">Plastisol</a>
+          <a href="articles.html" class="tag">Tips Sablon</a>
+          <a href="articles.html" class="tag">Custom Apparel</a>
+          <a href="articles.html" class="tag">Kaos Custom</a>
+        </div>
+
+        <!-- Author box -->
+        <div class="author-box">
+          <div class="author-box-avatar">JM</div>
+          <div>
+            <div class="author-box-name">Tim Javas Media</div>
+            <div class="author-box-role">Workshop Team · Surabaya</div>
+            <div class="author-box-desc">Tim produksi JavasMedia dengan pengalaman lebih dari 5 tahun di industri custom printing dan apparel. Kami menulis dari pengalaman langsung di workshop, bukan teori semata.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- KANAN: Sidebar -->
+      <div class="sidebar">
+
+        <!-- CTA Sidebar -->
+        <div class="cta-sidebar">
+          <div class="cta-sidebar-title">Mau Order<br>Custom Sekarang?</div>
+          <p class="cta-sidebar-desc">Konsultasi gratis, produksi cepat 3–5 hari, bisa satuan. Chat langsung dengan tim kami!</p>
+          <a href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+mau+order+custom" target="_blank" class="cta-sidebar-btn">💬 Chat WhatsApp</a>
+        </div>
+
+        <!-- Daftar Isi -->
+        <div class="sidebar-block">
+          <div class="sidebar-title">Daftar Isi</div>
+          <div class="sidebar-content">
+            <ul class="toc-list">
+              <li><a href="#dtf">1. DTF (Direct to Film)</a></li>
+              <li><a href="#polyflex">2. Polyflex / HTV</a></li>
+              <li><a href="#plastisol">3. Sablon Plastisol</a></li>
+              <li><a href="#comparison">Perbandingan Singkat</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Artikel Terkait Sidebar -->
+        <div class="sidebar-block">
+          <div class="sidebar-title">Artikel Terkait</div>
+          <div class="sidebar-content">
+            <a href="articles.html" class="related-item">
+              <div class="related-thumb">📁</div>
+              <div>
+                <div class="related-cat">Tips & Tutorial</div>
+                <div class="related-title">Cara Siapkan File Desain untuk Sablon DTF yang Sempurna</div>
+              </div>
+            </a>
+            <a href="articles.html" class="related-item">
+              <div class="related-thumb">⚠️</div>
+              <div>
+                <div class="related-cat">Tips & Tutorial</div>
+                <div class="related-title">5 Kesalahan Umum Saat Order Kaos Custom</div>
+              </div>
+            </a>
+            <a href="articles.html" class="related-item">
+              <div class="related-thumb">🏭</div>
+              <div>
+                <div class="related-cat">Behind the Scenes</div>
+                <div class="related-title">Sehari di Workshop JavasMedia</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Newsletter sidebar -->
+        <div style="background:#1e3a5f;border:2px solid #1a1a1a;box-shadow:3px 3px 0 #1a1a1a;padding:20px 16px;">
+          <div style="font-family:'Baloo Chettan 2',cursive;font-size:16px;font-weight:800;color:white;margin-bottom:6px;">Jangan Ketinggalan Update.</div>
+          <p style="font-size:11px;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:12px;">Tips desain & info promo terbaru langsung ke email kamu.</p>
+          <input type="email" placeholder="Email kamu..." style="width:100%;padding:9px 12px;border:none;font-size:12px;margin-bottom:8px;outline:none;font-family:'Inter',sans-serif;">
+          <button style="width:100%;background:#ffc107;color:#1a1a1a;border:none;padding:10px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;">SUBSCRIBE</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ARTIKEL TERKAIT BAWAH -->
+  <div class="grid-bg" style="padding-top:8px;padding-bottom:60px;">
+    <div class="related-section">
+      <div class="section-title-wrap">
+        <div class="section-title-bar"></div>
+        <div class="section-title-text">ARTIKEL LAINNYA</div>
+      </div>
+      <div class="related-grid">
+        <a href="articles.html" class="article-card">
+          <div class="article-card-img">📁</div>
+          <div class="article-card-body">
+            <div class="article-card-cat">Tips & Tutorial · 3 Jun 2026</div>
+            <div class="article-card-title">Cara Siapkan File Desain untuk Sablon DTF yang Sempurna</div>
+            <div class="article-card-meta">6 menit baca</div>
+          </div>
+        </a>
+        <a href="articles.html" class="article-card">
+          <div class="article-card-img" style="background:#2a2820;">🏭</div>
+          <div class="article-card-body">
+            <div class="article-card-cat">Behind the Scenes · 2 Jul 2026</div>
+            <div class="article-card-title">Sehari di Workshop JavasMedia: Dari Desain ke Produk Jadi</div>
+            <div class="article-card-meta">5 menit baca</div>
+          </div>
+        </a>
+        <a href="articles.html" class="article-card">
+          <div class="article-card-img" style="background:#e85d04;">🏷️</div>
+          <div class="article-card-body">
+            <div class="article-card-cat">Promo & Info · 10 Jun 2026</div>
+            <div class="article-card-title">Promo Juli: Diskon 50% untuk Order Perdana + Gratis Ongkir Surabaya</div>
+            <div class="article-card-meta">3 menit baca</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-main">
+      <div>
+        <img src="logo.png" alt="JavasMedia" class="footer-logo">
+        <div class="footer-info">Ploso Timur 1b No. 3b<br>Tambaksari - Surabaya<br>082143777463<br>javasmediasurabaya@gmail.com</div>
+        <div class="footer-social">
+          <a class="social-icon" href="#" aria-label="Facebook"><img src="fb-icon.png" alt="Facebook"></a>
+          <a class="social-icon" href="#" aria-label="TikTok"><img src="tiktok-icon.png" alt="TikTok"></a>
+          <a class="social-icon" href="#" aria-label="YouTube"><img src="youtube-icon.png" alt="YouTube"></a>
+          <a class="social-icon" href="#" aria-label="Instagram"><img src="instagram-icon.png" alt="Instagram"></a>
+          <a class="social-icon" href="https://wa.me/6282143777463" aria-label="WhatsApp"><img src="whatsapp-icon.png" alt="WhatsApp"></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 onclick="toggleFooterAccordion(this)">SHOP</h4>
+        <div class="footer-col-links">
+          <a href="katalog.html">New Arrivals</a>
+          <a href="katalog.html">Apparel</a>
+          <a href="katalog.html">Aksesori</a>
+          <a href="katalog.html">Packaging</a>
+          <a href="promo.html">Sale</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 onclick="toggleFooterAccordion(this)">HELP</h4>
+        <div class="footer-col-links">
+          <a href="#">FAQ</a>
+          <a href="#">Shipping Info</a>
+          <a href="#">Returns & Exchanges</a>
+          <a href="#">Track Order</a>
+          <a href="#">Contact Us</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 onclick="toggleFooterAccordion(this)">COMPANY</h4>
+        <div class="footer-col-links">
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+          <a href="#">Sustainability</a>
+          <a href="location.html">Pickup In Store</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-newsletter">
+      <p class="newsletter-text">Be the first to know about new product drops and exclusive deals from Javas Media.</p>
+      <div class="newsletter-form">
+        <input class="newsletter-input" type="email" placeholder="Enter your email address">
+        <button class="newsletter-btn">SUBSCRIBE</button>
+      </div>
+      <div class="newsletter-consent">
+        <input type="checkbox" style="width:12px;height:12px;">
+        <span>I agree to receive marketing emails from Javas Media. Unsubscribe anytime.</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function searchDesktop() {
+  const val = document.getElementById('desktopSearchInput').value.trim();
+  if (val) window.location.href = 'katalog.html?q=' + encodeURIComponent(val);
+}
+</script>
+
+<a class="floating-wa" href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+ingin+konsultasi" target="_blank" aria-label="Chat WhatsApp">
+  <img src="floating-wa.png" alt="Chat WhatsApp">
+</a>
+
+<script src="mobile-nav.js"></script>
+<script src="cart.js"></script>
+</body>
+</html>
