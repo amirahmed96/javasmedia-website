@@ -380,8 +380,11 @@
      di bawah - filter jadi chip di atas grid, banner pindah ke bawah grid.
      Ini bukan CSS order (sudah pernah gak reliable di proyek ini), tapi
      dua blok HTML berbeda yang di-toggle display, sama pola dengan
-     icon-strip di location.html. Produk jadi lega penuh lebar layar. ---- */
-  .sidebar { display: none !important; }
+     icon-strip di location.html. Produk jadi lega penuh lebar layar.
+     Di-scope ke .katalog-layout - articles.html juga punya class
+     ".sidebar" tapi itu beda elemen (kolom sidebar artikel) yang
+     harus tetap tampil, bukan disembunyikan. ---- */
+  .katalog-layout .sidebar { display: none !important; }
 
   .katalog-layout { padding: 0 16px 24px !important; }
   .katalog-main { padding-top: 12px !important; width: 100% !important; }
@@ -580,4 +583,75 @@
   .related-section { padding: 0 16px 40px !important; }
   .section-title-text { font-size: 15px !important; }
   .related-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+
+  /* ============================================
+     HALAMAN ARTICLES (articles.html)
+     Masthead ditumpuk, tab kategori bisa digeser (mirip
+     chip di katalog), featured card ditumpuk (bukan
+     2 kolom), sidebar artikel pindah ke bawah list.
+     ============================================ */
+
+  .masthead { padding: 20px 0 0 !important; }
+  .masthead-inner {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 0 16px 20px !important;
+    gap: 12px !important;
+  }
+  .masthead-title { font-size: 28px !important; margin-bottom: 6px !important; }
+  .masthead-desc { font-size: 11px !important; max-width: 100% !important; line-height: 1.6 !important; }
+  .masthead-right { text-align: left !important; }
+  .masthead-issue { font-size: 8px !important; }
+  .masthead-vol { font-size: 14px !important; }
+
+  /* ---- Tab kategori: bisa digeser ke samping (kategorinya panjang-panjang) ---- */
+  .cat-tabs-inner {
+    padding: 0 16px !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  .cat-tabs-inner::-webkit-scrollbar { display: none !important; height: 0 !important; }
+  .cat-tab { padding: 10px 14px !important; font-size: 9px !important; white-space: nowrap !important; flex-shrink: 0 !important; }
+
+  /* ---- Layout utama: 1 kolom, sidebar artikel ikut turun ke bawah list ---- */
+  .main-content { padding: 20px 0 !important; }
+  .content-layout { grid-template-columns: 1fr !important; padding: 0 16px !important; gap: 28px !important; }
+
+  /* ---- Artikel unggulan: foto di atas, teks di bawah (bukan 2 kolom) ---- */
+  .featured-card { grid-template-columns: 1fr !important; margin-bottom: 28px !important; }
+  .featured-img { min-height: 160px !important; font-size: 44px !important; }
+  .featured-body { padding: 16px !important; }
+  .article-cat-badge { font-size: 8px !important; padding: 3px 8px !important; margin-bottom: 8px !important; }
+  .article-meta { font-size: 9px !important; margin-bottom: 8px !important; }
+  .featured-title { font-size: 17px !important; margin-bottom: 10px !important; }
+  .featured-excerpt { font-size: 11px !important; margin-bottom: 14px !important; }
+  .author-avatar { width: 26px !important; height: 26px !important; font-size: 10px !important; }
+  .author-name { font-size: 10px !important; }
+  .read-more { font-size: 10px !important; }
+
+  .section-label { font-size: 8px !important; margin-bottom: 12px !important; }
+
+  /* ---- List artikel terbaru ---- */
+  .article-row { gap: 12px !important; padding: 14px 0 !important; }
+  .article-thumb { width: 56px !important; height: 56px !important; font-size: 20px !important; }
+  .article-row-cat { font-size: 8px !important; margin-bottom: 4px !important; }
+  .article-row-title { font-size: 12px !important; margin-bottom: 4px !important; }
+  .article-row-excerpt { font-size: 10px !important; line-height: 1.4 !important; }
+
+  /* ---- Sidebar artikel (BUKAN sidebar katalog - class sama tapi elemen
+     beda, ini yang harus tetap tampil, cuma di-reset dari sticky) ---- */
+  .sidebar { position: static !important; top: auto !important; }
+  .sidebar-block { margin-bottom: 14px !important; }
+  .sidebar-title { font-size: 8px !important; padding: 8px 12px !important; }
+  .sidebar-content { padding: 12px !important; }
+  .search-input { font-size: 11px !important; padding: 8px 12px !important; }
+  .cat-list li { font-size: 11px !important; padding: 8px 0 !important; }
+  .cat-count { font-size: 9px !important; }
+  .top-article { padding: 8px 0 !important; gap: 8px !important; }
+  .top-title { font-size: 11px !important; }
+  .newsletter-sidebar { padding: 16px 14px !important; }
+  .newsletter-sidebar-title { font-size: 15px !important; }
+  .newsletter-sidebar-desc { font-size: 10px !important; margin-bottom: 10px !important; }
 }
