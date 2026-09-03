@@ -17,6 +17,11 @@ const adminDecorRoutes = require('./routes/admin_decor');
 
 const app = express();
 
+// Railway men-terminate HTTPS di gerbang depan lalu terusin ke sini pakai
+// HTTP biasa. Tanpa ini, Express mengira koneksinya tidak aman dan diam-diam
+// menolak mengeset cookie sesi (cookie.secure butuh koneksi yang dianggap aman).
+app.set('trust proxy', 1);
+
 // Situs statis (katalog.html dkk) beda origin dari backend ini, jadi perlu
 // CORS. `credentials: true` gak dipakai di sini karena API publik tidak
 // butuh cookie - cuma endpoint /admin/* yang butuh session, dan itu dibuka
