@@ -654,4 +654,96 @@
   .newsletter-sidebar { padding: 16px 14px !important; }
   .newsletter-sidebar-title { font-size: 15px !important; }
   .newsletter-sidebar-desc { font-size: 10px !important; margin-bottom: 10px !important; }
+
+  /* ============================================
+     HALAMAN DETAIL ARTIKEL (detail-artikel.html)
+     Kolom kanan (sidebar) turun ke bawah artikel
+     (pakai class .sidebar/.sidebar-block/dst yang
+     sama dengan articles.html, jadi otomatis ikut
+     style di HALAMAN ARTICLES di atas - tidak perlu
+     ditulis ulang). Tabel perbandingan dibungkus
+     supaya bisa digeser, bukan dipaksa muat.
+     ============================================ */
+
+  /* Kotak grid background terlalu besar di layar sempit - diperkecil
+     jadi 20px (dari 40px). CATATAN: .grid-bg persis sama dipakai juga
+     di detail-produk.html (sudah live), jadi otomatis ikut lebih rapat
+     di sana juga - ini disengaja, bukan cuma untuk halaman ini. */
+  .grid-bg { background-size: 20px 20px !important; }
+
+  .artikel-layout { grid-template-columns: 1fr !important; padding: 20px 16px 32px !important; gap: 24px !important; }
+  /* Kolom grid tidak mau menyusut di bawah lebar tabel perbandingan (480px)
+     kalau tidak di-reset - ini yang bikin seluruh artikel ikut melebar. */
+  .artikel-main { min-width: 0 !important; }
+
+  .artikel-cat-badge { font-size: 8px !important; padding: 3px 10px !important; margin-bottom: 12px !important; }
+  .artikel-title { font-size: 22px !important; margin-bottom: 14px !important; }
+
+  .artikel-meta { flex-wrap: wrap !important; gap: 10px !important; padding-bottom: 14px !important; margin-bottom: 20px !important; }
+  .meta-avatar { width: 30px !important; height: 30px !important; font-size: 11px !important; }
+  .meta-name { font-size: 12px !important; }
+  .meta-date, .meta-read { font-size: 10px !important; }
+  .meta-share { margin-left: 0 !important; width: 100%; }
+  .share-btn { font-size: 9px !important; padding: 5px 10px !important; }
+
+  .artikel-foto { aspect-ratio: 4/3 !important; font-size: 44px !important; box-shadow: 3px 3px 0 #1a1a1a !important; margin-bottom: 6px !important; }
+  .foto-caption { font-size: 9px !important; margin-bottom: 20px !important; }
+
+  .artikel-body { font-size: 11px !important; line-height: 1.75 !important; }
+  .artikel-body h2 { font-size: 18px !important; margin: 26px 0 12px !important; }
+  .artikel-body h3 { font-size: 13.5px !important; margin: 18px 0 8px !important; }
+
+  .highlight-box { padding: 14px 16px !important; margin: 20px 0 !important; }
+  .highlight-box p { font-size: 12px !important; }
+
+  /* Tabel perbandingan: dibungkus .table-scroll (lihat detail-artikel.html),
+     lebar tabel dikunci supaya kolom tidak diremas - geser ke samping saja. */
+  .table-scroll { overflow-x: auto !important; -webkit-overflow-scrolling: touch; margin: 20px 0 24px !important; }
+  .table-scroll .compare-table { margin: 0 !important; min-width: 480px; }
+  .compare-table th { padding: 10px 12px !important; font-size: 10px !important; }
+  .compare-table td { padding: 10px 12px !important; font-size: 12px !important; }
+
+  .cta-artikel { padding: 20px !important; margin: 26px 0 !important; box-shadow: 3px 3px 0 #1a1a1a !important; }
+  .cta-artikel-title { font-size: 19px !important; }
+  .cta-artikel-desc { font-size: 12px !important; margin-bottom: 16px !important; }
+  .cta-artikel-btn { font-size: 12px !important; padding: 11px 20px !important; }
+
+  .artikel-tags { margin: 26px 0 20px !important; padding-top: 18px !important; }
+  .tag { font-size: 10px !important; padding: 4px 12px !important; }
+
+  .author-box { padding: 16px !important; gap: 14px !important; margin: 26px 0 !important; }
+  .author-box-avatar { width: 44px !important; height: 44px !important; font-size: 16px !important; }
+  .author-box-name { font-size: 13px !important; }
+  .author-box-role { font-size: 9px !important; }
+  .author-box-desc { font-size: 12px !important; }
+
+  /* CTA sidebar - bukan .sidebar-block, jadi diatur terpisah.
+     Diperkecil 20% dari revisi sebelumnya (16px->13px, dst). */
+  .cta-sidebar { padding: 13px 11px !important; margin-bottom: 11px !important; }
+  .cta-sidebar-title { font-size: 13px !important; }
+  .cta-sidebar-desc { font-size: 8px !important; margin-bottom: 8px !important; }
+  .cta-sidebar-btn { font-size: 8px !important; padding: 7px !important; }
+
+  /* Daftar Isi & Artikel Terkait pakai .sidebar-block/.sidebar-title/
+     .sidebar-content yang SAMA dengan articles.html (lihat HALAMAN
+     ARTICLES di atas) - di-scope ke .artikel-layout supaya perkecilan
+     20% ini TIDAK ikut mengecilkan sidebar articles.html. */
+  .artikel-layout .sidebar-block { margin-bottom: 11px !important; }
+  .artikel-layout .sidebar-title { font-size: 6.5px !important; padding: 6px 10px !important; }
+  .artikel-layout .sidebar-content { padding: 10px !important; }
+
+  .toc-list li { font-size: 9px !important; padding: 4px 0 !important; }
+
+  .related-item { padding: 6px 0 !important; gap: 8px !important; }
+  .related-thumb { width: 35px !important; height: 35px !important; font-size: 14px !important; }
+  .related-cat { font-size: 6.5px !important; margin-bottom: 2px !important; }
+  .related-title { font-size: 9px !important; }
+
+  /* ---- Artikel lainnya (bawah halaman) - .related-grid sudah 2 kolom
+     dari HALAMAN DETAIL PRODUK di atas, di sini cuma perkecil isinya ---- */
+  .article-card-img { aspect-ratio: 4/3 !important; height: auto !important; font-size: 28px !important; }
+  .article-card-body { padding: 10px !important; }
+  .article-card-cat { font-size: 7px !important; margin-bottom: 6px !important; }
+  .article-card-title { font-size: 11px !important; margin-bottom: 6px !important; }
+  .article-card-meta { font-size: 9px !important; }
 }

@@ -602,6 +602,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 .newsletter-consent { display: flex; align-items: center; justify-content: center; gap: 8px; color: #444; font-size: 11px; }
 </style>
 <link rel="stylesheet" href="mobile-nav.css">
+<link rel="stylesheet" href="mobile.css">
 </head>
 <body>
 <div class="page">
@@ -678,8 +679,6 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
     <img class="header-profile" src="profile.png" alt="" onclick="location.href='login.html'">
     <div class="bar-ornamen"></div>
   </div>
-
-  <div class="mobile-scale-wrap"><div class="mobile-scale-inner">
 
   <!-- BREADCRUMB -->
   <div class="breadcrumb grid-bg">
@@ -801,6 +800,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 
           <h2 id="comparison">Perbandingan Singkat</h2>
 
+          <div class="table-scroll">
           <table class="compare-table">
             <thead>
               <tr>
@@ -849,6 +849,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
               </tr>
             </tbody>
           </table>
+          </div>
 
           <h2>Kesimpulan: Mana yang Harus Dipilih?</h2>
 
@@ -1000,28 +1001,34 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
         </div>
       </div>
       <div class="footer-col">
-        <h4>SHOP</h4>
-        <a href="katalog.html">New Arrivals</a>
-        <a href="katalog.html">Apparel</a>
-        <a href="katalog.html">Aksesori</a>
-        <a href="katalog.html">Packaging</a>
-        <a href="promo.html">Sale</a>
+        <h4 onclick="toggleFooterAccordion(this)">SHOP</h4>
+        <div class="footer-col-links">
+          <a href="katalog.html">New Arrivals</a>
+          <a href="katalog.html">Apparel</a>
+          <a href="katalog.html">Aksesori</a>
+          <a href="katalog.html">Packaging</a>
+          <a href="promo.html">Sale</a>
+        </div>
       </div>
       <div class="footer-col">
-        <h4>HELP</h4>
-        <a href="#">FAQ</a>
-        <a href="#">Shipping Info</a>
-        <a href="#">Returns & Exchanges</a>
-        <a href="#">Track Order</a>
-        <a href="#">Contact Us</a>
+        <h4 onclick="toggleFooterAccordion(this)">HELP</h4>
+        <div class="footer-col-links">
+          <a href="#">FAQ</a>
+          <a href="#">Shipping Info</a>
+          <a href="#">Returns & Exchanges</a>
+          <a href="#">Track Order</a>
+          <a href="#">Contact Us</a>
+        </div>
       </div>
       <div class="footer-col">
-        <h4>COMPANY</h4>
-        <a href="#">About Us</a>
-        <a href="#">Careers</a>
-        <a href="#">Press</a>
-        <a href="#">Sustainability</a>
-        <a href="location.html">Pickup In Store</a>
+        <h4 onclick="toggleFooterAccordion(this)">COMPANY</h4>
+        <div class="footer-col-links">
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+          <a href="#">Sustainability</a>
+          <a href="location.html">Pickup In Store</a>
+        </div>
       </div>
     </div>
     <div class="footer-newsletter">
@@ -1037,7 +1044,6 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
     </div>
   </div>
 
-</div></div>
 </div>
 
 <script>
