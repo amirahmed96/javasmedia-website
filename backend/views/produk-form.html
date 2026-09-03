@@ -22,7 +22,7 @@
     <a href="/admin/produk" class="btn btn-secondary">← Kembali</a>
   </div>
   <div id="alertBox"></div>
-  <div class="form-card">
+  <div class="form-card" style="max-width:820px;">
     <form id="productForm">
       <div class="form-group">
         <label>Nama Produk</label>
@@ -44,20 +44,38 @@
         <textarea id="description" placeholder="Deskripsi produk untuk halaman detail..."></textarea>
       </div>
       <div class="form-group">
-        <label>Foto Produk</label>
-        <div id="currentPhotoWrap" class="current-photo" style="display:none;">
-          <img id="currentPhoto">
-          <span class="form-hint">Foto sekarang. Upload baru buat ganti.</span>
-        </div>
-        <input type="file" id="photo" accept="image/*">
-        <div class="form-hint">Format JPG/PNG/WEBP, maksimal 5MB.</div>
+        <label>Foto Produk (maks 8 foto, foto pertama jadi foto utama)</label>
+        <div id="photoPreviewWrap" class="photo-preview-wrap"></div>
+        <input type="file" id="photos" accept="image/*" multiple>
+        <div class="form-hint">Bisa pilih beberapa foto sekaligus. Pilih foto baru akan MENGGANTI semua foto lama.</div>
       </div>
+
       <div class="form-group">
-        <label>Varian (SKU, Ukuran/Label, Harga)</label>
-        <div id="variantsWrap"></div>
-        <button type="button" class="btn btn-secondary btn-small" onclick="addVariantRow()">+ Tambah Varian</button>
-        <div class="form-hint">Kalau produk gak punya pilihan ukuran, cukup 1 baris varian dengan Label dikosongkan (SKU tetap wajib).</div>
+        <label>Variasi 1 (opsional, mis. AREA SABLON)</label>
+        <input type="text" id="axis1Name" placeholder="Nama variasi 1">
+        <div id="axis1OptionsWrap" class="option-chip-wrap"></div>
+        <div class="option-add-row">
+          <input type="text" id="axis1NewOption" placeholder="Tambah opsi, mis. LOGO, lalu Enter">
+          <button type="button" class="btn btn-secondary btn-small" onclick="addAxisOption(1)">+ Tambah</button>
+        </div>
       </div>
+
+      <div class="form-group">
+        <label>Variasi 2 (opsional, mis. SIZE)</label>
+        <input type="text" id="axis2Name" placeholder="Nama variasi 2">
+        <div id="axis2OptionsWrap" class="option-chip-wrap"></div>
+        <div class="option-add-row">
+          <input type="text" id="axis2NewOption" placeholder="Tambah opsi, mis. M, lalu Enter">
+          <button type="button" class="btn btn-secondary btn-small" onclick="addAxisOption(2)">+ Tambah</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Kombinasi (SKU & Harga per kombinasi)</label>
+        <div id="combosWrap"></div>
+        <div class="form-hint">Kalau gak ada variasi sama sekali, cukup isi 1 baris SKU + harga di sini.</div>
+      </div>
+
       <button type="submit" class="btn btn-primary">Simpan Produk</button>
     </form>
   </div>
@@ -68,38 +86,140 @@ const isEdit = pathParts[2] !== 'baru';
 const productId = isEdit ? pathParts[2] : null;
 if (isEdit) document.getElementById('pageTitle').textContent = 'Edit Produk';
 
-function variantRowHtml(v) {
-  v = v || { sku: '', variant_label: '', price: '', price_old: '' };
-  return '<div class="variant-row">' +
-    '<input type="text" placeholder="SKU (mis. RB-M)" class="v-sku" value="' + (v.sku || '') + '">' +
-    '<input type="text" placeholder="Label ukuran (opsional)" class="v-label" value="' + (v.variant_label || '') + '">' +
-    '<input type="number" placeholder="Harga" class="v-price" value="' + (v.price || '') + '">' +
-    '<input type="number" placeholder="Harga coret (opsional)" class="v-price-old" value="' + (v.price_old || '') + '">' +
-    '<button type="button" class="btn-remove-variant" onclick="this.closest(\'.variant-row\').remove()">&times;</button>' +
-  '</div>';
+// ---------- Foto ----------
+let selectedPhotoFiles = [];
+let existingPhotoUrls = [];
+
+document.getElementById('photos').addEventListener('change', (e) => {
+  selectedPhotoFiles = Array.from(e.target.files).slice(0, 8);
+  renderPhotoPreview();
+});
+
+function renderPhotoPreview() {
+  const wrap = document.getElementById('photoPreviewWrap');
+  if (selectedPhotoFiles.length > 0) {
+    wrap.innerHTML = selectedPhotoFiles.map((f, i) =>
+      '<div class="photo-thumb"><img src="' + URL.createObjectURL(f) + '">' +
+      '<button type="button" onclick="removeSelectedPhoto(' + i + ')">&times;</button></div>'
+    ).join('');
+  } else if (existingPhotoUrls.length > 0) {
+    wrap.innerHTML = existingPhotoUrls.map((url) => '<div class="photo-thumb"><img src="' + url + '"></div>').join('') +
+      '<div class="form-hint" style="width:100%;margin-top:4px;">Foto sekarang. Pilih foto baru di atas untuk mengganti semuanya.</div>';
+  } else {
+    wrap.innerHTML = '';
+  }
 }
 
-function addVariantRow(v) {
-  document.getElementById('variantsWrap').insertAdjacentHTML('beforeend', variantRowHtml(v));
+function removeSelectedPhoto(i) {
+  selectedPhotoFiles.splice(i, 1);
+  renderPhotoPreview();
+}
+
+// ---------- Variasi 2 tingkat ----------
+let axis1Options = [];
+let axis2Options = [];
+let combosData = {}; // key "opt1|||opt2" -> { sku, price, price_old }
+
+function comboKey(o1, o2) { return (o1 || '') + '|||' + (o2 || ''); }
+
+function currentCombos() {
+  if (axis1Options.length === 0) return [{ option_1: null, option_2: null }];
+  if (axis2Options.length === 0) return axis1Options.map((o) => ({ option_1: o, option_2: null }));
+  const combos = [];
+  axis1Options.forEach((o1) => axis2Options.forEach((o2) => combos.push({ option_1: o1, option_2: o2 })));
+  return combos;
+}
+
+function renderOptionChips(axisNum) {
+  const options = axisNum === 1 ? axis1Options : axis2Options;
+  const wrap = document.getElementById('axis' + axisNum + 'OptionsWrap');
+  wrap.innerHTML = options.map((o) =>
+    '<span class="option-chip">' + o + ' <button type="button" onclick="removeAxisOption(' + axisNum + ', \'' + o.replace(/'/g, "\\'") + '\')">&times;</button></span>'
+  ).join('');
+}
+
+function addAxisOption(axisNum) {
+  const input = document.getElementById('axis' + axisNum + 'NewOption');
+  const val = input.value.trim();
+  if (!val) return;
+  const arr = axisNum === 1 ? axis1Options : axis2Options;
+  if (arr.includes(val)) { input.value = ''; return; }
+  arr.push(val);
+  input.value = '';
+  renderOptionChips(axisNum);
+  renderCombosTable();
+}
+
+function removeAxisOption(axisNum, val) {
+  if (axisNum === 1) axis1Options = axis1Options.filter((o) => o !== val);
+  else axis2Options = axis2Options.filter((o) => o !== val);
+  renderOptionChips(axisNum);
+  renderCombosTable();
+}
+
+function renderCombosTable() {
+  const combos = currentCombos();
+  const wrap = document.getElementById('combosWrap');
+  const showOpt1 = axis1Options.length > 0;
+  const showOpt2 = axis2Options.length > 0;
+  const axis1Label = document.getElementById('axis1Name').value.trim() || 'Variasi 1';
+  const axis2Label = document.getElementById('axis2Name').value.trim() || 'Variasi 2';
+
+  let html = '<table><thead><tr>';
+  if (showOpt1) html += '<th>' + axis1Label + '</th>';
+  if (showOpt2) html += '<th>' + axis2Label + '</th>';
+  html += '<th>SKU</th><th>Harga</th><th>Harga Coret</th></tr></thead><tbody>';
+  combos.forEach((c) => {
+    const key = comboKey(c.option_1, c.option_2);
+    const data = combosData[key] || {};
+    html += '<tr data-key="' + key.replace(/"/g, '&quot;') + '">';
+    if (showOpt1) html += '<td>' + c.option_1 + '</td>';
+    if (showOpt2) html += '<td>' + c.option_2 + '</td>';
+    html += '<td><input type="text" class="combo-sku" value="' + (data.sku || '') + '" placeholder="SKU"></td>';
+    html += '<td><input type="number" class="combo-price" value="' + (data.price || '') + '" placeholder="Harga"></td>';
+    html += '<td><input type="number" class="combo-price-old" value="' + (data.price_old || '') + '" placeholder="Opsional"></td>';
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  wrap.innerHTML = html;
+
+  wrap.querySelectorAll('tr[data-key]').forEach((row) => {
+    const key = row.dataset.key;
+    if (!combosData[key]) combosData[key] = {};
+    row.querySelector('.combo-sku').addEventListener('input', (e) => { combosData[key].sku = e.target.value; });
+    row.querySelector('.combo-price').addEventListener('input', (e) => { combosData[key].price = e.target.value; });
+    row.querySelector('.combo-price-old').addEventListener('input', (e) => { combosData[key].price_old = e.target.value; });
+  });
 }
 
 function collectVariants() {
-  const rows = document.querySelectorAll('#variantsWrap .variant-row');
+  const combos = currentCombos();
   const variants = [];
-  rows.forEach((row) => {
-    const sku = row.querySelector('.v-sku').value.trim();
-    const price = row.querySelector('.v-price').value;
-    if (!sku || !price) return;
+  combos.forEach((c) => {
+    const key = comboKey(c.option_1, c.option_2);
+    const data = combosData[key] || {};
+    if (!data.sku || !data.price) return;
     variants.push({
-      sku,
-      variant_label: row.querySelector('.v-label').value.trim() || null,
-      price: parseInt(price, 10),
-      price_old: row.querySelector('.v-price-old').value ? parseInt(row.querySelector('.v-price-old').value, 10) : null
+      sku: String(data.sku).trim(),
+      variant_option_1: c.option_1,
+      variant_option_2: c.option_2,
+      price: parseInt(data.price, 10),
+      price_old: data.price_old ? parseInt(data.price_old, 10) : null
     });
   });
   return variants;
 }
 
+document.getElementById('axis1Name').addEventListener('input', renderCombosTable);
+document.getElementById('axis2Name').addEventListener('input', renderCombosTable);
+document.getElementById('axis1NewOption').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { e.preventDefault(); addAxisOption(1); }
+});
+document.getElementById('axis2NewOption').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { e.preventDefault(); addAxisOption(2); }
+});
+
+// ---------- Load / submit ----------
 async function loadForEdit() {
   const res = await fetch('/api/admin/products/' + productId);
   if (!res.ok) {
@@ -110,21 +230,32 @@ async function loadForEdit() {
   document.getElementById('name').value = p.name;
   document.getElementById('category').value = p.category;
   document.getElementById('description').value = p.description || '';
-  if (p.image_url) {
-    document.getElementById('currentPhotoWrap').style.display = 'flex';
-    document.getElementById('currentPhoto').src = p.image_url;
-  }
-  if (p.variants.length > 0) {
-    p.variants.forEach((v) => addVariantRow(v));
-  } else {
-    addVariantRow();
-  }
+  document.getElementById('axis1Name').value = p.variant_axis_1_name || '';
+  document.getElementById('axis2Name').value = p.variant_axis_2_name || '';
+
+  existingPhotoUrls = (p.images || []).map((i) => i.image_url);
+  renderPhotoPreview();
+
+  const seen1 = [];
+  const seen2 = [];
+  (p.variants || []).forEach((v) => {
+    if (v.variant_option_1 && !seen1.includes(v.variant_option_1)) seen1.push(v.variant_option_1);
+    if (v.variant_option_2 && !seen2.includes(v.variant_option_2)) seen2.push(v.variant_option_2);
+    combosData[comboKey(v.variant_option_1, v.variant_option_2)] = {
+      sku: v.sku, price: v.price, price_old: v.price_old
+    };
+  });
+  axis1Options = seen1;
+  axis2Options = seen2;
+  renderOptionChips(1);
+  renderOptionChips(2);
+  renderCombosTable();
 }
 
 if (isEdit) {
   loadForEdit();
 } else {
-  addVariantRow();
+  renderCombosTable();
 }
 
 document.getElementById('productForm').addEventListener('submit', async (e) => {
@@ -133,16 +264,17 @@ document.getElementById('productForm').addEventListener('submit', async (e) => {
   const alertBox = document.getElementById('alertBox');
   alertBox.innerHTML = '';
   if (variants.length === 0) {
-    alertBox.innerHTML = '<div class="alert alert-error">Minimal 1 varian dengan SKU dan harga wajib diisi.</div>';
+    alertBox.innerHTML = '<div class="alert alert-error">Minimal 1 kombinasi dengan SKU dan harga wajib diisi.</div>';
     return;
   }
   const formData = new FormData();
   formData.append('name', document.getElementById('name').value.trim());
   formData.append('category', document.getElementById('category').value);
   formData.append('description', document.getElementById('description').value.trim());
+  formData.append('variant_axis_1_name', document.getElementById('axis1Name').value.trim());
+  formData.append('variant_axis_2_name', document.getElementById('axis2Name').value.trim());
   formData.append('variants_json', JSON.stringify(variants));
-  const photoFile = document.getElementById('photo').files[0];
-  if (photoFile) formData.append('photo', photoFile);
+  selectedPhotoFiles.forEach((f) => formData.append('photos', f));
 
   const url = isEdit ? '/api/admin/products/' + productId : '/api/admin/products';
   const method = isEdit ? 'PUT' : 'POST';
