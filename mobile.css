@@ -621,7 +621,9 @@
 
   /* ---- Artikel unggulan: foto di atas, teks di bawah (bukan 2 kolom) ---- */
   .featured-card { grid-template-columns: 1fr !important; margin-bottom: 28px !important; }
-  .featured-img { min-height: 160px !important; font-size: 44px !important; }
+  /* .featured-img sekarang aspect-ratio 4/3 dari base style (articles.html),
+     otomatis menyesuaikan lebar - di sini cuma perkecil ikon emoji-nya. */
+  .featured-img { font-size: 44px !important; }
   .featured-body { padding: 16px !important; }
   .article-cat-badge { font-size: 8px !important; padding: 3px 8px !important; margin-bottom: 8px !important; }
   .article-meta { font-size: 9px !important; margin-bottom: 8px !important; }
