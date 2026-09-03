@@ -101,7 +101,9 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
   font-size: 160px;
   margin-bottom: 12px;
   position: relative;
+  overflow: hidden;
 }
+#fotoMainEmoji { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
 
 .foto-badge {
   position: absolute;
@@ -558,36 +560,27 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
   <div class="breadcrumb grid-bg">
     <a href="index.html">Home</a> ›
     <a href="katalog.html">Produk</a> ›
-    <a href="katalog.html">Apparel</a> ›
-    <span>Kaos Custom Sablon DTF</span>
+    <a href="katalog.html" id="breadcrumbCat">Kategori</a> ›
+    <span id="breadcrumbName">Produk</span>
   </div>
 
   <!-- DETAIL PRODUK -->
-  <div class="grid-bg" style="padding-top:32px;">
+  <div class="grid-bg" style="padding-top:32px;" id="detailLayoutWrap">
     <div class="detail-layout">
 
       <!-- KIRI: Foto -->
       <div class="foto-col">
         <div class="foto-main">
-          <div class="foto-badge">-50%</div>
-          <span id="fotoMainEmoji">👕</span>
+          <div class="foto-badge" style="display:none;">-50%</div>
+          <span id="fotoMainEmoji">🛍️</span>
         </div>
-        <div class="foto-thumbs">
-          <div class="foto-thumb active">👕</div>
-          <div class="foto-thumb">📏</div>
-          <div class="foto-thumb">🎨</div>
-          <div class="foto-thumb">📦</div>
-          <div class="foto-thumb">🧵</div>
-          <div class="foto-thumb">🖨️</div>
-          <div class="foto-thumb">📏</div>
-          <div class="foto-thumb">🔖</div>
-        </div>
+        <div class="foto-thumbs" id="fotoThumbs" style="display:none;"></div>
       </div>
 
       <!-- KANAN: Info -->
       <div class="info-section">
-        <div class="product-cat-badge">APPAREL</div>
-        <h1 class="product-title">Kaos Custom<br>Sablon DTF</h1>
+        <div class="product-cat-badge" id="productCatBadge">KATEGORI</div>
+        <h1 class="product-title" id="productTitle">Memuat produk...</h1>
 
         <div class="rating-row">
           <span class="stars">★★★★★</span>
@@ -597,35 +590,13 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
         </div>
 
         <div class="price-section">
-          <div class="price-old">Rp 90.000</div>
-          <div class="price-new">Rp 45.000</div>
+          <div class="price-old" style="display:none;">Rp 0</div>
+          <div class="price-new">Rp 0</div>
           <div class="price-note">Harga per pcs · Bisa satuan · Min. 1 pcs</div>
         </div>
 
-        <!-- Varian Ukuran -->
-        <div class="varian-section">
-          <div class="varian-label">Ukuran</div>
-          <div class="varian-grid">
-            <button class="varian-btn">XS</button>
-            <button class="varian-btn active">S</button>
-            <button class="varian-btn">M</button>
-            <button class="varian-btn">L</button>
-            <button class="varian-btn">XL</button>
-            <button class="varian-btn">XXL</button>
-            <button class="varian-btn">3XL</button>
-          </div>
-        </div>
-
-        <!-- Tier Qty -->
-        <div class="varian-section">
-          <div class="varian-label">Tier Qty</div>
-          <div class="varian-grid">
-            <button class="varian-btn active">1–11 pcs</button>
-            <button class="varian-btn">12–49 pcs</button>
-            <button class="varian-btn">50–99 pcs</button>
-            <button class="varian-btn">100+ pcs</button>
-          </div>
-        </div>
+        <!-- Diisi JS: 0-2 seksi variasi tergantung data produk -->
+        <div id="variantSectionsWrap"></div>
 
         <!-- QTY -->
         <div class="qty-section">
@@ -662,7 +633,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
           <button type="button" class="btn-cart-detail" id="addCartBtn" onclick="addToCartFromDetail(this)">
             🛒 Tambah ke Keranjang
           </button>
-          <a href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+mau+order+Kaos+Custom+Sablon+DTF" target="_blank" class="btn-wa">
+          <a href="https://wa.me/6282143777463" target="_blank" class="btn-wa" id="waOrderBtn">
             💬 Pesan via WhatsApp
           </a>
           <a href="katalog.html" class="btn-catalog">
@@ -684,21 +655,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 
         <div id="tab-deskripsi" class="desc-content">
           <div class="desc-collapsible" id="descCollapsible">
-            <p>Kaos custom dengan teknik sablon <strong>DTF (Direct to Film)</strong> — hasil cetak presisi, warna tajam, dan tahan lama setelah dicuci berkali-kali. Cocok untuk:</p>
-            <ul>
-              <li>Merchandise komunitas & organisasi</li>
-              <li>Seragam tim olahraga & ekstrakurikuler</li>
-              <li>Kaos event, gathering, reuni</li>
-              <li>UMKM yang butuh produk branded</li>
-            </ul>
-            <br>
-            <p>Sablon DTF memungkinkan cetakan detail seperti foto, gradasi warna, dan desain kompleks tanpa minimum warna. <strong>Bisa full color tanpa biaya tambahan.</strong></p>
-            <br>
-            <p>Bahan dasar <strong>Cotton Combed</strong> yang kami pakai dipilih karena seratnya lembut, menyerap keringat, dan tetap nyaman dipakai seharian meski di cuaca panas. Jahitan rantai (chainstitch) di bagian bawah dan lengan membuat kaos lebih awet dan tidak mudah melar dibanding jahitan biasa.</p>
-            <br>
-            <p><strong>Tips perawatan:</strong> cuci bagian dalam terbalik dengan air dingin, hindari pemutih, dan jangan disetrika langsung di atas area sablon supaya hasil cetak DTF tetap tajam sampai puluhan kali cuci.</p>
-            <br>
-            <p>Kami juga menyediakan opsi <strong>revisi desain gratis 2x</strong> sebelum masuk produksi, jadi kamu bisa memastikan hasil akhirnya benar-benar sesuai sebelum dicetak. Tim desain kami siap bantu kalau kamu belum punya file desain sendiri.</p>
+            <p>Memuat deskripsi...</p>
           </div>
           <button class="desc-toggle-btn" id="descToggleBtn" onclick="toggleDesc()">Baca selengkapnya <span class="desc-toggle-arrow">▾</span></button>
         </div>
@@ -731,46 +688,13 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
   </div>
 
   <!-- PRODUK TERKAIT -->
-  <div class="grid-bg" style="padding-top:8px;padding-bottom:60px;">
+  <div class="grid-bg" style="padding-top:8px;padding-bottom:60px;" id="relatedWrap">
     <div class="related-section">
       <div class="section-title">
         <div class="section-title-bar"></div>
         <div class="section-title-text">PRODUK TERKAIT</div>
       </div>
-      <div class="related-grid">
-        <div class="product-card" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🧥</div>
-          <div class="product-info">
-            <div class="product-cat">APPAREL</div>
-            <div class="product-name">Coach Jacket Sablon Polyflex</div>
-            <div class="product-price"><span class="price-new">Rp 125.000</span></div>
-          </div>
-        </div>
-        <div class="product-card" style="border-top-color:#00bcd4;" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🪩</div>
-          <div class="product-info">
-            <div class="product-cat" style="background:#00bcd4;">AKSESORI</div>
-            <div class="product-name">Lanyard Print + ID Card</div>
-            <div class="product-price"><span class="price-new">Rp 25.000</span></div>
-          </div>
-        </div>
-        <div class="product-card" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🧢</div>
-          <div class="product-info">
-            <div class="product-cat">APPAREL</div>
-            <div class="product-name">Topi Baseball Custom DTF</div>
-            <div class="product-price"><span class="price-old">Rp 110.000</span><span class="price-new">Rp 65.000</span></div>
-          </div>
-        </div>
-        <div class="product-card" onclick="location.href='detail-produk.html'">
-          <div class="product-img">⚽</div>
-          <div class="product-info">
-            <div class="product-cat">APPAREL</div>
-            <div class="product-name">Jersey Futsal Full Print</div>
-            <div class="product-price"><span class="price-new">Rp 56.000</span></div>
-          </div>
-        </div>
-      </div>
+      <div class="related-grid" id="relatedGrid"></div>
     </div>
   </div>
 
@@ -835,36 +759,249 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 </div>
 
 <script>
+const API_BASE = 'https://javasmedia-backend-production.up.railway.app';
+const CATEGORY_EMOJI = { apparel: '👕', aksesori: '🪩', packaging: '🏷️', promotion: '📢', homedecor: '🖼️', others: '📦' };
+const CATEGORY_COLOR = { apparel: '#1e3a5f', aksesori: '#00bcd4', packaging: '#9c27b0', promotion: '#e85d04', homedecor: '#4caf50', others: '#795548' };
+const CATEGORY_LABEL = { apparel: 'Apparel', aksesori: 'Aksesori', packaging: 'Packaging', promotion: 'Promotion Item', homedecor: 'Homedecor', others: 'Others' };
+
+let currentProduct = null;
+let currentImages = [];
+let selectedOption1 = null;
+let selectedOption2 = null;
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str == null ? '' : str;
+  return div.innerHTML;
+}
+function formatRupiah(n) { return Number(n).toLocaleString('id-ID'); }
+
 function changeQty(delta) {
   const input = document.getElementById('qty');
   const val = parseInt(input.value) + delta;
   if (val >= 1) input.value = val;
 }
 
-function addToCartFromDetail(btnEl) {
-  const titleEl = document.querySelector('.product-title');
-  const name = (titleEl.innerText || titleEl.textContent).replace(/\s+/g, ' ').trim();
-  const priceEl = document.querySelector('.price-section .price-new');
-  const price = priceEl ? parseInt(priceEl.textContent.replace(/[^0-9]/g, ''), 10) || 0 : 0;
-  const qtyInput = document.getElementById('qty');
-  const qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
-  const emojiEl = document.getElementById('fotoMainEmoji');
-  const emoji = emojiEl ? emojiEl.textContent.trim() : '🛍️';
+function findSelectedVariant() {
+  const variants = (currentProduct && currentProduct.variants) || [];
+  return variants.find(v =>
+    (v.variant_option_1 || null) === (selectedOption1 || null) &&
+    (v.variant_option_2 || null) === (selectedOption2 || null)
+  ) || variants[0];
+}
 
-  let ukuran = '';
-  document.querySelectorAll('.varian-section').forEach(function (section) {
-    const label = section.querySelector('.varian-label');
-    if (label && label.textContent.trim() === 'Ukuran') {
-      const active = section.querySelector('.varian-btn.active');
-      if (active) ukuran = active.textContent.trim();
-    }
+function renderPrice(price, priceOld) {
+  const oldEl = document.querySelector('.price-section .price-old');
+  const newEl = document.querySelector('.price-section .price-new');
+  if (priceOld && priceOld > price) {
+    oldEl.style.display = 'block';
+    oldEl.textContent = 'Rp ' + formatRupiah(priceOld);
+  } else {
+    oldEl.style.display = 'none';
+  }
+  newEl.textContent = 'Rp ' + formatRupiah(price);
+}
+
+function updatePriceForSelection() {
+  const v = findSelectedVariant();
+  if (v) renderPrice(v.price, v.price_old);
+}
+
+function renderVariantSection(label, options, axisNum) {
+  const btns = options.map((o, i) =>
+    '<button type="button" class="varian-btn' + (i === 0 ? ' active' : '') + '" data-axis="' + axisNum + '" data-value="' + escapeHtml(o) + '">' + escapeHtml(o) + '</button>'
+  ).join('');
+  return '<div class="varian-section"><div class="varian-label">' + escapeHtml(label) + '</div><div class="varian-grid">' + btns + '</div></div>';
+}
+
+function renderVariants(p) {
+  const variants = p.variants || [];
+  const wrap = document.getElementById('variantSectionsWrap');
+  wrap.innerHTML = '';
+  selectedOption1 = null;
+  selectedOption2 = null;
+
+  const opts1 = Array.from(new Set(variants.map(v => v.variant_option_1).filter(Boolean)));
+  const opts2 = Array.from(new Set(variants.map(v => v.variant_option_2).filter(Boolean)));
+
+  let html = '';
+  if (opts1.length > 0) {
+    selectedOption1 = opts1[0];
+    html += renderVariantSection(p.variant_axis_1_name || 'Varian', opts1, 1);
+  }
+  if (opts2.length > 0) {
+    selectedOption2 = opts2[0];
+    html += renderVariantSection(p.variant_axis_2_name || 'Varian', opts2, 2);
+  }
+  wrap.innerHTML = html;
+
+  wrap.querySelectorAll('.varian-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const axisNum = this.dataset.axis;
+      const group = this.closest('.varian-grid');
+      group.querySelectorAll('.varian-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      if (axisNum === '1') selectedOption1 = this.dataset.value;
+      else selectedOption2 = this.dataset.value;
+      updatePriceForSelection();
+    });
   });
 
-  const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  updatePriceForSelection();
+}
+
+function showFotoAt(idx) {
+  const emojiSpan = document.getElementById('fotoMainEmoji');
+  const img = currentImages[idx];
+  if (img) {
+    emojiSpan.innerHTML = '<img src="' + img.image_url + '" alt="" style="width:100%;height:100%;object-fit:cover;">';
+  } else {
+    emojiSpan.textContent = CATEGORY_EMOJI[currentProduct.category] || '🛍️';
+  }
+  document.querySelectorAll('#fotoThumbs .foto-thumb').forEach((t, i) => t.classList.toggle('active', i === idx));
+}
+
+function renderFoto(p) {
+  currentImages = (p.images && p.images.length > 0) ? p.images : (p.image_url ? [{ image_url: p.image_url }] : []);
+  const thumbsWrap = document.getElementById('fotoThumbs');
+  if (currentImages.length <= 1) {
+    thumbsWrap.style.display = 'none';
+    thumbsWrap.innerHTML = '';
+  } else {
+    thumbsWrap.style.display = 'flex';
+    thumbsWrap.innerHTML = currentImages.map((img, i) =>
+      '<div class="foto-thumb' + (i === 0 ? ' active' : '') + '" data-idx="' + i + '"><img src="' + img.image_url + '" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:2px;"></div>'
+    ).join('');
+    thumbsWrap.querySelectorAll('.foto-thumb').forEach(t => {
+      t.addEventListener('click', function () { showFotoAt(parseInt(this.dataset.idx, 10)); });
+    });
+  }
+  showFotoAt(0);
+
+  const badgeEl = document.querySelector('.foto-badge');
+  if (p.price_old && p.price_old > p.price) {
+    const pct = Math.round((1 - p.price / p.price_old) * 100);
+    badgeEl.textContent = '-' + pct + '%';
+    badgeEl.style.display = 'block';
+  } else {
+    badgeEl.style.display = 'none';
+  }
+}
+
+function formatDescription(text) {
+  return text.split(/\n\s*\n/).map(para => '<p>' + escapeHtml(para).replace(/\n/g, '<br>') + '</p>').join('');
+}
+
+function showNotFound() {
+  document.getElementById('detailLayoutWrap').innerHTML =
+    '<div style="max-width:1200px;margin:0 auto;padding:80px 40px;text-align:center;">' +
+      '<h2 style="font-family:\'Baloo Chettan 2\',cursive;font-size:24px;margin-bottom:12px;">Produk tidak ditemukan</h2>' +
+      '<p style="color:#888;margin-bottom:20px;">Produk ini mungkin sudah dihapus atau linknya salah.</p>' +
+      '<a href="katalog.html" class="btn-catalog" style="display:inline-flex;">← Kembali ke Katalog</a>' +
+    '</div>';
+  const relatedWrap = document.getElementById('relatedWrap');
+  if (relatedWrap) relatedWrap.style.display = 'none';
+}
+
+function renderProduct() {
+  const p = currentProduct;
+  document.title = p.name + ' — JavasMedia';
+
+  document.getElementById('breadcrumbCat').textContent = CATEGORY_LABEL[p.category] || p.category;
+  document.getElementById('breadcrumbName').textContent = p.name;
+
+  renderFoto(p);
+
+  document.getElementById('productCatBadge').textContent = p.category.toUpperCase();
+  document.getElementById('productTitle').innerHTML = escapeHtml(p.name).replace(/\n/g, '<br>');
+
+  renderPrice(p.price, p.price_old);
+  renderVariants(p);
+
+  const waBtn = document.getElementById('waOrderBtn');
+  waBtn.href = 'https://wa.me/6282143777463?text=' + encodeURIComponent('Halo JavasMedia, saya mau order ' + p.name);
+
+  const descCollapsible = document.getElementById('descCollapsible');
+  descCollapsible.innerHTML = p.description
+    ? formatDescription(p.description)
+    : '<p style="color:#aaa;">Belum ada deskripsi untuk produk ini.</p>';
+  initDescCollapse();
+}
+
+async function loadRelated() {
+  try {
+    const res = await fetch(API_BASE + '/api/products');
+    const all = await res.json();
+    let related = all.filter(p => p.id !== currentProduct.id && p.category === currentProduct.category);
+    if (related.length < 4) {
+      const others = all.filter(p => p.id !== currentProduct.id && p.category !== currentProduct.category);
+      related = related.concat(others);
+    }
+    renderRelated(related.slice(0, 4));
+  } catch (err) {
+    document.getElementById('relatedWrap').style.display = 'none';
+  }
+}
+
+function renderRelated(list) {
+  const relatedWrap = document.getElementById('relatedWrap');
+  if (list.length === 0) {
+    relatedWrap.style.display = 'none';
+    return;
+  }
+  document.getElementById('relatedGrid').innerHTML = list.map(p => {
+    const color = CATEGORY_COLOR[p.category] || '#1e3a5f';
+    const imgHtml = p.image_url
+      ? '<img src="' + p.image_url + '" alt="" style="width:100%;height:100%;object-fit:cover;">'
+      : (CATEGORY_EMOJI[p.category] || '🛍️');
+    const priceHtml = (p.price_old && p.price_old > p.price)
+      ? '<span class="price-old">Rp ' + formatRupiah(p.price_old) + '</span><span class="price-new">Rp ' + formatRupiah(p.price) + '</span>'
+      : '<span class="price-new">Rp ' + formatRupiah(p.price) + '</span>';
+    return '<div class="product-card" style="border-top-color:' + color + ';" onclick="location.href=\'detail-produk.html?id=' + p.id + '\'">' +
+      '<div class="product-img">' + imgHtml + '</div>' +
+      '<div class="product-info">' +
+        '<div class="product-cat" style="background:' + color + ';">' + p.category.toUpperCase() + '</div>' +
+        '<div class="product-name">' + escapeHtml(p.name) + '</div>' +
+        '<div class="product-price">' + priceHtml + '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+async function loadProduct() {
+  const id = new URLSearchParams(window.location.search).get('id');
+  if (!id) { showNotFound(); return; }
+  try {
+    const res = await fetch(API_BASE + '/api/products/' + id);
+    if (!res.ok) { showNotFound(); return; }
+    currentProduct = await res.json();
+  } catch (err) {
+    showNotFound();
+    return;
+  }
+  renderProduct();
+  loadRelated();
+}
+
+function addToCartFromDetail(btnEl) {
+  if (!currentProduct) return;
+  const v = findSelectedVariant();
+  const price = v ? v.price : currentProduct.price;
+  const qtyInput = document.getElementById('qty');
+  const qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
+
+  const variantParts = [selectedOption1, selectedOption2].filter(Boolean);
+  const variantLabel = variantParts.join(' / ');
+
+  const firstImageUrl = currentImages[0] ? currentImages[0].image_url : null;
+  const emoji = firstImageUrl
+    ? '<img src="' + firstImageUrl + '" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">'
+    : (CATEGORY_EMOJI[currentProduct.category] || '🛍️');
+
   addToCart({
-    id: id,
-    name: name,
-    variant: ukuran ? ('Ukuran ' + ukuran) : '',
+    id: 'product-' + currentProduct.id,
+    name: currentProduct.name,
+    variant: variantLabel,
     price: price,
     qty: qty,
     emoji: emoji
@@ -887,22 +1024,6 @@ function showTab(id, el) {
   document.getElementById('tab-' + id).style.display = 'block';
   el.classList.add('active');
 }
-
-document.querySelectorAll('.varian-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    const group = this.closest('.varian-grid');
-    group.querySelectorAll('.varian-btn').forEach(b => b.classList.remove('active'));
-    this.classList.add('active');
-  });
-});
-
-document.querySelectorAll('.foto-thumb').forEach(thumb => {
-  thumb.addEventListener('click', function() {
-    document.querySelectorAll('.foto-thumb').forEach(t => t.classList.remove('active'));
-    this.classList.add('active');
-    document.getElementById('fotoMainEmoji').textContent = this.textContent.trim();
-  });
-});
 
 function searchDesktop() {
   const val = document.getElementById('desktopSearchInput').value.trim();
@@ -939,6 +1060,8 @@ function toggleDesc() {
 }
 window.addEventListener('load', initDescCollapse);
 window.addEventListener('resize', initDescCollapse);
+
+loadProduct();
 </script>
 
 <a class="floating-wa" href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+ingin+konsultasi" target="_blank" aria-label="Chat WhatsApp">
