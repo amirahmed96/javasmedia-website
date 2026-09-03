@@ -748,4 +748,52 @@
   .article-card-cat { font-size: 7px !important; margin-bottom: 6px !important; }
   .article-card-title { font-size: 11px !important; margin-bottom: 6px !important; }
   .article-card-meta { font-size: 9px !important; }
+
+  /* ============================================
+     HALAMAN DASHBOARD (dashboard.html)
+     Sidebar menu jadi block biasa di atas konten
+     (bukan sticky lagi, cuma ditumpuk), tabel order
+     bisa digeser ke samping (bukan dipaksa muat),
+     metric card & kartu bawah jadi 1 kolom.
+     ============================================ */
+
+  .layout { grid-template-columns: 1fr !important; }
+  /* .sidebar di-scope ke .layout - class ".sidebar" sama dipakai
+     articles.html/detail-artikel.html untuk sidebar konten (harus
+     tetap tampil apa adanya), beda elemen dari sidebar menu di sini. */
+  .layout .sidebar {
+    position: static !important;
+    border-right: none !important;
+    border-bottom: 2.5px solid var(--dark) !important;
+    padding: 16px 0 !important;
+  }
+
+  /* Kolom grid tidak mau menyusut di bawah lebar tabel order (560px)
+     kalau .main tidak di-reset - sama seperti kasus tabel di
+     detail-artikel.html, ini bikin sidebar ikut melebar juga. */
+  .main { min-width: 0 !important; padding: 20px 16px !important; }
+  .page-title { font-size: 26px !important; }
+  .page-title::before { height: 26px !important; }
+
+  .metrics { grid-template-columns: 1fr !important; gap: 10px !important; margin-bottom: 20px !important; }
+  .metric-card { padding: 14px !important; }
+  .metric-value { font-size: 28px !important; }
+  .metric-label { font-size: 8px !important; }
+  .metric-sub { font-size: 9.5px !important; }
+
+  .promo-banner { flex-direction: column !important; align-items: flex-start !important; padding: 18px !important; gap: 14px !important; margin-bottom: 20px !important; }
+  .promo-title { font-size: 22px !important; }
+  .promo-code { align-self: stretch !important; text-align: center !important; }
+
+  /* Tabel order digeser ke samping, bukan diremas - .table-wrap sudah
+     membungkus <table> pas, tinggal dikasih overflow-x. */
+  .table-wrap { overflow-x: auto !important; margin-bottom: 20px !important; -webkit-overflow-scrolling: touch; }
+  .table-wrap table { min-width: 560px !important; }
+
+  .bottom-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+  /* .info-card di-scope ke .bottom-grid - class sama dipakai location.html
+     dengan padding 16px, tapi di sini paddingnya ada di .card-body bagian
+     dalam, kalau ikut ke-set di .info-card sendiri, header hitamnya jadi
+     tidak rata sampai pinggir kartu. */
+  .bottom-grid .info-card { padding: 0 !important; }
 }

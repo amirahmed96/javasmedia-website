@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard Customer — JavasMedia</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
+html { overflow-x: hidden; }
+.page { width: 1440px; margin: 0 auto; overflow: hidden; }
 :root {
   --bg: #FAF8F3;
   --navy: #1e3a5f;
@@ -31,81 +33,67 @@ body {
   color: var(--dark);
 }
 
-/* HEADER */
-.header {
-  background: var(--navy);
-  padding: 0 32px;
+/* ===== HEADER (FINAL - sama seperti halaman lain) ===== */
+.header { position: relative; width: 1440px; height: 100px; z-index: 100; }
+.header .header-bar { position: absolute; top: 0; left: 0; width: 1440px; height: 80px; object-fit: cover; }
+.header .header-logo { position: absolute; top: 12px; left: 30px; height: 48px; width: auto; cursor: pointer; object-fit: contain; }
+.header .nav-btn { position: absolute; bottom: 20px; height: 52px; width: 140px; cursor: pointer; object-fit: fill; display: block; }
+.header .nav-btn-1 { left: 340px; } .header .nav-btn-2 { left: 455px; } .header .nav-btn-3 { left: 570px; } .header .nav-btn-4 { left: 685px; }
+.header .nav-label { position: absolute; font-family: 'Avenir Next Condensed','Arial Narrow',Arial,sans-serif; font-size: 18px; font-weight: 700; color: #1a1a1a; text-align: center; cursor: pointer; pointer-events: none; width: 140px; }
+.header .nav-label-1 { bottom: 33px; left: 340px; } .header .nav-label-2 { bottom: 33px; left: 455px; } .header .nav-label-3 { bottom: 33px; left: 570px; } .header .nav-label-4 { bottom: 33px; left: 685px; }
+.header .header-search-box {
+  position: absolute;
+  top: 24px; left: 1000px;
+  width: 190px; height: 32px;
+  background: #f5ecd8;
+  border-radius: 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 64px;
-  border-bottom: 2.5px solid var(--dark);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  padding: 0 14px;
+  box-sizing: border-box;
 }
-
-.logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
-  color: white;
-  letter-spacing: 3px;
-  font-style: italic;
-  text-decoration: none;
-}
-
-.header-nav {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.header-link {
-  font-size: 11px;
-  color: rgba(255,255,255,0.6);
-  text-decoration: none;
-  letter-spacing: 1px;
-  transition: color 0.15s;
-}
-
-.header-link:hover { color: var(--yellow); }
-
-.header-user {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.user-avatar {
-  width: 34px;
-  height: 34px;
-  background: var(--orange);
-  border: 2px solid var(--dark);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  font-weight: 700;
-  color: white;
-}
-
-.user-name {
+.header .header-search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
   font-size: 12px;
-  color: white;
-  font-weight: 700;
+  color: #1a1a1a;
+  font-family: 'Inter', sans-serif;
+  min-width: 0;
 }
+.header .header-search-box img {
+  width: 16px;
+  height: auto;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+.header .header-cart { position: absolute; top: 24px; left: 1210px; height: 30px; width: 32px; cursor: pointer; object-fit: contain; }
+.header .header-profile { position: absolute; top: 24px; left: 1260px; height: 28px; width: 29px; cursor: pointer; object-fit: contain; }
+.header .bar-ornamen { position: absolute; top: 80px; left: 0; width: 1440px; height: 20px; background-image: repeating-conic-gradient(#8b1a1a 0% 25%, transparent 0% 50%); background-size: 20px 20px; }
 
-.checkered {
-  height: 14px;
-  background: repeating-linear-gradient(90deg, var(--red) 0px, var(--red) 14px, var(--bg) 14px, var(--bg) 28px);
-  border-bottom: 2px solid var(--dark);
-}
+/* ===== FOOTER (sama seperti halaman lain) ===== */
+.footer { background: black; }
+.footer-main { padding: 60px 80px 40px; max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; border-bottom: 1px solid #222; }
+.footer-logo { height: 90px; width: auto; margin-bottom: 16px; display: block; object-fit: contain; }
+.footer-info { color: #666; font-size: 13px; line-height: 1.8; margin-bottom: 16px; font-family: 'Inter', sans-serif; }
+.footer-social { display: flex; gap: 8px; }
+.social-icon { width: 32px; height: 32px; background: #111; border: 1px solid #222; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; }
+.social-icon img { width: 16px; height: 16px; object-fit: contain; }
+.footer-col h4 { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: white; text-transform: uppercase; margin-bottom: 16px; }
+.footer-col a { display: block; color: #555; font-size: 13px; text-decoration: none; margin-bottom: 10px; font-family: 'Inter', sans-serif; }
+.footer-newsletter { padding: 40px 80px; text-align: center; max-width: 1440px; margin: 0 auto; }
+.newsletter-text { color: #555; font-size: 13px; margin-bottom: 20px; font-family: 'Inter', sans-serif; }
+.newsletter-form { display: flex; max-width: 512px; margin: 0 auto 12px; }
+.newsletter-input { flex: 1; padding: 16px 20px; background: white; border: none; font-size: 13px; color: #999; outline: none; font-family: 'Inter', sans-serif; }
+.newsletter-btn { background: #ffbb00; border: none; padding: 16px 32px; font-size: 12px; font-weight: 700; color: black; cursor: pointer; letter-spacing: 1.4px; text-transform: uppercase; font-family: 'Inter', sans-serif; }
+.newsletter-consent { display: flex; align-items: center; justify-content: center; gap: 8px; color: #444; font-size: 11px; font-family: 'Inter', sans-serif; }
 
 /* LAYOUT */
 .layout {
   display: grid;
   grid-template-columns: 220px 1fr;
-  min-height: calc(100vh - 80px);
 }
 
 /* SIDEBAR */
@@ -114,9 +102,7 @@ body {
   border-right: 2.5px solid var(--dark);
   padding: 24px 0;
   position: sticky;
-  top: 80px;
-  height: calc(100vh - 80px);
-  overflow-y: auto;
+  top: 0;
 }
 
 .sidebar-user {
@@ -560,25 +546,84 @@ tr:hover td { background: #fef9f0; }
 .history-date { color: var(--muted); font-size: 10px; margin-top: 2px; }
 .history-total { font-weight: 700; color: var(--orange); }
 </style>
+<link rel="stylesheet" href="mobile-nav.css">
+<link rel="stylesheet" href="mobile.css">
 </head>
 <body>
+<div class="page">
 
-<!-- HEADER -->
-<div class="header">
-  <a href="index.html" class="logo">JavasMedia</a>
-  <div class="header-nav">
-    <a href="katalog.html" class="header-link">Katalog</a>
-    <a href="promo.html" class="header-link">Promo</a>
-    <a href="articles.html" class="header-link">Articles</a>
+  <!-- ===== MOBILE HEADER (mobile only, see mobile-nav.css) ===== -->
+  <div class="mobile-header-bar">
+    <button class="mh-hamburger" aria-label="Menu"><img src="hamburger.png" alt="Menu"></button>
+    <img class="mh-logo" src="logo.png" alt="JavasMedia" onclick="location.href='index.html'">
+    <div class="mh-right">
+      <button class="mh-search-toggle" aria-label="Cari"><img src="search-icon.png" alt="Cari"></button>
+      <img class="mh-icon" src="cart.png" alt="Cart">
+      <img class="mh-icon" src="profile.png" alt="Profile" onclick="location.href='login.html'">
+    </div>
   </div>
-  <div class="header-user">
-    <div class="user-avatar">AD</div>
-    <div class="user-name">Aditya W</div>
+  <div class="mh-search-box">
+    <input type="text" placeholder="Cari produk...">
+    <button class="mh-search-close" aria-label="Tutup pencarian">&times;</button>
   </div>
-</div>
-<div class="checkered"></div>
 
-<div class="layout">
+  <!-- ===== MOBILE DRAWER NAV ===== -->
+  <div class="mobile-nav-overlay"></div>
+  <div class="mobile-nav-drawer">
+    <button class="mnd-close" aria-label="Tutup"><img src="drawer-close.png" alt="Tutup"></button>
+    <div class="mnd-brand">
+      <img class="mnd-brand-logo" src="house-of-customize.png" alt="House of Customize">
+    </div>
+    <div class="mnd-nav">
+      <a href="promo.html"><img src="btn-promo.png" alt="Promo"><span>PROMO</span></a>
+      <a href="katalog.html"><img src="btn-product.png" alt="Product"><span>PRODUCT</span></a>
+      <a href="articles.html"><img src="btn-articles.png" alt="Articles"><span>ARTICLES</span></a>
+      <a href="location.html"><img src="btn-location.png" alt="Location"><span>LOCATION</span></a>
+    </div>
+    <div class="mnd-footer">
+      <img class="mnd-footer-logo" src="javas-media-badge.png" alt="JavasMedia">
+      <p>Ploso Timur 1B No. 3b<br>Tambaksari - Surabaya<br>javasmediasurabaya@gmail.com<br>082143777463</p>
+      <div class="mnd-social">
+        <a href="#" aria-label="Facebook"><img src="fb-icon.png" alt="Facebook"></a>
+        <a href="#" aria-label="TikTok"><img src="tiktok-icon.png" alt="TikTok"></a>
+        <a href="#" aria-label="YouTube"><img src="youtube-icon.png" alt="YouTube"></a>
+        <a href="#" aria-label="Instagram"><img src="instagram-icon.png" alt="Instagram"></a>
+        <a href="https://wa.me/6282143777463" aria-label="WhatsApp"><img src="whatsapp-icon.png" alt="WhatsApp"></a>
+      </div>
+      <div class="mnd-links">
+        <a href="#">About Us</a>
+        <a href="#">Production</a>
+        <a href="location.html">Alamat</a>
+        <a href="katalog.html">Kaos Custom</a>
+        <a href="#">Career</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Track Order</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <img class="header-bar" src="bar-header.png" alt="">
+    <img class="header-logo" src="logo.png" alt="JavasMedia" onclick="location.href='index.html'" style="cursor:pointer;">
+    <img class="nav-btn nav-btn-1" src="btn1.png" alt="" onclick="location.href='promo.html'">
+    <img class="nav-btn nav-btn-2" src="btn2.png" alt="" onclick="location.href='katalog.html'">
+    <img class="nav-btn nav-btn-3" src="btn3.png" alt="" onclick="location.href='articles.html'">
+    <img class="nav-btn nav-btn-4" src="btn4.png" alt="" onclick="location.href='location.html'">
+    <span class="nav-label nav-label-1" onclick="location.href='promo.html'">PROMO</span>
+    <span class="nav-label nav-label-2" onclick="location.href='katalog.html'">PRODUCT</span>
+    <span class="nav-label nav-label-3" onclick="location.href='articles.html'">ARTICLES</span>
+    <span class="nav-label nav-label-4" onclick="location.href='location.html'">LOCATION</span>
+    <div class="header-search-box">
+      <input type="text" id="desktopSearchInput" placeholder="Cari produk..." onkeypress="if(event.key==='Enter'){searchDesktop()}">
+      <img src="search-icon-navy.png" alt="Cari" onclick="searchDesktop()">
+    </div>
+    <img class="header-cart" src="cart.png" alt="">
+    <img class="header-profile" src="profile.png" alt="" onclick="location.href='login.html'">
+    <div class="bar-ornamen"></div>
+  </div>
+
+  <div class="layout">
 
   <!-- SIDEBAR -->
   <div class="sidebar">
@@ -808,7 +853,73 @@ tr:hover td { background: #fef9f0; }
   </div>
 </div>
 
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-main">
+    <div>
+      <img src="logo.png" alt="JavasMedia" class="footer-logo">
+      <div class="footer-info">Ploso Timur 1b No. 3b<br>Tambaksari - Surabaya<br>082143777463<br>javasmediasurabaya@gmail.com</div>
+      <div class="footer-social">
+        <a class="social-icon" href="#" aria-label="Facebook"><img src="fb-icon.png" alt="Facebook"></a>
+        <a class="social-icon" href="#" aria-label="TikTok"><img src="tiktok-icon.png" alt="TikTok"></a>
+        <a class="social-icon" href="#" aria-label="YouTube"><img src="youtube-icon.png" alt="YouTube"></a>
+        <a class="social-icon" href="#" aria-label="Instagram"><img src="instagram-icon.png" alt="Instagram"></a>
+        <a class="social-icon" href="https://wa.me/6282143777463" aria-label="WhatsApp"><img src="whatsapp-icon.png" alt="WhatsApp"></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4 onclick="toggleFooterAccordion(this)">SHOP</h4>
+      <div class="footer-col-links">
+        <a href="katalog.html">New Arrivals</a>
+        <a href="katalog.html">T-Shirts</a>
+        <a href="katalog.html">Hoodies</a>
+        <a href="katalog.html">Pants</a>
+        <a href="katalog.html">Accessories</a>
+        <a href="promo.html">Sale</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4 onclick="toggleFooterAccordion(this)">HELP</h4>
+      <div class="footer-col-links">
+        <a href="#">FAQ</a>
+        <a href="#">Shipping Info</a>
+        <a href="#">Returns & Exchanges</a>
+        <a href="#">Track Order</a>
+        <a href="#">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4 onclick="toggleFooterAccordion(this)">COMPANY</h4>
+      <div class="footer-col-links">
+        <a href="#">About Us</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+        <a href="#">Sustainability</a>
+        <a href="location.html">Pickup In Store</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-newsletter">
+    <p class="newsletter-text">Be the first to know about new product drops and exclusive deals from Javas Media.</p>
+    <div class="newsletter-form">
+      <input class="newsletter-input" type="email" placeholder="Enter your email address">
+      <button class="newsletter-btn">SUBSCRIBE</button>
+    </div>
+    <div class="newsletter-consent">
+      <input type="checkbox" style="width:12px;height:12px;">
+      <span>I agree to receive marketing emails from Javas Media. Unsubscribe anytime.</span>
+    </div>
+  </div>
+</div>
+
+</div>
+
 <script>
+function searchDesktop() {
+  const val = document.getElementById('desktopSearchInput').value.trim();
+  if (val) window.location.href = 'katalog.html?q=' + encodeURIComponent(val);
+}
+
 function copyPromoCode(el) {
   const code = el.textContent.trim();
   const showCopied = () => {
@@ -834,5 +945,6 @@ function copyPromoCode(el) {
   }
 }
 </script>
+<script src="mobile-nav.js"></script>
 </body>
 </html>
