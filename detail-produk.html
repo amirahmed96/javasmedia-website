@@ -329,6 +329,26 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 }
 .btn-catalog:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 #1a1a1a; }
 
+.btn-cart-detail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #1a1a1a;
+  color: white;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 18px 32px;
+  border: 2.5px solid #1a1a1a;
+  box-shadow: 4px 4px 0 #e85d04;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'Inter', sans-serif;
+}
+.btn-cart-detail:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 #e85d04; }
+.btn-cart-detail.added { background: #25D366 !important; border-color: #25D366 !important; box-shadow: 4px 4px 0 #1a1a1a !important; }
+
 /* Benefit mini */
 .benefit-mini {
   display: grid;
@@ -456,6 +476,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 </style>
 <link rel="stylesheet" href="mobile-nav.css">
 <link rel="stylesheet" href="mobile.css">
+<link rel="stylesheet" href="cart.css">
 </head>
 <body>
 <div class="page">
@@ -553,7 +574,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
         </div>
         <div class="foto-thumbs">
           <div class="foto-thumb active">👕</div>
-          <div class="foto-thumb">📐</div>
+          <div class="foto-thumb">📏</div>
           <div class="foto-thumb">🎨</div>
           <div class="foto-thumb">📦</div>
           <div class="foto-thumb">🧵</div>
@@ -638,6 +659,9 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 
         <!-- CTA -->
         <div class="cta-group">
+          <button type="button" class="btn-cart-detail" id="addCartBtn" onclick="addToCartFromDetail(this)">
+            🛒 Tambah ke Keranjang
+          </button>
           <a href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+mau+order+Kaos+Custom+Sablon+DTF" target="_blank" class="btn-wa">
             💬 Pesan via WhatsApp
           </a>
@@ -723,7 +747,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
           </div>
         </div>
         <div class="product-card" style="border-top-color:#00bcd4;" onclick="location.href='detail-produk.html'">
-          <div class="product-img">🪪</div>
+          <div class="product-img">🪩</div>
           <div class="product-info">
             <div class="product-cat" style="background:#00bcd4;">AKSESORI</div>
             <div class="product-name">Lanyard Print + ID Card</div>
@@ -817,6 +841,46 @@ function changeQty(delta) {
   if (val >= 1) input.value = val;
 }
 
+function addToCartFromDetail(btnEl) {
+  const titleEl = document.querySelector('.product-title');
+  const name = (titleEl.innerText || titleEl.textContent).replace(/\s+/g, ' ').trim();
+  const priceEl = document.querySelector('.price-section .price-new');
+  const price = priceEl ? parseInt(priceEl.textContent.replace(/[^0-9]/g, ''), 10) || 0 : 0;
+  const qtyInput = document.getElementById('qty');
+  const qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
+  const emojiEl = document.getElementById('fotoMainEmoji');
+  const emoji = emojiEl ? emojiEl.textContent.trim() : '🛍️';
+
+  let ukuran = '';
+  document.querySelectorAll('.varian-section').forEach(function (section) {
+    const label = section.querySelector('.varian-label');
+    if (label && label.textContent.trim() === 'Ukuran') {
+      const active = section.querySelector('.varian-btn.active');
+      if (active) ukuran = active.textContent.trim();
+    }
+  });
+
+  const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  addToCart({
+    id: id,
+    name: name,
+    variant: ukuran ? ('Ukuran ' + ukuran) : '',
+    price: price,
+    qty: qty,
+    emoji: emoji
+  });
+
+  const original = btnEl.innerHTML;
+  btnEl.innerHTML = '✓ Ditambahkan ke Keranjang';
+  btnEl.classList.add('added');
+  btnEl.disabled = true;
+  setTimeout(function () {
+    btnEl.innerHTML = original;
+    btnEl.classList.remove('added');
+    btnEl.disabled = false;
+  }, 1400);
+}
+
 function showTab(id, el) {
   document.querySelectorAll('.desc-content').forEach(t => t.style.display = 'none');
   document.querySelectorAll('.desc-tab').forEach(t => t.classList.remove('active'));
@@ -882,5 +946,6 @@ window.addEventListener('resize', initDescCollapse);
 </a>
 
 <script src="mobile-nav.js"></script>
+<script src="cart.js"></script>
 </body>
 </html>
