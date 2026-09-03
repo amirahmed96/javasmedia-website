@@ -685,196 +685,41 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
   <div class="breadcrumb grid-bg">
     <a href="index.html">Home</a> ›
     <a href="articles.html">Articles</a> ›
-    <a href="articles.html">Tips & Tutorial</a> ›
-    <span>Panduan Lengkap Memilih Teknik Sablon</span>
+    <a href="articles.html" id="breadcrumbCat">Kategori</a> ›
+    <span id="breadcrumbTitle">Artikel</span>
   </div>
 
   <!-- KONTEN ARTIKEL -->
-  <div class="grid-bg" style="padding-top:8px;">
+  <div class="grid-bg" style="padding-top:8px;" id="artikelWrap">
     <div class="artikel-layout">
 
       <!-- KIRI: Artikel utama -->
       <div class="artikel-main">
 
-        <div class="artikel-cat-badge">Tips & Tutorial</div>
-        <h1 class="artikel-title">Panduan Lengkap Memilih Teknik Sablon yang Tepat untuk Brand Kamu</h1>
+        <div class="artikel-cat-badge" id="artikelCatBadge">Kategori</div>
+        <h1 class="artikel-title" id="artikelTitle">Memuat artikel...</h1>
 
         <div class="artikel-meta">
           <div class="meta-author">
             <div class="meta-avatar">JM</div>
             <div>
               <div class="meta-name">Tim Javas Media</div>
-              <div class="meta-date">5 Juli 2026</div>
+              <div class="meta-date" id="artikelDate"></div>
             </div>
           </div>
           <span class="meta-sep">·</span>
-          <span class="meta-read">8 menit baca</span>
+          <span class="meta-read" id="artikelReadTime"></span>
           <div class="meta-share">
-            <button class="share-btn">📤 Share</button>
-            <button class="share-btn">🔗 Copy Link</button>
+            <button class="share-btn" onclick="shareArtikel()">📤 Share</button>
+            <button class="share-btn" onclick="copyArtikelLink(this)">🔗 Copy Link</button>
           </div>
         </div>
 
         <!-- Foto utama -->
-        <div class="artikel-foto">🎨</div>
-        <p class="foto-caption">Berbagai teknik sablon tersedia untuk kebutuhan produksi custom yang berbeda-beda</p>
+        <div class="artikel-foto" id="artikelFoto">🎨</div>
 
         <!-- Konten -->
-        <div class="artikel-body">
-
-          <p>Kalau kamu baru mau bikin kaos atau produk custom, pasti bingung: <strong>DTF, polyflex, atau sablon plastisol?</strong> Tenang — artikel ini bakal bantu kamu pilih teknik yang paling pas sesuai kebutuhan, budget, dan jumlah produksi.</p>
-
-          <p>Di JavasMedia, kami menerima berbagai teknik sablon dan sering bantu klien memilih yang paling sesuai. Dari pengalaman kami, banyak yang akhirnya kecewa bukan karena hasil sablon-nya jelek — tapi karena salah pilih teknik sejak awal.</p>
-
-          <div class="highlight-box">
-            <p>💡 Tidak ada teknik sablon yang "terbaik" secara universal. Setiap teknik punya kelebihan dan kekurangan tergantung konteks penggunaannya.</p>
-          </div>
-
-          <h2 id="dtf">1. DTF (Direct to Film)</h2>
-
-          <p>DTF adalah teknologi cetak terbaru yang sedang booming. Prosesnya: desain dicetak ke film khusus, lalu di-press ke kain menggunakan heat press.</p>
-
-          <h3>Kelebihan DTF:</h3>
-          <ul>
-            <li><strong>Full color tanpa batas</strong> — gradasi, foto, desain kompleks semuanya bisa</li>
-            <li><strong>Bisa satuan</strong> — tidak ada minimum order</li>
-            <li><strong>Cocok untuk semua bahan kain</strong> — cotton, polyester, drifit, bahkan denim</li>
-            <li><strong>Tahan lama</strong> — tidak mudah retak atau mengelupas jika proses pressing benar</li>
-          </ul>
-
-          <h3>Kekurangan DTF:</h3>
-          <ul>
-            <li>Harga per pcs lebih tinggi dibanding screen printing untuk jumlah banyak</li>
-            <li>Tekstur sedikit terasa di permukaan kain (ada lapisan film)</li>
-          </ul>
-
-          <p><strong>DTF cocok untuk:</strong> merchandise event, kaos komunitas dengan desain detail, UMKM yang butuh fleksibilitas quantity, atau siapapun yang desainnya full color dan kompleks.</p>
-
-          <h2 id="polyflex">2. Polyflex (Heat Transfer Vinyl)</h2>
-
-          <p>Polyflex atau HTV adalah bahan vinyl yang dipotong menggunakan mesin cutting sesuai bentuk desain, lalu ditempel ke kain dengan heat press.</p>
-
-          <h3>Kelebihan Polyflex:</h3>
-          <ul>
-            <li><strong>Warna sangat solid dan cerah</strong> — tidak ada yang mengalahkan ketajaman warna polyflex</li>
-            <li><strong>Pilihan material beragam</strong> — ada reflektif, hologram, glitter, metalik</li>
-            <li><strong>Sangat tahan lama</strong> — bisa bertahan puluhan kali cuci</li>
-            <li><strong>Cocok untuk logo sederhana dan teks</strong></li>
-          </ul>
-
-          <h3>Kekurangan Polyflex:</h3>
-          <ul>
-            <li>Tidak bisa full color — tiap warna harus dipotong terpisah</li>
-            <li>Desain dengan detail kecil atau gradasi tidak bisa dilakukan</li>
-            <li>Ada batas minimum detail (ukuran huruf minimum sekitar 5mm)</li>
-          </ul>
-
-          <p><strong>Polyflex cocok untuk:</strong> jersey, seragam tim, nama punggung, logo brand minimalis, atau produk yang butuh efek khusus seperti reflektif.</p>
-
-          <!-- CTA Box tengah artikel -->
-          <div class="cta-artikel">
-            <div class="cta-artikel-label">Mau Konsultasi Gratis?</div>
-            <div class="cta-artikel-title">Bingung pilih teknik yang tepat?<br>Tanya langsung ke kami!</div>
-            <div class="cta-artikel-desc">Tim JavasMedia siap bantu analisis desain kamu dan rekomendasikan teknik yang paling pas — gratis, tanpa komitmen order.</div>
-            <a href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+mau+konsultasi+teknik+sablon+yang+tepat+untuk+produk+saya" target="_blank" class="cta-artikel-btn">
-              💬 Chat WhatsApp Sekarang
-            </a>
-          </div>
-
-          <h2 id="plastisol">3. Sablon Plastisol</h2>
-
-          <p>Sablon plastisol adalah teknik sablon manual tradisional yang masih sangat relevan, terutama untuk produksi skala besar. Tinta berbasis PVC yang tebal memberikan hasil yang bold dan khas.</p>
-
-          <h3>Kelebihan Plastisol:</h3>
-          <ul>
-            <li><strong>Harga paling murah untuk jumlah banyak</strong> — makin banyak, makin hemat</li>
-            <li><strong>Hasil bold dan tebal</strong> — khas kaos streetwear</li>
-            <li><strong>Tahan lama</strong> jika proses curing dilakukan dengan benar</li>
-          </ul>
-
-          <h3>Kekurangan Plastisol:</h3>
-          <ul>
-            <li>Minimum order biasanya 24–36 pcs per desain per warna bahan</li>
-            <li>Setiap penambahan warna desain menambah biaya</li>
-            <li>Tidak cocok untuk desain dengan banyak warna atau gradasi</li>
-          </ul>
-
-          <h2 id="comparison">Perbandingan Singkat</h2>
-
-          <div class="table-scroll">
-          <table class="compare-table">
-            <thead>
-              <tr>
-                <th>Aspek</th>
-                <th>DTF</th>
-                <th>Polyflex</th>
-                <th>Plastisol</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Full Color</strong></td>
-                <td><span class="check">✓ Ya</span></td>
-                <td><span class="cross">✗ Tidak</span></td>
-                <td>Terbatas</td>
-              </tr>
-              <tr>
-                <td><strong>Bisa Satuan</strong></td>
-                <td><span class="check">✓ Ya</span></td>
-                <td><span class="check">✓ Ya</span></td>
-                <td><span class="cross">✗ Min. order</span></td>
-              </tr>
-              <tr>
-                <td><strong>Efek Khusus</strong></td>
-                <td>Tidak</td>
-                <td><span class="check">✓ Reflektif, hologram</span></td>
-                <td>Terbatas</td>
-              </tr>
-              <tr>
-                <td><strong>Harga (satuan)</strong></td>
-                <td>Menengah</td>
-                <td>Menengah</td>
-                <td>Mahal</td>
-              </tr>
-              <tr>
-                <td><strong>Harga (massal)</strong></td>
-                <td>Menengah</td>
-                <td>Menengah</td>
-                <td><span class="check">✓ Paling murah</span></td>
-              </tr>
-              <tr>
-                <td><strong>Ketahanan</strong></td>
-                <td>Baik</td>
-                <td>Sangat baik</td>
-                <td>Baik</td>
-              </tr>
-            </tbody>
-          </table>
-          </div>
-
-          <h2>Kesimpulan: Mana yang Harus Dipilih?</h2>
-
-          <p>Pilih <strong>DTF</strong> kalau desain kamu kompleks, full color, atau kamu butuh fleksibilitas quantity — bisa pesan satuan sampai ribuan pcs.</p>
-
-          <p>Pilih <strong>Polyflex</strong> kalau desain kamu simpel (logo, teks), kamu mau warna yang solid dan cerah, atau butuh efek khusus seperti reflektif untuk seragam keselamatan atau streetwear.</p>
-
-          <p>Pilih <strong>Plastisol</strong> kalau kamu produksi dalam jumlah besar (50 pcs ke atas), desainnya tidak terlalu banyak warna, dan harga per pcs harus serendah mungkin.</p>
-
-          <div class="highlight-box">
-            <p>🎯 Di JavasMedia, kami tersedia untuk semua teknik di atas. Tidak yakin mana yang tepat? Chat kami dan kami bantu analisis desain kamu secara gratis.</p>
-          </div>
-
-        </div>
-
-        <!-- Tags -->
-        <div class="artikel-tags">
-          <a href="articles.html" class="tag">DTF</a>
-          <a href="articles.html" class="tag">Polyflex</a>
-          <a href="articles.html" class="tag">Plastisol</a>
-          <a href="articles.html" class="tag">Tips Sablon</a>
-          <a href="articles.html" class="tag">Custom Apparel</a>
-          <a href="articles.html" class="tag">Kaos Custom</a>
-        </div>
+        <div class="artikel-body" id="artikelBody"></div>
 
         <!-- Author box -->
         <div class="author-box">
@@ -899,44 +744,17 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
         </div>
 
         <!-- Daftar Isi -->
-        <div class="sidebar-block">
+        <div class="sidebar-block" id="tocBlock" style="display:none;">
           <div class="sidebar-title">Daftar Isi</div>
           <div class="sidebar-content">
-            <ul class="toc-list">
-              <li><a href="#dtf">1. DTF (Direct to Film)</a></li>
-              <li><a href="#polyflex">2. Polyflex / HTV</a></li>
-              <li><a href="#plastisol">3. Sablon Plastisol</a></li>
-              <li><a href="#comparison">Perbandingan Singkat</a></li>
-            </ul>
+            <ul class="toc-list" id="tocList"></ul>
           </div>
         </div>
 
         <!-- Artikel Terkait Sidebar -->
-        <div class="sidebar-block">
+        <div class="sidebar-block" id="relatedSidebarBlock" style="display:none;">
           <div class="sidebar-title">Artikel Terkait</div>
-          <div class="sidebar-content">
-            <a href="detail-artikel.html" class="related-item">
-              <div class="related-thumb">📁</div>
-              <div>
-                <div class="related-cat">Tips & Tutorial</div>
-                <div class="related-title">Cara Siapkan File Desain untuk Sablon DTF yang Sempurna</div>
-              </div>
-            </a>
-            <a href="detail-artikel.html" class="related-item">
-              <div class="related-thumb">⚠️</div>
-              <div>
-                <div class="related-cat">Tips & Tutorial</div>
-                <div class="related-title">5 Kesalahan Umum Saat Order Kaos Custom</div>
-              </div>
-            </a>
-            <a href="detail-artikel.html" class="related-item">
-              <div class="related-thumb">🏭</div>
-              <div>
-                <div class="related-cat">Behind the Scenes</div>
-                <div class="related-title">Sehari di Workshop JavasMedia</div>
-              </div>
-            </a>
-          </div>
+          <div class="sidebar-content" id="relatedSidebarContent"></div>
         </div>
 
         <!-- Newsletter sidebar -->
@@ -952,38 +770,13 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
   </div>
 
   <!-- ARTIKEL TERKAIT BAWAH -->
-  <div class="grid-bg" style="padding-top:8px;padding-bottom:60px;">
+  <div class="grid-bg" style="padding-top:8px;padding-bottom:60px;" id="relatedBottomWrap">
     <div class="related-section">
       <div class="section-title-wrap">
         <div class="section-title-bar"></div>
         <div class="section-title-text">ARTIKEL LAINNYA</div>
       </div>
-      <div class="related-grid">
-        <a href="detail-artikel.html" class="article-card">
-          <div class="article-card-img">📁</div>
-          <div class="article-card-body">
-            <div class="article-card-cat">Tips & Tutorial · 3 Jun 2026</div>
-            <div class="article-card-title">Cara Siapkan File Desain untuk Sablon DTF yang Sempurna</div>
-            <div class="article-card-meta">6 menit baca</div>
-          </div>
-        </a>
-        <a href="detail-artikel.html" class="article-card">
-          <div class="article-card-img" style="background:#2a2820;">🏭</div>
-          <div class="article-card-body">
-            <div class="article-card-cat">Behind the Scenes · 2 Jul 2026</div>
-            <div class="article-card-title">Sehari di Workshop JavasMedia: Dari Desain ke Produk Jadi</div>
-            <div class="article-card-meta">5 menit baca</div>
-          </div>
-        </a>
-        <a href="detail-artikel.html" class="article-card">
-          <div class="article-card-img" style="background:#e85d04;">🏷️</div>
-          <div class="article-card-body">
-            <div class="article-card-cat">Promo & Info · 10 Jun 2026</div>
-            <div class="article-card-title">Promo Juli: Diskon 50% untuk Order Perdana + Gratis Ongkir Surabaya</div>
-            <div class="article-card-meta">3 menit baca</div>
-          </div>
-        </a>
-      </div>
+      <div class="related-grid" id="relatedGrid"></div>
     </div>
   </div>
 
@@ -1048,10 +841,163 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 </div>
 
 <script>
+const API_BASE = 'https://javasmedia-backend-production.up.railway.app';
+const ARTICLE_CATEGORY_EMOJI = { 'Tips & Tutorial': '📝', 'Behind the Scenes': '🏭', 'Update Produk': '✨', 'Promo & Info': '🏷️' };
+const ARTICLE_CATEGORY_COLOR = { 'Tips & Tutorial': '#e85d04', 'Behind the Scenes': '#1e3a5f', 'Update Produk': '#4caf50', 'Promo & Info': '#e91e63' };
+
+let currentArticle = null;
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str == null ? '' : str;
+  return div.innerHTML;
+}
+function formatTanggal(dateStr) {
+  return new Date(dateStr).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+function articleThumb(a) {
+  return a.image_url
+    ? '<img src="' + a.image_url + '" alt="" style="width:100%;height:100%;object-fit:cover;">'
+    : (ARTICLE_CATEGORY_EMOJI[a.category] || '📰');
+}
+
+function showNotFound() {
+  document.getElementById('artikelWrap').innerHTML =
+    '<div style="max-width:800px;margin:0 auto;padding:80px 40px;text-align:center;">' +
+      '<h2 style="font-family:\'Playfair Display\',serif;font-size:24px;margin-bottom:12px;">Artikel tidak ditemukan</h2>' +
+      '<p style="color:#888;margin-bottom:20px;">Artikel ini mungkin sudah dihapus atau linknya salah.</p>' +
+      '<a href="articles.html" style="display:inline-block;background:#1a1a1a;color:white;padding:12px 28px;text-decoration:none;font-size:13px;font-weight:700;">← Kembali ke Articles</a>' +
+    '</div>';
+  document.getElementById('relatedBottomWrap').style.display = 'none';
+}
+
+function buildToc() {
+  const body = document.getElementById('artikelBody');
+  const headings = body.querySelectorAll('h2, h3');
+  const tocBlock = document.getElementById('tocBlock');
+  if (headings.length === 0) { tocBlock.style.display = 'none'; return; }
+  const items = [];
+  headings.forEach((h, i) => {
+    const id = 'heading-' + i;
+    h.id = id;
+    const prefix = h.tagName === 'H3' ? '&nbsp;&nbsp;' : '';
+    items.push('<li>' + prefix + '<a href="#' + id + '">' + escapeHtml(h.textContent) + '</a></li>');
+  });
+  document.getElementById('tocList').innerHTML = items.join('');
+  tocBlock.style.display = 'block';
+}
+
+function renderArticle() {
+  const a = currentArticle;
+  document.title = a.title + ' — JavasMedia Journal';
+
+  document.getElementById('breadcrumbCat').textContent = a.category;
+  document.getElementById('breadcrumbTitle').textContent = a.title;
+
+  const color = ARTICLE_CATEGORY_COLOR[a.category] || '#e85d04';
+  const badge = document.getElementById('artikelCatBadge');
+  badge.textContent = a.category;
+  badge.style.background = color;
+
+  document.getElementById('artikelTitle').textContent = a.title;
+  document.getElementById('artikelDate').textContent = formatTanggal(a.created_at);
+
+  const wordCount = (a.content || '').replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean).length;
+  const minutes = Math.max(1, Math.round(wordCount / 200));
+  document.getElementById('artikelReadTime').textContent = minutes + ' menit baca';
+
+  const fotoEl = document.getElementById('artikelFoto');
+  if (a.image_url) {
+    fotoEl.innerHTML = '<img src="' + a.image_url + '" alt="" style="width:100%;height:100%;object-fit:cover;">';
+  } else {
+    fotoEl.style.background = color;
+    fotoEl.textContent = ARTICLE_CATEGORY_EMOJI[a.category] || '📰';
+  }
+
+  document.getElementById('artikelBody').innerHTML = a.content || '<p>Belum ada isi untuk artikel ini.</p>';
+  buildToc();
+}
+
+function renderRelatedList(list) {
+  if (list.length === 0) {
+    document.getElementById('relatedSidebarBlock').style.display = 'none';
+    document.getElementById('relatedBottomWrap').style.display = 'none';
+    return;
+  }
+  document.getElementById('relatedSidebarBlock').style.display = 'block';
+  document.getElementById('relatedSidebarContent').innerHTML = list.map(a =>
+    '<a href="detail-artikel.html?id=' + a.id + '" class="related-item">' +
+      '<div class="related-thumb">' + articleThumb(a) + '</div>' +
+      '<div><div class="related-cat">' + escapeHtml(a.category) + '</div><div class="related-title">' + escapeHtml(a.title) + '</div></div>' +
+    '</a>'
+  ).join('');
+
+  document.getElementById('relatedBottomWrap').style.display = '';
+  document.getElementById('relatedGrid').innerHTML = list.map(a => {
+    const color = ARTICLE_CATEGORY_COLOR[a.category] || '#e85d04';
+    return '<a href="detail-artikel.html?id=' + a.id + '" class="article-card">' +
+      '<div class="article-card-img" style="' + (a.image_url ? '' : 'background:' + color + ';') + '">' + articleThumb(a) + '</div>' +
+      '<div class="article-card-body">' +
+        '<div class="article-card-cat">' + escapeHtml(a.category) + ' · ' + formatTanggal(a.created_at) + '</div>' +
+        '<div class="article-card-title">' + escapeHtml(a.title) + '</div>' +
+      '</div>' +
+    '</a>';
+  }).join('');
+}
+
+async function loadRelated() {
+  try {
+    const res = await fetch(API_BASE + '/api/articles');
+    const all = await res.json();
+    let related = all.filter(a => a.id !== currentArticle.id && a.category === currentArticle.category);
+    if (related.length < 3) {
+      const others = all.filter(a => a.id !== currentArticle.id && a.category !== currentArticle.category);
+      related = related.concat(others);
+    }
+    renderRelatedList(related.slice(0, 3));
+  } catch (err) {
+    renderRelatedList([]);
+  }
+}
+
+async function loadArticle() {
+  const id = new URLSearchParams(window.location.search).get('id');
+  if (!id) { showNotFound(); return; }
+  try {
+    const res = await fetch(API_BASE + '/api/articles/' + id);
+    if (!res.ok) { showNotFound(); return; }
+    currentArticle = await res.json();
+  } catch (err) {
+    showNotFound();
+    return;
+  }
+  renderArticle();
+  loadRelated();
+}
+
+function shareArtikel() {
+  if (navigator.share) {
+    navigator.share({ title: currentArticle ? currentArticle.title : 'JavasMedia', url: window.location.href }).catch(() => {});
+  } else {
+    copyArtikelLink();
+  }
+}
+function copyArtikelLink(btnEl) {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    if (btnEl) {
+      const original = btnEl.textContent;
+      btnEl.textContent = '✓ Link disalin';
+      setTimeout(() => { btnEl.textContent = original; }, 1500);
+    }
+  }).catch(() => {});
+}
+
 function searchDesktop() {
   const val = document.getElementById('desktopSearchInput').value.trim();
   if (val) window.location.href = 'katalog.html?q=' + encodeURIComponent(val);
 }
+
+loadArticle();
 </script>
 
 <a class="floating-wa" href="https://wa.me/6282143777463?text=Halo+JavasMedia,+saya+ingin+konsultasi" target="_blank" aria-label="Chat WhatsApp">
