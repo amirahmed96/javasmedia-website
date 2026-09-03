@@ -437,6 +437,47 @@ body {
 }
 
 .form-tab:first-child { border-right: 2px solid var(--dark); }
+
+/* ============================================
+   MOBILE (login.html / daftar.html)
+   Halaman ini berdiri sendiri (tidak pakai mobile.css
+   bersama) karena desainnya memang beda total dari
+   halaman lain - jadi media query ditulis di sini saja.
+   Panel kiri (dekoratif) diringkas jadi hero pendek di
+   atas, form turun ke bawah dalam 1 kolom.
+   ============================================ */
+@media (max-width: 768px) {
+  .mini-header { padding: 12px 20px; }
+  .logo { font-size: 22px; }
+
+  .main { grid-template-columns: 1fr; min-height: auto; }
+
+  .left-panel {
+    padding: 28px 20px 22px;
+    border-right: none;
+    border-bottom: 2.5px solid var(--dark);
+  }
+  .left-panel::after { display: none; }   /* teks hantu "JAVAS" raksasa, tidak proporsional di layar sempit */
+  .orn { display: none; }   /* ornamen SVG melayang - posisinya dihitung untuk panel tinggi, berantakan kalau panel diringkas */
+
+  .left-tag { font-size: 8px; padding: 4px 10px; margin-bottom: 14px; }
+  .left-title { font-size: 38px; margin-bottom: 12px; }
+  .left-desc { font-size: 11px; max-width: 100%; margin-bottom: 20px; }
+
+  .benefits { gap: 8px; }
+  .benefit-item { font-size: 10px; gap: 8px; }
+  .benefit-icon { width: 22px; height: 22px; font-size: 10px; }
+
+  .right-panel { padding: 28px 20px; }
+  .form-wrap { max-width: 100%; }
+
+  .form-header { margin-bottom: 22px; }
+  .form-title { font-size: 32px; }
+  .form-sub { font-size: 10px; }
+
+  .form-tabs { margin-bottom: 20px; }
+  .form-tab { font-size: 10px; padding: 8px; }
+}
 </style>
 </head>
 <body>
