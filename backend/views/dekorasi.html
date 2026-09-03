@@ -20,7 +20,10 @@
   <div class="admin-header"><h1>Slider Homepage</h1></div>
   <div class="upload-card">
     <form id="sliderForm">
-      <input type="file" id="sliderPhoto" accept="image/*" required>
+      <div class="form-row">
+        <input type="file" id="sliderPhoto" accept="image/*" required>
+        <input type="text" id="sliderLink" placeholder="Link tujuan saat diklik (opsional, mis. ke halaman produk)" style="max-width:340px;">
+      </div>
       <button type="submit" class="btn btn-primary btn-small" style="margin-top:10px;">+ Tambah Slide</button>
     </form>
     <div class="form-hint">Slide tampil sesuai urutan, bisa diubah dengan tombol ↑↓ di tiap kartu.</div>
@@ -33,6 +36,7 @@
       <div class="form-row">
         <input type="file" id="subCampaignPhoto" accept="image/*" required>
         <input type="text" id="subCampaignLabel" placeholder="Teks label (default: SUB CAMPAIGN)" style="max-width:220px;">
+        <input type="text" id="subCampaignLink" placeholder="Link tujuan saat diklik (opsional)" style="max-width:280px;">
       </div>
       <button type="submit" class="btn btn-primary btn-small" style="margin-top:10px;">+ Tambah Sub Campaign</button>
     </form>
@@ -41,7 +45,7 @@
   <div id="subCampaignContent" class="decor-grid">Memuat...</div>
 </div>
 <script>
-async function loadDecor(endpoint, containerId, extraLabel) {
+async function loadDecor(endpoint, containerId, hasLabel) {
   const res = await fetch(endpoint);
   const items = await res.json();
   const container = document.getElementById(containerId);
@@ -53,35 +57,55 @@ async function loadDecor(endpoint, containerId, extraLabel) {
     <div class="decor-card">
       <img src="${item.image_url}">
       <div class="decor-body">
-        ${extraLabel ? '<div style="font-size:12px;font-weight:700;margin-bottom:6px;">' + (item.label_text || '') + '</div>' : ''}
+        ${hasLabel ? '<div style="font-size:12px;font-weight:700;margin-bottom:2px;">' + (item.label_text || '') + '</div>' : ''}
+        <div style="font-size:11px;color:${item.link_url ? '#1e7e42' : '#999'};margin-bottom:6px;word-break:break-all;">${item.link_url ? '🔗 ' + item.link_url : 'Belum ada link'}</div>
         <div class="decor-actions">
-          <button class="btn btn-secondary btn-small" ${i === 0 ? 'disabled' : ''} onclick="moveItem('${endpoint}', ${item.id}, 'up', '${containerId}', ${!!extraLabel})">↑</button>
-          <button class="btn btn-secondary btn-small" ${i === items.length - 1 ? 'disabled' : ''} onclick="moveItem('${endpoint}', ${item.id}, 'down', '${containerId}', ${!!extraLabel})">↓</button>
-          <button class="btn btn-danger btn-small" onclick="deleteItem('${endpoint}', ${item.id}, '${containerId}', ${!!extraLabel})">Hapus</button>
+          <button class="btn btn-secondary btn-small" ${i === 0 ? 'disabled' : ''} onclick="moveItem('${endpoint}', ${item.id}, 'up', '${containerId}', ${!!hasLabel})">↑</button>
+          <button class="btn btn-secondary btn-small" ${i === items.length - 1 ? 'disabled' : ''} onclick="moveItem('${endpoint}', ${item.id}, 'down', '${containerId}', ${!!hasLabel})">↓</button>
+          <button class="btn btn-secondary btn-small" onclick="editItem('${endpoint}', ${item.id}, '${containerId}', ${!!hasLabel}, ${JSON.stringify(item.label_text || '')}, ${JSON.stringify(item.link_url || '')})">Edit</button>
+          <button class="btn btn-danger btn-small" onclick="deleteItem('${endpoint}', ${item.id}, '${containerId}', ${!!hasLabel})">Hapus</button>
         </div>
       </div>
     </div>
   `).join('');
 }
 
-async function moveItem(endpoint, id, direction, containerId, extraLabel) {
+async function moveItem(endpoint, id, direction, containerId, hasLabel) {
   await fetch(endpoint + '/' + id + '/move', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ direction })
   });
-  reloadContainer(containerId, extraLabel);
+  reloadContainer(containerId, hasLabel);
 }
 
-async function deleteItem(endpoint, id, containerId, extraLabel) {
+async function deleteItem(endpoint, id, containerId, hasLabel) {
   if (!confirm('Hapus item ini?')) return;
   await fetch(endpoint + '/' + id, { method: 'DELETE' });
-  reloadContainer(containerId, extraLabel);
+  reloadContainer(containerId, hasLabel);
 }
 
-function reloadContainer(containerId, extraLabel) {
+function reloadContainer(containerId, hasLabel) {
   if (containerId === 'slidesContent') loadDecor('/api/admin/hero-slides', 'slidesContent', false);
   else loadDecor('/api/admin/sub-campaigns', 'subCampaignContent', true);
+}
+
+async function editItem(endpoint, id, containerId, hasLabel, currentLabel, currentLink) {
+  const payload = {};
+  if (hasLabel) {
+    const label = prompt('Teks label:', currentLabel || '');
+    if (label === null) return;
+    payload.label_text = label;
+  }
+  const link = prompt('Link tujuan saat diklik (kosongkan kalau tidak perlu):', currentLink || '');
+  if (link === null) return;
+  payload.link_url = link || null;
+  await fetch(endpoint + '/' + id, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  reloadContainer(containerId, hasLabel);
 }
 
 document.getElementById('sliderForm').addEventListener('submit', async (e) => {
@@ -90,6 +114,8 @@ document.getElementById('sliderForm').addEventListener('submit', async (e) => {
   if (!file) return;
   const formData = new FormData();
   formData.append('photo', file);
+  const link = document.getElementById('sliderLink').value.trim();
+  if (link) formData.append('link_url', link);
   const res = await fetch('/api/admin/hero-slides', { method: 'POST', body: formData });
   if (res.ok) {
     document.getElementById('sliderForm').reset();
@@ -107,6 +133,8 @@ document.getElementById('subCampaignForm').addEventListener('submit', async (e) 
   formData.append('photo', file);
   const label = document.getElementById('subCampaignLabel').value.trim();
   if (label) formData.append('label_text', label);
+  const link = document.getElementById('subCampaignLink').value.trim();
+  if (link) formData.append('link_url', link);
   const res = await fetch('/api/admin/sub-campaigns', { method: 'POST', body: formData });
   if (res.ok) {
     document.getElementById('subCampaignForm').reset();
