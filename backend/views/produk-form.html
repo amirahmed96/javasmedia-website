@@ -21,7 +21,6 @@
     <h1 id="pageTitle">Tambah Produk</h1>
     <a href="/admin/produk" class="btn btn-secondary">← Kembali</a>
   </div>
-  <div id="alertBox"></div>
   <div class="form-card" style="max-width:820px;">
     <form id="productForm">
       <div class="form-group">
@@ -76,7 +75,8 @@
         <div class="form-hint">Kalau gak ada variasi sama sekali, cukup isi 1 baris SKU + harga di sini.</div>
       </div>
 
-      <button type="submit" class="btn btn-primary">Simpan Produk</button>
+      <button type="submit" class="btn btn-primary" id="submitBtn">Simpan Produk</button>
+      <div id="alertBox" style="margin-top:14px;"></div>
     </form>
   </div>
 </div>
@@ -86,12 +86,44 @@ const isEdit = pathParts[2] !== 'baru';
 const productId = isEdit ? pathParts[2] : null;
 if (isEdit) document.getElementById('pageTitle').textContent = 'Edit Produk';
 
+// Animasi FLIP generik - "First, Last, Invert, Play". Dipakai buat geser
+// urutan foto & opsi variasi biar transisinya halus (gak cuma lompat),
+// baik lewat drag maupun tombol ▲▼. Cocok karena chip/foto gampang
+// dicocokkan sebelum & sesudah lewat keyFn (value string / id foto),
+// gak perlu library tambahan.
+function flipReorder(containerSelector, itemSelector, keyFn, mutateAndRender) {
+  const container = document.querySelector(containerSelector);
+  const oldRects = {};
+  container.querySelectorAll(itemSelector).forEach((el) => {
+    oldRects[keyFn(el)] = el.getBoundingClientRect();
+  });
+  mutateAndRender();
+  container.querySelectorAll(itemSelector).forEach((el) => {
+    const oldRect = oldRects[keyFn(el)];
+    if (!oldRect) return;
+    const newRect = el.getBoundingClientRect();
+    const dx = oldRect.left - newRect.left;
+    const dy = oldRect.top - newRect.top;
+    if (!dx && !dy) return;
+    el.style.transition = 'none';
+    el.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
+    requestAnimationFrame(() => {
+      el.style.transition = 'transform 200ms ease';
+      el.style.transform = '';
+    });
+  });
+}
+
 // ---------- Foto ----------
 let selectedPhotoFiles = [];
+let selectedPhotoKeys = []; // id unik per foto (sejajar dgn selectedPhotoFiles), buat FLIP & drag-drop
+let nextPhotoKey = 1;
 let existingPhotoUrls = [];
+let draggedPhotoKey = null;
 
 document.getElementById('photos').addEventListener('change', (e) => {
   selectedPhotoFiles = Array.from(e.target.files).slice(0, 8);
+  selectedPhotoKeys = selectedPhotoFiles.map(() => nextPhotoKey++);
   renderPhotoPreview();
 });
 
@@ -99,13 +131,14 @@ function renderPhotoPreview() {
   const wrap = document.getElementById('photoPreviewWrap');
   if (selectedPhotoFiles.length > 0) {
     wrap.innerHTML = selectedPhotoFiles.map((f, i) =>
-      '<div class="photo-thumb"><img src="' + URL.createObjectURL(f) + '">' +
+      '<div class="photo-thumb" draggable="true" data-photo-key="' + selectedPhotoKeys[i] + '"><img src="' + URL.createObjectURL(f) + '">' +
       '<div class="photo-move">' +
         '<button type="button" class="chip-move" ' + (i === 0 ? 'disabled' : '') + ' onclick="movePhoto(' + i + ', -1)">▲</button>' +
         '<button type="button" class="chip-move" ' + (i === selectedPhotoFiles.length - 1 ? 'disabled' : '') + ' onclick="movePhoto(' + i + ', 1)">▼</button>' +
       '</div>' +
       '<button type="button" onclick="removeSelectedPhoto(' + i + ')">&times;</button></div>'
     ).join('');
+    attachPhotoDragHandlers(wrap);
   } else if (existingPhotoUrls.length > 0) {
     wrap.innerHTML = existingPhotoUrls.map((url) => '<div class="photo-thumb"><img src="' + url + '"></div>').join('') +
       '<div class="form-hint" style="width:100%;margin-top:4px;">Foto sekarang. Pilih foto baru di atas untuk mengganti semuanya.</div>';
@@ -114,20 +147,55 @@ function renderPhotoPreview() {
   }
 }
 
+function attachPhotoDragHandlers(wrap) {
+  wrap.querySelectorAll('.photo-thumb[draggable="true"]').forEach((el) => {
+    el.addEventListener('dragstart', () => {
+      draggedPhotoKey = el.dataset.photoKey;
+      el.classList.add('dragging');
+    });
+    el.addEventListener('dragend', () => {
+      el.classList.remove('dragging');
+      draggedPhotoKey = null;
+    });
+    el.addEventListener('dragover', (e) => { e.preventDefault(); });
+    el.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const targetKey = el.dataset.photoKey;
+      if (!draggedPhotoKey || draggedPhotoKey === targetKey) return;
+      reorderPhotoByKey(draggedPhotoKey, targetKey);
+    });
+  });
+}
+
+function reorderPhotoByKey(fromKey, toKey) {
+  const fromIdx = selectedPhotoKeys.findIndex((k) => String(k) === String(fromKey));
+  const toIdx = selectedPhotoKeys.findIndex((k) => String(k) === String(toKey));
+  if (fromIdx === -1 || toIdx === -1) return;
+  flipReorder('#photoPreviewWrap', '.photo-thumb', (el) => el.dataset.photoKey, () => {
+    const [movedFile] = selectedPhotoFiles.splice(fromIdx, 1);
+    const [movedKey] = selectedPhotoKeys.splice(fromIdx, 1);
+    selectedPhotoFiles.splice(toIdx, 0, movedFile);
+    selectedPhotoKeys.splice(toIdx, 0, movedKey);
+    renderPhotoPreview();
+  });
+}
+
 function removeSelectedPhoto(i) {
   selectedPhotoFiles.splice(i, 1);
+  selectedPhotoKeys.splice(i, 1);
   renderPhotoPreview();
 }
 
-// Urutan foto nentuin mana yang jadi foto utama (foto pertama) - digeser
-// pakai tombol ▲▼ yang sama polanya dengan urutan opsi variasi di atas.
+// Urutan foto nentuin mana yang jadi foto utama (foto pertama) - bisa
+// digeser drag langsung, atau tombol ▲▼ buat yang gak nyaman drag (mis. di HP).
 function movePhoto(index, direction) {
   const target = index + direction;
   if (target < 0 || target >= selectedPhotoFiles.length) return;
-  const tmp = selectedPhotoFiles[index];
-  selectedPhotoFiles[index] = selectedPhotoFiles[target];
-  selectedPhotoFiles[target] = tmp;
-  renderPhotoPreview();
+  flipReorder('#photoPreviewWrap', '.photo-thumb', (el) => el.dataset.photoKey, () => {
+    const tmpF = selectedPhotoFiles[index]; selectedPhotoFiles[index] = selectedPhotoFiles[target]; selectedPhotoFiles[target] = tmpF;
+    const tmpK = selectedPhotoKeys[index]; selectedPhotoKeys[index] = selectedPhotoKeys[target]; selectedPhotoKeys[target] = tmpK;
+    renderPhotoPreview();
+  });
 }
 
 // ---------- Variasi 2 tingkat ----------
@@ -146,28 +214,70 @@ function currentCombos() {
   return combos;
 }
 
+let draggedChipValue = null;
+let draggedChipAxis = null;
+
 function renderOptionChips(axisNum) {
   const options = axisNum === 1 ? axis1Options : axis2Options;
   const wrap = document.getElementById('axis' + axisNum + 'OptionsWrap');
   wrap.innerHTML = options.map((o, i) =>
-    '<span class="option-chip">' +
+    '<span class="option-chip" draggable="true" data-value="' + o.replace(/"/g, '&quot;') + '">' +
       '<button type="button" class="chip-move" ' + (i === 0 ? 'disabled' : '') + ' onclick="moveAxisOption(' + axisNum + ', ' + i + ', -1)">▲</button>' +
       '<button type="button" class="chip-move" ' + (i === options.length - 1 ? 'disabled' : '') + ' onclick="moveAxisOption(' + axisNum + ', ' + i + ', 1)">▼</button>' +
       ' ' + o + ' <button type="button" onclick="removeAxisOption(' + axisNum + ', \'' + o.replace(/'/g, "\\'") + '\')">&times;</button></span>'
   ).join('');
+  attachChipDragHandlers(wrap, axisNum);
 }
 
-// Urutan chip nentuin urutan baris di tabel kombinasi di bawah - digeser
-// pakai tombol ▲▼, bukan drag-and-drop, biar lebih pasti kepencet.
+function attachChipDragHandlers(wrap, axisNum) {
+  wrap.querySelectorAll('.option-chip[draggable="true"]').forEach((el) => {
+    el.addEventListener('dragstart', () => {
+      draggedChipValue = el.dataset.value;
+      draggedChipAxis = axisNum;
+      el.classList.add('dragging');
+    });
+    el.addEventListener('dragend', () => {
+      el.classList.remove('dragging');
+      draggedChipValue = null;
+      draggedChipAxis = null;
+    });
+    el.addEventListener('dragover', (e) => { e.preventDefault(); });
+    el.addEventListener('drop', (e) => {
+      e.preventDefault();
+      if (draggedChipAxis !== axisNum) return;
+      const targetValue = el.dataset.value;
+      if (!draggedChipValue || draggedChipValue === targetValue) return;
+      reorderChipByValue(axisNum, draggedChipValue, targetValue);
+    });
+  });
+}
+
+function reorderChipByValue(axisNum, fromValue, toValue) {
+  const arr = axisNum === 1 ? axis1Options : axis2Options;
+  const fromIdx = arr.indexOf(fromValue);
+  const toIdx = arr.indexOf(toValue);
+  if (fromIdx === -1 || toIdx === -1) return;
+  flipReorder('#axis' + axisNum + 'OptionsWrap', '.option-chip', (el) => el.dataset.value, () => {
+    const [moved] = arr.splice(fromIdx, 1);
+    arr.splice(toIdx, 0, moved);
+    renderOptionChips(axisNum);
+    renderCombosTable();
+  });
+}
+
+// Urutan chip nentuin urutan baris di tabel kombinasi di bawah - bisa
+// digeser drag langsung, atau tombol ▲▼ buat yang gak nyaman drag.
 function moveAxisOption(axisNum, index, direction) {
   const arr = axisNum === 1 ? axis1Options : axis2Options;
   const target = index + direction;
   if (target < 0 || target >= arr.length) return;
-  const tmp = arr[index];
-  arr[index] = arr[target];
-  arr[target] = tmp;
-  renderOptionChips(axisNum);
-  renderCombosTable();
+  flipReorder('#axis' + axisNum + 'OptionsWrap', '.option-chip', (el) => el.dataset.value, () => {
+    const tmp = arr[index];
+    arr[index] = arr[target];
+    arr[target] = tmp;
+    renderOptionChips(axisNum);
+    renderCombosTable();
+  });
 }
 
 function addAxisOption(axisNum) {
@@ -207,16 +317,15 @@ function renderCombosTable() {
     bulkHtml =
       '<div class="bulk-edit-bar">' +
         '<span class="bulk-edit-label">Isi massal:</span>' +
-        '<select id="bulkField">' +
-          '<option value="price">Harga</option>' +
-          '<option value="price_old">Harga Coret</option>' +
-          '<option value="sku">SKU</option>' +
-        '</select>' +
-        '<input type="text" id="bulkValue" placeholder="Nilai...">' +
-        '<button type="button" class="btn btn-secondary btn-small" onclick="applyBulkValue(\'all\')">Terapkan ke Semua</button>' +
-        '<button type="button" class="btn btn-secondary btn-small" onclick="applyBulkValue(\'selected\')">Terapkan ke Terpilih (<span id="bulkSelectedCount">' + selectedCombos.size + '</span>)</button>' +
+        '<div class="bulk-edit-field"><label>SKU</label><input type="text" id="bulkSku" placeholder="Kosongkan = gak diubah"></div>' +
+        '<div class="bulk-edit-field"><label>Harga</label><input type="number" id="bulkPrice" placeholder="Kosongkan = gak diubah"></div>' +
+        '<div class="bulk-edit-field"><label>Harga Coret</label><input type="number" id="bulkPriceOld" placeholder="Kosongkan = gak diubah"></div>' +
+        '<div class="bulk-edit-actions">' +
+          '<button type="button" class="btn btn-secondary btn-small" onclick="applyBulkValue(\'all\')">Terapkan ke Semua</button>' +
+          '<button type="button" class="btn btn-secondary btn-small" onclick="applyBulkValue(\'selected\')">Terapkan ke Terpilih (<span id="bulkSelectedCount">' + selectedCombos.size + '</span>)</button>' +
+        '</div>' +
       '</div>' +
-      '<div class="form-hint" style="margin:-4px 0 10px;">Untuk SKU: nilai di atas jadi kode dasar, kode variasinya (mis. ukuran) otomatis ditambah di belakang tiap baris biar tetap unik (contoh: RB-CUSTOM jadi RB-CUSTOM-M, RB-CUSTOM-L, dst).</div>';
+      '<div class="form-hint" style="margin:-4px 0 10px;">Isi kolom yang mau diubah aja, sisanya dibiarkan (mis. isi Harga doang, SKU & Harga Coret gak ikut berubah). Untuk SKU: nilai yang diisi jadi kode dasar, kode variasinya (mis. ukuran) otomatis ditambah di belakang tiap baris biar tetap unik (contoh: RB-CUSTOM jadi RB-CUSTOM-M, RB-CUSTOM-L, dst).</div>';
   }
 
   let html = bulkHtml + '<table><thead><tr>';
@@ -273,12 +382,14 @@ function renderCombosTable() {
   }
 }
 
-// "Isi massal" ala Shopee/TikTok Seller Center - isi 1 nilai lalu terapkan
-// ke semua baris kombinasi sekaligus, atau cuma ke baris yang dicentang.
+// Isi Massal ala TikTok Seller Center - SKU, Harga, Harga Coret masing2
+// kolom sendiri; cuma kolom yang diisi yang diterapkan, kolom yang
+// dikosongkan gak ikut ngubah data yang sudah ada.
 function applyBulkValue(target) {
-  const field = document.getElementById('bulkField').value;
-  const rawValue = document.getElementById('bulkValue').value.trim();
-  if (!rawValue) return;
+  const rawSku = document.getElementById('bulkSku').value.trim();
+  const rawPrice = document.getElementById('bulkPrice').value.trim();
+  const rawPriceOld = document.getElementById('bulkPriceOld').value.trim();
+  if (!rawSku && !rawPrice && !rawPriceOld) return;
   const combos = currentCombos();
   const keys = target === 'all'
     ? combos.map((c) => comboKey(c.option_1, c.option_2))
@@ -289,7 +400,9 @@ function applyBulkValue(target) {
   }
   keys.forEach((key) => {
     if (!combosData[key]) combosData[key] = {};
-    combosData[key][field] = field === 'sku' ? buildVariantSku(rawValue, key) : rawValue;
+    if (rawSku) combosData[key].sku = buildVariantSku(rawSku, key);
+    if (rawPrice) combosData[key].price = rawPrice;
+    if (rawPriceOld) combosData[key].price_old = rawPriceOld;
   });
   renderCombosTable();
 }
@@ -376,6 +489,7 @@ document.getElementById('productForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const variants = collectVariants();
   const alertBox = document.getElementById('alertBox');
+  const submitBtn = document.getElementById('submitBtn');
   alertBox.innerHTML = '';
   if (variants.length === 0) {
     alertBox.innerHTML = '<div class="alert alert-error">Minimal 1 kombinasi dengan SKU dan harga wajib diisi.</div>';
@@ -390,15 +504,24 @@ document.getElementById('productForm').addEventListener('submit', async (e) => {
   formData.append('variants_json', JSON.stringify(variants));
   selectedPhotoFiles.forEach((f) => formData.append('photos', f));
 
-  const url = isEdit ? '/api/admin/products/' + productId : '/api/admin/products';
-  const method = isEdit ? 'PUT' : 'POST';
-  const res = await fetch(url, { method, body: formData });
-  const data = await res.json();
-  if (!res.ok) {
-    alertBox.innerHTML = '<div class="alert alert-error">' + (data.error || 'Gagal menyimpan produk.') + '</div>';
-    return;
+  submitBtn.classList.add('btn-loading');
+  submitBtn.disabled = true;
+  try {
+    const url = isEdit ? '/api/admin/products/' + productId : '/api/admin/products';
+    const method = isEdit ? 'PUT' : 'POST';
+    const res = await fetch(url, { method, body: formData });
+    const data = await res.json();
+    if (!res.ok) {
+      alertBox.innerHTML = '<div class="alert alert-error">' + (data.error || 'Gagal menyimpan produk.') + '</div>';
+      return;
+    }
+    window.location.href = '/admin/produk';
+  } catch (err) {
+    alertBox.innerHTML = '<div class="alert alert-error">Gagal terhubung ke server. Cek koneksi internet lalu coba lagi.</div>';
+  } finally {
+    submitBtn.classList.remove('btn-loading');
+    submitBtn.disabled = false;
   }
-  window.location.href = '/admin/produk';
 });
 
 document.getElementById('logoutBtn').addEventListener('click', async () => {
