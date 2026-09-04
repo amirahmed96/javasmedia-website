@@ -95,9 +95,11 @@ router.get('/api/articles/:id', async (req, res) => {
 router.get('/api/vouchers', async (req, res) => {
   try {
     const result = await pool.query(
-      `SELECT id, code, discount_percent, description, valid_until
+      `SELECT id, code, discount_type, discount_value, max_discount_amount, description, valid_from, valid_until
        FROM vouchers
-       WHERE is_active = true AND (valid_until IS NULL OR valid_until >= CURRENT_DATE)
+       WHERE is_active = true
+         AND (valid_until IS NULL OR valid_until >= CURRENT_DATE)
+         AND (valid_from IS NULL OR valid_from <= CURRENT_DATE)
        ORDER BY valid_until ASC NULLS LAST`
     );
     res.json(result.rows);
