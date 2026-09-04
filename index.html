@@ -734,6 +734,10 @@ const FALLBACK_SUB_CAMPAIGNS = [
   { image_url: 'sub-campaign-4.png', label_text: 'SUB CAMPAIGN', link_url: null }
 ];
 
+function resolveImg(url) {
+  return url && url.charAt(0) === '/' ? API_BASE + url : url;
+}
+
 // ===== SLIDER (swipeable, scroll-snap) =====
 const sliderTrack = document.getElementById('sliderTrack');
 let total = 0;
@@ -767,7 +771,7 @@ function renderSlides(slides) {
   sliderTrack.innerHTML = slides.map((s) => {
     const cursorStyle = s.link_url ? 'cursor:pointer;' : '';
     const clickAttr = s.link_url ? ' onclick="location.href=\'' + s.link_url + '\'"' : '';
-    return '<img class="slide-img" src="' + s.image_url + '" alt=""' + clickAttr +
+    return '<img class="slide-img" src="' + resolveImg(s.image_url) + '" alt=""' + clickAttr +
       ' style="width:1200px;height:auto;display:block;flex-shrink:0;object-fit:cover;scroll-snap-align:start;' + cursorStyle + '">';
   }).join('');
 
@@ -798,7 +802,7 @@ function renderSubCampaigns(items) {
     const clickAttr = item.link_url ? ' onclick="location.href=\'' + item.link_url + '\'" style="cursor:pointer;"' : '';
     const label = (item.label_text || 'SUB CAMPAIGN').toUpperCase().replace(' ', '<br>');
     return '<div class="sub-card"' + clickAttr + '>' +
-      '<img src="' + item.image_url + '" alt="Sub Campaign">' +
+      '<img src="' + resolveImg(item.image_url) + '" alt="Sub Campaign">' +
       '<div class="sub-card-label">' + label + '</div>' +
     '</div>';
   }).join('');
