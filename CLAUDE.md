@@ -20,12 +20,18 @@ Bahasa percakapan: **Bahasa Indonesia**, santai, pakai "aku/kamu".
 
 | File | Isi |
 |---|---|
-| `index.html` | Homepage — CSS desktop ada di dalam (tag `<style>`) |
+| `index.html` | Homepage — CSS desktop ada di dalam (tag `<style>`). Slider & sub-campaign narik data dari backend, fallback ke foto asli kalau backend kosong |
 | `mobile.css` | **Semua CSS mobile, dipakai bersama semua halaman** |
 | `mobile-nav.css` / `mobile-nav.js` | Header & drawer menu versi mobile |
 | `cek-layout-mobile.js` | Script pengecekan layout (lihat bagian Alur Kerja) |
-| `promo.html`, `katalog.html`, `articles.html`, `location.html`, `detail-produk.html`, `detail-artikel.html` | Halaman lain — **versi mobile belum dikerjakan** |
-| `login.html`, `daftar.html`, `dashboard.html` | Layout khusus, belum pernah direview |
+| `katalog.html`, `detail-produk.html`, `promo.html`, `articles.html`, `detail-artikel.html` | Desktop & mobile sudah selesai. Sudah tersambung ke backend — isinya narik data asli dari admin panel, tampil "belum ada" kalau backend masih kosong. `katalog.html`: kartu produk sengaja TANPA tombol "+ Keranjang" (diminta dihapus) — tambah-ke-keranjang cuma ada di halaman detail produk |
+| `detail-artikel.html` | Bukan artikel tertentu — ini **template dinamis** yang menampilkan artikel apapun dari backend lewat `?id=...` |
+| `artikel-teknik-sablon.html` | Artikel contoh lama ("Panduan Teknik Sablon"), isinya statis (bukan dari backend). Dulu ini isi `detail-artikel.html` sebelum halaman itu diubah jadi template — dipindah ke sini biar tidak hilang. **Belum di-link dari navigasi manapun** |
+| `location.html` | Desktop & mobile selesai. Belum tersambung ke backend (masih statis) |
+| `cart.html` | Desktop & mobile selesai. Belum tersambung ke backend — isi keranjang tersimpan di browser pengunjung saja (localStorage), belum ada sistem order/checkout sungguhan |
+| `login.html`, `daftar.html`, `dashboard.html` | Sudah direview, desktop & mobile selesai. **Belum ada backend beneran** — form login/daftar tidak submit kemana-mana, isi dashboard (riwayat order, dll) masih data contoh |
+| `kaos-custom-dtf.html` | Halaman iklan berdiri sendiri, sudah jadi tapi **belum di-link** dari navigasi manapun. Rencananya masuk ke articles.html dengan kategori khusus "materi iklan" — belum dikerjakan |
+| `backend/server.js` | Sesi login admin disimpan di Postgres (bukan memori), tahan restart server, berlaku 7 hari & diperpanjang tiap aktivitas. Bisa punya 2 akun admin lewat env var `ADMIN_USERNAME`/`ADMIN_PASSWORD` (akun utama) dan `ADMIN2_USERNAME`/`ADMIN2_PASSWORD` (akun ke-2, opsional) |
 
 **Aturan penting:** revisi tampilan mobile dikerjakan di `mobile.css`, JANGAN
 dikembalikan menjadi inline di HTML. Pemisahan ini disengaja supaya satu perubahan
@@ -40,10 +46,10 @@ mengubah salah satunya tanpa diminta, itu **regresi** dan harus diperbaiki:
 
 | Yang diukur | Nilai |
 |---|---|
-| Jarak hero → kartu sub-campaign | 24px |
+| Jarak hero → kartu sub-campaign | 18px |
 | Lebar kartu sub-campaign | 72px, ter-center (margin kiri = kanan) |
 | bg2 terpotong? | TIDAK — pakai aspect-ratio asli 2879/928 |
-| Jarak bg2 → bg3 | 175px |
+| Jarak bg2 → bg3 | 162px |
 | About Us menindih bg2 & bg3 | 6px di masing-masing sisi |
 | Font About Us | 10px (sengaja disamakan dengan `.brand-desc`) |
 | Lebar kartu testimoni | 38vw |
@@ -158,8 +164,15 @@ respons melambat dan boros kuota.
 
 ## Masih menunggu dikerjakan
 
-1. Versi mobile untuk halaman selain homepage
+1. Isi data asli di admin panel: produk, artikel, voucher, hero slide,
+   sub-campaign — backend sudah tersambung tapi masih kosong
 2. Konten dummy yang perlu diganti aslinya: kartu New Arrivals (kosong),
    logo Brand Partner (ACME/Nexus/dst masih contoh), teks About Us (Inggris generik)
-3. Review `login.html`, `daftar.html`, `dashboard.html`
-4. SEO: title & meta description per halaman, redirect root → www di Cloudflare
+3. `artikel-teknik-sablon.html` belum di-link ke navigasi manapun (lihat tabel Struktur file)
+4. `kaos-custom-dtf.html` belum di-link — rencananya masuk articles.html
+   dengan kategori "materi iklan"
+5. Bug lama: drawer menu hamburger di mobile tidak animasi geser saat dibuka
+   (fungsinya jalan, cuma visualnya diam) — ditemukan di articles.html, kemungkinan
+   berlaku di semua halaman yang pakai mobile-nav.js
+6. SEO: title & meta description per halaman, redirect root → www di Cloudflare
+7. location.html & cart.html belum tersambung ke backend

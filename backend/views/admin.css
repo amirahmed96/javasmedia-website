@@ -41,6 +41,10 @@ tr:last-child td { border-bottom: none; }
 
 .empty-state { text-align: center; padding: 60px 20px; color: #999; background: white; border-radius: 8px; }
 
+.variant-summary { font-size: 12px; font-weight: 600; }
+.btn-link-detail { background: none; border: none; color: #1e3a5f; font-size: 11px; font-weight: 700; cursor: pointer; padding: 0; text-decoration: underline; }
+.variant-detail { font-size: 11px; color: #666; margin-top: 4px; line-height: 1.5; }
+
 .form-card { background: white; border-radius: 8px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); max-width: 640px; }
 .form-group { margin-bottom: 16px; }
 .form-group label { display: block; font-size: 12px; font-weight: 700; color: #555; margin-bottom: 6px; }
@@ -70,6 +74,8 @@ tr:last-child td { border-bottom: none; }
 .option-chip-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
 .option-chip { background: #eef1f5; border-radius: 14px; padding: 4px 6px 4px 10px; font-size: 12px; display: inline-flex; align-items: center; gap: 6px; }
 .option-chip button { background: none; border: none; cursor: pointer; color: #c0392b; font-size: 14px; line-height: 1; padding: 0 2px; }
+.option-chip .chip-move { color: #888; font-size: 9px; padding: 0; }
+.option-chip .chip-move:disabled { opacity: 0.25; cursor: default; }
 .option-add-row { display: flex; gap: 8px; }
 .option-add-row input { flex: 1; }
 
@@ -77,8 +83,24 @@ tr:last-child td { border-bottom: none; }
 .photo-thumb { position: relative; width: 72px; height: 72px; }
 .photo-thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; background: #eee; display: block; }
 .photo-thumb button { position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; border-radius: 50%; background: #c0392b; color: white; border: none; cursor: pointer; font-size: 12px; line-height: 1; }
+.photo-thumb .photo-move { position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); display: flex; gap: 3px; background: white; border-radius: 4px; padding: 1px 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+.photo-thumb .photo-move button { position: static; width: auto; height: auto; border-radius: 0; background: none; color: #888; font-size: 9px; padding: 0; }
+.photo-thumb .photo-move button:disabled { opacity: 0.25; cursor: default; }
 
 #combosWrap table td input { width: 100%; }
+#combosWrap .combo-check-col { width: 32px; text-align: center; }
+#combosWrap table tr.combo-group-start td { border-top: 2px solid #ccc; }
+
+/* Hapus panah naik/turun di kolom Harga & Harga Coret - gampang kepencet gak sengaja. */
+#combosWrap input[type="number"]::-webkit-outer-spin-button,
+#combosWrap input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+#combosWrap input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+
+.bulk-edit-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; background: #eef1f5; border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; }
+.bulk-edit-bar .bulk-edit-label { font-size: 12px; font-weight: 700; color: #555; }
+.bulk-edit-bar select, .bulk-edit-bar input[type="text"] { padding: 7px 10px; border: 1.5px solid #ddd; border-radius: 6px; font-size: 13px; font-family: inherit; }
+.bulk-edit-bar select { min-width: 110px; }
+.bulk-edit-bar input[type="text"] { width: 140px; }
 
 .decor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
 .decor-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }

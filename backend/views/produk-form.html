@@ -100,6 +100,10 @@ function renderPhotoPreview() {
   if (selectedPhotoFiles.length > 0) {
     wrap.innerHTML = selectedPhotoFiles.map((f, i) =>
       '<div class="photo-thumb"><img src="' + URL.createObjectURL(f) + '">' +
+      '<div class="photo-move">' +
+        '<button type="button" class="chip-move" ' + (i === 0 ? 'disabled' : '') + ' onclick="movePhoto(' + i + ', -1)">▲</button>' +
+        '<button type="button" class="chip-move" ' + (i === selectedPhotoFiles.length - 1 ? 'disabled' : '') + ' onclick="movePhoto(' + i + ', 1)">▼</button>' +
+      '</div>' +
       '<button type="button" onclick="removeSelectedPhoto(' + i + ')">&times;</button></div>'
     ).join('');
   } else if (existingPhotoUrls.length > 0) {
@@ -115,10 +119,22 @@ function removeSelectedPhoto(i) {
   renderPhotoPreview();
 }
 
+// Urutan foto nentuin mana yang jadi foto utama (foto pertama) - digeser
+// pakai tombol ▲▼ yang sama polanya dengan urutan opsi variasi di atas.
+function movePhoto(index, direction) {
+  const target = index + direction;
+  if (target < 0 || target >= selectedPhotoFiles.length) return;
+  const tmp = selectedPhotoFiles[index];
+  selectedPhotoFiles[index] = selectedPhotoFiles[target];
+  selectedPhotoFiles[target] = tmp;
+  renderPhotoPreview();
+}
+
 // ---------- Variasi 2 tingkat ----------
 let axis1Options = [];
 let axis2Options = [];
 let combosData = {}; // key "opt1|||opt2" -> { sku, price, price_old }
+let selectedCombos = new Set(); // key yang dicentang, buat "Terapkan ke Terpilih"
 
 function comboKey(o1, o2) { return (o1 || '') + '|||' + (o2 || ''); }
 
@@ -133,9 +149,25 @@ function currentCombos() {
 function renderOptionChips(axisNum) {
   const options = axisNum === 1 ? axis1Options : axis2Options;
   const wrap = document.getElementById('axis' + axisNum + 'OptionsWrap');
-  wrap.innerHTML = options.map((o) =>
-    '<span class="option-chip">' + o + ' <button type="button" onclick="removeAxisOption(' + axisNum + ', \'' + o.replace(/'/g, "\\'") + '\')">&times;</button></span>'
+  wrap.innerHTML = options.map((o, i) =>
+    '<span class="option-chip">' +
+      '<button type="button" class="chip-move" ' + (i === 0 ? 'disabled' : '') + ' onclick="moveAxisOption(' + axisNum + ', ' + i + ', -1)">▲</button>' +
+      '<button type="button" class="chip-move" ' + (i === options.length - 1 ? 'disabled' : '') + ' onclick="moveAxisOption(' + axisNum + ', ' + i + ', 1)">▼</button>' +
+      ' ' + o + ' <button type="button" onclick="removeAxisOption(' + axisNum + ', \'' + o.replace(/'/g, "\\'") + '\')">&times;</button></span>'
   ).join('');
+}
+
+// Urutan chip nentuin urutan baris di tabel kombinasi di bawah - digeser
+// pakai tombol ▲▼, bukan drag-and-drop, biar lebih pasti kepencet.
+function moveAxisOption(axisNum, index, direction) {
+  const arr = axisNum === 1 ? axis1Options : axis2Options;
+  const target = index + direction;
+  if (target < 0 || target >= arr.length) return;
+  const tmp = arr[index];
+  arr[index] = arr[target];
+  arr[target] = tmp;
+  renderOptionChips(axisNum);
+  renderCombosTable();
 }
 
 function addAxisOption(axisNum) {
@@ -162,17 +194,46 @@ function renderCombosTable() {
   const wrap = document.getElementById('combosWrap');
   const showOpt1 = axis1Options.length > 0;
   const showOpt2 = axis2Options.length > 0;
+  const showCheck = combos.length > 1;
   const axis1Label = document.getElementById('axis1Name').value.trim() || 'Variasi 1';
   const axis2Label = document.getElementById('axis2Name').value.trim() || 'Variasi 2';
 
-  let html = '<table><thead><tr>';
+  // buang centang buat kombinasi yang udah gak ada lagi (misal opsi variasi dihapus)
+  const validKeys = new Set(combos.map((c) => comboKey(c.option_1, c.option_2)));
+  Array.from(selectedCombos).forEach((k) => { if (!validKeys.has(k)) selectedCombos.delete(k); });
+
+  let bulkHtml = '';
+  if (showCheck) {
+    bulkHtml =
+      '<div class="bulk-edit-bar">' +
+        '<span class="bulk-edit-label">Isi massal:</span>' +
+        '<select id="bulkField">' +
+          '<option value="price">Harga</option>' +
+          '<option value="price_old">Harga Coret</option>' +
+          '<option value="sku">SKU</option>' +
+        '</select>' +
+        '<input type="text" id="bulkValue" placeholder="Nilai...">' +
+        '<button type="button" class="btn btn-secondary btn-small" onclick="applyBulkValue(\'all\')">Terapkan ke Semua</button>' +
+        '<button type="button" class="btn btn-secondary btn-small" onclick="applyBulkValue(\'selected\')">Terapkan ke Terpilih (<span id="bulkSelectedCount">' + selectedCombos.size + '</span>)</button>' +
+      '</div>' +
+      '<div class="form-hint" style="margin:-4px 0 10px;">Untuk SKU: nilai di atas jadi kode dasar, kode variasinya (mis. ukuran) otomatis ditambah di belakang tiap baris biar tetap unik (contoh: RB-CUSTOM jadi RB-CUSTOM-M, RB-CUSTOM-L, dst).</div>';
+  }
+
+  let html = bulkHtml + '<table><thead><tr>';
+  if (showCheck) html += '<th class="combo-check-col"><input type="checkbox" id="comboSelectAll"></th>';
   if (showOpt1) html += '<th>' + axis1Label + '</th>';
   if (showOpt2) html += '<th>' + axis2Label + '</th>';
   html += '<th>SKU</th><th>Harga</th><th>Harga Coret</th></tr></thead><tbody>';
-  combos.forEach((c) => {
+  let prevOption1 = null;
+  combos.forEach((c, idx) => {
     const key = comboKey(c.option_1, c.option_2);
     const data = combosData[key] || {};
-    html += '<tr data-key="' + key.replace(/"/g, '&quot;') + '">';
+    // Kasih garis pemisah tiap ganti kelompok Variasi 1 (cuma relevan kalau
+    // ada 2 tingkat variasi, biar gampang lihat batas antar kelompok saat isi harga).
+    const isNewGroup = showOpt2 && idx > 0 && c.option_1 !== prevOption1;
+    prevOption1 = c.option_1;
+    html += '<tr data-key="' + key.replace(/"/g, '&quot;') + '"' + (isNewGroup ? ' class="combo-group-start"' : '') + '>';
+    if (showCheck) html += '<td class="combo-check-col"><input type="checkbox" class="combo-check"' + (selectedCombos.has(key) ? ' checked' : '') + '></td>';
     if (showOpt1) html += '<td>' + c.option_1 + '</td>';
     if (showOpt2) html += '<td>' + c.option_2 + '</td>';
     html += '<td><input type="text" class="combo-sku" value="' + (data.sku || '') + '" placeholder="SKU"></td>';
@@ -189,7 +250,60 @@ function renderCombosTable() {
     row.querySelector('.combo-sku').addEventListener('input', (e) => { combosData[key].sku = e.target.value; });
     row.querySelector('.combo-price').addEventListener('input', (e) => { combosData[key].price = e.target.value; });
     row.querySelector('.combo-price-old').addEventListener('input', (e) => { combosData[key].price_old = e.target.value; });
+    const checkEl = row.querySelector('.combo-check');
+    if (checkEl) {
+      checkEl.addEventListener('change', () => {
+        if (checkEl.checked) selectedCombos.add(key); else selectedCombos.delete(key);
+        const countEl = document.getElementById('bulkSelectedCount');
+        if (countEl) countEl.textContent = selectedCombos.size;
+        const selectAllEl = document.getElementById('comboSelectAll');
+        if (selectAllEl) selectAllEl.checked = selectedCombos.size === combos.length;
+      });
+    }
   });
+
+  const selectAllEl = document.getElementById('comboSelectAll');
+  if (selectAllEl) {
+    selectAllEl.checked = combos.length > 0 && selectedCombos.size === combos.length;
+    selectAllEl.addEventListener('change', () => {
+      if (selectAllEl.checked) combos.forEach((c) => selectedCombos.add(comboKey(c.option_1, c.option_2)));
+      else selectedCombos.clear();
+      renderCombosTable();
+    });
+  }
+}
+
+// "Isi massal" ala Shopee/TikTok Seller Center - isi 1 nilai lalu terapkan
+// ke semua baris kombinasi sekaligus, atau cuma ke baris yang dicentang.
+function applyBulkValue(target) {
+  const field = document.getElementById('bulkField').value;
+  const rawValue = document.getElementById('bulkValue').value.trim();
+  if (!rawValue) return;
+  const combos = currentCombos();
+  const keys = target === 'all'
+    ? combos.map((c) => comboKey(c.option_1, c.option_2))
+    : Array.from(selectedCombos);
+  if (keys.length === 0) {
+    alert('Belum ada baris yang dicentang.');
+    return;
+  }
+  keys.forEach((key) => {
+    if (!combosData[key]) combosData[key] = {};
+    combosData[key][field] = field === 'sku' ? buildVariantSku(rawValue, key) : rawValue;
+  });
+  renderCombosTable();
+}
+
+// SKU per kombinasi = kode dasar + akhiran dari variasinya (mis. RB-CUSTOM-LOGO-M),
+// biar walau kode dasarnya diisi sama semua lewat Isi Massal, tiap baris tetap
+// otomatis unik - persis kayak "Kode Variasi" di Shopee/TikTok Seller Center.
+function buildVariantSku(base, key) {
+  const parts = key.split('|||').filter(Boolean).map(sanitizeSkuPart).filter(Boolean);
+  return parts.length > 0 ? base + '-' + parts.join('-') : base;
+}
+
+function sanitizeSkuPart(s) {
+  return s.toString().trim().toUpperCase().replace(/[^A-Z0-9]+/g, '');
 }
 
 function collectVariants() {

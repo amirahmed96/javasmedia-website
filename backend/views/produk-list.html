@@ -33,8 +33,13 @@ async function loadProducts() {
     return;
   }
   let html = '<table><thead><tr><th>Foto</th><th>Nama</th><th>Kategori</th><th>Varian</th><th>Status</th><th>Aksi</th></tr></thead><tbody>';
-  products.forEach((p) => {
-    const variantSummary = p.variants.map((v) => {
+  products.forEach((p, idx) => {
+    const variants = p.variants || [];
+    const prices = variants.map((v) => v.price).filter((v) => v != null);
+    const minPrice = prices.length ? Math.min(...prices) : null;
+    const maxPrice = prices.length ? Math.max(...prices) : null;
+    const priceRange = minPrice == null ? '' : (minPrice === maxPrice ? formatRupiah(minPrice) : formatRupiah(minPrice) + '–' + formatRupiah(maxPrice));
+    const variantDetail = variants.map((v) => {
       const opts = [v.variant_option_1, v.variant_option_2].filter(Boolean).join(' / ');
       return v.sku + (opts ? ' (' + opts + ')' : '');
     }).join(', ') || '-';
@@ -42,7 +47,13 @@ async function loadProducts() {
       '<td>' + (p.image_url ? '<img class="thumb" src="' + p.image_url + '">' : '<div class="thumb"></div>') + '</td>' +
       '<td>' + p.name + '</td>' +
       '<td>' + p.category + '</td>' +
-      '<td style="max-width:220px;font-size:11px;color:#666;">' + variantSummary + '</td>' +
+      '<td style="max-width:200px;">' +
+        '<div class="variant-summary">' + variants.length + ' varian' + (priceRange ? ' · ' + priceRange : '') + '</div>' +
+        (variants.length > 0 ?
+          '<button type="button" class="btn-link-detail" onclick="toggleVariantDetail(' + idx + ')" id="variantToggle' + idx + '">Lihat rincian</button>' +
+          '<div id="variantDetail' + idx + '" class="variant-detail" hidden>' + variantDetail + '</div>'
+          : '') +
+      '</td>' +
       '<td>' + (p.is_active ? 'Aktif' : 'Nonaktif') + '</td>' +
       '<td><div class="action-group">' +
         '<a href="/admin/produk/' + p.id + '/edit" class="btn btn-secondary btn-small">Edit</a>' +
@@ -52,6 +63,20 @@ async function loadProducts() {
   });
   html += '</tbody></table>';
   content.innerHTML = html;
+}
+
+function formatRupiah(n) {
+  return 'Rp' + Number(n).toLocaleString('id-ID');
+}
+
+// Rincian varian disembunyikan default - produk dengan puluhan kombinasi
+// (mis. 27 varian) bikin barisnya jadi raksasa kalau ditampilkan semua.
+function toggleVariantDetail(idx) {
+  const detail = document.getElementById('variantDetail' + idx);
+  const toggle = document.getElementById('variantToggle' + idx);
+  const willShow = detail.hidden;
+  detail.hidden = !willShow;
+  toggle.textContent = willShow ? 'Sembunyikan' : 'Lihat rincian';
 }
 
 async function hapusProduk(id, name) {
