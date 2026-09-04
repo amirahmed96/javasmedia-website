@@ -372,24 +372,6 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 .price-old { font-size: 11px; color: #bbb; text-decoration: line-through; }
 .price-new { font-size: 14px; font-weight: 800; color: #e85d04; }
 
-.btn-add-cart {
-  width: 100%;
-  margin-top: 8px;
-  padding: 7px;
-  background: white;
-  border: 1.5px solid #1a1a1a;
-  border-radius: 3px;
-  font-family: 'Inter', sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-  color: #1a1a1a;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.btn-add-cart:hover { background: #1a1a1a; color: white; }
-.btn-add-cart.added { background: #25D366; border-color: #25D366; color: white; }
-
 /* Elemen khusus mobile - disembunyikan di desktop (versi aslinya
    ada di dalam .sidebar, ini cuma salinan buat posisi mobile) */
 .load-more-wrap { display: none; }
@@ -710,7 +692,6 @@ function renderProductCard(p) {
         '<div class="product-cat ' + p.category + '">' + p.category.toUpperCase() + '</div>' +
         '<div class="product-name">' + escapeHtml(p.name) + '</div>' +
         '<div class="product-price">' + priceHtml + '</div>' +
-        '<button class="btn-add-cart" onclick="event.stopPropagation();quickAddToCart(this)">+ Keranjang</button>' +
       '</div>' +
     '</div>';
 }

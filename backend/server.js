@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 
@@ -36,14 +37,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
+  // Sesi disimpan di Postgres (bukan memori server) supaya login Amir tidak
+  // ikut hilang setiap kali server restart (redeploy, dsb) - sebelumnya
+  // pakai memory store default express-session, yang berarti restart server
+  // = semua orang ke-logout paksa meski cookie di browser belum kedaluwarsa.
+  store: new pgSession({ pool, tableName: 'session', createTableIfMissing: true }),
   secret: process.env.SESSION_SECRET || 'dev-secret-ganti-di-production',
   resave: false,
   saveUninitialized: false,
+  rolling: true, // tiap request memperpanjang sesi, bukan cuma dihitung dari sekali login
   cookie: {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
-    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 hari
+    maxAge: 30 * 24 * 60 * 60 * 1000 // 30 hari, diperpanjang lagi tiap ada aktivitas (rolling)
   }
 }));
 
@@ -106,6 +113,20 @@ async function runStartupTasks() {
       [process.env.ADMIN_USERNAME, hash]
     );
     console.log(`Akun admin "${process.env.ADMIN_USERNAME}" siap dipakai.`);
+  }
+
+  // Akun admin ke-2 (opsional) - dipisah dari ADMIN_USERNAME/ADMIN_PASSWORD
+  // di atas supaya nambah akun ini tidak mengganggu/menimpa akun admin yang
+  // sudah ada.
+  if (process.env.ADMIN2_USERNAME && process.env.ADMIN2_PASSWORD) {
+    const hash2 = await bcrypt.hash(process.env.ADMIN2_PASSWORD, 10);
+    await pool.query(
+      `INSERT INTO users (username, password_hash, role)
+       VALUES ($1, $2, 'owner')
+       ON CONFLICT (username) DO UPDATE SET password_hash = EXCLUDED.password_hash`,
+      [process.env.ADMIN2_USERNAME, hash2]
+    );
+    console.log(`Akun admin "${process.env.ADMIN2_USERNAME}" siap dipakai.`);
   }
 }
 
