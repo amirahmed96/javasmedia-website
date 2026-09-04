@@ -24,9 +24,10 @@
         <input type="file" id="sliderPhoto" accept="image/*" required>
         <input type="text" id="sliderLink" placeholder="Link tujuan saat diklik (opsional, mis. ke halaman produk)" style="max-width:340px;">
       </div>
-      <button type="submit" class="btn btn-primary btn-small" style="margin-top:10px;">+ Tambah Slide</button>
+      <button type="submit" class="btn btn-primary btn-small" id="sliderSubmitBtn" style="margin-top:10px;">+ Tambah Slide</button>
     </form>
     <div class="form-hint">Slide tampil sesuai urutan, bisa diubah dengan tombol ↑↓ di tiap kartu.</div>
+    <div id="sliderAlertBox" style="margin-top:10px;"></div>
   </div>
   <div id="slidesContent" class="decor-grid">Memuat...</div>
 
@@ -38,9 +39,10 @@
         <input type="text" id="subCampaignLabel" placeholder="Teks label (default: SUB CAMPAIGN)" style="max-width:220px;">
         <input type="text" id="subCampaignLink" placeholder="Link tujuan saat diklik (opsional)" style="max-width:280px;">
       </div>
-      <button type="submit" class="btn btn-primary btn-small" style="margin-top:10px;">+ Tambah Sub Campaign</button>
+      <button type="submit" class="btn btn-primary btn-small" id="subCampaignSubmitBtn" style="margin-top:10px;">+ Tambah Sub Campaign</button>
     </form>
     <div class="form-hint">Sebaiknya 4 kartu, sesuai desain homepage.</div>
+    <div id="subCampaignAlertBox" style="margin-top:10px;"></div>
   </div>
   <div id="subCampaignContent" class="decor-grid">Memuat...</div>
 </div>
@@ -116,12 +118,24 @@ document.getElementById('sliderForm').addEventListener('submit', async (e) => {
   formData.append('photo', file);
   const link = document.getElementById('sliderLink').value.trim();
   if (link) formData.append('link_url', link);
-  const res = await fetch('/api/admin/hero-slides', { method: 'POST', body: formData });
-  if (res.ok) {
-    document.getElementById('sliderForm').reset();
-    loadDecor('/api/admin/hero-slides', 'slidesContent', false);
-  } else {
-    alert((await res.json()).error || 'Gagal upload slide.');
+  const submitBtn = document.getElementById('sliderSubmitBtn');
+  const alertBox = document.getElementById('sliderAlertBox');
+  alertBox.innerHTML = '';
+  submitBtn.classList.add('btn-loading');
+  submitBtn.disabled = true;
+  try {
+    const res = await fetch('/api/admin/hero-slides', { method: 'POST', body: formData });
+    if (res.ok) {
+      document.getElementById('sliderForm').reset();
+      loadDecor('/api/admin/hero-slides', 'slidesContent', false);
+    } else {
+      alertBox.innerHTML = '<div class="alert alert-error">' + ((await res.json()).error || 'Gagal upload slide.') + '</div>';
+    }
+  } catch (err) {
+    alertBox.innerHTML = '<div class="alert alert-error">Gagal terhubung ke server. Cek koneksi internet lalu coba lagi.</div>';
+  } finally {
+    submitBtn.classList.remove('btn-loading');
+    submitBtn.disabled = false;
   }
 });
 
@@ -135,12 +149,24 @@ document.getElementById('subCampaignForm').addEventListener('submit', async (e) 
   if (label) formData.append('label_text', label);
   const link = document.getElementById('subCampaignLink').value.trim();
   if (link) formData.append('link_url', link);
-  const res = await fetch('/api/admin/sub-campaigns', { method: 'POST', body: formData });
-  if (res.ok) {
-    document.getElementById('subCampaignForm').reset();
-    loadDecor('/api/admin/sub-campaigns', 'subCampaignContent', true);
-  } else {
-    alert((await res.json()).error || 'Gagal upload sub campaign.');
+  const submitBtn = document.getElementById('subCampaignSubmitBtn');
+  const alertBox = document.getElementById('subCampaignAlertBox');
+  alertBox.innerHTML = '';
+  submitBtn.classList.add('btn-loading');
+  submitBtn.disabled = true;
+  try {
+    const res = await fetch('/api/admin/sub-campaigns', { method: 'POST', body: formData });
+    if (res.ok) {
+      document.getElementById('subCampaignForm').reset();
+      loadDecor('/api/admin/sub-campaigns', 'subCampaignContent', true);
+    } else {
+      alertBox.innerHTML = '<div class="alert alert-error">' + ((await res.json()).error || 'Gagal upload sub campaign.') + '</div>';
+    }
+  } catch (err) {
+    alertBox.innerHTML = '<div class="alert alert-error">Gagal terhubung ke server. Cek koneksi internet lalu coba lagi.</div>';
+  } finally {
+    submitBtn.classList.remove('btn-loading');
+    submitBtn.disabled = false;
   }
 });
 
