@@ -23,7 +23,6 @@
 
   <div class="form-card" style="margin-bottom:24px;">
     <h3 id="formTitle" style="margin-bottom:14px;font-size:14px;">Tambah Voucher Baru</h3>
-    <div id="alertBox"></div>
     <form id="voucherForm">
       <input type="hidden" id="editId">
       <div class="form-row">
@@ -32,8 +31,21 @@
           <input type="text" id="code" required placeholder="Contoh: JAVASPERT">
         </div>
         <div class="form-group">
-          <label>Diskon (%)</label>
-          <input type="number" id="discountPercent" required min="1" max="100">
+          <label>Tipe Diskon</label>
+          <select id="discountType">
+            <option value="percent">Persentase (%)</option>
+            <option value="fixed">Nominal Tetap (Rp)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label id="discountValueLabel">Diskon (%)</label>
+          <input type="number" id="discountValue" required min="1">
+        </div>
+        <div class="form-group" id="maxDiscountGroup">
+          <label>Maksimal Potongan, Rp (opsional)</label>
+          <input type="number" id="maxDiscount" min="1" placeholder="Contoh: 20000">
         </div>
       </div>
       <div class="form-group">
@@ -41,6 +53,10 @@
         <input type="text" id="description" placeholder="Contoh: Untuk pelanggan baru">
       </div>
       <div class="form-row">
+        <div class="form-group">
+          <label>Berlaku Mulai (opsional)</label>
+          <input type="date" id="validFrom">
+        </div>
         <div class="form-group">
           <label>Berlaku Sampai (opsional)</label>
           <input type="date" id="validUntil">
@@ -55,12 +71,27 @@
       </div>
       <button type="submit" class="btn btn-primary" id="submitBtn">Simpan Voucher</button>
       <button type="button" class="btn btn-secondary" id="cancelEditBtn" style="display:none;">Batal Edit</button>
+      <div id="alertBox" style="margin-top:14px;"></div>
     </form>
   </div>
 
   <div id="content">Memuat...</div>
 </div>
 <script>
+function formatRupiah(n) {
+  return 'Rp' + Number(n).toLocaleString('id-ID');
+}
+
+function updateDiscountTypeUI() {
+  const type = document.getElementById('discountType').value;
+  const isPercent = type === 'percent';
+  document.getElementById('discountValueLabel').textContent = isPercent ? 'Diskon (%)' : 'Potongan (Rp)';
+  document.getElementById('discountValue').max = isPercent ? 100 : '';
+  document.getElementById('maxDiscountGroup').style.display = isPercent ? '' : 'none';
+}
+document.getElementById('discountType').addEventListener('change', updateDiscountTypeUI);
+updateDiscountTypeUI();
+
 async function loadVouchers() {
   const res = await fetch('/api/admin/vouchers');
   const vouchers = await res.json();
@@ -69,16 +100,24 @@ async function loadVouchers() {
     content.innerHTML = '<div class="empty-state">Belum ada voucher.</div>';
     return;
   }
-  let html = '<table><thead><tr><th>Kode</th><th>Diskon</th><th>Deskripsi</th><th>Berlaku Sampai</th><th>Status</th><th>Aksi</th></tr></thead><tbody>';
+  let html = '<table><thead><tr><th>Kode</th><th>Diskon</th><th>Deskripsi</th><th>Berlaku</th><th>Status</th><th>Aksi</th></tr></thead><tbody>';
   vouchers.forEach((v) => {
+    const discText = v.discount_type === 'fixed'
+      ? formatRupiah(v.discount_value)
+      : v.discount_value + '%' + (v.max_discount_amount ? ' (maks ' + formatRupiah(v.max_discount_amount) + ')' : '');
+    const validText = [
+      v.valid_from ? 'mulai ' + new Date(v.valid_from).toLocaleDateString('id-ID') : null,
+      v.valid_until ? 's/d ' + new Date(v.valid_until).toLocaleDateString('id-ID') : null
+    ].filter(Boolean).join(' ') || '-';
     html += '<tr>' +
       '<td><strong>' + v.code + '</strong></td>' +
-      '<td>' + v.discount_percent + '%</td>' +
+      '<td>' + discText + '</td>' +
       '<td>' + (v.description || '-') + '</td>' +
-      '<td>' + (v.valid_until ? new Date(v.valid_until).toLocaleDateString('id-ID') : '-') + '</td>' +
+      '<td>' + validText + '</td>' +
       '<td>' + (v.is_active ? 'Aktif' : 'Nonaktif') + '</td>' +
       '<td><div class="action-group">' +
         '<button class="btn btn-secondary btn-small" onclick=\'editVoucher(' + JSON.stringify(v) + ')\'>Edit</button>' +
+        '<button class="btn btn-secondary btn-small" onclick=\'duplicateVoucher(' + JSON.stringify(v) + ')\'>Duplikat</button>' +
         '<button class="btn btn-danger btn-small" onclick="hapusVoucher(' + v.id + ', \'' + v.code + '\')">Hapus</button>' +
       '</div></td>' +
     '</tr>';
@@ -87,16 +126,38 @@ async function loadVouchers() {
   content.innerHTML = html;
 }
 
-function editVoucher(v) {
-  document.getElementById('editId').value = v.id;
+function fillVoucherForm(v) {
   document.getElementById('code').value = v.code;
-  document.getElementById('discountPercent').value = v.discount_percent;
+  document.getElementById('discountType').value = v.discount_type || 'percent';
+  document.getElementById('discountValue').value = v.discount_value;
+  document.getElementById('maxDiscount').value = v.max_discount_amount || '';
   document.getElementById('description').value = v.description || '';
+  document.getElementById('validFrom').value = v.valid_from ? v.valid_from.substring(0, 10) : '';
   document.getElementById('validUntil').value = v.valid_until ? v.valid_until.substring(0, 10) : '';
   document.getElementById('isActive').value = String(v.is_active);
+  updateDiscountTypeUI();
+}
+
+function editVoucher(v) {
+  document.getElementById('editId').value = v.id;
+  fillVoucherForm(v);
   document.getElementById('formTitle').textContent = 'Edit Voucher: ' + v.code;
   document.getElementById('submitBtn').textContent = 'Simpan Perubahan';
   document.getElementById('cancelEditBtn').style.display = 'inline-flex';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Duplikat voucher - buka form dalam mode "Tambah Baru" (bukan edit id
+// yang lama) tapi udah keisi semua data dari voucher yang di-duplikat,
+// jadi Amir tinggal ganti kode + seperlunya lalu simpan sebagai voucher baru.
+function duplicateVoucher(v) {
+  document.getElementById('editId').value = '';
+  fillVoucherForm(Object.assign({}, v, { code: v.code + '-COPY' }));
+  document.getElementById('formTitle').textContent = 'Duplikat dari: ' + v.code;
+  document.getElementById('submitBtn').textContent = 'Simpan Voucher Baru';
+  document.getElementById('cancelEditBtn').style.display = 'inline-flex';
+  document.getElementById('code').focus();
+  document.getElementById('code').select();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -106,6 +167,7 @@ function resetForm() {
   document.getElementById('formTitle').textContent = 'Tambah Voucher Baru';
   document.getElementById('submitBtn').textContent = 'Simpan Voucher';
   document.getElementById('cancelEditBtn').style.display = 'none';
+  updateDiscountTypeUI();
 }
 document.getElementById('cancelEditBtn').addEventListener('click', resetForm);
 
@@ -119,29 +181,42 @@ async function hapusVoucher(id, code) {
 document.getElementById('voucherForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const alertBox = document.getElementById('alertBox');
+  const submitBtn = document.getElementById('submitBtn');
   alertBox.innerHTML = '';
   const editId = document.getElementById('editId').value;
   const payload = {
     code: document.getElementById('code').value.trim(),
-    discount_percent: parseInt(document.getElementById('discountPercent').value, 10),
+    discount_type: document.getElementById('discountType').value,
+    discount_value: parseInt(document.getElementById('discountValue').value, 10),
+    max_discount_amount: document.getElementById('maxDiscount').value ? parseInt(document.getElementById('maxDiscount').value, 10) : null,
     description: document.getElementById('description').value.trim(),
+    valid_from: document.getElementById('validFrom').value || null,
     valid_until: document.getElementById('validUntil').value || null,
     is_active: document.getElementById('isActive').value === 'true'
   };
-  const url = editId ? '/api/admin/vouchers/' + editId : '/api/admin/vouchers';
-  const method = editId ? 'PUT' : 'POST';
-  const res = await fetch(url, {
-    method,
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  });
-  const data = await res.json();
-  if (!res.ok) {
-    alertBox.innerHTML = '<div class="alert alert-error">' + (data.error || 'Gagal menyimpan voucher.') + '</div>';
-    return;
+  submitBtn.classList.add('btn-loading');
+  submitBtn.disabled = true;
+  try {
+    const url = editId ? '/api/admin/vouchers/' + editId : '/api/admin/vouchers';
+    const method = editId ? 'PUT' : 'POST';
+    const res = await fetch(url, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      alertBox.innerHTML = '<div class="alert alert-error">' + (data.error || 'Gagal menyimpan voucher.') + '</div>';
+      return;
+    }
+    resetForm();
+    loadVouchers();
+  } catch (err) {
+    alertBox.innerHTML = '<div class="alert alert-error">Gagal terhubung ke server. Cek koneksi internet lalu coba lagi.</div>';
+  } finally {
+    submitBtn.classList.remove('btn-loading');
+    submitBtn.disabled = false;
   }
-  resetForm();
-  loadVouchers();
 });
 
 document.getElementById('logoutBtn').addEventListener('click', async () => {
