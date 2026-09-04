@@ -686,9 +686,13 @@ function formatRupiah(n) {
   return Number(n).toLocaleString('id-ID');
 }
 
+function resolveImg(url) {
+  return url && url.charAt(0) === '/' ? API_BASE + url : url;
+}
+
 function renderProductCard(p) {
   const imgHtml = p.image_url
-    ? '<img src="' + p.image_url + '" alt="' + escapeHtml(p.name) + '">'
+    ? '<img src="' + resolveImg(p.image_url) + '" alt="' + escapeHtml(p.name) + '">'
     : (CATEGORY_EMOJI[p.category] || '🛍️');
   const priceHtml = (p.price_old && p.price_old > p.price)
     ? '<span class="price-old">Rp ' + formatRupiah(p.price_old) + '</span><span class="price-new">Rp ' + formatRupiah(p.price) + '</span>'
