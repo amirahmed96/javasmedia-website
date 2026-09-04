@@ -737,6 +737,14 @@ function formatTanggal(dateStr) {
   const d = new Date(dateStr);
   return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
 }
+// Angka badge diskon nominal tetap disingkat (15000 -> "15RB") biar muat
+// di badge bulat yang aslinya didesain buat angka persen 2 digit.
+function formatRupiahShort(n) {
+  return n >= 1000 ? Math.round(n / 1000) + 'RB' : String(n);
+}
+function formatRupiahFull(n) {
+  return 'Rp' + Number(n).toLocaleString('id-ID');
+}
 
 // Countdown timer - dipakaikan ke voucher yang paling dekat expired
 let countdownTarget = null;
@@ -773,11 +781,15 @@ async function loadVouchers() {
     }
     listEl.innerHTML = vouchers.map((v, i) => {
       const colorClass = VOUCHER_COLORS[i % VOUCHER_COLORS.length];
+      const badgeNum = v.discount_type === 'fixed' ? formatRupiahShort(v.discount_value) : v.discount_value + '%';
+      const capNote = v.discount_type === 'percent' && v.max_discount_amount
+        ? '<div class="voucher-exp">Maks potongan ' + formatRupiahFull(v.max_discount_amount) + '</div>' : '';
       return '<div class="voucher-card">' +
-        '<div class="voucher-disc ' + colorClass + '"><div class="voucher-disc-num">' + v.discount_percent + '%</div><div class="voucher-disc-off">OFF</div></div>' +
+        '<div class="voucher-disc ' + colorClass + '"><div class="voucher-disc-num">' + badgeNum + '</div><div class="voucher-disc-off">OFF</div></div>' +
         '<div class="voucher-info">' +
           '<div class="voucher-title">' + escapeHtml(v.description || 'Voucher JavasMedia') + '</div>' +
           '<div class="voucher-code">' + escapeHtml(v.code) + '</div>' +
+          capNote +
           (v.valid_until ? '<div class="voucher-exp">Berlaku s/d ' + formatTanggal(v.valid_until) + '</div>' : '<div class="voucher-exp">Tidak ada batas waktu</div>') +
         '</div>' +
       '</div>';
