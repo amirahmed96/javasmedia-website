@@ -411,6 +411,11 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
 .desc-content ul { padding-left: 20px; margin-top: 8px; }
 .desc-content li { margin-bottom: 6px; }
 .desc-content strong { color: #1a1a1a; }
+/* Deskripsi produk dipecah jadi <p> per baris kosong di JS (formatDescription),
+   tapi reset "* { margin:0 }" di atas bikin tiap <p> nempel tanpa jarak -
+   ini yang bikin "Enter" di form admin kelihatan gak ada spasinya di web. */
+.desc-collapsible p { margin-bottom: 14px; }
+.desc-collapsible p:last-child { margin-bottom: 0; }
 .desc-toggle-btn { display: none; }
 
 /* Spek tabel */
@@ -631,7 +636,7 @@ body { background: #FAF6EE; font-family: 'Inter', sans-serif; color: #1a1a1a; }
         <!-- CTA -->
         <div class="cta-group">
           <button type="button" class="btn-cart-detail" id="addCartBtn" onclick="addToCartFromDetail(this)">
-            🛒 Tambah ke Keranjang
+            🛍️ Tambah ke Keranjang
           </button>
           <a href="https://wa.me/6282143777463" target="_blank" class="btn-wa" id="waOrderBtn">
             💬 Pesan via WhatsApp
